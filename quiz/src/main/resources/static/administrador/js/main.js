@@ -1,6 +1,6 @@
 (function ($) {
  "use strict";
-
+  	
 	/*----------------------------
 	 jQuery MeanMenu
 	------------------------------ */
@@ -97,4 +97,9 @@
         animation: 'fade'
     }); 	   
  
-})(jQuery); 
+})(jQuery);
+
+$("#search").attr("data-tablese", $("#hedsconf").attr("data-search") );
+if($("#hedsconf").attr("data-ads") == "button")
+	$("#actionsBtnTitle").append( new Element("input", { type:"button", class:"btn btn-success", onclick:"javascript:location.href='"+$('#hedsconf').attr('data-href')+"';", value:"Agregar"},[]));
+
