@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="sparkline8-graph content" th:fragment="frm-ads-quest">
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-12">
+					<select id="typeOption" class="form-control">
+						<option value="radio">Seleccion radio</option>
+						<option value="checkbox">Seleccion check</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<textarea class="form-control" id="question" placeholder="Pregunta"></textarea>
+		</div>
+		<div class="form-group">
+			<input type="button" class="btn btn-info" id="more" value="+" />
+			<label>Opciones</label>
+		</div>
+		<form>
+			<div class="form-group">
+				<div id="lst"></div>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" id="messages" placeholder="Algun mensaje (opcional)"></textarea>
+			</div>
+			<div class="form-group">
+				<input type="number" min="1" value="1" class="form-control" placeholder="Score"/>
+			</div>
+			<div class="form-group mainForce">
+				<input type="button" class="btn btn-warning" id="clear" value="Limpiar" />
+				<input type="button" class="btn btn-primary" id="add" value="Agregar" />
+			</div>
+		</form>
+	</div>
+</html>

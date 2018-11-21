@@ -278,3 +278,18 @@ textarea {
         page-break-after: avoid;
     }
 }
+#more{
+	border-radius: 50%;
+}
+#more:hover{
+	border-radius: 50%;
+}
+#more:active{
+	border-radius: 50%;
+}
+#more:focus{
+	border-radius: 50%;
+}
+#more:visited{
+	border-radius: 50%;
+}
