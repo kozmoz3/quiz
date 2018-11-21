@@ -11,12 +11,12 @@ class ExamplesController {
 	
 	@GetMapping("/")
 	public String index(Model model) {
-		return "index";
+		return "admin/index";
 	}
 
 	@GetMapping("/quiz")
 	public String quiz(Model model) {
-		return "quiz";
+		return "admin/components/quiz/crud";
 	}
 	
 }
