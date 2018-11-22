@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<head th:replace="admin/includes/heads :: heads"></head>
 	<body>
+		<div id="hedsconf" data-title="Agregar simulador"></div>
 	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
 	    <div class="all-content-wrapper">
 	        <div th:replace="admin/includes/logo-movile :: logo-mov"></div>
@@ -12,42 +13,223 @@
 	            <div th:replace="admin/includes/menu-movile :: menu-movil"></div>
 	            <div th:replace="admin/includes/navegacion :: breadcome"></div>
 	        </div>
-	        <div class="login-form-area edu-pd mg-b-15">
-	            <div class="container-fluid">
-	            	<div class="row">
-	            		<div class="col-md-6">
-	                		<div class="row">
-	                			<div class="col-md-12">
-	                				<div class="sparkline8-list responsive-mg-b-30">
-	                					<div class="sparkline8-hd">
-	                						<h4 class="title">Mis preguntas</h4>
-	                					</div>
-	                					<div class="sparkline8-graph content">
-	                						<ul id="listQuest"></ul>
-	                						<div id="form-questionxlsx"></div>
-	                					</div>
-	                				</div>
-	                			</div>
-	                		</div>
-	                	</div>
-	                	<div class="col-md-6">
-	                		<div class="row">
-	                			<div class="col-md-12">
-	                				<div class="sparkline8-list responsive-mg-b-30">
-	                					<div class="sparkline8-hd">
-	                						<h4 class="title">Agregar preguntas</h4>
-	                					</div>
-	                					<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+	        <div class="single-pro-review-area mt-t-30 mg-b-15" th:fragment="frm-data-change">
+				<div class="container-fluid">
+					<div class="sparkline8-list responsive-mg-b-30">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<form>
+									<div class="product-payment-inner-st">
+										<ul id="myTabedu1" class="tab-review-design">
+											<li class="active"><a href="#general">General</a></li>
+											<li><a href="#seguridad">Seguridad</a></li>
+											<li><a href="#resultados">Resultados</a></li>
+										</ul>
+										<div id="myTabContent" class="tab-content custom-product-edit">
+											<div class="product-tab-list tab-pane fade active in" id="general">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div class="review-content-section">
+															<div id="dropzone1" class="pro-ad">
+																<div class="row">
+																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+																		<div class="form-group">
+																			<input name="firstname" type="text" class="form-control" placeholder="Nombre">
+																		</div>
+																		<div class="form-group radio-group">
+																			<label>
+																				<input type="radio"> Mostrar todas las preguntas
+																			</label>
+																			<div class="form-group">
+																				<label>
+																					<input type="radio"> Mostrar sólo
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+																		<div class="form-group">
+																			<input name="department" type="text" class="form-control" placeholder="Descripcion">
+																		</div>
+																		<div class="form-group  radio-group">
+																			<label>
+																				<input type="radio"> Todas las preguntas en una hoja
+																			</label>
+																			<div class="form-group">
+																				<label>
+																					<input type="radio"> Mostrar preguntas en un wizard
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<hr>
+																<div class="row">
+																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Preguntas random
+																			</label>
+																		</div>
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Asignar un tiempo
+																			</label>
+																		</div>
+																	</div>
+																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Vencimiento de simulador
+																			</label>
+																			<div class="form-group" style="display: flex;">
+																				<input type="date" class="form-control">
+																				<span style="padding-right: 20px;padding-left: 20px;">a</span>
+																				<input type="date" class="form-control">
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="product-tab-list tab-pane fade" id="seguridad">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div class="review-content-section">
+															<div class="row">
+																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+																	<div class="devit-card-custom">
+																		<div class="form-group  radio-group">
+																			<label>
+																				<input type="radio"> Para todos
+																			</label>
+																			<div class="form-group">
+																				<label>
+																					<input type="radio"> Para grupo
+																				</label>
+																			</div>
+																		</div>
+																		<hr>
+																		<div class="form-group radio-group">
+																			<label>
+																				<input type="radio"> Sin contraseña
+																			</label>
+																			<div class="form-group">
+																				<label>
+																					<input type="radio"> Asignar contraseña (restringir acceso a alumnos aún en grupos)
+																				</label>
+																				<div class="form-group">
+																					<input type="password" class="form-control" style="width: 80%;">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="product-tab-list tab-pane fade" id="resultados">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div class="review-content-section">
+															<div class="row">
+																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+																	<div class="devit-card-custom">
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Mostrar preguntas correctas
+																			</label>
+																		</div>
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Mostrar respuestas correctas
+																			</label>
+																		</div>
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Mostrar preguntas incorrectas
+																			</label>
+																		</div>
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Mostrar calificación
+																			</label>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+																	<div class="devit-card-custom">
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Mostrar gráfico
+																			</label>
+																		</div>
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Mostrar tiempo de examen
+																			</label>
+																		</div>
+																		<div class="form-group">
+																			<label>
+																				<input type="checkbox"> Mostrar mensajes opcionales
+																			</label>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<hr>
+															<div class="row radio-group">
+																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+																	<div class="devit-card-custom">
+																		<div class="form-group">
+																			<label>
+																				<input type="radio"> Mostrar todos los intentos
+																			</label>
+																		</div>
+																		<div class="form-group">
+																			<label>
+																				<input type="radio"> Mostrar # intentos
+																			</label>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+																	<div class="devit-card-custom">
+																		<div class="form-group">
+																			<label>
+																				<input type="radio"> Mostrar en rango de fechas
+																			</label>
+																			<div class="form-group" style="display: flex;">
+																				<input type="date" class="form-control">
+																				<span style="padding-right: 20px;padding-left: 20px;">a</span>
+																				<input type="date" class="form-control">
+																			</div>
+																		</div>
+																		
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
+									<div class="form-group">
+										<input type="button" class="btn btn-info" value="Aceptar">
+									</div>
+								</form>
 							</div>
-	                	</div>
-	            	</div>
-	            </div>
-            </div>      
+						</div>
+					</div>
+				</div>
+			</div>
 	    </div>
 	    <div th:replace="admin/includes/scripts :: scripts"></div>
-	    <script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
-  		<script type="text/javascript" th:src="@{/generales/quiz/addQuestion.js}"></script>
 	</body>
 </html>

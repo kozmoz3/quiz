@@ -1,0 +1,54 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
+	<title>Preguntas</title>
+	<meta charset="utf-8">
+	<head th:replace="admin/includes/heads :: heads"></head>
+	<body>
+		<div id="hedsconf" data-title="Agregar preguntas a cuestionario {{Nombre}}"></div>
+	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
+	    <div class="all-content-wrapper">
+	        <div th:replace="admin/includes/logo-movile :: logo-mov"></div>
+	        <div class="header-advance-area">
+	            <div th:replace="admin/includes/top :: top"></div>
+	            <div th:replace="admin/includes/menu-movile :: menu-movil"></div>
+	            <div th:replace="admin/includes/navegacion :: breadcome"></div>
+	        </div>
+	        <div class="login-form-area edu-pd mg-b-15">
+	            <div class="container-fluid">
+	            	<div class="row">
+	            		<div class="col-md-6">
+	                		<div class="row">
+	                			<div class="col-md-12">
+	                				<div class="sparkline8-list responsive-mg-b-30">
+	                					<div class="sparkline8-hd">
+	                						<h4 class="title">Mis preguntas</h4>
+	                					</div>
+	                					<div class="sparkline8-graph content">
+	                						<ul id="listQuest"></ul>
+	                						<div id="form-questionxlsx"></div>
+	                					</div>
+	                				</div>
+	                			</div>
+	                		</div>
+	                	</div>
+	                	<div class="col-md-6">
+	                		<div class="row">
+	                			<div class="col-md-12">
+	                				<div class="sparkline8-list responsive-mg-b-30">
+	                					<div class="sparkline8-hd">
+	                						<h4 class="title">Agregar preguntas</h4>
+	                					</div>
+	                					<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+									</div>
+								</div>
+							</div>
+	                	</div>
+	            	</div>
+	            </div>
+            </div>      
+	    </div>
+	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	    <script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
+  		<script type="text/javascript" th:src="@{/generales/quiz/addQuestion.js}"></script>
+	</body>
+</html>

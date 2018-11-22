@@ -102,4 +102,11 @@
 $("#search").attr("data-tablese", $("#hedsconf").attr("data-search") );
 if($("#hedsconf").attr("data-ads") == "button")
 	$("#actionsBtnTitle").append( new Element("input", { type:"button", class:"btn btn-success", onclick:"javascript:location.href='"+$('#hedsconf').attr('data-href')+"';", value:"Agregar"},[]));
+else{
+	$($("#actionsBtnTitle").parents("div")[0]).remove();
+	$( $(".breadcome-heading").parents("div")[0] ).removeClass("col-lg-6 col-md-6 col-sm-6");
+	$( $(".breadcome-heading").parents("div")[0] ).addClass("col-lg-12 col-md-12 col-sm-12");
+	$(".breadcome-heading form").remove();
+	$(".breadcome-heading").append( new Element("h4",{},[ $("#hedsconf").attr("data-title") ]) );
+}
 

@@ -24,6 +24,16 @@ class ExamplesController {
 		return "admin/components/simuladores/crud";
 	}
 	
+	@GetMapping("/simuladores/preguntas/add")
+	public String simuladoresPreguntasAdd(Model model) {
+		return "admin/components/simuladores/questions";
+	}
+	
+	@GetMapping("/simuladores/preguntas")
+	public String simuladoresPreguntas(Model model) {
+		return "admin/components/simuladores/list-preguntas";
+	}
+	
 	@GetMapping("/estudiantes")
 	public String estudiantes(Model model) {
 		return "admin/components/estudiantes/list";
@@ -42,6 +52,11 @@ class ExamplesController {
 	@GetMapping("/grupos")
 	public String grupos(Model model) {
 		return "admin/components/grupos/list";
+	}
+	
+	@GetMapping("/grupos/add")
+	public String gruposAdd(Model model) {
+		return "admin/components/grupos/crud";
 	}
 	
 }
