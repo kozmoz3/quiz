@@ -19,47 +19,47 @@ class ExamplesController {
 		return "admin/index";
 	}
 	
-	@GetMapping("/simuladores")
+	@GetMapping("/admin/simuladores")
 	public String simuladores(Model model) {
 		return "admin/components/simuladores/list";
 	}
 
-	@GetMapping("/simuladores/add")
+	@GetMapping("/admin/simuladores/add")
 	public String simuladoresAdd(Model model) {
 		return "admin/components/simuladores/crud";
 	}
 	
-	@GetMapping("/simuladores/preguntas/add")
+	@GetMapping("/admin/simuladores/preguntas/add")
 	public String simuladoresPreguntasAdd(Model model) {
 		return "admin/components/simuladores/questions";
 	}
 	
-	@GetMapping("/simuladores/preguntas")
+	@GetMapping("/admin/simuladores/preguntas")
 	public String simuladoresPreguntas(Model model) {
 		return "admin/components/simuladores/list-preguntas";
 	}
 	
-	@GetMapping("/estudiantes")
+	@GetMapping("/admin/estudiantes")
 	public String estudiantes(Model model) {
 		return "admin/components/estudiantes/list";
 	}
 	
-	@GetMapping("/estudiantes/add")
+	@GetMapping("/admin/estudiantes/add")
 	public String estudiantesAdd(Model model) {
 		return "admin/components/estudiantes/crud";
 	}
 	
-	@GetMapping("/me")
+	@GetMapping("/admin/me")
 	public String me(Model model) {
 		return "admin/components/me/index";
 	}
 	
-	@GetMapping("/grupos")
+	@GetMapping("/admin/grupos")
 	public String grupos(Model model) {
 		return "admin/components/grupos/list";
 	}
 	
-	@GetMapping("/grupos/add")
+	@GetMapping("/admin/grupos/add")
 	public String gruposAdd(Model model) {
 		return "admin/components/grupos/crud";
 	}
