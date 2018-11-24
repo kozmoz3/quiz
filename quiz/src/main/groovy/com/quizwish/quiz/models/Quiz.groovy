@@ -37,6 +37,8 @@ class Quiz implements Serializable{
 	@Basic(optional = false)
 	@Column(name = "descripcion")
 	String descripcion
+	@Column(name = "img")
+	String img
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
 	List<Confresultados> confresultadosList
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
@@ -81,6 +83,15 @@ class Quiz implements Serializable{
 
 	def setDescripcion(String descripcion) {
 		this.descripcion = descripcion
+	}	
+	
+
+	def String getImg() {
+		return img;
+	}
+
+	def setImg(String img) {
+		this.img = img;
 	}
 
 	@XmlTransient
