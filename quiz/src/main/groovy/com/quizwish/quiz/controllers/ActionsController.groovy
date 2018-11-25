@@ -17,9 +17,9 @@ class ActionsController {
 	@Qualifier("serviceQuiz")
 	QuizServiceImp serviceQuiz
 	
-	@PostMapping("/admin/simuladores/add")
+	@PostMapping("/admin/actions/simuladores/add")
 	def simuladoresAdd(@RequestParam(defaultValue = "0") Map<String, Object> simuladorInfo, Model model) {
-		simuladorInfo.forEach({k,v->System.out.println v});
+		simuladorInfo.each{it->"Clave: ${it.key} Valor: ${it.value}"}
 		//serviceQuiz.setQuiz(new Quiz());
 	}
 }

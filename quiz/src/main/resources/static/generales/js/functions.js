@@ -45,8 +45,10 @@
 		
 		if( validate( idElement, lstElements, arraryString )  ){
 			
+			var objetoAdmin = convertToObject( lstElements.filter(function( item ){ return $(this).attr("data-noset") != undefined ? false : true; }),  reduce );
+			
 			if( $(idElement).attr("data-ismetadata") != undefined ){
-				sendActionMetadata( idElement );
+				sendActionMetadata( idElement, objetoAdmin );
 				if( $(idElement).attr("data-onclear") == "true"){
 					$("#imagePreview img").remove();
 					clearFElements( lstElements );
@@ -54,8 +56,6 @@
 				}
 				return false;
 			}
-			
-			var objetoAdmin = convertToObject( lstElements.filter(function( item ){ return $(this).attr("data-noset") != undefined ? false : true; }),  reduce );
 			
 			console.log(objetoAdmin);
 			var ulrString = arraryString.length > 0 ? getNewsStrings(arraryString, reduce) : "";
@@ -72,18 +72,34 @@
 	
 	}
 	
-	function sendActionMetadata( idElement ){
-		var formData = new FormData( $(idElement).parents("form") );
+	function sendActionMetadata( idElement, objetoAdmin ){
+		console.log($("input[type='file']")[0].files[0] );
+		console.log($("input[type='file']")[0].files[0].type );
+		
+		var formData = toFormData(objetoAdmin);
+		formData.append( $("input[type='file']").attr("id"), new Blob( 
+				[ $("input[type='file']")[0].files[0] ],
+				{ type: $("input[type='file']")[0].files[0].type } )
+		);
 		
 		datosMetadata.url= $(idElement).attr("data-href-url");
 		datosMetadata.type= $(idElement).attr("data-href-method");
 		datosMetadata.data= formData;
-		console.log(formData);
+		
 		$.ajax(datosMetadata).done(function(res){
             console.log(res);
         }).error(function ( XMLHttpRequest, textStatus, errorthrows ){
 			getErrorMessage( getCodeStatus( XMLHttpRequest, textStatus ) );
 		});
+	}
+	
+	function toFormData( objetoAdmin ){
+		var formData = new FormData();
+		$.each(objetoAdmin, function(index, value){
+			if(index != "img");
+				formData.append(index, value);
+		});
+		return formData;
 	}
 	
 	function getNewsStrings(arraryString, reduce){
