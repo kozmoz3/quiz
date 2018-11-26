@@ -125,8 +125,8 @@ function setInForm( formulario, conenedor ){
 			var listaDivs = $(value).find("div[data-remxlsx]");
 			if ( !valueList.isEmptyList( listaDivs.find("input[type='text']") ) ) verificaCampos = false;
 		});
-		if(!verificaCampos) alert("Hay campos vac&iacute;os");
-		if(!verificaChecks) alert("Hay preguntas no marcadas (Debe de haber al menos una opci&oacute;n correcta)");
+		if(!verificaCampos) {getErrorMessage("Hay campos vac&iacute;os");return false;}
+		if(!verificaChecks) {getErrorMessage("Hay preguntas no marcadas (Debe de haber al menos una opci&oacute;n correcta)");return false;}
 		if( verificaCampos && verificaChecks ){
 			addToListQuestions();
 		}

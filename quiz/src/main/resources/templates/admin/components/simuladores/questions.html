@@ -39,6 +39,16 @@
 	                						<h4 class="title">Agregar preguntas</h4>
 	                					</div>
 	                					<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+	                					<hr>
+	                					<form>
+	                						<div class="from-group">
+	                							<label>Nombre de cabeceras (separados por comas)</label>
+	                							<input type="text" data-colrow class="form-control"/>
+	                						</div>
+	                						<div class="from-group">
+	                							<input type="file" data-importxls onchange="ExportToTable()" />
+	                						</div>
+	                					</form>
 									</div>
 								</div>
 							</div>
@@ -50,5 +60,9 @@
 	    <div th:replace="admin/includes/scripts :: scripts"></div>
 	    <script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
   		<script type="text/javascript" th:src="@{/generales/quiz/addQuestion.js}"></script>
+  		
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
+  		<script type="text/javascript" th:src="@{/generales/quiz/loadexceltoform.js}"></script>
 	</body>
 </html>
