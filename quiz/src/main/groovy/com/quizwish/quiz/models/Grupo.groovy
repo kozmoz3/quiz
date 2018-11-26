@@ -29,22 +29,22 @@ import javax.xml.bind.annotation.XmlTransient
 	, @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
 	, @NamedQuery(name = "Grupo.findByDescripcion", query = "SELECT g FROM Grupo g WHERE g.descripcion = :descripcion")})*/
 class Grupo implements Serializable{
-	static final long serialVersionUID = 1L
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name = "idgrupo")
-	Integer idgrupo
-	@Basic(optional = false)
-	@Column(name = "nombre")
-	String nombre
-	@Basic(optional = false)
-	@Column(name = "descripcion")
-	String descripcion
-	@OneToMany(mappedBy = "idgrupo")
-	List<Confseguridad> confseguridadList
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
-	List<Grupousuario> grupousuarioList
+	static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idgrupo")
+    Integer idgrupo
+    @Basic(optional = false)
+    @Column(name = "nombre")
+    String nombre
+    @Basic(optional = false)
+    @Column(name = "descripcion")
+    String descripcion
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
+    List<Seguridadgrupo> seguridadgrupoList
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
+    List<Grupousuario> grupousuarioList
 
 	def Grupo() {
 	}
@@ -84,22 +84,22 @@ class Grupo implements Serializable{
 	}
 
 	@XmlTransient
-	def List<Confseguridad> getConfseguridadList() {
-		return confseguridadList
-	}
+    def List<Seguridadgrupo> getSeguridadgrupoList() {
+        return seguridadgrupoList
+    }
 
-	def setConfseguridadList(List<Confseguridad> confseguridadList) {
-		this.confseguridadList = confseguridadList
-	}
+    def setSeguridadgrupoList(List<Seguridadgrupo> seguridadgrupoList) {
+        this.seguridadgrupoList = seguridadgrupoList
+    }
 
-	@XmlTransient
-	def List<Grupousuario> getGrupousuarioList() {
-		return grupousuarioList
-	}
+    @XmlTransient
+    def List<Grupousuario> getGrupousuarioList() {
+        return grupousuarioList
+    }
 
-	def setGrupousuarioList(List<Grupousuario> grupousuarioList) {
-		this.grupousuarioList = grupousuarioList
-	}
+    def setGrupousuarioList(List<Grupousuario> grupousuarioList) {
+        this.grupousuarioList = grupousuarioList
+    }
 
 	@Override
 	def String toString() {

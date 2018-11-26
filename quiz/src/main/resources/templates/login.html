@@ -42,7 +42,7 @@
 	                    	<div class="text-center m-b-md custom-login">
 	                    		<img src="http://pngimage.net/wp-content/uploads/2018/06/user-login-png-transparent-6.png" class="circle"/>
 	                    	</div>
-	                        <form action="/admin" >
+	                        <form th:action="@{/inlogin}" method="post" >
 	                            <div class="form-group">
 	                                <label class="control-label" for="username">Correo</label>
 	                                <input type="text" placeholder="uncorreo@example.com" required value="" name="email" id="email" class="form-control">

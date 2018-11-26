@@ -19,7 +19,8 @@ class ActionsController {
 	
 	@PostMapping("/admin/actions/simuladores/add")
 	def simuladoresAdd(@RequestParam(defaultValue = "0") Map<String, Object> simuladorInfo, Model model) {
-		simuladorInfo.each{it->"Clave: ${it.key} Valor: ${it.value}"}
+		System.out.println(simuladorInfo);
+		//simuladorInfo.each{it->"Clave: ${it.key} Valor: ${it.value}"}
 		//serviceQuiz.setQuiz(new Quiz());
 	}
 }
