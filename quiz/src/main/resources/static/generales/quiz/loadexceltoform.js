@@ -9,6 +9,7 @@ function ExportToTable() {
 		var xlsxflag = false;  
 		if ($("input[data-importxls]").val().toLowerCase().indexOf(".xlsx") > 0) xlsxflag = true;
 		if (typeof (FileReader) != "undefined") {
+			getLoadMessage();
 			var reader = new FileReader();
 			reader.onload = function (e) {
 				var data = e.target.result;
@@ -23,21 +24,23 @@ function ExportToTable() {
 						
 						var camposRow = $("input[data-colrow]").val().split(",");
 						var headers = getHeaders( exceljson );
-						if( isListInList( headers, camposRow ) ){	
+						if( isListInList( headers, camposRow ) ){
 							BindTable(exceljson, camposRow);
 							cnt++;
 						}else{
+							dropLoadMessage();
 							getErrorMessage("Las cabeceras que agregaste no corresponden al documento");
 							$("input[data-importxls]").val("");
 						}
 					}
 				});
 			}
+			dropLoadMessage();
 			xlsxflag == true ? reader.readAsArrayBuffer($("input[data-importxls]")[0].files[0]) : reader.readAsBinaryString($("input[data-importxls]")[0].files[0]);
 		}else
-			alert("No soportado");
+			getErrorMessage("No soportado");
 	} else
-		alert("Archivo inválido");
+		getErrorMessage("Archivo inválido");
 }
   		
 function BindTable(jsondata, camposRow) {
@@ -100,10 +103,16 @@ function createForm( componets ){
 		var preguntacompleta = new Element('div',{ id : "questdiv" + counquest, "data-question":"" },[
 			new Element('textarea',{ id:'questionxlsx' + counquest, class:'form-control',placeholder:"Pregunta" },[ value.question ] ),
 			respuestas,
-			new Element('div',{ class:'form-group'},[
-				new Element('input',{type:'button', value:'Delete', class:'btn btn-danger',onclick:"removeQuestion(questdiv"+counquest+");" },[])
+			new Element('br',{},[] ),
+			new Element('div',{ class:'grid-delq'},[
+				new Element('div',{ class:'item-grid-q'},[
+					new Element('input',{type:'button', value:'Eliminar pregunta', class:'btn btn-danger',onclick:"removeQuestion(questdiv"+counquest+");" },[])
+				]),
+				new Element('div',{ class:'item-grid-q'},[
+					new Element('input',{type:'number', value:'1', "data-score":"", class:'form-control', min:"1" },[])
+				])
 			]),
-			new Element('br',{},[] )
+			new Element('hr',{},[] )
 		]);
 		counquest++;
 		conenedor.appendChild(preguntacompleta);
@@ -162,18 +171,17 @@ function removeQuestion(id){
 }
   		
 function getElementCheckRad( radiocheck, countListXLSX, valueResp ){
-	var buttonDell = isTrueFalse(valueResp.toLowerCase()) ? new Element('input',{type:'button', value:'Delete', class:'btn btn-danger', onclick:'removeElemet("itemansw'+countListXLSX+'")' },[]) : "";
-	return new Element('div',{ class:'form-inline',id:'itemansw'+countListXLSX ,'data-remxlsx':'' },[
-		new Element('div',{ class:'form-group', style:'padding:5px;' },[
+	var buttonDell = isTrueFalse(valueResp.toLowerCase()) ? new Element('input',{type:'button', value:'Eliminar', class:'btn btn-danger', onclick:'removeElemet("itemansw'+countListXLSX+'")' },[]) : "";
+	return new Element('div',{ class:'grid-quest',id:'itemansw'+countListXLSX ,'data-remxlsx':'' },[
+		new Element('div',{ class:'item-grid-c', style:'padding:5px;' },[
 			radiocheck
 			]),
-			new Element('div',{ class:'form-group', style:'padding:5px;' },[
+			new Element('div',{ class:'item-grid-c', style:'padding:5px;' },[
 				new Element('input',{ type:'text', class:'form-control', value:valueResp },[ ] )
 				]),
-				new Element('div',{ class:'form-group', style:'padding:5px;' },[
+				new Element('div',{ class:'item-grid-c', style:'padding:5px;' },[
 					buttonDell
-					]),
-					new Element('br',{ },[] )
+					])
 		]);
 }
   		

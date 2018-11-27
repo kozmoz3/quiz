@@ -293,3 +293,19 @@ textarea {
 #more:visited{
 	border-radius: 50%;
 }
+
+.grid-quest {
+	display: grid;
+	grid-template-columns: 10% 60% 30%;
+}
+.grid-quest > .item-grid-c {
+	text-align: left;
+}
+
+.grid-delq {
+	display: grid;
+	grid-template-columns: 40% 60%;
+}
+.grid-delq > .item-grid-q {
+	text-align: left;
+}

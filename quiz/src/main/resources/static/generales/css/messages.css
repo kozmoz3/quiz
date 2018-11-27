@@ -46,3 +46,31 @@
   background:steelblue;
   color:#fff;
 }
+
+.fireworks-window{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  display:flex;
+  z-index: 10000;
+  background-color: rgba(0,0,0,.9);
+}
+.fireworks-content{
+  background:transparent;
+}
+
+.modal-window-load{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  display:flex;
+  z-index: 10000;
+  background-color: #fff;
+}
+.load-content{
+  background:transparent;
+}

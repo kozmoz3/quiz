@@ -25,7 +25,7 @@ var config = {
 
 $("#typeOption").change(function(){
 	var typeValue = $(this).val();
-	$.each($(".form-inline").find("input[id*='corr']"),function(index, value){
+	$.each($(".grid-quest").find("input[id*='corr']"),function(index, value){
 		$(value).prop("checked",false);
 		$(value).attr("type",typeValue);
 	});
@@ -34,17 +34,16 @@ $("#typeOption").change(function(){
 btn.addEventListener("click",function(){
 	//$("#typeOption").prop("disabled",true);
 	var typeValue = $("#typeOption").val();
-	let divrow = new Element('div',{ class:'form-inline',id:'li' + countList, 'data-rem':'' },[
-		new Element('div',{ class:'form-group', style:'padding:5px;' },[
+	let divrow = new Element('div',{ class:'grid-quest',id:'li' + countList, 'data-rem':'' },[
+		new Element('div',{ class:'item-grid-c', style:'padding:5px;' },[
 			new Element('input',{type:typeValue, id:'corr' + countList, onclick:'radio(this)', value:'rad' + countList},[])
 		]),
-		new Element('div',{ class:'form-group', style:'padding:5px;' },[
+		new Element('div',{ class:'item-grid-c', style:'padding:5px;' },[
 			new Element('input',{ type:'text', id:'resp' + countList, class:'form-control' },[] )
 		]),
-		new Element('div',{ class:'form-group', style:'padding:5px;' },[
+		new Element('div',{ class:'item-grid-c', style:'padding:5px;' },[
 			new Element('input',{type:'button', id:'dell' + countList, value:'Delete', class:'btn btn-danger', onclick:'removeElemet("li'+countList+'")' },[])
-		]),
-		new Element('br',{ },[] )
+		])
 	]);
 	countList++;
 	lista.appendChild(divrow);

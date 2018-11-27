@@ -15,8 +15,22 @@ function getCodeStatus(jqXHR, textStatus) {
 		return 'Error desconocido: ' + jqXHR.responseText;
 }
 
+function dropLoadMessage(){
+	$( ".modal-window-load" ).hide( "highlight",{}, 1000, callback );
+}
+
+function callback() {
+	setTimeout(function() {
+		$( ".modal-window-load" ).remove();
+	}, 1000 );
+}
+
+function getLoadMessage(){
+	$("body").append( "<div class='modal-window-load'><div class='modal-window-content'><img src='https://i.redd.it/ounq1mw5kdxy.gif'></div><div>");
+}
+
 function getErrorMessage( error ){
-	$(".modal-window-image").css("box-shadow","");
+	//$(".modal-window-image").css("box-shadow","");
 	let e = new Modal('div',{class:'modal-window-content'},[
 		new Elements('div',{class:'modal-window-image-error'},['<svg enable-background="new 0 0 512 512" id="Layer_1" viewBox="0 0 512 512" style="height: 30px;width: 30px;float: right;"><linearGradient gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="256" x2="256" y1="512" y2="-9.094947e-013"><stop offset="0" style="stop-color:#E73827"></stop><stop offset="1" style="stop-color:#F85032"></stop></linearGradient><circle cx="256" cy="256" fill="url(#SVGID_1_)" r="256"></circle><path d="M268.7,256l119.6-119.6c3.2-3.2,3.2-8.3,0-11.4c-3.2-3.2-8.3-3.2-11.4,0L257.2,244.6L135.1,122.5  c-3.2-3.2-8.3-3.2-11.4,0c-3.2,3.2-3.2,8.3,0,11.4L245.8,256L123.7,378.1c-3.2,3.2-3.2,8.3,0,11.4c1.6,1.6,3.7,2.4,5.7,2.4  c2.1,0,4.1-0.8,5.7-2.4l122.1-122.1l119.6,119.6c1.6,1.6,3.7,2.4,5.7,2.4c2.1,0,4.1-0.8,5.7-2.4c3.2-3.2,3.2-8.3,0-11.4L268.7,256z" fill="#FFFFFF"></path></svg>']),
 		new Elements('h1',{class:'modal-window-title'},[ "¡UPS!" ]),
@@ -88,4 +102,15 @@ var Modal = /** @class */ (function (_super) {
         document.body.removeChild(this);
     };
     return Modal;
+}(Elements));
+
+
+var ModalLoad = /** @class */ (function (_super) {
+    __extends(ModalLoad, _super);
+    function ModalLoad(type, attributes, children) {
+        var _this = _super.call(this, 'div', { class: 'modal-window-load' }, []) || this;
+        Elements.prototype.addChildren(_this, [Elements.prototype.createCustomElement(type, attributes, children)]);
+        return _this;
+    }
+    return ModalLoad;
 }(Elements));
