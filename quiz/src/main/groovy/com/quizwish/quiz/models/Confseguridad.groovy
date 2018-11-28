@@ -47,38 +47,10 @@ class Confseguridad implements Serializable {
 	def Confseguridad(Integer idconfseguri) {
 		this.idconfseguri = idconfseguri
 	}
-
-	def Integer getIdconfseguri() {
-		return idconfseguri
-	}
-
-	def setIdconfseguri(Integer idconfseguri) {
-		this.idconfseguri = idconfseguri
-	}
-
-	def String getPassword() {
-		return password
-	}
-
-	def setPassword(String password) {
-		this.password = password
-	}
-
-	def Quiz getIdquiz() {
-		return idquiz
-	}
-
-	def setIdquiz(Quiz idquiz) {
-		this.idquiz = idquiz
-	}
 	
 	@XmlTransient
-	def List<Seguridadgrupo> getSeguridadgrupoList() {
+	def getSeguridadgrupoList() {
 		return seguridadgrupoList
-	}
-
-	def setSeguridadgrupoList(List<Seguridadgrupo> seguridadgrupoList) {
-		this.seguridadgrupoList = seguridadgrupoList
 	}
 	
 

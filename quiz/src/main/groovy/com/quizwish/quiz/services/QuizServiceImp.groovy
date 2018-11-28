@@ -9,19 +9,20 @@ import org.springframework.stereotype.Service
 
 @Service("serviceQuiz")
 class QuizServiceImp {
+	
 	@Autowired
 	@Qualifier("quizRepository")
 	QuizRepository quizRepository
 	
-	def List<Quiz> getQuizAll() {
+	def getQuizAll() {
 		return quizRepository.findAll()
 	}
 	
-	def Quiz getQuizById(Integer id) {
+	def getQuizById(Integer id) {
 		return quizRepository.findById(id)
 	}
 	
-	def Quiz setQuiz(Quiz quiz) {
+	def setQuiz(Quiz quiz) {
 		return quizRepository.save(quiz)
 	}
 	
@@ -29,7 +30,7 @@ class QuizServiceImp {
 		quizRepository.deleteById(id)
 	}
 	
-	def Optional<Quiz> getByCriteria(Example<Quiz> example) {
+	def getByCriteria(Example<Quiz> example) {
 		return quizRepository.findAll(example)
 	}
 }

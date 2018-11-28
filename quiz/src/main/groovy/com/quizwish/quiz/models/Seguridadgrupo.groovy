@@ -42,30 +42,6 @@ class Seguridadgrupo {
 		this.idrelacionsg = idrelacionsg
 	}
 
-	def Integer getIdrelacionsg() {
-		return idrelacionsg
-	}
-
-	def setIdrelacionsg(Integer idrelacionsg) {
-		this.idrelacionsg = idrelacionsg
-	}
-
-	def Grupo getIdgrupo() {
-		return idgrupo
-	}
-
-	def setIdgrupo(Grupo idgrupo) {
-		this.idgrupo = idgrupo
-	}
-
-	def Confseguridad getIdconfseguri() {
-		return idconfseguri
-	}
-
-	def setIdconfseguri(Confseguridad idconfseguri) {
-		this.idconfseguri = idconfseguri
-	}
-
 	@Override
 	def String toString() {
 		return "Seguridadgrupo [idrelacionsg=" + idrelacionsg + ", idgrupo=" + idgrupo + ", idconfseguri="

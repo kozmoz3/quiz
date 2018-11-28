@@ -4,6 +4,7 @@
 	var errorColor ={
 		    "border-bottom": "solid 1px red"
 	}
+	$("li[data-disable]").prop("disabled",true);
 	var objectSend = {
 		type : "null",
 		url : "null",
@@ -28,17 +29,52 @@
             processData: false
     };
 	
-	function getListElements(){
-		var lstInputs = $(".valid-errors").find("input");
-		var lstSelect = $(".valid-errors").find("select");
-		var textarea = $(".valid-errors").find("textarea");
+	function getListElements( inthis ){
+		var lstInputs = $(inthis).find("input");
+		var lstSelect = $(inthis).find("select");
+		var textarea = $(inthis).find("textarea");
 		for (var i = 0 ; i < lstSelect.length; i++) lstInputs.push(lstSelect[i]);		
 		for (var i = 0 ; i < textarea.length; i++) lstInputs.push(textarea[i]);
 		return lstInputs;
 	}
 	
+	function sendDataForm( idElement ) {
+		var lstElements = getListElements( $(idElement).parents("form")[0] );
+		var lstStringscmd = $(idElement).attr("data-list-str") != undefined ? $(idElement).attr("data-list-str") : "";
+		var arraryString = lstStringscmd =="" ? [] : lstStringscmd.split(",");
+		var reduce = $(idElement).attr("data-remain") == '' ? 0: $(idElement).attr("data-remain");
+		
+		if( validate( idElement, lstElements, arraryString )  ){
+			
+			var objetoAdmin = convertToObject( lstElements.filter(function( item ){ return $(this).attr("data-noset") != undefined ? false : true; }),  reduce );
+			
+			if( $(idElement).attr("data-ismetadata") != undefined ){
+				sendActionMetadata( idElement, objetoAdmin );
+				if( $(idElement).attr("data-onclear") == "true"){
+					$("#imagePreview img").remove();
+					clearFElements( lstElements );
+					clearList(arraryString);
+				}
+				return false;
+			}
+			
+			console.log(objetoAdmin);
+			var ulrString = arraryString.length > 0 ? getNewsStrings(arraryString, reduce) : "";
+			if(getPasswordinArray()){
+				setActionMethod( idElement, objetoAdmin, ulrString.substring( 0, (ulrString.length -1) ) );
+				if( $(idElement).attr("data-onclear") == "true"){
+					clearFElements( lstElements );
+					clearList(arraryString);
+				}
+			}else{
+				getErrorMessage("Los campos contraseñas deben coincidir");
+			}
+		}
+	
+	}
+	
 	function sendData( idElement ) {
-		var lstElements = getListElements();
+		var lstElements = getListElements( $(".valid-errors") );
 		var lstStringscmd = $(idElement).attr("data-list-str") != undefined ? $(idElement).attr("data-list-str") : "";
 		var arraryString = lstStringscmd =="" ? [] : lstStringscmd.split(",");
 		var reduce = $(idElement).attr("data-remain") == '' ? 0: $(idElement).attr("data-remain");
@@ -73,15 +109,13 @@
 	}
 	
 	function sendActionMetadata( idElement, objetoAdmin ){
-		console.log($("input[type='file']")[0].files[0] );
-		console.log($("input[type='file']")[0].files[0].type );
 		
 		var formData = toFormData(objetoAdmin);
 		formData.append( $("input[type='file']").attr("id"), new Blob( 
 				[ $("input[type='file']")[0].files[0] ],
 				{ type: $("input[type='file']")[0].files[0].type } )
 		);
-		
+		console.log(formData);
 		datosMetadata.url= $(idElement).attr("data-href-url");
 		datosMetadata.type= $(idElement).attr("data-href-method");
 		datosMetadata.data= formData;
@@ -113,10 +147,9 @@
 	
 	function getPasswordinArray(){
 		var listpass = $(".form").find("input[type='password']");
-		if(listpass.length == 2){
+		if(listpass.length == 2)
 			if($(listpass[0]).val() != $(listpass[1]).val() ) 
 				return false
-		}		
 		return true;
 		
 	}

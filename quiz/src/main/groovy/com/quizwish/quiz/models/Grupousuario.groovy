@@ -41,30 +41,6 @@ class Grupousuario implements Serializable{
 		this.idrelaciongu = idrelaciongu
 	}
 
-	def Integer getIdrelaciongu() {
-		return idrelaciongu
-	}
-
-	def setIdrelaciongu(Integer idrelaciongu) {
-		this.idrelaciongu = idrelaciongu
-	}
-
-	def Grupo getIdgrupo() {
-		return idgrupo
-	}
-
-	def setIdgrupo(Grupo idgrupo) {
-		this.idgrupo = idgrupo
-	}
-
-	def Usuario getIdusuario() {
-		return idusuario
-	}
-
-	def setIdusuario(Usuario idusuario) {
-		this.idusuario = idusuario
-	}
-
 	@Override
 	def String toString() {
 		return "models.Grupousuario[ idrelaciongu=" + idrelaciongu + " ]"

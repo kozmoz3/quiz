@@ -57,48 +57,16 @@ class Grupo implements Serializable{
 		this.idgrupo = idgrupo
 		this.nombre = nombre
 		this.descripcion = descripcion
-	}
-
-	def Integer getIdgrupo() {
-		return idgrupo
-	}
-
-	def setIdgrupo(Integer idgrupo) {
-		this.idgrupo = idgrupo
-	}
-
-	def String getNombre() {
-		return nombre
-	}
-
-	def setNombre(String nombre) {
-		this.nombre = nombre
-	}
-
-	def String getDescripcion() {
-		return descripcion
-	}
-
-	def setDescripcion(String descripcion) {
-		this.descripcion = descripcion
-	}
+	}	
 
 	@XmlTransient
-    def List<Seguridadgrupo> getSeguridadgrupoList() {
+    def getSeguridadgrupoList() {
         return seguridadgrupoList
     }
 
-    def setSeguridadgrupoList(List<Seguridadgrupo> seguridadgrupoList) {
-        this.seguridadgrupoList = seguridadgrupoList
-    }
-
     @XmlTransient
-    def List<Grupousuario> getGrupousuarioList() {
+    def getGrupousuarioList() {
         return grupousuarioList
-    }
-
-    def setGrupousuarioList(List<Grupousuario> grupousuarioList) {
-        this.grupousuarioList = grupousuarioList
     }
 
 	@Override

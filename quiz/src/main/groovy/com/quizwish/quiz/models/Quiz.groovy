@@ -61,73 +61,24 @@ class Quiz implements Serializable{
 		this.descripcion = descripcion
 	}
 
-	def Integer getIdquiz() {
-		return idquiz
-	}
-
-	def setIdquiz(Integer idquiz) {
-		this.idquiz = idquiz
-	}
-
-	def String getNombre() {
-		return nombre
-	}
-
-	def setNombre(String nombre) {
-		this.nombre = nombre
-	}
-
-	def String getDescripcion() {
-		return descripcion
-	}
-
-	def setDescripcion(String descripcion) {
-		this.descripcion = descripcion
-	}	
-	
-
-	def String getImg() {
-		return img;
-	}
-
-	def setImg(String img) {
-		this.img = img;
-	}
-
 	@XmlTransient
-	def List<Confresultados> getConfresultadosList() {
+	def getConfresultadosList() {
 		return confresultadosList
 	}
 
-	def setConfresultadosList(List<Confresultados> confresultadosList) {
-		this.confresultadosList = confresultadosList
-	}
-
 	@XmlTransient
-	def List<Confseguridad> getConfseguridadList() {
+	def getConfseguridadList() {
 		return confseguridadList
 	}
 
-	def setConfseguridadList(List<Confseguridad> confseguridadList) {
-		this.confseguridadList = confseguridadList
-	}
-
 	@XmlTransient
-	def List<Confgeneral> getConfgeneralList() {
+	def getConfgeneralList() {
 		return confgeneralList
 	}
 
-	def setConfgeneralList(List<Confgeneral> confgeneralList) {
-		this.confgeneralList = confgeneralList
-	}
-
 	@XmlTransient
-	def List<Questions> getQuestionsList() {
+	def getQuestionsList() {
 		return questionsList
-	}
-
-	def setQuestionsList(List<Questions> questionsList) {
-		this.questionsList = questionsList
 	}
 
 	@Override

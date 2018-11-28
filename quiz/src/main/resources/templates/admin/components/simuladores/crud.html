@@ -3,28 +3,6 @@
 	<title>Simulador</title>
 	<meta charset="utf-8">
 	<head th:replace="admin/includes/heads :: heads"></head>
-	<style type="text/css">
-		progress[value] {
-			-webkit-appearance: none;
-			appearance: none;
-			width: 250px;
-			height: 20px;
-		}
-		.ml-auto, .mx-auto {
-		    margin-left: auto!important;
-		}
-		.mr-auto, .mx-auto {
-		    margin-right: auto!important;
-		}
-		.d-block {
-		    display: block!important;
-		}
-		.rounded-circle {
-		    border-radius: 50%!important;
-		    width: 200px;
-		    height: 200px;
-		}
-	</style>
 	<body>
 		<div id="hedsconf" data-title="Agregar simulador"></div>
 	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
@@ -34,60 +12,71 @@
 	            <div th:replace="admin/includes/top :: top"></div>
 	            <div th:replace="admin/includes/menu-movile :: menu-movil"></div>
 	            <div th:replace="admin/includes/navegacion :: breadcome"></div>
-	        </div>
-	        
+	        </div>	        
 	        <div class="single-pro-review-area mt-t-30 mg-b-15" th:fragment="frm-data-change">
 				<div class="container-fluid">
 					<div class="sparkline8-list responsive-mg-b-30">
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<form >
-									<div class="product-payment-inner-st">
-										<ul id="myTabedu1" class="tab-review-design">
-											<li class="active"><a href="#simulador">Simulador</a></li>
-											<li><a href="#general">General</a></li>
-											<li><a href="#seguridad">Seguridad</a></li>
-											<li><a href="#resultados">Resultados</a></li>
-										</ul>
-										<div class="tab-content custom-product-edit valid-errors">
-											<div class="product-tab-list tab-pane fade active in" id="simulador">
-												<div class="row">
-													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<div class="review-content-section">
-															<div class="pro-ad">
-																<div class="row">
+								<div class="product-payment-inner-st">
+									<ul id="myTabedu1" class="tab-review-design">
+										<li class="active"><a href="#simulador">Simulador</a></li>
+										<li data-disable><a href="#general">General</a></li>
+										<li data-disable><a href="#seguridad">Seguridad</a></li>
+										<li data-disable><a href="#resultados">Resultados</a></li>
+									</ul>
+									<div class="tab-content custom-product-edit valid-errors">
+										<div class="product-tab-list tab-pane fade active in" id="simulador">
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="review-content-section">
+														<div class="pro-ad">
+															<form>
+																<div class="row">																
 																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 																		<div class="form-group">
-																			<input id="strnombre" type="text" class="form-control" placeholder="Nombre">
+																			<input id="strnombre" name="strnombre" type="text" class="form-control" placeholder="Nombre">
 																		</div>
-																		<!-- div class="form-group mx-auto d-block">
+																		<div class="form-group mx-auto d-block">
 																			<div id="imagePreview"></div>
-																			<input type="file" onchange="setArchive(this);" data-progress="progressimgp"
-																			class="custom-file-input" id="strimg" data-image-size="900,900" 
+																		</div>
+																		<div class="form-group mx-auto d-block upload">
+																			<input type="file" data-optional data-cleable onchange="setArchive(this);" data-progress="progressimgp"
+																			id="strimg" name="strimg" data-image-size="900,900" 
 																			lang="es" accept=".png,.jpeg,.jpg,.gif" data-preview="imagePreview"
-																			data-loaded="false">
-																			<label class="custom-file-label" for="strimg">Seleccionar Archivo</label>
+																			data-loaded="false"/>
+																			<p>Arrastra tu archvo aquí. (opcional)</p>
 																		</div>
 																		<div class="form-group">
 																			<progress id="progressimgp" style="display: none;" value="1" max="100"></progress>
-																		</div>-->
+																		</div>
 																	</div>
 																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 																		<div class="form-group">
-																			<textarea id="strdescripcion" class="form-control" placeholder="Descripcion"></textarea>
+																			<textarea id="strdescripcion" name="descripcion" class="form-control" placeholder="Descripcion"></textarea>
 																		</div>
-																	</div>																	
+																	</div>
 																</div>
-															</div>
+																<div class="form-group">
+																	<input  onclick="sendDataForm(this);"
+																		data-onclear="true" 
+																		data-href-method="post"
+																		data-remain="3"
+																		data-href-url="/admin/actions/simuladores" data-ismetadata data-optional data-noset data-cleable 
+																		type="button" class="btn btn-info" value="Aceptar">
+																</div>
+															</form>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="product-tab-list tab-pane fade" id="general">
-												<div class="row">
-													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<div class="review-content-section">
-															<div class="pro-ad">
+										</div>
+										<div class="product-tab-list tab-pane fade" id="general">
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="review-content-section">
+														<div class="pro-ad">
+															<form>
 																<div class="row">
 																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 																		<div class="form-group radio-group">
@@ -141,16 +130,26 @@
 																		</div>
 																	</div>
 																</div>
-															</div>
+																<div class="form-group">
+																	<input  onclick="sendDataForm(this);"
+																		data-onclear="true" 
+																		data-href-method="post"
+																		data-remain="3"
+																		data-href-url="/admin/actions/simuladores" data-optional data-noset data-cleable 
+																		type="button" class="btn btn-info" value="Aceptar">
+																</div>
+															</form>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="product-tab-list tab-pane fade" id="seguridad">
-												<div class="row">
-													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<div class="review-content-section">
-															<div class="row">
+										</div>
+										<div class="product-tab-list tab-pane fade" id="seguridad">
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="review-content-section">
+														<div class="row">
+															<form>
 																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 																	<div class="devit-card-custom">
 																		<div class="form-group  radio-group">
@@ -163,7 +162,10 @@
 																				</label>
 																			</div>
 																		</div>
-																		<hr>
+																	</div>
+																</div>
+																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+																	<div class="devit-card-custom">
 																		<div class="form-group radio-group" data-showt>
 																			<label>
 																				<input data-optional data-noset data-cleable id="strpasswordno" checked type="radio"> Sin contraseña
@@ -179,15 +181,25 @@
 																		</div>
 																	</div>
 																</div>
-															</div>
+																<div class="form-group">
+																	<input  onclick="sendDataForm(this);"
+																		data-onclear="true" 
+																		data-href-method="post"
+																		data-remain="3"
+																		data-href-url="/admin/actions/simuladores" data-optional data-noset data-cleable 
+																		type="button" class="btn btn-info" value="Aceptar">
+																</div>
+															</form>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="product-tab-list tab-pane fade" id="resultados">
-												<div class="row">
-													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<div class="review-content-section">
+										</div>
+										<div class="product-tab-list tab-pane fade" id="resultados">
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="review-content-section">
+														<form>
 															<div class="row">
 																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 																	<div class="devit-card-custom">
@@ -260,26 +272,26 @@
 																				<span style="padding-right: 20px;padding-left: 20px;">a</span>
 																				<input data-optional id="strshowfechafin" disabled type="date" class="form-control">
 																			</div>
-																		</div>
-																		
+																		</div>																	
 																	</div>
 																</div>
 															</div>
-														</div>
+															<div class="form-group">
+																<input  onclick="sendDataForm(this);"
+																	data-onclear="true" 
+																	data-href-method="post"
+																	data-remain="3"
+																	data-href-url="/admin/actions/simuladores" data-optional data-noset data-cleable 
+																	type="button" class="btn btn-info" value="Aceptar">
+																
+															</div>
+														</form>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<input  onclick="sendData(this);"
-											data-onclear="true" 
-											data-href-method="post"
-											data-remain="3"
-											data-href-url="/admin/actions/simuladores" data-optional data-noset data-cleable 
-											type="button" class="btn btn-info" value="Aceptar">
-									</div>
-								</form>
+								</div>
 							</div>
 						</div>
 					</div>
