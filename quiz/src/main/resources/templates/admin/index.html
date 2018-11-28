@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
+	<title>Index</title>
+	<meta charset="utf-8">
+	<head th:replace="admin/includes/heads :: heads"></head>
+	<body>
+	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
+	    <div class="all-content-wrapper">
+	        <div th:replace="admin/includes/logo-movile :: logo-mov"></div>
+	        <div class="header-advance-area">
+	            <div th:replace="admin/includes/top :: top"></div>
+	            <div th:replace="admin/includes/menu-movile :: menu-movil"></div>
+	        </div>
+	        <div class="product-sales-area mg-tb-30">
+            <div class="container-fluid">
+                <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 res-mg-t-30 table-mg-t-pro-n tb-sm-res-d-n dk-res-t-d-n">
+                            <h3 class="box-title">Alumnos registrados</h3>
+                            <ul class="list-inline two-part-sp">
+                                <li>
+                                    <div id="sparklinedash"></div>
+                                </li>
+                                <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter text-success">15</span></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 tb-sm-res-d-n dk-res-t-d-n">
+                            <h3 class="box-title">Número de simuladores</h3>
+                            <ul class="list-inline two-part-sp">
+                                <li>
+                                    <div id="sparklinedash2"></div>
+                                </li>
+                                <li class="text-right graph-two-ctn"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter text-purple">33</span></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 tb-sm-res-d-n dk-res-t-d-n">
+                            <h3 class="box-title">Simuladores realizados</h3>
+                            <ul class="list-inline two-part-sp">
+                                <li>
+                                    <div id="sparklinedash3"></div>
+                                </li>
+                                <li class="text-right graph-three-ctn"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter text-info">399</span></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="white-box analytics-info-cs table-dis-n-pro tb-sm-res-d-n dk-res-t-d-n">
+                            <h3 class="box-title">Media de resultados</h3>
+                            <ul class="list-inline two-part-sp">
+                                <li>
+                                    <div id="sparklinedash4"></div>
+                                </li>
+                                <li class="text-right graph-four-ctn"><i class="fa fa-level-down" aria-hidden="true"></i> <span class="text-danger"><span class="counter">86.4</span>%</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div></div>
+	    </div>
+	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	</body>
+</html>

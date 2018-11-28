@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
+	<title>Simuladores</title>
+	<meta charset="utf-8">
+	<head th:replace="admin/includes/heads :: heads"></head>
+	<body>
+		<div id="hedsconf" data-search="simulador" data-ads="button" data-href="/admin/simuladores/add"></div>
+	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
+	    <div class="all-content-wrapper">
+	        <div th:replace="admin/includes/logo-movile :: logo-mov"></div>
+	        <div class="header-advance-area">
+	            <div th:replace="admin/includes/top :: top"></div>
+	            <div th:replace="admin/includes/menu-movile :: menu-movil"></div>
+	            <div th:replace="admin/includes/navegacion :: breadcome"></div>
+	        </div>
+	        <div class="courses-area">
+	        	<div class="container-fluid">
+	        		<div class="row">
+	        			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	        				<div class="courses-inner res-mg-b-30">
+	        					<div class="courses-title">
+	        						<a href="#"><img th:src="@{/administrador/img/courses/1.jpg}" alt=""></a>
+	        						<h2>{{Nombre simulador}}</h2>
+	        						<h5>{{Grupo}}</h5>
+	        					</div>
+	        					<div class="course-des">
+	        						<p><span><i class="fa fa-clock"></i></span> <b>100</b> Preguntas</p>
+	        						<p><span><i class="fa fa-clock"></i></span> <b>100</b> Alumnos</p>
+	        					</div>
+	        					<div class="product-buttons">
+	        						<button type="button" class="button-warning cart-btn">Editar</button>
+	        						<button type="button" onclick="javascript:location.href='/admin/simuladores/preguntas';" class="button-info cart-btn">Preguntas</button>
+	        						<button type="button" class="button-danger cart-btn">Eliminar</button>
+	        					</div>
+	        				</div>
+	        			</div>
+	        		</div>
+	        	</div>
+	        </div>
+	    </div>
+	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	</body>
+</html>

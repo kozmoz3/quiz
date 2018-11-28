@@ -1,0 +1,81 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
+	<title>Preguntas</title>
+	<meta charset="utf-8">
+	<head th:replace="admin/includes/heads :: heads"></head>
+	<body>
+		<div id="hedsconf" data-title="Agregar preguntas a cuestionario {{Nombre}}"></div>
+	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
+	    <div class="all-content-wrapper">
+	        <div th:replace="admin/includes/logo-movile :: logo-mov"></div>
+	        <div class="header-advance-area">
+	            <div th:replace="admin/includes/top :: top"></div>
+	            <div th:replace="admin/includes/menu-movile :: menu-movil"></div>
+	            <div th:replace="admin/includes/navegacion :: breadcome"></div>
+	        </div>
+	        <div class="login-form-area edu-pd mg-b-15">
+	            <div class="container-fluid">
+	            	<div class="row">
+	            		<div class="col-md-6">
+	                		<div class="row">
+	                			<div class="col-md-12">
+	                				<div class="sparkline8-list responsive-mg-b-30">
+	                					<div class="sparkline8-hd">
+	                						<h4 class="title">Mis preguntas</h4>
+	                					</div>
+	                					<div class="sparkline8-graph content">
+	                						<ul id="listQuest"></ul>
+	                						<div id="form-questionxlsx"></div>
+	                					</div>
+	                				</div>
+	                			</div>
+	                		</div>
+	                	</div>
+	                	<div class="col-md-6">
+	                		<div class="row">
+	                			<div class="col-md-12">
+	                				<div class="sparkline8-list responsive-mg-b-30">
+	                					<div class="sparkline8-hd">
+	                						<h4 class="title">Agregar preguntas</h4>
+	                					</div>
+	                					<div class="from-group">
+	                						<input type="button" data-masiva value="Carga masiva" class="btn btn-info"/>
+	                						<input type="button" data-manual value="Carga manual" class="btn btn-info"/>	                						
+	                					</div>
+	                					<div class="sparkline8-graph content" data-display-manual style="display:none;">
+	                						<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+	                						<form>
+												<div class="form-group mainForce">
+													<input type="button" class="btn btn-warning" id="clear" value="Limpiar" />
+													<input type="button" class="btn btn-primary" id="add" value="Agregar" />
+												</div>
+											</form>
+	                					</div>
+	                					<hr>
+	                					<form style="display:none;" data-display-masiva>
+	                						<div class="from-group">
+	                							<label>Nombre de cabeceras (separados por comas)</label>
+	                							<input type="text" placeholder="pregunta, opci&oacute;n, respuestas, score, mensaje" data-colrow class="form-control"/>
+	                						</div>
+	                						<div class="from-group upload">
+	                							<input type="file" data-importxls onchange="ExportToTable()" />
+	                							<p>Drag your files here or click in this area.</p>
+	                						</div>
+	                					</form>
+									</div>
+								</div>
+							</div>
+	                	</div>
+	            	</div>
+	            </div>
+            </div>      
+	    </div>
+	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	    <script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
+  		<script type="text/javascript" th:src="@{/generales/quiz/addQuestion.js}"></script>
+  		
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>
+  		<script type="text/javascript" th:src="@{/generales/quiz/loadexceltoform.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="horizontal-form" th:fragment="frm-ads-quest">
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-12">
+					<select id="typeOption" class="form-control">
+						<option value="radio">Opci&oacute;n m&uacute;ltiple</option>
+						<option value="checkbox">Seleccion m&uacute;ltiple</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<textarea class="form-control" id="question" placeholder="Pregunta"></textarea>
+		</div>
+		<div class="form-group">
+			<input type="button" class="btn btn-info" id="more" value="+" />
+			<label>Opciones</label>
+		</div>
+		<div class="form-group">
+			<div id="lst"></div>
+		</div>
+		<div class="form-group">
+			<textarea class="form-control" id="messages" placeholder="Alg&uacute;n mensaje (opcional)"></textarea>
+		</div>
+		<div class="form-group">
+			<input type="number" id="score-quest" min="1" value="1" class="form-control" placeholder="Score" title="Score"/>
+		</div>
+	</div>		
+</html>

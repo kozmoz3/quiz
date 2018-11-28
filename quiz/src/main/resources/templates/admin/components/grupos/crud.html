@@ -1,0 +1,79 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
+	<title>Simulador</title>
+	<meta charset="utf-8">
+	<head th:replace="admin/includes/heads :: heads"></head>
+	<body>
+		<div id="hedsconf" data-title="Agregar grupo"></div>
+	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
+	    <div class="all-content-wrapper">
+	        <div th:replace="admin/includes/logo-movile :: logo-mov"></div>
+	        <div class="header-advance-area">
+	            <div th:replace="admin/includes/top :: top"></div>
+	            <div th:replace="admin/includes/menu-movile :: menu-movil"></div>
+	            <div th:replace="admin/includes/navegacion :: breadcome"></div>
+	        </div>
+	        <div class="single-pro-review-area mt-t-30 mg-b-15" th:fragment="frm-data-change">
+				<div class="container-fluid">
+					<div class="sparkline8-list responsive-mg-b-30">
+						<form>
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Nombre"/>
+									</div>
+									<div class="form-group">
+										<textarea rows="8" class="form-control" placeholder="Descripción"></textarea>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<div style="height: 204px; overflow: scroll;">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Nombre</th>
+													<th>Asignar</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Nombre de un alumno</td>
+													<td><input type="checkbox"/></td>
+												</tr>
+												<tr>
+													<td>Nombre de un alumno</td>
+													<td><input type="checkbox"/></td>
+												</tr>
+												<tr>
+													<td>Nombre de un alumno</td>
+													<td><input type="checkbox"/></td>
+												</tr>
+												<tr>
+													<td>Nombre de un alumno</td>
+													<td><input type="checkbox"/></td>
+												</tr>
+												<tr>
+													<td>Nombre de un alumno</td>
+													<td><input type="checkbox"/></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="form-group">
+										<label>
+											<input type="checkbox" /> Seleccionar todos
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<input type="button" class="btn btn-success" value="Enviar"/>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	    </div>
+	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	</body>
+</html>
