@@ -13,6 +13,10 @@ class QuizServiceImp {
 	@Qualifier("quizRepository")
 	QuizRepository quizRepository
 	
+	def saveQuiz() {
+		
+	}
+	
 	def List<Quiz> getQuizAll() {
 		return quizRepository.findAll()
 	}

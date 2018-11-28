@@ -24,10 +24,7 @@ class ExamplesController {
 		return "admin/components/simuladores/list";
 	}
 
-	@GetMapping("/admin/simuladores/add")
-	public String simuladoresAdd(Model model) {
-		return "admin/components/simuladores/crud";
-	}
+	
 	
 	@GetMapping("/admin/simuladores/preguntas/add")
 	public String simuladoresPreguntasAdd(Model model) {
