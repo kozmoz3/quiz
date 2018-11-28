@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient
 	, @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
 	, @NamedQuery(name = "Grupo.findByDescripcion", query = "SELECT g FROM Grupo g WHERE g.descripcion = :descripcion")})*/
 class Grupo implements Serializable{
-	static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -42,7 +42,7 @@ class Grupo implements Serializable{
     @Column(name = "descripcion")
     String descripcion
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
-    List<Seguridadgrupo> seguridadgrupoList
+    List<Quizgrupo> quizgrupoList
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
     List<Grupousuario> grupousuarioList
 
@@ -60,10 +60,10 @@ class Grupo implements Serializable{
 	}	
 
 	@XmlTransient
-    def getSeguridadgrupoList() {
-        return seguridadgrupoList
+    def getQuizgrupoList() {
+        return quizgrupoList
     }
-
+	
     @XmlTransient
     def getGrupousuarioList() {
         return grupousuarioList

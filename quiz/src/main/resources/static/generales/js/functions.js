@@ -109,6 +109,8 @@
 	}
 	
 	function sendActionMetadata( idElement, objetoAdmin ){
+		console.log($("input[type='file']")[0].files[0] );
+		console.log($("input[type='file']")[0].files[0].type );
 		
 		var formData = toFormData(objetoAdmin);
 		formData.append( $("input[type='file']").attr("id"), new Blob( 
@@ -130,6 +132,7 @@
 	function toFormData( objetoAdmin ){
 		var formData = new FormData();
 		$.each(objetoAdmin, function(index, value){
+			console.log(index +" => "+ value);
 			if(index != "img");
 				formData.append(index, value);
 		});
