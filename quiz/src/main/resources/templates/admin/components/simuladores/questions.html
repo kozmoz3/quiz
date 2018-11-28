@@ -38,15 +38,28 @@
 	                					<div class="sparkline8-hd">
 	                						<h4 class="title">Agregar preguntas</h4>
 	                					</div>
-	                					<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+	                					<div class="from-group">
+	                						<input type="button" data-masiva value="Carga masiva" class="btn btn-info"/>
+	                						<input type="button" data-manual value="Carga manual" class="btn btn-info"/>	                						
+	                					</div>
+	                					<div class="sparkline8-graph content" data-display-manual style="display:none;">
+	                						<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+	                						<form>
+												<div class="form-group mainForce">
+													<input type="button" class="btn btn-warning" id="clear" value="Limpiar" />
+													<input type="button" class="btn btn-primary" id="add" value="Agregar" />
+												</div>
+											</form>
+	                					</div>
 	                					<hr>
-	                					<form>
+	                					<form style="display:none;" data-display-masiva>
 	                						<div class="from-group">
 	                							<label>Nombre de cabeceras (separados por comas)</label>
-	                							<input type="text" data-colrow class="form-control"/>
+	                							<input type="text" placeholder="pregunta, opci&oacute;n, respuestas, score, mensaje" data-colrow class="form-control"/>
 	                						</div>
-	                						<div class="from-group">
+	                						<div class="from-group upload">
 	                							<input type="file" data-importxls onchange="ExportToTable()" />
+	                							<p>Drag your files here or click in this area.</p>
 	                						</div>
 	                					</form>
 									</div>

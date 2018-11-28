@@ -68,7 +68,15 @@
 	    				</button>
 	    			</div>
 	    			<div class="modal-body">
-	    				<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+	    				<div class="sparkline8-graph content">
+	                		<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+	                		<form>
+								<div class="form-group mainForce">
+									<input type="button" class="btn btn-warning" id="clear" value="Limpiar" />
+									<input type="button" class="btn btn-primary" id="add" value="Agregar" />
+								</div>
+							</form>
+	                	</div>
 	    			</div>
 	    		</div>
 	    	</div>

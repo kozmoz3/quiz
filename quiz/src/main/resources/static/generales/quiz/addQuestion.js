@@ -31,8 +31,19 @@ $("#typeOption").change(function(){
 	});
 });
 
+$("input[data-masiva]").click(function(){
+	$("form[data-display-masiva]").show("slow");
+	$( $(this).parent("div")[0] ).hide("slow");
+	$( $(this).parent("div")[0] ).remove();
+});
+
+$("input[data-manual]").click(function(){
+	$("div[data-display-manual]").show("slow");
+	$( $(this).parent("div")[0] ).hide("slow");
+	$( $(this).parent("div")[0] ).remove();
+});
+
 btn.addEventListener("click",function(){
-	//$("#typeOption").prop("disabled",true);
 	var typeValue = $("#typeOption").val();
 	let divrow = new Element('div',{ class:'grid-quest',id:'li' + countList, 'data-rem':'' },[
 		new Element('div',{ class:'item-grid-c', style:'padding:5px;' },[
@@ -55,6 +66,7 @@ clear.addEventListener("click",function(){
 
 add.addEventListener("click",function(){
 	if( $("#question").val() == "" ){ getErrorMessage("Agrega una pregunta"); return false; }
+	if( $("#score-quest").val() < 0 ){getErrorMessage("Se encontr&oacute; un score menor a 0, el valor de una pregunta es '0' como m&iacute;nimo");return false;}
 	
 	var isEmptyElem = $("#lst").find("input[id*=corr]").filter(function(item){ return $(this).is(":checked") ? true: false; });
 		
@@ -62,7 +74,7 @@ add.addEventListener("click",function(){
 		var listaDivs = $("#lst").find("div[data-rem]");
 		if( objResource.isEmptyList( listaDivs.find("input[type='text']") ) > 0 ){
 			var opciones = objResource.getCampos( listaDivs );
-			listQuestions.push( new Question($("#question").val(), opciones[0], opciones[1], $("#messages").val(), 0, 0, $("#typeOption").val() ) );
+			listQuestions.push( new Question($("#question").val(), opciones[0], opciones[1], $("#messages").val(), 0, 0, $("#typeOption").val(),$("#score-quest").val() ) );
 			$("#question").val("");
 			$("#messages").val("");
 			setList();

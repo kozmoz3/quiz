@@ -1,5 +1,5 @@
 var Question = /** @class */ (function () {
-    function Question(question, options, answers, message, idquestion, idquiz, type) {
+    function Question(question, options, answers, message, idquestion, idquiz, type, score) {
         this.question = question;
         this.options = options;
         this.answers = answers;
@@ -7,18 +7,20 @@ var Question = /** @class */ (function () {
         this.idquestion = idquestion;
         this.idquiz = idquiz;
 		this.type = type;
+		this.score = score;
     }
     return Question;
 }());
 
 var QuestionXLSX = /** @class */ (function () {
-    function QuestionXLSX(question, options, answers, message, idquiz, type) {
+    function QuestionXLSX(question, options, answers, message, idquiz, type, score) {
         this.question = question;
         this.options = options;
         this.answers = answers;
         this.message = message;
         this.idquiz = idquiz;
 		this.type = type;
+		this.score = score;
     }
     return QuestionXLSX;
 }());

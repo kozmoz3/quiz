@@ -47,7 +47,8 @@ function BindTable(jsondata, camposRow) {
 	var all = [];
 	var posiciones = [];
 	var preguntas = [];
-	var pregunta = "";            
+	var pregunta = "";
+	var score = "";
 	var contpre = 0;
 	var type = "";
 	var j = 0;
@@ -60,11 +61,12 @@ function BindTable(jsondata, camposRow) {
 				else if(contpre > 1)
 					type = "checkbox";
                         
-				all.push( new QuestionXLSX(pregunta, preguntas, posiciones, "", 1, type) );
+				all.push( new QuestionXLSX(pregunta, preguntas, posiciones, "", 1, type, score) );
 				posiciones = [];
 				preguntas = [];
 			}
 			pregunta = isEmptyCell( jsondata[i][camposRow[0]] );
+			score = jsondata[i][camposRow[3]] != null ? jsondata[i][camposRow[3]] : 0;
 			pos = 0;
 			contpre = 0;
 		}
@@ -109,7 +111,7 @@ function createForm( componets ){
 					new Element('input',{type:'button', value:'Eliminar pregunta', class:'btn btn-danger',onclick:"removeQuestion(questdiv"+counquest+");" },[])
 				]),
 				new Element('div',{ class:'item-grid-q'},[
-					new Element('input',{type:'number', value:'1', "data-score":"", class:'form-control', min:"1" },[])
+					new Element('input',{type:'number', value: value.score, "data-score":"", class:'form-control', min:"0" },[])
 				])
 			]),
 			new Element('hr',{},[] )
@@ -128,17 +130,23 @@ function setInForm( formulario, conenedor ){
 	buttonAgregar.addEventListener("click",function(){
 		var verificaCampos = true;
 		var verificaChecks = true;
+		var verificaScore = true;
 		$.each( $("#formloadXLSX").find("div[data-question]") , function(index, value){
 			if ( $(value).find("input[id*=xlsxcorr]").filter(function(item){ return $(this).is(":checked") ? true: false; }).length  <= 0 ) verificaChecks = false;
-  					
+			
+			var score = $(value).find(".grid-delq .item-grid-q input[type='number']")[0];
+			if ( $(score).val() < 0 ) verificaScore = false;
+			
 			var listaDivs = $(value).find("div[data-remxlsx]");
 			if ( !valueList.isEmptyList( listaDivs.find("input[type='text']") ) ) verificaCampos = false;
 		});
+		
 		if(!verificaCampos) {getErrorMessage("Hay campos vac&iacute;os");return false;}
 		if(!verificaChecks) {getErrorMessage("Hay preguntas no marcadas (Debe de haber al menos una opci&oacute;n correcta)");return false;}
-		if( verificaCampos && verificaChecks ){
-			addToListQuestions();
-		}
+		if(!verificaScore) {getErrorMessage("Se encontr&oacute; un score menor a 0, el valor de una pregunta es '0' como m&iacute;nimo");return false;}
+		
+		if( verificaCampos && verificaChecks ) addToListQuestions();
+		
 	});
 	formulario.appendChild(
 			new Element('div',{ class:'form-group'},[
@@ -154,7 +162,8 @@ function addToListQuestions(){
 		var listaDivs = $(value).find("div[data-remxlsx]");
 		var opciones = objResource.getCamposXLSX( listaDivs );
 		var type = objResource.getTypeXLSX( listaDivs );
-		listQuestions.push( new Question($("#questionxlsx" + index).val(), opciones[0], opciones[1], "", 0, 0, type ) );
+		var score = $(value).find(".grid-delq .item-grid-q input[type='number']")[0];
+		listQuestions.push( new Question($("#questionxlsx" + index).val(), opciones[0], opciones[1], "", 0, 0, type, $(score).val() ) );
 	});
 	console.log(listQuestions);
 }
