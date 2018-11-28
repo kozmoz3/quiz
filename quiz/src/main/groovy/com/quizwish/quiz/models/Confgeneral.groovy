@@ -43,6 +43,9 @@ class Confgeneral implements Serializable{
 	@Column(name = "vista")
 	String vista
 	@Basic(optional = false)
+	@Column(name = "intentos")
+	String intentos
+	@Basic(optional = false)
 	@Lob
 	@Column(name = "random")
 	boolean random
@@ -67,12 +70,13 @@ class Confgeneral implements Serializable{
 		this.idconfgen = idconfgen
 	}
 
-	def Confgeneral(Integer idconfgen, String mostrar, String vista, boolean random, Date tiempo) {
+	def Confgeneral(Integer idconfgen, String mostrar, String vista,String intentos, boolean random, Date tiempo) {
 		this.idconfgen = idconfgen
 		this.mostrar = mostrar
 		this.vista = vista
 		this.random = random
 		this.tiempo = tiempo
+		this.intentos = intentos;
 	}
 
 	def Integer getIdconfgen() {
@@ -97,6 +101,14 @@ class Confgeneral implements Serializable{
 
 	def setVista(String vista) {
 		this.vista = vista
+	}
+	
+	def String getIntentos() {
+		return intentos
+	}
+
+	def setIntentos(String intentos) {
+		this.intentos = intentos
 	}
 
 	def boolean getRandom() {

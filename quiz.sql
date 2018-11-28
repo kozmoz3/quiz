@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-28 11:28:00
+Date: 2018-11-28 13:59:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,6 +27,7 @@ CREATE TABLE `confgeneral` (
   `tiempo` time NOT NULL,
   `venceini` date DEFAULT NULL,
   `vencefin` date DEFAULT NULL,
+  `intentos` char(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `idquiz` int(11) NOT NULL,
   PRIMARY KEY (`idconfgen`),
   KEY `fk_gene_quiz` (`idquiz`),
@@ -50,7 +51,7 @@ CREATE TABLE `confresultados` (
   `grafico` binary(255) NOT NULL,
   `tiempo` binary(255) NOT NULL,
   `mensajesop` binary(255) NOT NULL,
-  `intentos` char(10) COLLATE utf8_spanish_ci NOT NULL,
+  `intentos` binary(255) NOT NULL,
   `showfechaini` date DEFAULT NULL,
   `showfechafin` date DEFAULT NULL,
   `idquiz` int(11) NOT NULL,
@@ -123,7 +124,7 @@ CREATE TABLE `questions` (
   `answers` longtext COLLATE utf8_spanish_ci NOT NULL,
   `message` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `options` longtext COLLATE utf8_spanish_ci NOT NULL,
-  `question` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `question` longtext COLLATE utf8_spanish_ci NOT NULL,
   `type` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `score` smallint(6) NOT NULL,
   `idquiz` int(11) NOT NULL,
@@ -142,8 +143,8 @@ CREATE TABLE `questions` (
 DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE `quiz` (
   `idquiz` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
   `img` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`idquiz`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

@@ -63,8 +63,7 @@ class Confresultados implements Serializable{
 	@Column(name = "mensajesop")
 	boolean mensajesop
 	@Basic(optional = false)
-	@Column(name = "intentos")
-	String intentos
+	boolean intentos
 	@Column(name = "showfechaini")
 	@Temporal(TemporalType.DATE)
 	Date showfechaini
@@ -82,7 +81,7 @@ class Confresultados implements Serializable{
 		this.idconfresult = idconfresult
 	}
 
-	def Confresultados(Integer idconfresult, boolean preguntasc, boolean respuestac, boolean preguntasi, boolean calificacion, boolean grafico, boolean tiempo, boolean mensajesop, String intentos) {
+	def Confresultados(Integer idconfresult, boolean preguntasc, boolean respuestac, boolean preguntasi, boolean calificacion, boolean grafico, boolean tiempo, boolean mensajesop, boolean intentos) {
 		this.idconfresult = idconfresult
 		this.preguntasc = preguntasc
 		this.respuestac = respuestac
@@ -158,11 +157,11 @@ class Confresultados implements Serializable{
 		this.mensajesop = mensajesop
 	}
 
-	def String getIntentos() {
+	def boolean getIntentos() {
 		return intentos
 	}
 
-	def setIntentos(String intentos) {
+	def setIntentos(boolean intentos) {
 		this.intentos = intentos
 	}
 
