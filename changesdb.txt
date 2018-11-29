@@ -1,0 +1,19 @@
+------------------------------------------------------------------------+
++  agrer								+
+~  editar								+
+-  eliminar								+
+=> cambio a								+
+[] tipo de								+
++> combinar tablas							+
+------------------------------------------------------------------------+
+
+------------------------------------------------------------------------+28/11/2018
+~confresultados c~intentos [char(10) => binary]				+
+~confgeneral c+ intentos[char(10)]					+
+~quiz c~nombre[varchar(50) => varchar(100)]				+
+~quiz c~descripcion[varchar(255) => text]				+
+~quiz +>{confgeneral,confresultados,confseguridad}			+
+-confgeneral								+
+-confseguridad								+
+-confresultados								+
+------------------------------------------------------------------------+

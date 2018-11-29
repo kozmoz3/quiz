@@ -318,20 +318,36 @@ textarea {
 }
 .upload p{
   width: 100%;
-  height: 100%;
   text-align: center;
   line-height: 170px;
   font-family: Arial;
 }
 .upload input[type='file']{
-  position: absolute;
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
   outline: none;
   opacity: 0;
 }
-
+progress[value] {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 250px;
+			height: 20px;
+		}
+		.ml-auto, .mx-auto {
+		    margin-left: auto!important;
+		}
+		.mr-auto, .mx-auto {
+		    margin-right: auto!important;
+		}
+		.d-block {
+		    display: block!important;
+		}
+		.rounded-circle {
+		    border-radius: 50%!important;
+		    width: 200px;
+		    height: 200px;
+		}
 
 

@@ -10,77 +10,12 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-28 11:28:00
+Date: 2018-11-28 17:09:22
 */
 CREATE Database quiz;
 use quiz;
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for confgeneral
--- ----------------------------
-DROP TABLE IF EXISTS `confgeneral`;
-CREATE TABLE `confgeneral` (
-  `idconfgen` int(11) NOT NULL AUTO_INCREMENT,
-  `mostrar` char(10) COLLATE utf8_spanish_ci NOT NULL,
-  `vista` char(2) COLLATE utf8_spanish_ci NOT NULL,
-  `random` binary(255) NOT NULL,
-  `tiempo` time NOT NULL,
-  `venceini` date DEFAULT NULL,
-  `vencefin` date DEFAULT NULL,
-  `idquiz` int(11) NOT NULL,
-  PRIMARY KEY (`idconfgen`),
-  KEY `fk_gene_quiz` (`idquiz`),
-  CONSTRAINT `fk_gene_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- ----------------------------
--- Records of confgeneral
--- ----------------------------
-
--- ----------------------------
--- Table structure for confresultados
--- ----------------------------
-DROP TABLE IF EXISTS `confresultados`;
-CREATE TABLE `confresultados` (
-  `idconfresult` int(11) NOT NULL AUTO_INCREMENT,
-  `preguntasc` binary(255) NOT NULL,
-  `respuestac` binary(255) NOT NULL,
-  `preguntasi` binary(255) NOT NULL,
-  `calificacion` binary(255) NOT NULL,
-  `grafico` binary(255) NOT NULL,
-  `tiempo` binary(255) NOT NULL,
-  `mensajesop` binary(255) NOT NULL,
-  `intentos` char(10) COLLATE utf8_spanish_ci NOT NULL,
-  `showfechaini` date DEFAULT NULL,
-  `showfechafin` date DEFAULT NULL,
-  `idquiz` int(11) NOT NULL,
-  PRIMARY KEY (`idconfresult`),
-  KEY `fk_resu_quiz` (`idquiz`),
-  CONSTRAINT `fk_resu_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- ----------------------------
--- Records of confresultados
--- ----------------------------
-
--- ----------------------------
--- Table structure for confseguridad
--- ----------------------------
-DROP TABLE IF EXISTS `confseguridad`;
-CREATE TABLE `confseguridad` (
-  `idconfseguri` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `idquiz` int(11) NOT NULL,
-  PRIMARY KEY (`idconfseguri`),
-  KEY `fk_segu_quiz` (`idquiz`),
-  CONSTRAINT `fk_segu_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- ----------------------------
--- Records of confseguridad
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for grupo
@@ -125,7 +60,7 @@ CREATE TABLE `questions` (
   `answers` longtext COLLATE utf8_spanish_ci NOT NULL,
   `message` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `options` longtext COLLATE utf8_spanish_ci NOT NULL,
-  `question` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `question` longtext COLLATE utf8_spanish_ci NOT NULL,
   `type` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `score` smallint(6) NOT NULL,
   `idquiz` int(11) NOT NULL,
@@ -144,14 +79,51 @@ CREATE TABLE `questions` (
 DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE `quiz` (
   `idquiz` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
   `img` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `mostrar` char(10) COLLATE utf8_spanish_ci NOT NULL,
+  `vista` char(2) COLLATE utf8_spanish_ci NOT NULL,
+  `random` binary(255) NOT NULL,
+  `tiempo` time NOT NULL,
+  `venceini` date DEFAULT NULL,
+  `vencefin` date DEFAULT NULL,
+  `intentos` char(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `preguntasc` binary(255) NOT NULL,
+  `respuestac` binary(255) NOT NULL,
+  `preguntasi` binary(255) NOT NULL,
+  `calificacion` binary(255) NOT NULL,
+  `grafico` binary(255) NOT NULL,
+  `istiempo` binary(255) NOT NULL,
+  `mensajesop` binary(255) NOT NULL,
+  `isintentos` binary(255) NOT NULL,
+  `showfechaini` date DEFAULT NULL,
+  `showfechafin` date DEFAULT NULL,
+  `password` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`idquiz`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of quiz
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for quizgrupo
+-- ----------------------------
+DROP TABLE IF EXISTS `quizgrupo`;
+CREATE TABLE `quizgrupo` (
+  `idrelacionsg` int(11) NOT NULL AUTO_INCREMENT,
+  `idgrupo` int(11) NOT NULL,
+  `idquiz` int(11) NOT NULL,
+  PRIMARY KEY (`idrelacionsg`),
+  KEY `fk_qugr_quiz` (`idquiz`),
+  KEY `fk_qugr_grup` (`idgrupo`),
+  CONSTRAINT `fk_qugr_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
+  CONSTRAINT `fk_qugr_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of quizgrupo
 -- ----------------------------
 
 -- ----------------------------
@@ -169,25 +141,6 @@ CREATE TABLE `roles` (
 -- ----------------------------
 INSERT INTO `roles` VALUES ('1', 'ROLE_ROOT');
 INSERT INTO `roles` VALUES ('2', 'ROLE_ALUM');
-
--- ----------------------------
--- Table structure for seguridadgrupo
--- ----------------------------
-DROP TABLE IF EXISTS `seguridadgrupo`;
-CREATE TABLE `seguridadgrupo` (
-  `idrelacionsg` int(11) NOT NULL AUTO_INCREMENT,
-  `idgrupo` int(11) NOT NULL,
-  `idconfseguri` int(11) NOT NULL,
-  PRIMARY KEY (`idrelacionsg`),
-  KEY `fk_seg_seg` (`idconfseguri`),
-  KEY `fk_seg_grup` (`idgrupo`),
-  CONSTRAINT `fk_seg_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
-  CONSTRAINT `fk_seg_seg` FOREIGN KEY (`idconfseguri`) REFERENCES `confseguridad` (`idconfseguri`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- ----------------------------
--- Records of seguridadgrupo
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for usuario

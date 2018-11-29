@@ -69,79 +69,11 @@ class Usuario implements Serializable {
 		this.idusuario = idusuario
 		this.correo = correo
 		this.password = password
-	}
-	
-	def Integer getIdusuario() {
-		return idusuario
-	}
-
-	def setIdusuario(Integer idusuario) {
-		this.idusuario = idusuario
-	}
-
-	def String getNombre() {
-		return nombre
-	}
-
-	def setNombre(String nombre) {
-		this.nombre = nombre
-	}
-
-	def String getApellidos() {
-		return apellidos
-	}
-
-	def setApellidos(String apellidos) {
-		this.apellidos = apellidos
-	}
-
-	def String getTelefono() {
-		return telefono
-	}
-
-	def setTelefono(String telefono) {
-		this.telefono = telefono
-	}
-
-	def String getCorreo() {
-		return correo
-	}
-
-	def setCorreo(String correo) {
-		this.correo = correo
-	}
-
-	def String getPassword() {
-		return password
-	}
-
-	def setPassword(String password) {
-		this.password = password
-	}
-
-	def String getPerfil() {
-		return perfil
-	}
-
-	def setPerfil(String perfil) {
-		this.perfil = perfil
-	}
-
-	def Roles getIdrol() {
-		return idrol
-	}
-
-	def setIdrol(Roles idrol) {
-		this.idrol = idrol
-	}
+	}	
 
 	@XmlTransient
-	def List<Grupousuario> getGrupousuarioList() {
+	def getGrupousuarioList() {
 		return grupousuarioList
-	}
-
-	def setGrupousuarioList(List<Grupousuario> grupousuarioList) {
-		this.grupousuarioList = grupousuarioList
 	}
 
 	@Override

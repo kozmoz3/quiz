@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient
 	, @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
 	, @NamedQuery(name = "Grupo.findByDescripcion", query = "SELECT g FROM Grupo g WHERE g.descripcion = :descripcion")})*/
 class Grupo implements Serializable{
-	static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -42,7 +42,7 @@ class Grupo implements Serializable{
     @Column(name = "descripcion")
     String descripcion
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
-    List<Seguridadgrupo> seguridadgrupoList
+    List<Quizgrupo> quizgrupoList
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
     List<Grupousuario> grupousuarioList
 
@@ -57,48 +57,16 @@ class Grupo implements Serializable{
 		this.idgrupo = idgrupo
 		this.nombre = nombre
 		this.descripcion = descripcion
-	}
-
-	def Integer getIdgrupo() {
-		return idgrupo
-	}
-
-	def setIdgrupo(Integer idgrupo) {
-		this.idgrupo = idgrupo
-	}
-
-	def String getNombre() {
-		return nombre
-	}
-
-	def setNombre(String nombre) {
-		this.nombre = nombre
-	}
-
-	def String getDescripcion() {
-		return descripcion
-	}
-
-	def setDescripcion(String descripcion) {
-		this.descripcion = descripcion
-	}
+	}	
 
 	@XmlTransient
-    def List<Seguridadgrupo> getSeguridadgrupoList() {
-        return seguridadgrupoList
+    def getQuizgrupoList() {
+        return quizgrupoList
     }
-
-    def setSeguridadgrupoList(List<Seguridadgrupo> seguridadgrupoList) {
-        this.seguridadgrupoList = seguridadgrupoList
-    }
-
+	
     @XmlTransient
-    def List<Grupousuario> getGrupousuarioList() {
+    def getGrupousuarioList() {
         return grupousuarioList
-    }
-
-    def setGrupousuarioList(List<Grupousuario> grupousuarioList) {
-        this.grupousuarioList = grupousuarioList
     }
 
 	@Override

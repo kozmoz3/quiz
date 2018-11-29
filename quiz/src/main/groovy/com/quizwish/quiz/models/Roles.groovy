@@ -47,31 +47,11 @@ class Roles implements Serializable{
 	def Roles(Integer idrol, String descripcion) {
 		this.idrol = idrol
 		this.descripcion = descripcion
-	}
-
-	def Integer getIdrol() {
-		return idrol
-	}
-
-	def setIdrol(Integer idrol) {
-		this.idrol = idrol
-	}
-
-	def String getDescripcion() {
-		return descripcion
-	}
-
-	def setDescripcion(String descripcion) {
-		this.descripcion = descripcion
-	}
+	}	
 
 	@XmlTransient
 	def List<Usuario> getUsuarioList() {
 		return usuarioList
-	}
-
-	def setUsuarioList(List<Usuario> usuarioList) {
-		this.usuarioList = usuarioList
 	}
 	
 	@Override
