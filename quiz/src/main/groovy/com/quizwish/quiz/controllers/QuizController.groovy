@@ -18,7 +18,7 @@ import com.quizwish.quiz.services.QuizService
 class QuizController {
      
 	 static final def INDEX = "admin/components/simuladores/crud";
-	 static final def QUIZ = "quiz";
+	 static final def SHOW_QUIZ = "/admin/simuladores/preguntas/add";
 	 
 	 @Autowired
 	 @Qualifier("quizService")
@@ -31,8 +31,13 @@ class QuizController {
 	  
 	@PostMapping("/saveQuiz")
 	def saveQuiz(@ModelAttribute("quiz")Quiz quiz) {
-		def mov = new ModelAndView(QUIZ);
+		def mov = new ModelAndView(SHOW_QUIZ);
 		mov.addObject("quiz",quiz)
 		return mov;
+	}
+	
+	@GetMapping("/admin/simuladores/preguntas/add")
+	public String simuladoresPreguntasAdd(Model model) {
+		return "admin/components/simuladores/questions";
 	}
 }
