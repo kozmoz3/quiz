@@ -14,7 +14,9 @@ class QuizServiceImp {
 	@Qualifier("quizRepository")
 	QuizRepository quizRepository
 	
+
 	def getQuizAll() {
+
 		return quizRepository.findAll()
 	}
 	

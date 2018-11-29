@@ -43,6 +43,10 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	
 	implementation('com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.4.0')
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+	compile ("org.springframework.boot:spring-boot-devtools:2.0.6.RELEASE")
+	compile ("log4j:log4j:1.2.17")
+	
 	
 	implementation('org.codehaus.groovy:groovy')
 	runtimeOnly('mysql:mysql-connector-java')
