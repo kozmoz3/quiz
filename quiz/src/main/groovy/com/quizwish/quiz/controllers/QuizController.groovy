@@ -14,10 +14,10 @@ import com.quizwish.quiz.models.Quiz
 import com.quizwish.quiz.services.QuizService
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping(path = "/admin")
 class QuizController {
      
-	static final def INDEX = "admin/components/simuladores/list"
+	static final String INDEX = "admin/components/simuladores/list"
 	 static final def SHOW = "admin/components/simuladores/crud";
 	 static final def STORE = "admin/simuladores/preguntas/add";
 	 
@@ -25,9 +25,9 @@ class QuizController {
 	 @Qualifier("quizService")
 	 private QuizService quizService;
 	 
-	 @GetMapping("admin/simuladores")
-	 def index(Model model) {
-		 return INDEX;
+	 @GetMapping("/admin/simuladores")
+	 public String index(Model model) {
+		 return "admin/components/simuladores/list";
 	 }
 	 
 	 @GetMapping("/simuladores/add")
@@ -36,7 +36,7 @@ class QuizController {
 	 }
 	  
 	@PostMapping("/saveQuiz")
-	def saveQuiz(@ModelAttribute("quiz")Quiz quiz) {
+	def save(@ModelAttribute("quiz")Quiz quiz) {
 		def mov = new ModelAndView(STORE);
 		mov.addObject("quiz",quiz)
 		return mov;
