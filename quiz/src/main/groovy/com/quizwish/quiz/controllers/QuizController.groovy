@@ -14,7 +14,7 @@ import com.quizwish.quiz.models.Quiz
 import com.quizwish.quiz.services.QuizService
 
 @Controller
-@RequestMapping(path = "/admin")
+@RequestMapping("/admin")
 class QuizController {
      
 	static final def INDEX = "admin/components/simuladores/list"
@@ -25,8 +25,8 @@ class QuizController {
 	 @Qualifier("quizService")
 	 private QuizService quizService;
 	 
-	 @GetMapping("/simuladores")
-	 public String index(Model model) {
+	 @GetMapping("admin/simuladores")
+	 def index(Model model) {
 		 return INDEX;
 	 }
 	 
