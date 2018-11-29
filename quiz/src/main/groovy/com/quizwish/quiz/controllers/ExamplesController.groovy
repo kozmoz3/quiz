@@ -43,10 +43,4 @@ class ExamplesController {
 		return "admin/components/grupos/crud";
 	}
 	
-	@PostMapping("/admin/actions/simuladores/add")
-	def addQuiz(@ModelAttribute Object quiz) {
-		System.out.println(quiz.toString());
-		return quiz;
-	}
-	
 }

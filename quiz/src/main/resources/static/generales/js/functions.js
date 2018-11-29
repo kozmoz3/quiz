@@ -4,7 +4,7 @@
 	var errorColor ={
 		    "border-bottom": "solid 1px red"
 	}
-	$("li[data-disable]").prop("disabled",true);
+	
 	var objectSend = {
 		type : "null",
 		url : "null",
@@ -66,10 +66,10 @@
 					clearFElements( lstElements );
 					clearList(arraryString);
 				}
-			}else{
+			}else
 				getErrorMessage("Los campos contraseñas deben coincidir");
-			}
-		}
+		}else
+			getErrorMessage("Se encontraron campos requeridos vacíos, por favor, verifica");
 	
 	}
 	
@@ -101,38 +101,29 @@
 					clearFElements( lstElements );
 					clearList(arraryString);
 				}
-			}else{
+			}else
 				getErrorMessage("Los campos contraseñas deben coincidir");
-			}
-		}
+		}else
+			getErrorMessage("Se encontraron campos requeridos vacíos, por favor, verifica");
 	
 	}
 	
 	function sendActionMetadata( idElement, objetoAdmin ){
-		console.log($("input[type='file']")[0].files[0] );
-		console.log($("input[type='file']")[0].files[0].type );
-		
+		console.log(objetoAdmin);
 		var formData = toFormData(objetoAdmin);
 		formData.append( $("input[type='file']").attr("id"), new Blob( 
 				[ $("input[type='file']")[0].files[0] ],
 				{ type: $("input[type='file']")[0].files[0].type } )
 		);
-		console.log(formData);
 		datosMetadata.url= $(idElement).attr("data-href-url");
 		datosMetadata.type= $(idElement).attr("data-href-method");
-		datosMetadata.data= formData;
-		
-		$.ajax(datosMetadata).done(function(res){
-            console.log(res);
-        }).error(function ( XMLHttpRequest, textStatus, errorthrows ){
-			getErrorMessage( getCodeStatus( XMLHttpRequest, textStatus ) );
-		});
+		datosMetadata.data= formData;		
+		setDataWithProgress(datosMetadata.type, datosMetadata.url, datosMetadata.data);
 	}
 	
 	function toFormData( objetoAdmin ){
 		var formData = new FormData();
 		$.each(objetoAdmin, function(index, value){
-			console.log(index +" => "+ value);
 			if(index != "img");
 				formData.append(index, value);
 		});
@@ -182,8 +173,8 @@
 				break;
 			default: return; break;
 		}
-		
-		$.ajax( objectSend );
+		setDataWithProgress(objectSend.type, objectSend.url, objeto);
+		//$.ajax( objectSend );
 	}
 	
 	
