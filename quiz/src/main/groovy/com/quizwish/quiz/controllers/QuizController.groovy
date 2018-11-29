@@ -12,10 +12,14 @@ import org.springframework.web.servlet.ModelAndView
 
 import com.quizwish.quiz.models.Quiz
 import com.quizwish.quiz.services.QuizService
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
 
 @Controller
 @RequestMapping(path = "/admin")
 class QuizController {
+	
+	private static final Log LOGGER = LogFactory.getLog(QuizController.class)
      
 	static final String INDEX = "admin/components/simuladores/list"
 	 static final def SHOW = "admin/components/simuladores/crud";
@@ -27,6 +31,7 @@ class QuizController {
 	 
 	 @GetMapping("/admin/simuladores")
 	 public String index(Model model) {
+		 LOGGER.info("-------------entro aqui")
 		 return "admin/components/simuladores/list";
 	 }
 	 
