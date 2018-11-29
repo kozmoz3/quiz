@@ -29,7 +29,7 @@ class QuizController {
 	 @Qualifier("quizService")
 	 private QuizService quizService;
 	 
-	 @GetMapping("/admin/simuladores")
+	 @GetMapping("/simuladores")
 	 public String index(Model model) {
 		 return INDEX;
 	 }
@@ -46,7 +46,7 @@ class QuizController {
 		return mov;
 	}
 	
-	@GetMapping("/admin/simuladores/preguntas/add")
+	@GetMapping("/simuladores/preguntas/add")
 	public String simuladoresPreguntasAdd(Model model) {
 		return "admin/components/simuladores/questions";
 	}

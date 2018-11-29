@@ -1,6 +1,7 @@
 package com.quizwish.quiz.models
 
 import java.io.Serializable
+import java.util.Date
 import java.util.List
 import javax.persistence.Basic
 import javax.persistence.CascadeType
@@ -9,7 +10,9 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
 import javax.persistence.Lob
+import javax.persistence.ManyToOne
 import javax.persistence.NamedQueries
 import javax.persistence.NamedQuery
 import javax.persistence.OneToMany
@@ -35,7 +38,9 @@ import javax.xml.bind.annotation.XmlTransient
     , @NamedQuery(name = "Quiz.findByIntentos", query = "SELECT q FROM Quiz q WHERE q.intentos = :intentos")
     , @NamedQuery(name = "Quiz.findByShowfechaini", query = "SELECT q FROM Quiz q WHERE q.showfechaini = :showfechaini")
     , @NamedQuery(name = "Quiz.findByShowfechafin", query = "SELECT q FROM Quiz q WHERE q.showfechafin = :showfechafin")
-    , @NamedQuery(name = "Quiz.findByPassword", query = "SELECT q FROM Quiz q WHERE q.password = :password")})*/
+    , @NamedQuery(name = "Quiz.findByPassword", query = "SELECT q FROM Quiz q WHERE q.password = :password")
+    , @NamedQuery(name = "Quiz.findByTipovista", query = "SELECT q FROM Quiz q WHERE q.tipovista = :tipovista")
+    , @NamedQuery(name = "Quiz.findByFecha", query = "SELECT q FROM Quiz q WHERE q.fecha = :fecha")})*/
 class Quiz implements Serializable{
 	static final long serialVersionUID = 1L
     @Id
@@ -114,19 +119,33 @@ class Quiz implements Serializable{
     Date showfechafin
     @Column(name = "password")
     String password
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "estatus")
+    byte[] estatus
+    @Basic(optional = false)
+    @Column(name = "tipovista")
+    String tipovista
+    @Basic(optional = false)
+    @Column(name = "fecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    Date fecha
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
+    @ManyToOne(optional = false)
+    Usuario idusuario
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
     List<Questions> questionsList
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
     List<Quizgrupo> quizgrupoList
 
-    def Quiz() {
+    public Quiz() {
     }
 
-    def Quiz(Integer idquiz) {
+    public Quiz(Integer idquiz) {
         this.idquiz = idquiz
     }
 
-    def Quiz(Integer idquiz, String nombre, String descripcion, String mostrar, String vista, byte[] random, Date tiempo, byte[] preguntasc, byte[] respuestac, byte[] preguntasi, byte[] calificacion, byte[] grafico, byte[] istiempo, byte[] mensajesop, byte[] isintentos) {
+    public Quiz(Integer idquiz, String nombre, String descripcion, String mostrar, String vista, byte[] random, Date tiempo, byte[] preguntasc, byte[] respuestac, byte[] preguntasi, byte[] calificacion, byte[] grafico, byte[] istiempo, byte[] mensajesop, byte[] isintentos, byte[] estatus, String tipovista, Date fecha) {
         this.idquiz = idquiz
         this.nombre = nombre
         this.descripcion = descripcion
@@ -142,6 +161,9 @@ class Quiz implements Serializable{
         this.istiempo = istiempo
         this.mensajesop = mensajesop
         this.isintentos = isintentos
+        this.estatus = estatus
+        this.tipovista = tipovista
+        this.fecha = fecha
     }
 
 	@XmlTransient

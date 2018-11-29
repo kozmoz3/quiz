@@ -52,6 +52,8 @@ class Usuario implements Serializable {
 	String password
 	@Column(name = "perfil")
 	String perfil
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
+	List<Quiz> quizList
 	@JoinColumn(name = "idrol", referencedColumnName = "idrol")
 	@ManyToOne(optional = false)
 	Roles idrol
@@ -74,6 +76,11 @@ class Usuario implements Serializable {
 	@XmlTransient
 	def getGrupousuarioList() {
 		return grupousuarioList
+	}
+	
+	@XmlTransient
+	def getQuizList() {
+		return quizList
 	}
 
 	@Override

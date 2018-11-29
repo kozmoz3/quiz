@@ -12,32 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 @RequestMapping(path = "/")
 class ExamplesController {
-	
-	@GetMapping("/")
-	def login(Model model) {
-		return "login";
-	}
-	
-	@GetMapping("/admin")
-	def index(Model model) {
-		return "admin/index";
-	}
 		
-	@GetMapping("/admin/simuladores")
-	def simuladores(Model model) {
-		return "admin/components/simuladores/list";
-	}
-
-	@GetMapping("/admin/simuladores/add")
-	def simuladoresAdd(Model model) {
-		return "admin/components/simuladores/crud";
-	}
-	
-	@GetMapping("/admin/simuladores/preguntas/add")
-	def simuladoresPreguntasAdd(Model model) {
-		return "admin/components/simuladores/questions";
-	}
-	
 	@GetMapping("/admin/simuladores/preguntas")
 	def simuladoresPreguntas(Model model) {
 		return "admin/components/simuladores/list-preguntas";
