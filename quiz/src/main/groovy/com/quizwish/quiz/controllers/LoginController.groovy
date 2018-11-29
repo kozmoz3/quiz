@@ -10,10 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping
 class LoginController {
 	
 	static final def INDEX = "login";
+	static final def ADMIN = "admin/index";
 	
 	@GetMapping("/")
-	public String index(Model model) {
+	public String login(Model model) {
 		return INDEX;
+	}
+	
+	@GetMapping("/admin")
+	public String index(Model model) {
+		return ADMIN;
 	}
 
 }

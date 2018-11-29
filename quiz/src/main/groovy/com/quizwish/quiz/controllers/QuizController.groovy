@@ -17,21 +17,27 @@ import com.quizwish.quiz.services.QuizService
 @RequestMapping(path = "/admin")
 class QuizController {
      
-	 static final def INDEX = "/components/simuladores/crud";
-	 static final def SHOW_QUIZ = "/simuladores/preguntas/add";
+	static final def INDEX = "admin/components/simuladores/list"
+	 static final def SHOW = "admin/components/simuladores/crud";
+	 static final def STORE = "admin/simuladores/preguntas/add";
 	 
 	 @Autowired
 	 @Qualifier("quizService")
 	 private QuizService quizService;
 	 
-	 @GetMapping("/admin/simuladores/add")
-	 def index(Model model) {
+	 @GetMapping("/simuladores")
+	 public String index(Model model) {
 		 return INDEX;
+	 }
+	 
+	 @GetMapping("/simuladores/add")
+	 def show(Model model) {
+		 return SHOW;
 	 }
 	  
 	@PostMapping("/saveQuiz")
 	def saveQuiz(@ModelAttribute("quiz")Quiz quiz) {
-		def mov = new ModelAndView(SHOW_QUIZ);
+		def mov = new ModelAndView(STORE);
 		mov.addObject("quiz",quiz)
 		return mov;
 	}

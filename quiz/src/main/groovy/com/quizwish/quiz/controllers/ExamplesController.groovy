@@ -13,11 +13,11 @@ class ExamplesController {
 	public String login(Model model) {
 		return "login";
 	}*/
-	
+	/*
 	@GetMapping("/admin")
 	public String index(Model model) {
 		return "admin/index";
-	}
+	}*/
 	
 	@GetMapping("/admin/simuladores")
 	public String simuladores(Model model) {
