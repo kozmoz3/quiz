@@ -12,6 +12,8 @@ File Encoding         : 65001
 
 Date: 2018-11-28 11:28:00
 */
+CREATE Database quiz;
+use quiz;
 
 SET FOREIGN_KEY_CHECKS=0;
 
