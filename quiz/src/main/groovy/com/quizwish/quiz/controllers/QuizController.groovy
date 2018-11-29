@@ -14,11 +14,11 @@ import com.quizwish.quiz.models.Quiz
 import com.quizwish.quiz.services.QuizService
 
 @Controller
-@RequestMapping(path = "/")
+@RequestMapping(path = "/admin")
 class QuizController {
      
-	 static final def INDEX = "admin/components/simuladores/crud";
-	 static final def SHOW_QUIZ = "/admin/simuladores/preguntas/add";
+	 static final def INDEX = "/components/simuladores/crud";
+	 static final def SHOW_QUIZ = "/simuladores/preguntas/add";
 	 
 	 @Autowired
 	 @Qualifier("quizService")

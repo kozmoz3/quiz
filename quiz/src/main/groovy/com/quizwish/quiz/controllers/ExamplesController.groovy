@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 @RequestMapping(path = "/")
 class ExamplesController {
 	
-	@GetMapping("/")
+	/*@GetMapping("/")
 	public String login(Model model) {
 		return "login";
-	}
+	}*/
 	
 	@GetMapping("/admin")
 	public String index(Model model) {
