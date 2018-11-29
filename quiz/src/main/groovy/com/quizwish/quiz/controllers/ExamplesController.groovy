@@ -13,39 +13,25 @@ import org.springframework.web.bind.annotation.RequestParam
 @RequestMapping(path = "/")
 class ExamplesController {
 	
-<<<<<<< HEAD
 	@GetMapping("/")
 	def login(Model model) {
-=======
-	/*@GetMapping("/")
-	public String login(Model model) {
->>>>>>> 54915b48a254bf3302477c6289004a88ddb0beab
 		return "login";
-	}*/
-	/*
+	}
+	
 	@GetMapping("/admin")
 	def index(Model model) {
 		return "admin/index";
-	}*/
-	
-<<<<<<< HEAD
+	}
+		
 	@GetMapping("/admin/simuladores")
 	def simuladores(Model model) {
-=======
-	/*@GetMapping("/admin/simuladores")
-	public String simuladores(Model model) {
->>>>>>> 54915b48a254bf3302477c6289004a88ddb0beab
 		return "admin/components/simuladores/list";
-	}*/
+	}
 
-<<<<<<< HEAD
 	@GetMapping("/admin/simuladores/add")
 	def simuladoresAdd(Model model) {
 		return "admin/components/simuladores/crud";
 	}
-=======
-	
->>>>>>> 54915b48a254bf3302477c6289004a88ddb0beab
 	
 	@GetMapping("/admin/simuladores/preguntas/add")
 	def simuladoresPreguntasAdd(Model model) {
