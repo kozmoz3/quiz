@@ -21,10 +21,17 @@ class ExamplesController {
 	@GetMapping("/admin")
 	def index(Model model) {
 		return "admin/index";
+<<<<<<< HEAD
 	}
 		
 	@GetMapping("/admin/simuladores")
 	def simuladores(Model model) {
+=======
+	}*/
+	
+	@GetMapping("/admin/simuladores")
+	public String simuladores(Model model) {
+>>>>>>> 503b46426aad91d21e8bec7d6bf95f6c4ecbf476
 		return "admin/components/simuladores/list";
 	}
 
