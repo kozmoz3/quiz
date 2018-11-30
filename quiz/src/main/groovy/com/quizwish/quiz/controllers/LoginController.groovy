@@ -8,7 +8,8 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
-import com.quizwish.quiz.sesion.AppUserDAO
+import org.springframework.security.core.userdetails.UserDetails
+import com.quizwish.quiz.utils.SesionVariables
 
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
@@ -22,18 +23,18 @@ class LoginController {
 	static final def INDEX = "login";
 	static final def ADMIN = "admin/index";
 	
-	@Autowired
-	@Qualifier("appUserDAO")
-	AppUserDAO appUserDAO
+
 	
 	@GetMapping("/")
 	public String login(Model model) {
-		LOGGER.info("login user "+appUserDAO.findUserAccount("Alfonso"));
 		return INDEX;
 	}
 	
 	@GetMapping("/admin")
 	public String index(Model model) {
+		//UserDetails details = SesionVariables.sesionDetails()
+			LOGGER.info("login user - "+ SesionVariables.sesionDetails());
+		//	model.addAttribute("usuario", details.getUsername())
 		return ADMIN;
 	}
 
