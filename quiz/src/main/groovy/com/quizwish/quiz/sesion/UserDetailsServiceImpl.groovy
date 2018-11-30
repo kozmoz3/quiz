@@ -26,7 +26,7 @@ class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User: " + userName + " was not found in the database")
  
         List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId()) 
-        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>()
+        List<GrantedAuthority> grantList = new ArrayList<>()
 		
         if (roleNames != null)
             for (String role : roleNames)

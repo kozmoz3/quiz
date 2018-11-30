@@ -5,6 +5,9 @@
 => cambio a								+
 [] tipo de								+
 +> combinar tablas							+
+-> tipo secundario							+
+|> referencia a tabla							+
+{} conjunto de tablas							+
 ------------------------------------------------------------------------+
 
 ------------------------------------------------------------------------+28/11/2018
@@ -16,4 +19,8 @@
 -confgeneral								+
 -confseguridad								+
 -confresultados								+
+-quiz c+ estatus[binary]						+
+-quiz c+ tipovista[char(15)]						+
+-quiz c+ fecha[datetime]						+
+-quiz c+ idusuario[int -> foreign key |> {usuario}]			+
 ------------------------------------------------------------------------+

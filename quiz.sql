@@ -10,10 +10,8 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-28 17:09:22
+Date: 2018-11-29 11:57:28
 */
-CREATE Database quiz;
-use quiz;
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -100,7 +98,13 @@ CREATE TABLE `quiz` (
   `showfechaini` date DEFAULT NULL,
   `showfechafin` date DEFAULT NULL,
   `password` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`idquiz`)
+  `estatus` binary(255) NOT NULL,
+  `tipovista` char(15) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` datetime NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  PRIMARY KEY (`idquiz`),
+  KEY `idusuario` (`idusuario`),
+  CONSTRAINT `fk_user_quiz` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
@@ -158,7 +162,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`idusuario`),
   KEY `fk_user_rol` (`idrol`),
   CONSTRAINT `fk_user_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of usuario

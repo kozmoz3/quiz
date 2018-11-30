@@ -20,7 +20,7 @@ class ActionsController {
 	@Qualifier("serviceQuiz")
 	QuizServiceImp serviceQuiz
 
-	@PostMapping("/admin/actions/simuladores/add")
+	/*@PostMapping("/admin/actions/simuladores/add")
 	def uploadFile(
 		@RequestParam("img")MultipartFile img, 
 		@RequestParam("nombre")String nombre, 
@@ -33,5 +33,5 @@ class ActionsController {
 								
 			}
 		}
-	}
+	}*/
 }
