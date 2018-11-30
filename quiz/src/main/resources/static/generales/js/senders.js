@@ -9,11 +9,10 @@ function sendForm(idform, url, type) {
 		getErrorMessage(getCodeStatus(xhr, ""));
 }
 
-function setDataWithProgress(type, url, data){	
+function setDataWithProgress( objRequest, inresponse ){	
 	var req = new XMLHttpRequest();
 	
 	req.onprogress = function (e) {
-		console.log( e );
 		if (e.lengthComputable){
 			if( $("body").find(".modal-window").length <= 0 ) getLoadMessageProgress();
 			$("#progressmsg").progressbar("option", "value", (e.loaded / e.total ) * 100 );
@@ -23,15 +22,16 @@ function setDataWithProgress(type, url, data){
 	req.addEventListener("error", transferFailed, false);
 	req.addEventListener("abort", transferCanceled, false);
 	
-	req.open(type, url, true);
+	req.open( objRequest.type, objRequest.url, false );	
+	req.send( objRequest.data );
 	
-	req.send(data);
-	console.log(req);
 	if (req.status == 200){
-		console.log(req.response);
+		if (inresponse != "")
+			$(inresponse).html( req.response );
 		getSuccessfulMessageWithText("Operación completada");
-	}else
+	}else{
 		getErrorMessage(getCodeStatus(req, ""));
+	}
 }
 
 function transferFailed(evt) {

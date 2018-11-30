@@ -58,7 +58,7 @@
 				return false;
 			}
 			
-			console.log(objetoAdmin);
+			//console.log(objetoAdmin);
 			var ulrString = arraryString.length > 0 ? getNewsStrings(arraryString, reduce) : "";
 			if(getPasswordinArray()){
 				setActionMethod( idElement, objetoAdmin, ulrString.substring( 0, (ulrString.length -1) ) );
@@ -93,7 +93,7 @@
 				return false;
 			}
 			
-			console.log(objetoAdmin);
+			//console.log(objetoAdmin);
 			var ulrString = arraryString.length > 0 ? getNewsStrings(arraryString, reduce) : "";
 			if(getPasswordinArray()){
 				setActionMethod( idElement, objetoAdmin, ulrString.substring( 0, (ulrString.length -1) ) );
@@ -111,14 +111,38 @@
 	function sendActionMetadata( idElement, objetoAdmin ){
 		console.log(objetoAdmin);
 		var formData = toFormData(objetoAdmin);
-		formData.append( $("input[type='file']").attr("id"), new Blob( 
-				[ $("input[type='file']")[0].files[0] ],
-				{ type: $("input[type='file']")[0].files[0].type } )
-		);
-		datosMetadata.url= $(idElement).attr("data-href-url");
-		datosMetadata.type= $(idElement).attr("data-href-method");
-		datosMetadata.data= formData;		
-		setDataWithProgress(datosMetadata.type, datosMetadata.url, datosMetadata.data);
+		if($("input[type='file']")[0].files.length != 0)
+			formData.append( $("input[type='file']").attr("id"), new Blob( 
+					[ $("input[type='file']")[0].files[0] ],
+					{ type: $("input[type='file']")[0].files[0].type } )
+			);
+		var url = $(idElement).attr("data-href-url");
+		datosMetadata.type = $(idElement).attr("data-href-method");
+		datosMetadata.url = getUrlToType( datosMetadata.type, url );
+		datosMetadata.data= formData;
+		var inresponse = "";
+		if( $(idElement).attr("data-response") != undefined )
+			inresponse = getOnResponse( $(idElement).attr("data-response") );
+		setDataWithProgress( datosMetadata, inresponse );
+	}
+	
+	function getOnResponse( response ){
+		var types = response.split("|");
+		if(types[0] == "ptext")
+			return "";
+		else if(types[0] == "view")
+			return $(types[1]);
+		else 
+			return "";
+	}
+	
+	function getUrlToType( type, url ){
+		switch( type ){
+			case "post": return url +"/add";
+			case "put":  return url +"/edit";
+			case "delete":  return url +"/delete";
+			default: return ""; break;
+		}
 	}
 	
 	function toFormData( objetoAdmin ){
@@ -173,11 +197,13 @@
 				break;
 			default: return; break;
 		}
-		setDataWithProgress(objectSend.type, objectSend.url, objeto);
-		//$.ajax( objectSend );
+		
+		var inresponse = "";
+		if( $(idElement).attr("data-response") != undefined )
+			inresponse = getOnResponse( $(idElement).attr("data-response") );
+		
+		setDataWithProgress(objectSend, inresponse);
 	}
-	
-	
 	
 	function getSize( input ){
 		var tamanio = $(input).attr("data-image-size").trim().split(",");

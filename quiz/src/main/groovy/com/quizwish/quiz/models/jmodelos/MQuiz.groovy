@@ -2,33 +2,33 @@ package com.quizwish.quiz.models.jmodelos
 
 class MQuiz {
 	int idquiz
-	String nombre
+	boolean calificacion
 	String descripcion
+	boolean grafico
+	boolean idgrupo
+	boolean idgrupoall
 	String img
-	byte[] imgc
+	boolean intentosall
+	boolean mensajesop
 	boolean mostrarall
 	boolean mostraronly
-	char mostrar
-	boolean random
-	Date tiempo
-	boolean tiemporesponse
-	Date venceini
-	Date vencefin
-	boolean intentosall
-	boolean intentosonly
-	char intentos
-	boolean preguntasc
-	boolean respuestac
-	boolean preguntasi
-	boolean calificacion
-	boolean grafico
-	boolean mensajesop
-	boolean isintentos
-	Date showfechaini
-	Date showfechafin
+	String nombre
 	String password
-	int estatus
-	char tipovista
-	Date fecha
-	int idusuario
+	boolean preguntasc
+	boolean preguntasi
+	boolean random
+	boolean respuestac
+	String showfechafin
+	String showfechaini
+	String showonly
+	String showtimeonly
+	boolean tiempo
+	boolean tiemporesponse
+	String vencefin
+	String venceini
+	boolean vistaall
+	boolean vistaonly
+	boolean tipovista
+	
+	def MQuiz() {}
 }
