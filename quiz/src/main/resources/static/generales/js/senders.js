@@ -9,17 +9,17 @@ function sendForm(idform, url, type) {
 		getErrorMessage(getCodeStatus(xhr, ""));
 }
 
-function setDataWithProgress(type, url, data){
-	getLoadMessageProgress();
-	
+function setDataWithProgress(type, url, data){	
 	var req = new XMLHttpRequest();
 	
 	req.onprogress = function (e) {
 		console.log( e );
-		if (e.lengthComputable)
+		if (e.lengthComputable){
+			if( $("body").find(".modal-window").length <= 0 ) getLoadMessageProgress();
 			$("#progressmsg").progressbar("option", "value", (e.loaded / e.total ) * 100 );
+		}
 	};
-	req.addEventListener("load", transferComplete, false);
+	
 	req.addEventListener("error", transferFailed, false);
 	req.addEventListener("abort", transferCanceled, false);
 	
@@ -29,13 +29,9 @@ function setDataWithProgress(type, url, data){
 	console.log(req);
 	if (req.status == 200){
 		console.log(req.response);
-		getSuccessfulMessage();
+		getSuccessfulMessageWithText("Operación completada");
 	}else
 		getErrorMessage(getCodeStatus(req, ""));
-}
-
-function transferComplete(evt) {
-	getSuccessfulMessageWithText("Operación completada");
 }
 
 function transferFailed(evt) {

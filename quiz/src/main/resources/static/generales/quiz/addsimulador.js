@@ -1,20 +1,8 @@
 $("#strmostraronly").click(function(){
-	var parent = $(this).parents(".form-group")[0];
-	if( $(parent).find("input[type!='radio']").length <= 0){
-		$(parent).append(
-				new Element("input",{
-					type:"number",
-					class:"form-control", 
-					value:"1", 
-					id:"strshowonly",
-					min:"1",
-					placeholder:"#"
-				},[] )
-		);
-	}
-});
-$("#strmostrarall").click(function(){
-	$( $(this).parents(".form-group")[0] ).find("input[type='number']")[0].remove();
+	if( $(this).is(":checked") )
+		onBlock( ["#strshowonly"], false );
+	else
+		onBlock( ["#strshowonly"], true );
 });
 
 $("div[data-showt] input[type='radio']").click(function(){
@@ -38,19 +26,8 @@ $("#strvence").click(function(){
 });
 
 $("#strtiempo").click(function(){
-	if( $(this).is(":checked") ){
-		var parent = $(this).parents(".form-group")[0];
-		$(parent).append(
-				new Element("input",{
-					type:"time",
-					class:"form-control", 
-					value:"1", 
-					id:"strshowonly", 
-					placeholder:"#"
-				},[] )
-		);
-	}else{
-		var parent = $(this).parents(".form-group")[0];
-		$(parent).find("input[type!='checkbox']")[0].remove();
-	}
+	if( $(this).is(":checked") )
+		onBlock( ["#strshowtimeonly"], false );
+	else
+		onBlock( ["#strshowtimeonly"], true );
 });

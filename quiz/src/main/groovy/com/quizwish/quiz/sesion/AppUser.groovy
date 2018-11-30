@@ -13,30 +13,5 @@ public class AppUser {
 		this.userId = userId
 		this.userName = userName
 		this.encrytedPassword = encrytedPassword
-	}
-
-	def Long getUserId() {
-		return userId
-	}
-
-	def setUserId(Long userId) {
-		this.userId = userId
-	}
-
-	def String getUserName() {
-		return userName
-	}
-
-	def setUserName(String userName) {
-		this.userName = userName
-	}
-
-	def String getEncrytedPassword() {
-		return encrytedPassword
-	}
-
-	def setEncrytedPassword(String encrytedPassword) {
-		this.encrytedPassword = encrytedPassword
 	}	
-	
 }

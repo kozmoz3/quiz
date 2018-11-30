@@ -2,6 +2,7 @@ package com.quizwish.quiz.controllers
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView
 
 import com.quizwish.quiz.models.Quiz
 import com.quizwish.quiz.services.QuizService
+import com.quizwish.quiz.utils.SesionVariables
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import java.util.Map
@@ -39,6 +41,8 @@ class QuizController {
 	 
 	 @GetMapping("/simuladores/add")
 	 def show(Model model) {
+		 UserDetails details = SesionVariables.sesionDetails()
+		 model.addAttribute("usuario", details.getUsername())
 		 return SHOW;
 	 }
 	 
