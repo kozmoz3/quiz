@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
 
-@Repository
+@Repository("appUserDAO")
 @Transactional
 class AppUserDAO extends JdbcDaoSupport {
  

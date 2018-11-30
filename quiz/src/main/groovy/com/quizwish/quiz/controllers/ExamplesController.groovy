@@ -19,10 +19,7 @@ class ExamplesController {
 		return "admin/index";
 	}*/
 	
-	@GetMapping("/admin/simuladores")
-	public String simuladores(Model model) {
-		return "admin/components/simuladores/list";
-	}
+	
 
 	
 	

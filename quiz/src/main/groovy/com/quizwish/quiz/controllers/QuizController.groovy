@@ -21,7 +21,7 @@ class QuizController {
 	
 	private static final Log LOGGER = LogFactory.getLog(QuizController.class)
      
-	static final String INDEX = "admin/components/simuladores/list";
+	static final String INDEX = "admin/components/simuladores/list"
 	 static final def SHOW = "admin/components/simuladores/crud";
 	 static final def STORE = "admin/simuladores/preguntas/add";
 	 
@@ -29,9 +29,10 @@ class QuizController {
 	 @Qualifier("quizService")
 	 private QuizService quizService;
 	 
-	 @GetMapping("/admin/simuladores")
-	 public String index(Model model) {
-		 return INDEX;
+	 @GetMapping("/simuladores")
+	 def simuladores(Model model) {
+		 LOGGER.info("entro")
+		 return "admin/components/simuladores/list";
 	 }
 	 
 	 @GetMapping("/simuladores/add")
