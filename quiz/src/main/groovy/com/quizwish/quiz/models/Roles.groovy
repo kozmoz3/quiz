@@ -17,15 +17,15 @@ import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlTransient
 
 
-@Entity
-@Table(name = "roles", catalog = "quiz", schema = "")
+//@Entity
+//@Table(name = "roles", catalog = "quiz", schema = "")
 @XmlRootElement
 /*@NamedQueries({
 	@NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")
 	, @NamedQuery(name = "Roles.findByIdrol", query = "SELECT r FROM Roles r WHERE r.idrol = :idrol")
 	, @NamedQuery(name = "Roles.findByDescripcion", query = "SELECT r FROM Roles r WHERE r.descripcion = :descripcion")})*/
 class Roles implements Serializable{
-	static final long serialVersionUID = 1L
+	/*static final long serialVersionUID = 1L
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
@@ -57,5 +57,5 @@ class Roles implements Serializable{
 	@Override
 	def String toString() {
 		return "models.Roles[ idrol=" + idrol + " ]"
-	}
+	}*/
 }

@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient
 	, @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")
 	, @NamedQuery(name = "Usuario.findByPerfil", query = "SELECT u FROM Usuario u WHERE u.perfil = :perfil")})*/
 class Usuario implements Serializable {
-	static final long serialVersionUID = 1L
+	/*static final long serialVersionUID = 1L
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
@@ -88,5 +88,5 @@ class Usuario implements Serializable {
         return "models.Usuario[ idusuario=" + idusuario + " ]"
     }
 	
-	
+	*/
 }
