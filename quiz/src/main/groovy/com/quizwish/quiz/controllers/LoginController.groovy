@@ -24,8 +24,12 @@ class LoginController {
 	static final def ADMIN = "admin/index";
 	
 
-	
 	@GetMapping("/")
+	public String redirectToLogin() {
+		return "redirect:/"+INDEX;
+	} 
+	
+	@GetMapping("login")
 	public String login(Model model) {
 		return INDEX;
 	}
