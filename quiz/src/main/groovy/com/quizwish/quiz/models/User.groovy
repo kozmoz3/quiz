@@ -55,6 +55,14 @@ class User implements Serializable {
 	Rol idrol
 
 	
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
 	public Rol getIdrol() {
 		return idrol;
 	}

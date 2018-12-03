@@ -14,6 +14,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 
+class SecurityConfig{
+	
+}
+/*
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
@@ -43,4 +47,4 @@ class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.usernameParameter("email").passwordParameter("password")
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
 	}
-}
+}*/
