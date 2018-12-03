@@ -19,8 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlTransient
 
 
-@Entity
-@Table(name = "usuario", catalog = "quiz", schema = "")
+//@Entity
+//@Table(name = "usuario", catalog = "quiz", schema = "")
 @XmlRootElement
 /*@NamedQueries({
 	@NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"), 
@@ -52,11 +52,14 @@ class Usuario implements Serializable {
 	String password
 	@Column(name = "perfil")
 	String perfil
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
 	List<Quiz> quizList
+	
 	@JoinColumn(name = "idrol", referencedColumnName = "idrol")
 	@ManyToOne(optional = false)
 	Roles idrol
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
 	List<Grupousuario> grupousuarioList
 

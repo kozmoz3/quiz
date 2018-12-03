@@ -20,29 +20,37 @@ import javax.xml.bind.annotation.XmlTransient
  *
  * @author Alfonso
  */
-@Entity
-@Table(name = "grupo", catalog = "quiz", schema = "")
+
 @XmlRootElement
 /*@NamedQueries({
 	@NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g")
 	, @NamedQuery(name = "Grupo.findByIdgrupo", query = "SELECT g FROM Grupo g WHERE g.idgrupo = :idgrupo")
 	, @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
 	, @NamedQuery(name = "Grupo.findByDescripcion", query = "SELECT g FROM Grupo g WHERE g.descripcion = :descripcion")})*/
+
+@Entity
+@Table(name = "grupo", catalog = "quiz", schema = "")
 class Grupo implements Serializable{
+	
 	static final long serialVersionUID = 1L
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idgrupo")
     Integer idgrupo
+	
     @Basic(optional = false)
     @Column(name = "nombre")
     String nombre
+	
     @Basic(optional = false)
     @Column(name = "descripcion")
     String descripcion
+	
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
     List<Quizgrupo> quizgrupoList
+	
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
     List<Grupousuario> grupousuarioList
 

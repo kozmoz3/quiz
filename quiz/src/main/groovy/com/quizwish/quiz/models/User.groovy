@@ -1,5 +1,6 @@
 package com.quizwish.quiz.models
 
+import java.io.Serializable
 import javax.persistence.Basic
 import javax.persistence.CascadeType
 import javax.persistence.Column
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 import javax.persistence.Table
+import javax.persistence.UniqueConstraint
 
 @Entity
 @Table(name = "user", catalog = "quiz", schema = "")
@@ -22,32 +24,44 @@ class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "iduser")
-	Integer iduser
+	private Integer iduser;
 	
-	@Column(name = "nombre")
-	String nombre
+	@Column(name = "nombre", length = 30)
+	private String nombre;
 	
-	@Column(name = "apellidos")
-	String apellidos
+	@Column(name = "apellidos", length = 40)
+	private String apellidos;
 	
-	@Column(name = "telefono")
-	String telefono
-	
-	@Basic(optional = false)
-	@Column(name = "correo")
-	String correo
+	@Column(name = "telefono", length = 10)
+	private String telefono;
 	
 	@Basic(optional = false)
-	@Column(name = "password")
-	String password
+	@Column(name = "correo" , unique = true, nullable = false, length = 80 )
+	private String correo;
 	
-	@Column(name = "perfil")
-	String perfil
+	@Basic(optional = false)
+	@Column(name = "password", nullable = false, length = 150 )
+	private String password;
+	
+	@Column(name = "perfil", length = 255)
+	private String perfil;
+	
+	@Column(name = "enable", nullable = false)
+	private boolean enable;
 	
 	/*** id rol***/
 	@JoinColumn(name = "idrol", referencedColumnName = "idrol")
 	@ManyToOne(optional = false)
-	Roles idrol
+	Rol idrol
+
+	
+	public Rol getIdrol() {
+		return idrol;
+	}
+
+	public void setIdrol(Rol idrol) {
+		this.idrol = idrol;
+	}
 
 	public Integer getIduser() {
 		return iduser;
@@ -105,19 +119,5 @@ class User implements Serializable {
 		this.perfil = perfil;
 	}
 
-	public Roles getIdrol() {
-		return idrol;
-	}
-
-	public void setIdrol(Roles idrol) {
-		this.idrol = idrol;
-	}
-	
-	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
-	List<Quiz> quizList
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
-	List<Grupousuario> grupousuarioList*/
-	
-	
+		
 }

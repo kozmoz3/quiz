@@ -22,10 +22,22 @@ class Rol implements Serializable{
 	
 	@Basic(optional = false)
 	@Column(name = "descripcion")
-	private String descripcion
-	
+	String descripcion
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idrol")
-	private List<Usuario> usuarioList
+	List<User> usuarioList
+	
+	public Rol() {
+		super();
+	}
+
+	
+	public Rol(String descripcion, List<User> usuarioList) {
+		super();
+		this.descripcion = descripcion;
+		this.usuarioList = usuarioList;
+	}
+
 
 	public Integer getIdrol() {
 		return idrol;
@@ -43,14 +55,15 @@ class Rol implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public List<Usuario> getUsuarioList() {
+
+	public List<User> getUsuarioList() {
 		return usuarioList;
 	}
 
-	public void setUsuarioList(List<Usuario> usuarioList) {
+
+	public void setUsuarioList(List<User> usuarioList) {
 		this.usuarioList = usuarioList;
 	}
-	
-	
 
+		
 }

@@ -22,17 +22,20 @@ import javax.xml.bind.annotation.XmlRootElement
 	, @NamedQuery(name = "Grupousuario.findByIdrelaciongu", query = "SELECT g FROM Grupousuario g WHERE g.idrelaciongu = :idrelaciongu")})*/
 class Grupousuario implements Serializable{
 	static final long serialVersionUID = 1L
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "idrelaciongu")
 	Integer idrelaciongu
+	
 	@JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo")
 	@ManyToOne(optional = false)
 	Grupo idgrupo
-	@JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
+	
+	@JoinColumn(name = "iduser", referencedColumnName = "iduser")
 	@ManyToOne(optional = false)
-	Usuario idusuario
+	User iduser
 
 	def Grupousuario() {
 	}
