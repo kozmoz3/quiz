@@ -30,7 +30,7 @@
 	        					<div class="product-buttons">
 	        						<button type="button" class="button-warning cart-btn">Editar</button>
 	        						<button type="button" onclick="javascript:location.href='/admin/simuladores/preguntas';" class="button-info cart-btn">Preguntas</button>
-	        						<button type="button" class="button-danger cart-btn">Eliminar</button>
+	        						<button type="button" onclick="getOption();" class="button-danger cart-btn">Eliminar</button>
 	        					</div>
 	        				</div>
 	        			</div>
@@ -39,5 +39,13 @@
 	        </div>
 	    </div>
 	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	    <script type="text/javascript" src="/generales/js/messages.js"></script>
+	    <script type="text/javascript">
+	    	function getOption(){
+	    		getOptionalMessage("Quiz","¿Está seguro de eliminar?",function(){
+	    			alert("Es ok");
+	    		},function(){});
+	    	}
+	    </script>
 	</body>
 </html>

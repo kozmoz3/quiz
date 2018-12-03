@@ -15,6 +15,25 @@ function getCodeStatus(jqXHR, textStatus) {
 		return 'Error desconocido: ' + jqXHR.responseText;
 }
 
+function getOptionalMessage( title, message, fnSuccess, fnFailure ){
+	let btnsuccess = new Elements('input',{type:'button', class:'btn-modal-option', value:'Aceptar'},[ ]);
+	let btnfailure = new Elements('input',{type:'button', class:'btn-modal-option', value:'Cancelar'},[ ]);
+	btnsuccess.addEventListener("click", function(){
+		fnSuccess();
+		$(".modal-window").remove();
+	});
+	btnfailure.addEventListener("click", function(){
+		fnFailure();
+		$(".modal-window").remove();
+	});
+	let e = new Modal('div',{class:'modal-window-content'},[
+				new Elements('h1',{class:'modal-window-title'},[ title ]),
+				new Elements('p',{class:'modal-window-text'},[message]),
+				new Elements('div',{class:'modal-window-options'},[  btnfailure, btnsuccess ])
+			]);
+	document.body.appendChild(e);
+}
+
 function dropLoadMessage(){
 	$( ".modal-window-load" ).hide( "highlight",{}, 1000, callback );
 }
