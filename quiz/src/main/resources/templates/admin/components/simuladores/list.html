@@ -30,7 +30,7 @@
 	        					<div class="product-buttons">
 	        						<button type="button" class="button-warning cart-btn">Editar</button>
 	        						<button type="button" onclick="javascript:location.href='/admin/simuladores/preguntas';" class="button-info cart-btn">Preguntas</button>
-	        						<button type="button" onclick="getOption();" class="button-danger cart-btn">Eliminar</button>
+	        						<button type="button" class="button-danger cart-btn">Eliminar</button>
 	        					</div>
 	        				</div>
 	        			</div>
@@ -40,18 +40,5 @@
 	    </div>
 	    <div th:replace="admin/includes/scripts :: scripts"></div>
 	    <script type="text/javascript" src="/generales/js/messages.js"></script>
-	    <script type="text/javascript">
-	    	function getOption(){
-	    		getOptionalMessage("Quiz","¿Está seguro de eliminar?",function(){
-	    			getNotification("Todo está bien 1");
-	    		},function(){
-	    			getNotificationImg(
-	    					"Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
-	    					"success",
-	    					"http://culto.latercera.com/wp-content/uploads/2018/06/Ramones_%C2%A9ChalkieDavies-1-900x600.jpg"
-	    			);
-	    		});
-	    	}
-	    </script>
 	</body>
 </html>
