@@ -43,13 +43,12 @@
 	    <script type="text/javascript">
 	    	function getOption(){
 	    		getOptionalMessage("Quiz","¿Está seguro de eliminar?",function(){
-	    			getNotification("Todo está bien","success");
+	    			getNotification("Todo está bien 1");
 	    		},function(){
-	    			getNotificationPersonal("success",
-	    					new Elements("img", {
-	    						src:"https://pre00.deviantart.net/9b87/th/pre/i/2015/107/2/4/al_carajo_la_magia_rosa_yo_usare_armas_by_lachicadelhacha-d7np1ky.jpg",
-	    						style:"width: 20%;height: 20%;"
-	    						},[])
+	    			getNotificationImg(
+	    					"Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.",
+	    					"success",
+	    					"http://culto.latercera.com/wp-content/uploads/2018/06/Ramones_%C2%A9ChalkieDavies-1-900x600.jpg"
 	    			);
 	    		});
 	    	}

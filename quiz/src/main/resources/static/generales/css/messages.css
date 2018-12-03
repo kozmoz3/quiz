@@ -157,7 +157,26 @@
 .notif-default{
     background-color: #86888a;
 }
-
+.notif-container{
+	display: grid;
+	grid-column: 2;
+	grid-template-columns: 30% 70%;
+	grid-column-gap: 10px;
+	grid-row: 1;
+	grid-template-rows: 80px;
+    height: 80px;
+}
+.notif-img{
+	width: 100%;
+	height: 100%;
+}
+.notif-img img{
+	height: 100%;
+    width: auto;
+}
+.notif-text{
+	
+}
 @keyframes bounceIn {
 	0% {
 		transform: translateX(1000px);

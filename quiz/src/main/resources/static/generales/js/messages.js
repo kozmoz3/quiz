@@ -15,20 +15,59 @@ function getCodeStatus(jqXHR, textStatus) {
 		return 'Error desconocido: ' + jqXHR.responseText;
 }
 function getNotificationPersonal(type, reuselm ){
-	let e = new Elements('div',{ class: getTypeNotification(type) },[ reuselm ]);
+	let e = new Elements('div',{ class: getTypeNotification(type), style: getStyleOfNotif() },[ reuselm ]);
 	document.body.appendChild(e);
 	setTimeout(function(){
-		$(".notif").hide("slow");
-		$(".notif").remove();
+		$(e).hide("slow");
+		$(e).remove();
 	},5000);
 }
-function getNotification( text, type ){
-	let e = new Elements('div',{ class: getTypeNotification(type) },[ text ]);
+
+function getNotificationImg( text, type, img ){
+	let e = new Elements('div',{ class: getTypeNotification(type), style: getStyleOfNotif() },[
+		new Elements("div", {class:'notif-container'},[
+			new Elements("div", {class:'notif-img'},[
+				new Elements("img", { src: img },[])
+			]),
+			new Elements("div", {class:'notif-text'},[
+				new Elements("p", {},[ getLongMessage( text ) ])
+			])
+		])
+	]);
 	document.body.appendChild(e);
 	setTimeout(function(){
-		$(".notif").hide("slow");
-		$(".notif").remove();
+		$(e).hide("slow");
+		$(e).remove();
 	},5000);
+}
+
+function getNotification( text, type ){
+	let e = new Elements('div',{ class: getTypeNotification(type), style: getStyleOfNotif() },[ getLongMessage( text ) ]);
+	document.body.appendChild(e);
+	setTimeout(function(){
+		$(e).hide("slow");
+		$(e).remove();
+	},5000);
+}
+
+function getStyleOfNotif(){
+	let style = "bottom:10px;";
+	let tamanioc = $(".notif").length;
+	if(  tamanioc > 0 ){
+		let domNotif = $(".notif")[tamanioc - 1];			
+		let bottom = $(domNotif).css("bottom");
+		let height = $(domNotif).css("height");
+		let valinstr = String(bottom).substring(0, (String(bottom).length - 2 ) );
+		style = "bottom:" + (parseInt( valinstr ) + parseInt( height ) + 10) +"px;";
+	}
+	return style;
+}
+
+function getLongMessage( text ){
+	if( text.length <= 140)
+		return text;
+	else
+		return text.substring(0, 140) + "...";
 }
 
 function getTypeNotification( type ){
