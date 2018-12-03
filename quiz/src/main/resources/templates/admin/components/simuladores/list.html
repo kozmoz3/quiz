@@ -43,8 +43,15 @@
 	    <script type="text/javascript">
 	    	function getOption(){
 	    		getOptionalMessage("Quiz","¿Está seguro de eliminar?",function(){
-	    			alert("Es ok");
-	    		},function(){});
+	    			getNotification("Todo está bien","success");
+	    		},function(){
+	    			getNotificationPersonal("success",
+	    					new Elements("img", {
+	    						src:"https://pre00.deviantart.net/9b87/th/pre/i/2015/107/2/4/al_carajo_la_magia_rosa_yo_usare_armas_by_lachicadelhacha-d7np1ky.jpg",
+	    						style:"width: 20%;height: 20%;"
+	    						},[])
+	    			);
+	    		});
 	    	}
 	    </script>
 	</body>

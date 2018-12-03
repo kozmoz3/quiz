@@ -14,6 +14,32 @@ function getCodeStatus(jqXHR, textStatus) {
 	else
 		return 'Error desconocido: ' + jqXHR.responseText;
 }
+function getNotificationPersonal(type, reuselm ){
+	let e = new Elements('div',{ class: getTypeNotification(type) },[ reuselm ]);
+	document.body.appendChild(e);
+	setTimeout(function(){
+		$(".notif").hide("slow");
+		$(".notif").remove();
+	},5000);
+}
+function getNotification( text, type ){
+	let e = new Elements('div',{ class: getTypeNotification(type) },[ text ]);
+	document.body.appendChild(e);
+	setTimeout(function(){
+		$(".notif").hide("slow");
+		$(".notif").remove();
+	},5000);
+}
+
+function getTypeNotification( type ){
+	switch(type){
+		case "success": return "notif notif-success";
+		case "danger": return "notif notif-danger";
+		case "info": return "notif notif-info";
+		case "warning": return "notif notif-warning";
+		default: return "notif notif-default";
+	}
+}
 
 function getOptionalMessage( title, message, fnSuccess, fnFailure ){
 	let btnsuccess = new Elements('input',{type:'button', class:'btn-modal-option', value:'Aceptar'},[ ]);
