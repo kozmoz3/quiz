@@ -70,10 +70,9 @@ class QuizController {
 			newQuiz.setShowfechaini( toDate(quiz.getShowfechaini()) )
 			newQuiz.setShowfechafin( toDate(quiz.getShowfechafin()) )
 		}
-		
 		newQuiz.setPassword(quiz.getPassword())		
-		newQuiz.setIdusuario( SesionVariables.getUserlog() )
-		System.out.println(SesionVariables.getUserlog().getIdusuario());
+		newQuiz.setIdusuario( SesionVariables.getUser() )
+		System.out.println( newQuiz.getIdusuario() );
 		//return quizService.setQuiz(newQuiz)
 		return SHOW;
 	 }
