@@ -42,6 +42,15 @@ class User implements Serializable {
 	@Column(name = "username", nullable = false, length = 60 )
 	private String username;
 	
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Basic(optional = false)
 	@Column(name = "password", nullable = false, length = 150 )
 	private String password;
