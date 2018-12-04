@@ -1,0 +1,22 @@
+.single-feature {
+  margin-bottom: 50px;
+  > {
+    p {
+      margin-bottom: 0;
+    }
+    i {
+      color: #fb397d;
+      font-size: 30px;
+      display: inline-block;
+      float: left;
+      margin-right: 10px;
+    }
+    h5 {
+      font-size: 22px;
+      color: $principal;
+    }
+    p {
+      margin-top: 15px;
+    }
+  }
+}

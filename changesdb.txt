@@ -16,11 +16,18 @@
 ~quiz c~nombre[varchar(50) => varchar(100)]				+
 ~quiz c~descripcion[varchar(255) => text]				+
 ~quiz +>{confgeneral,confresultados,confseguridad}			+
+------------------------------------------------------------------------+30/11/2018
 -confgeneral								+
 -confseguridad								+
 -confresultados								+
--quiz c+ estatus[binary]						+
--quiz c+ tipovista[char(15)]						+
--quiz c+ fecha[datetime]						+
--quiz c+ idusuario[int -> foreign key |> {usuario}]			+
+~quiz c+ estatus[binary]						+
+~quiz c+ tipovista[char(15)]						+
+~quiz c+ fecha[datetime]						+
+~quiz c+ idusuario[int -> foreign key |> {usuario}]			+
+------------------------------------------------------------------------+03/12/2018
+~usuario => user							+
+~usuario c+ username[varchar(80)]					+
+~usuario c+ enable[tinyint(1)]						+
+------------------------------------------------------------------------+04/12/2018
+~quiz c=> binary -> tinyint						+
 ------------------------------------------------------------------------+
