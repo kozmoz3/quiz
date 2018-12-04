@@ -56,7 +56,17 @@ class User implements Serializable {
 	@JoinColumn(name = "idrol", referencedColumnName = "idrol")
 	@ManyToOne(optional = false)
 	Rol idrol
+	public int getIdrol() {
+		return this.idrol.getIdrol();
+	}
+	
+	public String getRol() {
+		return this.idrol.getDescripcion();
+	}
 
+	public void setIdrol(Rol idrol) {
+		this.idrol = idrol;
+	}
 	
 	public boolean isEnable() {
 		return enable;
@@ -66,13 +76,7 @@ class User implements Serializable {
 		this.enable = enable;
 	}
 
-	public Rol getIdrol() {
-		return idrol;
-	}
-
-	public void setIdrol(Rol idrol) {
-		this.idrol = idrol;
-	}
+	
 
 	public Integer getIduser() {
 		return iduser;

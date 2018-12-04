@@ -52,7 +52,7 @@ class UserService implements UserDetailsService{
 	private List<GrantedAuthority> buildAuthorities(com.quizwish.quiz.models.User user){
 		LOGGER.info("METHOD : buildAuthorities --");
 		Set<GrantedAuthority> auths = new HashSet<GrantedAuthority> (); 
-		Rol rol = rolRepository.findByIdrol(user.getIdrol().idrol)
+		Rol rol = rolRepository.findByIdrol(user.getIdrol())
 		auths.add(new SimpleGrantedAuthority(rol.getDescripcion()));
 		LOGGER.info("METHOD : buildAuthorities --  rol de usuario "+ rol.getDescripcion() + " auths "+ auths+ " ArrayList<GrantedAuthority> "+ new ArrayList<GrantedAuthority>(auths));
 		return new ArrayList<GrantedAuthority>(auths);

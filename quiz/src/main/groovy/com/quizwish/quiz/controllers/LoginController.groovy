@@ -10,6 +10,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import com.quizwish.quiz.component.SessionUser;
+import com.quizwish.quiz.models.User
 
 
 @Controller
@@ -36,9 +37,10 @@ class LoginController {
 	@PreAuthorize("hasRole('ROLE_ROOT') or hasRole('ROLE_ALUM') ")
 	@GetMapping("/loginsucces")
 	public String loginCheck(Model model) {
-		LOGGER.info("METHOD : loginCheck --  session "+sessionUser.userSessionAll().getIdrol().idrol );
-		if(sessionUser.userSessionAll().getIdrol().idrol == 1) {
-			def username = sessionUser.getNameSession();
+		User user = sessionUser.userSessionAll();
+		LOGGER.info("METHOD : loginCheck --  session "+ user.getRol());
+		if(user.getIdrol() == 1) {
+			def username = user.getNombre();
 			model.addAttribute("username", username);
 		return ADMIN;
 		}else
