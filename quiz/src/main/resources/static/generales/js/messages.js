@@ -14,6 +14,90 @@ function getCodeStatus(jqXHR, textStatus) {
 	else
 		return 'Error desconocido: ' + jqXHR.responseText;
 }
+function getNotificationPersonal(type, reuselm ){
+	let e = new Elements('div',{ class: getTypeNotification(type), style: getStyleOfNotif() },[ reuselm ]);
+	document.body.appendChild(e);
+	setTimeout(function(){
+		$(e).hide("slow");
+		$(e).remove();
+	},5000);
+}
+
+function getNotificationImg( text, type, img ){
+	let e = new Elements('div',{ class: getTypeNotification(type), style: getStyleOfNotif() },[
+		new Elements("div", {class:'notif-container'},[
+			new Elements("div", {class:'notif-img'},[
+				new Elements("img", { src: img },[])
+			]),
+			new Elements("div", {class:'notif-text'},[
+				new Elements("p", {},[ getLongMessage( text ) ])
+			])
+		])
+	]);
+	document.body.appendChild(e);
+	setTimeout(function(){
+		$(e).hide("slow");
+		$(e).remove();
+	},5000);
+}
+
+function getNotification( text, type ){
+	let e = new Elements('div',{ class: getTypeNotification(type), style: getStyleOfNotif() },[ getLongMessage( text ) ]);
+	document.body.appendChild(e);
+	setTimeout(function(){
+		$(e).hide("slow");
+		$(e).remove();
+	},5000);
+}
+
+function getStyleOfNotif(){
+	let style = "bottom:10px;";
+	let tamanioc = $(".notif").length;
+	if(  tamanioc > 0 ){
+		let domNotif = $(".notif")[tamanioc - 1];			
+		let bottom = $(domNotif).css("bottom");
+		let height = $(domNotif).css("height");
+		let valinstr = String(bottom).substring(0, (String(bottom).length - 2 ) );
+		style = "bottom:" + (parseInt( valinstr ) + parseInt( height ) + 10) +"px;";
+	}
+	return style;
+}
+
+function getLongMessage( text ){
+	if( text.length <= 140)
+		return text;
+	else
+		return text.substring(0, 140) + "...";
+}
+
+function getTypeNotification( type ){
+	switch(type){
+		case "success": return "notif notif-success";
+		case "danger": return "notif notif-danger";
+		case "info": return "notif notif-info";
+		case "warning": return "notif notif-warning";
+		default: return "notif notif-default";
+	}
+}
+
+function getOptionalMessage( title, message, fnSuccess, fnFailure ){
+	let btnsuccess = new Elements('input',{type:'button', class:'btn-modal-option', value:'Aceptar'},[ ]);
+	let btnfailure = new Elements('input',{type:'button', class:'btn-modal-option', value:'Cancelar'},[ ]);
+	btnsuccess.addEventListener("click", function(){
+		fnSuccess();
+		$(".modal-window").remove();
+	});
+	btnfailure.addEventListener("click", function(){
+		fnFailure();
+		$(".modal-window").remove();
+	});
+	let e = new Modal('div',{class:'modal-window-content'},[
+				new Elements('h1',{class:'modal-window-title'},[ title ]),
+				new Elements('p',{class:'modal-window-text'},[message]),
+				new Elements('div',{class:'modal-window-options'},[  btnfailure, btnsuccess ])
+			]);
+	document.body.appendChild(e);
+}
 
 function dropLoadMessage(){
 	$( ".modal-window-load" ).hide( "highlight",{}, 1000, callback );

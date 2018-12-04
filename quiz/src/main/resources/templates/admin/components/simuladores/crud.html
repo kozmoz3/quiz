@@ -76,6 +76,11 @@
 																		<div class="form-group">
 																			<textarea id="strdescripcion" class="form-control" placeholder="Descripcion"></textarea>
 																		</div>
+																		<div class="form-group">
+																			<label>Es publico
+																				<input type="checkbox" data-optional data-cleable id="chktipovista"/>
+																			</label>
+																		</div>
 																	</div>																	
 																</div>
 															</div>
@@ -96,9 +101,9 @@
 																			</label>
 																			<div class="form-group">
 																				<label>
-																					<input data-optional data-cleable id="strmostraronly" type="radio"> Mostrar sólo
+																					<input data-optional data-cleable data-block id="strmostraronly" type="radio"> Mostrar sólo
 																				</label>
-																				<input type="number" class="form-control" value="1" id="strshowonly" min="1" placeholder="#"/>
+																				<input type="number" class="form-control" disabled value="1" id="strshowonly" min="1" placeholder="#"/>
 																			</div>
 																		</div>
 																	</div>
@@ -127,7 +132,7 @@
 																			<label>
 																				<input data-optional data-cleable id="strtiempo" type="checkbox"> Asignar un tiempo
 																			</label>
-																			<input type="time" class="form-control" value="1" id="strshowtimeonly" placeholder="#" />
+																			<input type="time" class="form-control" disabled value="1" id="strshowtimeonly" placeholder="#" />
 																		</div>
 																	</div>
 																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -244,11 +249,11 @@
 																				<input data-optional data-cleable id="strintentosall" checked type="radio"> Mostrar todos los intentos
 																			</label>
 																		</div>
-																		<div class="form-group">
+																		<!-- <div class="form-group">
 																			<label>
 																				<input data-optional data-cleable id="strintentosonly" type="radio"> Mostrar # intentos
 																			</label>
-																		</div>
+																		</div>-->
 																	</div>
 																</div>
 																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -272,7 +277,8 @@
 																		data-onclear="true" 
 																		data-href-method="post"
 																		data-remain="3"
-																		data-href-url="/admin/simuladores" data-ismetadata data-optional data-noset data-cleable 
+																		data-href-url="/admin/simuladores" data-ismetadata data-optional data-noset data-cleable
+																		data-response="view|#unid" 
 																		type="button" class="btn btn-info" value="Aceptar">
 																</div>
 														</div>

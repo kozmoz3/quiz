@@ -66,7 +66,7 @@ class Quiz implements Serializable{
     @Basic(optional = false)
     @Lob
     @Column(name = "random")
-    byte[] random
+    boolean random
     @Basic(optional = false)
     @Column(name = "tiempo")
     @Temporal(TemporalType.TIME)
@@ -82,35 +82,35 @@ class Quiz implements Serializable{
     @Basic(optional = false)
     @Lob
     @Column(name = "preguntasc")
-    byte[] preguntasc
+    boolean preguntasc
     @Basic(optional = false)
     @Lob
     @Column(name = "respuestac")
-    byte[] respuestac
+    boolean respuestac
     @Basic(optional = false)
     @Lob
     @Column(name = "preguntasi")
-    byte[] preguntasi
+    boolean preguntasi
     @Basic(optional = false)
     @Lob
     @Column(name = "calificacion")
-    byte[] calificacion
+    boolean calificacion
     @Basic(optional = false)
     @Lob
     @Column(name = "grafico")
-    byte[] grafico
+    boolean grafico
     @Basic(optional = false)
     @Lob
     @Column(name = "istiempo")
-    byte[] istiempo
+    boolean istiempo
     @Basic(optional = false)
     @Lob
     @Column(name = "mensajesop")
-    byte[] mensajesop
+    boolean mensajesop
     @Basic(optional = false)
     @Lob
     @Column(name = "isintentos")
-    byte[] isintentos
+    boolean isintentos
     @Column(name = "showfechaini")
     @Temporal(TemporalType.DATE)
     Date showfechaini
@@ -122,7 +122,7 @@ class Quiz implements Serializable{
     @Basic(optional = false)
     @Lob
     @Column(name = "estatus")
-    byte[] estatus
+    boolean estatus
     @Basic(optional = false)
     @Column(name = "tipovista")
     String tipovista
@@ -145,7 +145,7 @@ class Quiz implements Serializable{
         this.idquiz = idquiz
     }
 
-    public Quiz(Integer idquiz, String nombre, String descripcion, String mostrar, String vista, byte[] random, Date tiempo, byte[] preguntasc, byte[] respuestac, byte[] preguntasi, byte[] calificacion, byte[] grafico, byte[] istiempo, byte[] mensajesop, byte[] isintentos, byte[] estatus, String tipovista, Date fecha) {
+    public Quiz(Integer idquiz, String nombre, String descripcion, String mostrar, String vista, boolean random, Date tiempo, boolean preguntasc, boolean respuestac, boolean preguntasi, boolean calificacion, boolean grafico, boolean istiempo, boolean mensajesop, boolean isintentos, boolean estatus, String tipovista, Date fecha) {
         this.idquiz = idquiz
         this.nombre = nombre
         this.descripcion = descripcion
@@ -165,6 +165,27 @@ class Quiz implements Serializable{
         this.tipovista = tipovista
         this.fecha = fecha
     }
+	
+	public Quiz(String nombre, String descripcion, String mostrar, String vista, boolean random, Date tiempo, boolean preguntasc, boolean respuestac, boolean preguntasi, boolean calificacion, boolean grafico, boolean istiempo, boolean mensajesop, boolean isintentos, boolean estatus, String tipovista, Date fecha) {
+		this.idquiz = idquiz
+		this.nombre = nombre
+		this.descripcion = descripcion
+		this.mostrar = mostrar
+		this.vista = vista
+		this.random = random
+		this.tiempo = tiempo
+		this.preguntasc = preguntasc
+		this.respuestac = respuestac
+		this.preguntasi = preguntasi
+		this.calificacion = calificacion
+		this.grafico = grafico
+		this.istiempo = istiempo
+		this.mensajesop = mensajesop
+		this.isintentos = isintentos
+		this.estatus = estatus
+		this.tipovista = tipovista
+		this.fecha = fecha
+	}
 
 	@XmlTransient
     def getQuestionsList() {

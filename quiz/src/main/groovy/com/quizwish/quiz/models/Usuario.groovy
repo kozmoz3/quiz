@@ -71,7 +71,10 @@ class Usuario implements Serializable {
 		this.idusuario = idusuario
 		this.correo = correo
 		this.password = password
-	}	
+	}
+	def Usuario(String correo) {
+		this.correo = correo
+	}
 
 	@XmlTransient
 	def getGrupousuarioList() {

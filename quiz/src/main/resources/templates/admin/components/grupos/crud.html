@@ -16,19 +16,19 @@
 	        <div class="single-pro-review-area mt-t-30 mg-b-15" th:fragment="frm-data-change">
 				<div class="container-fluid">
 					<div class="sparkline8-list responsive-mg-b-30">
-						<form>
+						<form class="valid-errors">
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Nombre"/>
+										<input type="text" id="strnombre" class="form-control" placeholder="Nombre"/>
 									</div>
 									<div class="form-group">
-										<textarea rows="8" class="form-control" placeholder="Descripción"></textarea>
+										<textarea rows="8" id="strdescripcion" class="form-control" placeholder="Descripción"></textarea>
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 									<div style="height: 204px; overflow: scroll;">
-										<table class="table">
+										<table class="table" data-collection="students">
 											<thead>
 												<tr>
 													<th>Nombre</th>
@@ -38,36 +38,43 @@
 											<tbody>
 												<tr>
 													<td>Nombre de un alumno</td>
-													<td><input type="checkbox"/></td>
+													<td><input type="checkbox" id="ckus0" data-optional data-selck="1"/></td>
 												</tr>
 												<tr>
 													<td>Nombre de un alumno</td>
-													<td><input type="checkbox"/></td>
+													<td><input type="checkbox" id="ckus1" data-optional data-selck="2"/></td>
 												</tr>
 												<tr>
 													<td>Nombre de un alumno</td>
-													<td><input type="checkbox"/></td>
+													<td><input type="checkbox" id="ckus2" data-optional data-selck="3"/></td>
 												</tr>
 												<tr>
 													<td>Nombre de un alumno</td>
-													<td><input type="checkbox"/></td>
+													<td><input type="checkbox" id="ckus3" data-optional data-selck="4"/></td>
 												</tr>
 												<tr>
 													<td>Nombre de un alumno</td>
-													<td><input type="checkbox"/></td>
+													<td><input type="checkbox" id="ckus4" data-optional data-selck="5"/></td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 									<div class="form-group">
 										<label>
-											<input type="checkbox" /> Seleccionar todos
+											<input type="checkbox" data-allselck /> Seleccionar todos
 										</label>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="button" class="btn btn-success" value="Enviar"/>
+								<input type="button" 
+								onclick="sendData(this);"
+								data-onclear="true" 
+								data-href-method="post" 
+								data-remain="3" 
+								data-href-url="/admin/grupos" data-optional data-noset data-cleable 
+								data-response="ptext|#unid" 
+								class="btn btn-success" value="Enviar"/>
 							</div>
 						</form>
 					</div>
@@ -75,5 +82,9 @@
 			</div>
 	    </div>
 	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	    <script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
+	    <script type="text/javascript" th:src="@{/generales/js/senders.js}"></script>
+	    <script type="text/javascript" th:src="@{/generales/js/validations.js}"></script>
+	    <script type="text/javascript" th:src="@{/generales/js/functions.js}"></script>
 	</body>
 </html>
