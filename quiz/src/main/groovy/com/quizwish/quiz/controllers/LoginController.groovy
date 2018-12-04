@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 import org.springframework.security.core.userdetails.UserDetails
@@ -15,7 +16,7 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
 @Controller
-@RequestMapping(path = "/")
+//@RequestMapping(path = "/")
 class LoginController {
 	
 	private static final Log LOGGER = LogFactory.getLog(QuizController.class)
@@ -23,18 +24,13 @@ class LoginController {
 	static final def INDEX = "login";
 	static final def ADMIN = "admin/index";
 	
-
-	@GetMapping("/")
-	public String redirectToLogin() {
-		return "redirect:/"+INDEX;
-	} 
 	
 	@GetMapping("login")
 	public String login(Model model) {
 		return INDEX;
 	}
 	
-	@GetMapping("/admin")
+	@PostMapping("/loginsucces")
 	public String index(Model model) {
 		//UserDetails details = SesionVariables.sesionDetails()
 			LOGGER.info("login user - "+ SesionVariables.sesionDetails());

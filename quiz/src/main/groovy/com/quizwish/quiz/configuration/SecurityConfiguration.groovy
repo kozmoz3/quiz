@@ -30,11 +30,11 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/generales/**","/administrador/**","/estudiante/**").permitAll()
 		     .anyRequest().authenticated()
 		     .and()
-	    .formLogin().loginPage("/login").loginProcessingUrl("/inlogin")
+	    .formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
 	    .usernameParameter("email").passwordParameter("password")
 	    .defaultSuccessUrl("/loginsucces").permitAll()
 	    .and()
-	    .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
+	    .logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
 	    .permitAll();
 	}
 }

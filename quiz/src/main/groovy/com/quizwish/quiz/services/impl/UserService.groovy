@@ -9,9 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
+import org.springframework.security.core.userdetails.User
 
 import com.quizwish.quiz.models.Rol
-import com.quizwish.quiz.models.User
+//import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.RolRepository
 import com.quizwish.quiz.repositorys.UserRepository
 
@@ -33,25 +34,27 @@ class UserService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-		User user = userRepository.findByCorreo(correo);
+		LOGGER.info("loadUserByUsername --> ");
+		com.quizwish.quiz.models.User user = userRepository.findByCorreo(correo);
 		List<GrantedAuthority> authorities = buildAuthorities(user);
-	
-		LOGGER.info("loadUserByUsername --> usuario "+ buildUser(user, authorities).getNombre());
+		
+		LOGGER.info("loadUserByUsername --> buildUser "+buildUser(user, authorities));
 		return buildUser(user, authorities);
 	}
 
-	private User buildUser(User user, List<GrantedAuthority> authorities) {
-		LOGGER.info("buildUser --> usuario "+ user.getNombre());
+	private User buildUser(com.quizwish.quiz.models.User user, List<GrantedAuthority> authorities) {
+		LOGGER.info("buildUser --> ");
+		LOGGER.info("buildUser --> usuario = "+ user.getNombre() + " authorities = "+authorities +" User = ");
 		return new org.springframework.security.core.userdetails.User(user.getCorreo(), user.getPassword(), user.isEnable(),
 			                                                          true, true, true, authorities);
 	}
 	
-	private List<GrantedAuthority> buildAuthorities(User user){
+	private List<GrantedAuthority> buildAuthorities(com.quizwish.quiz.models.User user){
+		LOGGER.info("buildAuthorities -->");
 		Set<GrantedAuthority> auths = new HashSet<GrantedAuthority> (); 
-		Rol rol = rolRepository.findById(user.getIdrol())
+		Rol rol = rolRepository.findByIdrol(user.getIdrol().idrol)
 		auths.add(new SimpleGrantedAuthority(rol.getDescripcion()));
-		
-		LOGGER.info("buildAuthorities -->  rol de usuario "+ rol.getDescripcion());
+		LOGGER.info("buildAuthorities -->  rol de usuario "+ rol.getDescripcion() + " auths "+ auths+ " ArrayList<GrantedAuthority> "+ new ArrayList<GrantedAuthority>(auths));
 		return new ArrayList<GrantedAuthority>(auths);
 	}
 }

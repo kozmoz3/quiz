@@ -17,34 +17,4 @@ import org.springframework.security.crypto.password.PasswordEncoder
 class SecurityConfig{
 	
 }
-/*
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
-class SecurityConfig extends WebSecurityConfigurerAdapter{
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Autowired
-	UserDetailsServiceImpl userDetailsService;
-
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
-	}
-
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/", "/logout").permitAll()
-		http.authorizeRequests().antMatchers("/generales/**","/administrador/**","/estudiante/**").permitAll()
-		http.authorizeRequests().antMatchers("/study/**").access("hasAnyRole('ROLE_ROOT', 'ROLE_ALUM')")
-		http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ROOT', 'ROLE_ALUM')")
-		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/access-denied")
-		http.authorizeRequests().and().formLogin().loginProcessingUrl("/inlogin")
-				.loginPage("/").defaultSuccessUrl("/admin")
-				.failureUrl("/?error=true")
-				.usernameParameter("email").passwordParameter("password")
-				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
-	}
-}*/
