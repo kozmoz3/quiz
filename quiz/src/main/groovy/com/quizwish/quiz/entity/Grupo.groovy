@@ -1,4 +1,4 @@
-package com.quizwish.quiz.models
+package com.quizwish.quiz.entity
 
 import java.io.Serializable
 import java.util.List

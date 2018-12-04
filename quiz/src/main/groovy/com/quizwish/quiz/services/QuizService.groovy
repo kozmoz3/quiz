@@ -1,6 +1,6 @@
 package com.quizwish.quiz.services
 
-import com.quizwish.quiz.models.Quiz
+import com.quizwish.quiz.entity.Quiz
 
 interface QuizService {
 

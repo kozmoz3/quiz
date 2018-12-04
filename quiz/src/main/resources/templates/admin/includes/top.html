@@ -23,9 +23,10 @@
 											</a>
 											<ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
 												<li>
-													<a th:href="@{/logout}">
-														<span class="edu-icon edu-locked author-log-ic"></span>Salir
-													</a>
+													<form th:action="@{/logout}" method="POST">
+														<button type="submit"><span class="edu-icon edu-locked author-log-ic"></span>Salir
+													    </button>
+													</form>
 												</li>
 											</ul>
 										</li>

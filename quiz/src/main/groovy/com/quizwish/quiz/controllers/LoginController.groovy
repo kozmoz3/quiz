@@ -25,16 +25,15 @@ class LoginController {
 	static final def ADMIN = "admin/index";
 	
 	
-	@GetMapping("login")
-	public String login(Model model) {
+	@GetMapping("/login")
+	public String login() {
+		LOGGER.info("login --");
 		return INDEX;
 	}
 	
 	@PostMapping("/loginsucces")
 	public String index(Model model) {
-		//UserDetails details = SesionVariables.sesionDetails()
-			LOGGER.info("login user - "+ SesionVariables.sesionDetails());
-		//	model.addAttribute("usuario", details.getUsername())
+		LOGGER.info("index -- ");
 		return ADMIN;
 	}
 

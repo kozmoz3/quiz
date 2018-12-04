@@ -1,6 +1,6 @@
 package com.quizwish.quiz.services
 
-import com.quizwish.quiz.models.Quiz
+import com.quizwish.quiz.entity.Quiz
 import com.quizwish.quiz.repositorys.QuizRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier

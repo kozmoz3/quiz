@@ -1,4 +1,4 @@
-package com.quizwish.quiz.models
+package com.quizwish.quiz.entity
 
 import java.io.Serializable
 import javax.persistence.Basic
@@ -13,6 +13,8 @@ import javax.persistence.NamedQueries
 import javax.persistence.NamedQuery
 import javax.persistence.Table
 import javax.xml.bind.annotation.XmlRootElement
+
+import com.quizwish.quiz.models.User
 
 @Entity
 @Table(name = "grupousuario", catalog = "quiz", schema = "")

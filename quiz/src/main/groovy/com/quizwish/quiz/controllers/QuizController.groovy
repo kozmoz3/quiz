@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.servlet.ModelAndView
 
-import com.quizwish.quiz.models.Quiz
+import com.quizwish.quiz.entity.Quiz
 import com.quizwish.quiz.services.QuizService
 import com.quizwish.quiz.utils.SesionVariables
 import org.apache.commons.logging.Log

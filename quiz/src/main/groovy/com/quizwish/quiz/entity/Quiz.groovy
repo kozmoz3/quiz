@@ -1,4 +1,4 @@
-package com.quizwish.quiz.models
+package com.quizwish.quiz.entity
 
 import java.io.Serializable
 import java.util.Date
@@ -21,6 +21,8 @@ import javax.persistence.Temporal
 import javax.persistence.TemporalType
 import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlTransient
+
+import com.quizwish.quiz.models.User
 
 
 @XmlRootElement
