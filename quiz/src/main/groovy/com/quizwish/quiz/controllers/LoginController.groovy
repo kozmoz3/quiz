@@ -36,8 +36,11 @@ class LoginController {
 	@PreAuthorize("hasRole('ROLE_ROOT') or hasRole('ROLE_ALUM') ")
 	@GetMapping("/loginsucces")
 	public String loginCheck() {
-		LOGGER.info("METHOD : loginCheck --  session "+sessionUser.userSessionAll().getNombre() );
+		LOGGER.info("METHOD : loginCheck --  session "+sessionUser.userSessionAll().getIdrol().idrol );
+		if(sessionUser.userSessionAll().getIdrol().idrol == 1)
 		return ADMIN;
+		else
+			return INDEX;
 	}
 
 }

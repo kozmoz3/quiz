@@ -16,7 +16,11 @@ class SessionUser {
 	UserRepository userRepository;
 	
 	public com.quizwish.quiz.models.User userSessionAll(){
-		User userSesion =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User userSesion =  session();
         return userRepository.findByCorreo( userSesion.getUsername());
+	}
+	
+	public User session() {
+		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }
