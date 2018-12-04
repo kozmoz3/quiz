@@ -49,6 +49,7 @@ class UserService implements UserDetailsService{
 			                                                          true, true, true, authorities);
 	}
 	
+	
 	private List<GrantedAuthority> buildAuthorities(com.quizwish.quiz.models.User user){
 		LOGGER.info("METHOD : buildAuthorities --");
 		Set<GrantedAuthority> auths = new HashSet<GrantedAuthority> (); 

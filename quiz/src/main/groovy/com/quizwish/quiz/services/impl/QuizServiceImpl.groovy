@@ -5,12 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.data.domain.Example
 import org.springframework.stereotype.Service
 
-<<<<<<< HEAD
-import com.quizwish.quiz.models.Quiz
-import com.quizwish.quiz.repositorys.QuizRepository
-=======
 import com.quizwish.quiz.entity.Quiz
->>>>>>> autentication
+import com.quizwish.quiz.repositorys.QuizRepository
 import com.quizwish.quiz.services.QuizService
 
 @Service("quizService")
@@ -45,13 +41,5 @@ class QuizServiceImpl implements QuizService{
 		return quizRepository.deleteById(id)
 	}
 
-	@Override
-	def getByCriteria(Example<Quiz> example) {
-		return quizRepository.findOne(example)
-	}
 
-	@Override
-	public Object getByCriteriaList(Example<Quiz> example) {
-		return quizRepository.findAll(example);
-	}
 }

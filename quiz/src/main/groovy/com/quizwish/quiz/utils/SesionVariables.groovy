@@ -6,13 +6,10 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContext
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
-<<<<<<< HEAD
+
 import com.quizwish.quiz.models.Usuario
 import com.quizwish.quiz.services.UsuarioService
-=======
-import org.springframework.stereotype.Component
 
->>>>>>> autentication
 
 class SesionVariables {
 

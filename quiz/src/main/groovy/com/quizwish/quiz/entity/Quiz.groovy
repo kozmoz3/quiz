@@ -78,12 +78,8 @@ class Quiz implements Serializable{
     @Basic(optional = false)
     @Lob
     @Column(name = "random")
-<<<<<<< HEAD:quiz/src/main/groovy/com/quizwish/quiz/models/Quiz.groovy
     boolean random
-=======
-    byte[] random
-	
->>>>>>> autentication:quiz/src/main/groovy/com/quizwish/quiz/entity/Quiz.groovy
+
     @Basic(optional = false)
     @Column(name = "tiempo")
     @Temporal(TemporalType.TIME)
@@ -103,7 +99,6 @@ class Quiz implements Serializable{
     @Basic(optional = false)
     @Lob
     @Column(name = "preguntasc")
-<<<<<<< HEAD:quiz/src/main/groovy/com/quizwish/quiz/models/Quiz.groovy
     boolean preguntasc
     @Basic(optional = false)
     @Lob
@@ -133,45 +128,7 @@ class Quiz implements Serializable{
     @Lob
     @Column(name = "isintentos")
     boolean isintentos
-=======
-    byte[] preguntasc
-	
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "respuestac")
-    byte[] respuestac
-	
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "preguntasi")
-    byte[] preguntasi
-	
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "calificacion")
-    byte[] calificacion
-	
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "grafico")
-    byte[] grafico
-	
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "istiempo")
-    byte[] istiempo
-	
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "mensajesop")
-    byte[] mensajesop
-	
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "isintentos")
-    byte[] isintentos
-	
->>>>>>> autentication:quiz/src/main/groovy/com/quizwish/quiz/entity/Quiz.groovy
+
     @Column(name = "showfechaini")
     @Temporal(TemporalType.DATE)
     Date showfechaini
@@ -186,12 +143,8 @@ class Quiz implements Serializable{
     @Basic(optional = false)
     @Lob
     @Column(name = "estatus")
-<<<<<<< HEAD:quiz/src/main/groovy/com/quizwish/quiz/models/Quiz.groovy
     boolean estatus
-=======
-    byte[] estatus
-	
->>>>>>> autentication:quiz/src/main/groovy/com/quizwish/quiz/entity/Quiz.groovy
+
     @Basic(optional = false)
     @Column(name = "tipovista")
     String tipovista
