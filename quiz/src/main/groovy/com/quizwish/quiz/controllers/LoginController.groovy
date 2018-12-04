@@ -1,22 +1,14 @@
 package com.quizwish.quiz.controllers
 
 import org.apache.commons.logging.Log
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
+import org.apache.commons.logging.LogFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 
-import org.springframework.security.core.userdetails.UserDetails
-import com.quizwish.quiz.utils.SesionVariables
-
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
 
 @Controller
-//@RequestMapping(path = "/")
 class LoginController {
 	
 	private static final Log LOGGER = LogFactory.getLog(QuizController.class)
@@ -26,14 +18,17 @@ class LoginController {
 	
 	
 	@GetMapping("/login")
-	public String login() {
-		LOGGER.info("login --");
+	public String showLoginForm(Model model,
+		                        @RequestParam(name="error", defaultValue="", required=false)String error ) {
+		LOGGER.info("showLoginForm --");
+		model.addAttribute("error", error)
+		
 		return INDEX;
 	}
 	
-	@PostMapping("/loginsucces")
-	public String index(Model model) {
-		LOGGER.info("index -- ");
+	@GetMapping("/loginsucces")
+	public String loginCheck() {
+		LOGGER.info("loginCheck -- ");
 		return ADMIN;
 	}
 

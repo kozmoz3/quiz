@@ -42,16 +42,17 @@
 	                    	<div class="text-center m-b-md custom-login">
 	                    		<img src="http://pngimage.net/wp-content/uploads/2018/06/user-login-png-transparent-6.png" class="circle"/>
 	                    	</div>
-	                        <form action="#" th:action="@{/loginsucces}" method="POST" >
+	                        <form  th:action="@{/logincheck}" method="POST"  >
 	                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	                            <div class="form-group">
 	                                <label class="control-label" for="username">Correo</label>
-	                                <input type="text" placeholder="uncorreo@example.com" required value="" name="email" id="email" class="form-control">
+	                                <input type="text" placeholder="uncorreo@example.com" required value="" name="email" id="email"  class="form-control">
 	                            </div>
 	                            <div class="form-group">
 	                                <label class="control-label" for="password">Contraseña</label>
-	                                <input type="password" placeholder="******" required value="" name="password" id="password" class="form-control">
+	                                <input type="password" placeholder="******" required value="" name="password" id="password"  class="form-control">
 	                            </div>
+	                            <div th:if="${error != null}" class="alert-danger" role="alert">Invalid email or password</div>
 	                            <div class="checkbox login-checkbox">
 	                                <label><input type="checkbox" class="i-checks"> Recordar </label>
 	                            </div>
