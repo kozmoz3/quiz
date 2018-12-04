@@ -34,15 +34,17 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http)throws Exception{
-		LOGGER.info("METHOD : configure ")
+		LOGGER.info("METHOD : configure ")		
+		http.csrf().disable()
+		http.authorizeRequests().antMatchers("/register","/logout").permitAll()
 		http.authorizeRequests().antMatchers("/generales/**","/administrador/**","/estudiante/**").permitAll()
-		     .anyRequest().authenticated()
-		     .and()
-	    .formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
-	    .usernameParameter("email").passwordParameter("password")
-	    .defaultSuccessUrl("/loginsucces").permitAll()
-	    .and()
-	    .logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
-	    .permitAll();
+		http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ROOT')")
+		http.authorizeRequests().antMatchers("/me/**").access("hasAnyRole('ROLE_ALUMN')")
+		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/access-denied")
+		http.authorizeRequests().and().formLogin().loginProcessingUrl("/logincheck")
+		.loginPage("/login").defaultSuccessUrl("/loginsucces")
+		.failureUrl("/login?error=true")
+		.usernameParameter("email").passwordParameter("password")
+		.and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
 	}
 }
