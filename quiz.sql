@@ -33,16 +33,16 @@ CREATE TABLE `grupo` (
 -- ----------------------------
 -- Table structure for grupousuario
 -- ----------------------------
-DROP TABLE IF EXISTS `grupousuario`;
-CREATE TABLE `grupousuario` (
+DROP TABLE IF EXISTS `grupouser`;
+CREATE TABLE `grupouser` (
   `idrelaciongu` int(11) NOT NULL AUTO_INCREMENT,
-  `idusuario` int(11) NOT NULL,
+  `iduserfk` int(11) NOT NULL,
   `idgrupo` int(11) NOT NULL,
   PRIMARY KEY (`idrelaciongu`),
-  KEY `fk_grup_user` (`idusuario`),
+  KEY `fk_grup_user` (`iduserfk`),
   KEY `fk_grup_grup` (`idgrupo`),
   CONSTRAINT `fk_grup_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
-  CONSTRAINT `fk_grup_user` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`)
+  CONSTRAINT `fk_grup_user` FOREIGN KEY (`iduserfk`) REFERENCES `user` (`iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
@@ -101,10 +101,10 @@ CREATE TABLE `quiz` (
   `estatus` binary(255) NOT NULL,
   `tipovista` char(15) COLLATE utf8_spanish_ci NOT NULL,
   `fecha` datetime NOT NULL,
-  `idusuario` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
   PRIMARY KEY (`idquiz`),
-  KEY `idusuario` (`idusuario`),
-  CONSTRAINT `fk_user_quiz` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`)
+  KEY `idusuario` (`iduser`),
+  CONSTRAINT `fk_user_quiz` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
@@ -115,16 +115,16 @@ CREATE TABLE `quiz` (
 -- Table structure for quizgrupo
 -- ----------------------------
 DROP TABLE IF EXISTS `quizgrupo`;
-CREATE TABLE `quizgrupo` (
-  `idrelacionsg` int(11) NOT NULL AUTO_INCREMENT,
-  `idgrupo` int(11) NOT NULL,
-  `idquiz` int(11) NOT NULL,
-  PRIMARY KEY (`idrelacionsg`),
-  KEY `fk_qugr_quiz` (`idquiz`),
-  KEY `fk_qugr_grup` (`idgrupo`),
-  CONSTRAINT `fk_qugr_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
-  CONSTRAINT `fk_qugr_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  CREATE TABLE `quizgrupo` (
+    `idrelacionsg` int(11) NOT NULL AUTO_INCREMENT,
+    `idgrupo` int(11) NOT NULL,
+    `idquiz` int(11) NOT NULL,
+    PRIMARY KEY (`idrelacionsg`),
+    KEY `fk_qugr_quiz` (`idquiz`),
+    KEY `fk_qugr_grup` (`idgrupo`),
+    CONSTRAINT `fk_qugr_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
+    CONSTRAINT `fk_qugr_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of quizgrupo
@@ -149,17 +149,18 @@ INSERT INTO `roles` VALUES ('2', 'ROLE_ALUM');
 -- ----------------------------
 -- Table structure for usuario
 -- ----------------------------
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE `usuario` (
-  `idusuario` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `iduser` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
   `apellidos` varchar(40) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` char(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `correo` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `perfil` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `enable` BOOLEAN,
   `idrol` int(11) NOT NULL,
-  PRIMARY KEY (`idusuario`),
+  PRIMARY KEY (`iduser`),
   KEY `fk_user_rol` (`idrol`),
   CONSTRAINT `fk_user_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -167,4 +168,4 @@ CREATE TABLE `usuario` (
 -- ----------------------------
 -- Records of usuario
 -- ----------------------------
-INSERT INTO `usuario` VALUES ('1', 'Alfonso', 'Vásquez Cortes', null, 'alvaco_1993@hotmail.com', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', null, '1');
+INSERT INTO `user` VALUES ('1', 'Alfonso', 'Vásquez Cortes', null, 'alvaco_1993@hotmail.com', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', null, '1');
