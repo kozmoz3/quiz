@@ -1,8 +1,12 @@
 package com.quizwish.quiz.services
 
+<<<<<<< HEAD
 import org.springframework.data.domain.Example
 
 import com.quizwish.quiz.models.Quiz
+=======
+import com.quizwish.quiz.entity.Quiz
+>>>>>>> autentication
 
 interface QuizService {
 

@@ -1,4 +1,4 @@
-package com.quizwish.quiz.models
+package com.quizwish.quiz.entity
 
 import java.io.Serializable
 import java.util.Date
@@ -22,8 +22,9 @@ import javax.persistence.TemporalType
 import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlTransient
 
-@Entity
-@Table(name = "quiz", catalog = "quiz", schema = "")
+import com.quizwish.quiz.models.User
+
+
 @XmlRootElement
 /*@NamedQueries({
     @NamedQuery(name = "Quiz.findAll", query = "SELECT q FROM Quiz q")
@@ -41,47 +42,68 @@ import javax.xml.bind.annotation.XmlTransient
     , @NamedQuery(name = "Quiz.findByPassword", query = "SELECT q FROM Quiz q WHERE q.password = :password")
     , @NamedQuery(name = "Quiz.findByTipovista", query = "SELECT q FROM Quiz q WHERE q.tipovista = :tipovista")
     , @NamedQuery(name = "Quiz.findByFecha", query = "SELECT q FROM Quiz q WHERE q.fecha = :fecha")})*/
+
+@Entity
+@Table(name = "quiz", catalog = "quiz", schema = "")
 class Quiz implements Serializable{
+	
 	static final long serialVersionUID = 1L
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idquiz")
     Integer idquiz
+	
     @Basic(optional = false)
     @Column(name = "nombre")
     String nombre
+	
     @Basic(optional = false)
     @Lob
     @Column(name = "descripcion")
     String descripcion
+	
     @Column(name = "img")
     String img
+	
     @Basic(optional = false)
     @Column(name = "mostrar")
     String mostrar
+	
     @Basic(optional = false)
     @Column(name = "vista")
     String vista
+	
     @Basic(optional = false)
     @Lob
     @Column(name = "random")
+<<<<<<< HEAD:quiz/src/main/groovy/com/quizwish/quiz/models/Quiz.groovy
     boolean random
+=======
+    byte[] random
+	
+>>>>>>> autentication:quiz/src/main/groovy/com/quizwish/quiz/entity/Quiz.groovy
     @Basic(optional = false)
     @Column(name = "tiempo")
     @Temporal(TemporalType.TIME)
     Date tiempo
+	
     @Column(name = "venceini")
     @Temporal(TemporalType.DATE)
     Date venceini
+	
     @Column(name = "vencefin")
     @Temporal(TemporalType.DATE)
     Date vencefin
+	
     @Column(name = "intentos")
     String intentos
+	
     @Basic(optional = false)
     @Lob
     @Column(name = "preguntasc")
+<<<<<<< HEAD:quiz/src/main/groovy/com/quizwish/quiz/models/Quiz.groovy
     boolean preguntasc
     @Basic(optional = false)
     @Lob
@@ -111,30 +133,81 @@ class Quiz implements Serializable{
     @Lob
     @Column(name = "isintentos")
     boolean isintentos
+=======
+    byte[] preguntasc
+	
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "respuestac")
+    byte[] respuestac
+	
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "preguntasi")
+    byte[] preguntasi
+	
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "calificacion")
+    byte[] calificacion
+	
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "grafico")
+    byte[] grafico
+	
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "istiempo")
+    byte[] istiempo
+	
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "mensajesop")
+    byte[] mensajesop
+	
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "isintentos")
+    byte[] isintentos
+	
+>>>>>>> autentication:quiz/src/main/groovy/com/quizwish/quiz/entity/Quiz.groovy
     @Column(name = "showfechaini")
     @Temporal(TemporalType.DATE)
     Date showfechaini
+	
     @Column(name = "showfechafin")
     @Temporal(TemporalType.DATE)
     Date showfechafin
+	
     @Column(name = "password")
     String password
+	
     @Basic(optional = false)
     @Lob
     @Column(name = "estatus")
+<<<<<<< HEAD:quiz/src/main/groovy/com/quizwish/quiz/models/Quiz.groovy
     boolean estatus
+=======
+    byte[] estatus
+	
+>>>>>>> autentication:quiz/src/main/groovy/com/quizwish/quiz/entity/Quiz.groovy
     @Basic(optional = false)
     @Column(name = "tipovista")
     String tipovista
+	
     @Basic(optional = false)
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     Date fecha
-    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
+	
+    @JoinColumn(name = "iduser", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
-    Usuario idusuario
+    User iduser
+	
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
     List<Questions> questionsList
+	
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
     List<Quizgrupo> quizgrupoList
 
