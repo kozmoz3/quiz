@@ -35,11 +35,13 @@ class LoginController {
 	
 	@PreAuthorize("hasRole('ROLE_ROOT') or hasRole('ROLE_ALUM') ")
 	@GetMapping("/loginsucces")
-	public String loginCheck() {
+	public String loginCheck(Model model) {
 		LOGGER.info("METHOD : loginCheck --  session "+sessionUser.userSessionAll().getIdrol().idrol );
-		if(sessionUser.userSessionAll().getIdrol().idrol == 1)
+		if(sessionUser.userSessionAll().getIdrol().idrol == 1) {
+			def username = sessionUser.getNameSession();
+			model.addAttribute("username", username);
 		return ADMIN;
-		else
+		}else
 			return INDEX;
 	}
 

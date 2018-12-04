@@ -15,6 +15,10 @@ class SessionUser {
 	@Qualifier("userRepository")
 	UserRepository userRepository;
 	
+	public String getNameSession() {
+		return userSessionAll().getNombre();
+	}
+	
 	public com.quizwish.quiz.models.User userSessionAll(){
 		User userSesion =  session();
         return userRepository.findByCorreo( userSesion.getUsername());
