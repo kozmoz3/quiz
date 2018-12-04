@@ -34,27 +34,27 @@ class UserService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-		LOGGER.info("loadUserByUsername --> ");
+		LOGGER.info("METHOD : loadUserByUsername -- ");
 		com.quizwish.quiz.models.User user = userRepository.findByCorreo(correo);
 		List<GrantedAuthority> authorities = buildAuthorities(user);
 		
-		LOGGER.info("loadUserByUsername --> buildUser "+buildUser(user, authorities));
+		LOGGER.info("METHOD : loadUserByUsername -- buildUser "+buildUser(user, authorities));
 		return buildUser(user, authorities);
 	}
 
 	private User buildUser(com.quizwish.quiz.models.User user, List<GrantedAuthority> authorities) {
-		LOGGER.info("buildUser --> ");
-		LOGGER.info("buildUser --> usuario = "+ user.getNombre() + " authorities = "+authorities +" User = ");
+		LOGGER.info("METHOD : buildUser -- ");
+		LOGGER.info("METHOD : buildUser -- usuario = "+ user.getNombre() + " authorities = "+authorities +" User = ");
 		return new org.springframework.security.core.userdetails.User(user.getCorreo(), user.getPassword(), user.isEnable(),
 			                                                          true, true, true, authorities);
 	}
 	
 	private List<GrantedAuthority> buildAuthorities(com.quizwish.quiz.models.User user){
-		LOGGER.info("buildAuthorities -->");
+		LOGGER.info("METHOD : buildAuthorities --");
 		Set<GrantedAuthority> auths = new HashSet<GrantedAuthority> (); 
 		Rol rol = rolRepository.findByIdrol(user.getIdrol().idrol)
 		auths.add(new SimpleGrantedAuthority(rol.getDescripcion()));
-		LOGGER.info("buildAuthorities -->  rol de usuario "+ rol.getDescripcion() + " auths "+ auths+ " ArrayList<GrantedAuthority> "+ new ArrayList<GrantedAuthority>(auths));
+		LOGGER.info("METHOD : buildAuthorities --  rol de usuario "+ rol.getDescripcion() + " auths "+ auths+ " ArrayList<GrantedAuthority> "+ new ArrayList<GrantedAuthority>(auths));
 		return new ArrayList<GrantedAuthority>(auths);
 	}
 }

@@ -20,7 +20,7 @@ class LoginController {
 	@GetMapping("/login")
 	public String showLoginForm(Model model,
 		                        @RequestParam(name="error", defaultValue="", required=false)String error ) {
-		LOGGER.info("showLoginForm --");
+		LOGGER.info("METHOD : showLoginForm --");
 		model.addAttribute("error", error)
 		
 		return INDEX;
@@ -28,7 +28,7 @@ class LoginController {
 	
 	@GetMapping("/loginsucces")
 	public String loginCheck() {
-		LOGGER.info("loginCheck -- ");
+		LOGGER.info("METHOD : loginCheck -- ");
 		return ADMIN;
 	}
 
