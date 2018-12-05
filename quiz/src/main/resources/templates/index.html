@@ -4,13 +4,17 @@
   	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<title>Needles</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <!--<link rel="stylesheet" th:href="@{/home/css/themify-icons.css}">-->
+  	<title>CrystalS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        
     <link rel="stylesheet" th:href="@{/home/css/animate.css}">
-  	<link rel="stylesheet" th:href="@{/home/css/main.css}">
     <link rel="stylesheet" th:href="@{/home/css/owl.carousel.min.css}">
+    
+    <link rel="stylesheet" th:href="@{/home/css/font-awesome.min.css}" >
+    <link rel="stylesheet" th:href="@{/home/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/home/css/ionicons.min.css}">
+    
+    <link rel="stylesheet" th:href="@{/home/css/main.css}">
   </head>
   <body>
     <header class="header_area animated">
@@ -19,18 +23,19 @@
                 <div class="col-12 col-lg-10">
                     <div class="menu_area">
                         <nav class="navbar navbar-expand-lg navbar-light">
-                            <a class="navbar-brand" href="#">PullAndDrop</a>
+                            <a class="navbar-brand" href="#">CrystalS</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ca-navbar" aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                             <div class="collapse navbar-collapse" id="ca-navbar">
                                 <ul class="navbar-nav ml-auto" id="nav">
                                     <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#screenshot">Screenshot</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#screenshot">Screenshots</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#precios">Precios</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
                                 </ul>
                                 <div class="sing-up-button d-lg-none">
-                                    <a href="#">Iniciar sesión</a>
+                                    <a th:href="@{/login}">Iniciar sesión</a>
                                 </div>
                             </div>
                         </nav>
@@ -38,7 +43,7 @@
                 </div>
                 <div class="col-12 col-lg-2">
                     <div class="sing-up-button d-none d-lg-block">
-                        <a href="#">Iniciar sesión</a>
+                        <a th:href="@{/login}">Iniciar sesión</a>
                     </div>
                 </div>
             </div>
@@ -73,27 +78,16 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-sm-6 col-lg-4">
+                <div class="col-12 col-sm-6 col-lg-5">
                     <div class="single-feature">
-                        <i class="ti-user" aria-hidden="true"></i>
-                        <h5>Nuestra visión</h5>
-                        <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <img th:src="@{/home/img/logo.png}" style="width: 80%; height: 80%;" alt="">
                     </div>
                 </div>
-                <!-- Single Feature Start -->
-                <div class="col-12 col-sm-6 col-lg-4">
+                <div class="col-12 col-sm-6 col-lg-7">
                     <div class="single-feature">
-                        <i class="ti-pulse" aria-hidden="true"></i>
-                        <h5>Fast and Simple</h5>
-                        <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
-                <!-- Single Feature Start -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="single-feature">
-                        <i class="ti-dashboard" aria-hidden="true"></i>
-                        <h5>Clean Code</h5>
-                        <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                        <h5>¿Quienes somos?</h5>
+                        <p>Una descripcion larga que commprenda la visión y mision.</p>
                     </div>
                 </div>
             </div>
@@ -114,28 +108,28 @@
                 <div class="col-12 col-md-4">
                     <div class="single-special text-center wow fadeInUp" data-wow-delay="0.2s">
                         <div class="single-icon">
-                            <i class="ti-mobile" aria-hidden="true"></i>
+                            <i class="fa fa-ravelry" aria-hidden="true"></i>
                         </div>
-                        <h4>Easy to use</h4>
-                        <p>We build pretty complex tools and this allows us to take designs and turn them into functional quickly and easily</p>
+                        <h4>Aplicaciones a la medida</h4>
+                        <p>Aplicaciones customizadas y adaptables</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="single-special text-center wow fadeInUp" data-wow-delay="0.4s">
                         <div class="single-icon">
-                            <i class="ti-ruler-pencil" aria-hidden="true"></i>
+                            <i class="fa fa-diamond" aria-hidden="true"></i>
                         </div>
-                        <h4>Powerful Design</h4>
-                        <p>We build pretty complex tools and this allows us to take designs and turn them into functional quickly and easily</p>
+                        <h4>CrystalS</h4>
+                        <p>Un poderoso generador de cuestionarios oline para realizar examenes publicos o privados.</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="single-special text-center wow fadeInUp" data-wow-delay="0.6s">
                         <div class="single-icon">
-                            <i class="ti-settings" aria-hidden="true"></i>
+                            <i class="fa fa-connectdevelop" aria-hidden="true"></i>
                         </div>
-                        <h4>Customizability</h4>
-                        <p>We build pretty complex tools and this allows us to take designs and turn them into functional quickly and easily</p>
+                        <h4>Otra cosa</h4>
+                        <p>Otras cosas que deberia poner :S</p>
                     </div>
                 </div>
             </div>
@@ -156,14 +150,11 @@
                             <div class="app-download-area">
                                 <div class="app-download-btn wow fadeInUp" data-wow-delay="0.2s">
                                     <a href="#">
-                                        <i class="fa fa-android"></i>
-                                        <p class="mb-0"><span>available on</span> Google Store</p>
-                                    </a>
-                                </div>
-                                <div class="app-download-btn wow fadeInDown" data-wow-delay="0.4s">
-                                    <a href="#">
-                                        <i class="fa fa-apple"></i>
-                                        <p class="mb-0"><span>available on</span> Apple Store</p>
+                                        <i class="fa fa-internet-explorer" aria-hidden="true"></i>
+                                        <i class="fa fa-firefox" aria-hidden="true"></i>
+                                        <i class="fa fa-chrome" aria-hidden="true"></i>
+                                        <i class="fa fa-opera" aria-hidden="true"></i>
+                                        <p class="mb-0"><span>available on</span></p>
                                     </a>
                                 </div>
                             </div>
@@ -179,7 +170,7 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="section-heading">
-                        <h2>Vista</h2>
+                        <h2>Screenshots</h2>
                         <div class="line-shape"></div>
                     </div>
                 </div>
@@ -206,6 +197,112 @@
                         </div>
                         <div class="single-shot">
                             <img th:src="@{/home/img/app-3.jpg}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing-plane-area section_padding_100_70 clearfix" id="precios">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <h2>Nustros precios</h2>
+                        <div class="line-shape"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-price-plan text-center">
+                        <div class="package-plan">
+                            <h5>Esmeralda (Gratuito)</h5>
+                            <div class="ca-price d-flex justify-content-center">
+                                <span>$</span>
+                                <h4>0</h4>
+                            </div>
+                        </div>
+                        <div class="package-description">
+                            <p>2 meses gratuito</p>
+                            <p>10 Quiz</p>
+                            <p>50 preguntas por quiz</p>
+                            <p>Soporte</p>
+                            <p>20 alumnos registrados</p>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-price-plan text-center">
+                        <div class="package-plan">
+                            <h5>Zafiro</h5>
+                            <div class="ca-price d-flex justify-content-center">
+                                <span>$</span>
+                                <h4>49</h4>
+                            </div>
+                        </div>
+                        <div class="package-description">
+                            <p>Pago por mes</p>
+                            <p>10 quiz</p>
+                            <p>100 preguntas por quiz</p>
+                            <p>Soporte</p>
+                            <p>Sin anuncios</p>
+                            <p>50 usuarios registrados</p>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-price-plan active text-center">
+                        <div class="package-plan">
+                            <h5>Rubí</h5>
+                            <div class="ca-price d-flex justify-content-center">
+                                <span>$</span>
+                                <h4>69</h4>
+                            </div>
+                        </div>
+                        <div class="package-description">
+                            <p>Pago anual</p>
+                            <p>Quiz ilimitados</p>
+                            <p>200 preguntas por quiz</p>
+                            <p>Soporte preferente</p>
+                            <p>Importación por archivo</p>
+                            <p>Exportación por archivo</p>
+                            <p>Sin anuncios</p>
+                            <p>100 usuarios registrados</p>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-price-plan text-center">
+                        <div class="package-plan">
+                            <h5>Diamante</h5>
+                            <div class="ca-price d-flex justify-content-center">
+                                <span>$</span>
+                                <h4>99</h4>
+                            </div>
+                        </div>
+                        <div class="package-description">
+                            <p>Pago anual</p>
+                            <p>Quiz ilimitados</p>
+                            <p>300 preguntas por quiz</p>
+                            <p>Soporte preferente</p>
+                            <p>Importación por archivo</p>
+                            <p>Exportación por archivo</p>
+                            <p>Sin anuncios</p>
+                            <p>150 usuarios registrados</p>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#">Seleccionar</a>
                         </div>
                     </div>
                 </div>
@@ -265,11 +362,10 @@
             </div>
         </div>
     </section>
-
     <footer>
     	<div>Todos los derechos reservados 2016</div>
     </footer>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script th:src="@{/administrador/js/vendor/jquery-1.12.4.min.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script type="text/javascript" th:src="@{/home/js/plugins.js}"></script>
