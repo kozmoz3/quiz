@@ -1,8 +1,10 @@
 package com.quizwish.quiz.services
 
-import org.springframework.data.domain.Example
 
-import com.quizwish.quiz.models.Quiz
+import org.hibernate.criterion.Example
+
+import com.quizwish.quiz.entity.Quiz
+
 
 interface QuizService {
 
@@ -16,7 +18,5 @@ interface QuizService {
 			
 	def deleteQuiz(Integer id);
 			
-	def getByCriteria(Example<Quiz> example);
 	
-	def getByCriteriaList(Example<Quiz> example);
 }

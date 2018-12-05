@@ -351,3 +351,13 @@ progress[value] {
 		}
 
 
+.page-lo-position {
+			    padding: 20px 0;
+			    position: relative;
+			    margin: 0 auto;
+			    width: 70%;
+			}
+			.page-lo-position, .error-pagewrap:before {
+			    vertical-align: middle;
+			    display: inline-block;
+			}

@@ -1,0 +1,118 @@
+.single-icon > i {
+  font-size: 36px;
+  color: #fb397d;
+}
+
+.single-special > h4 {
+  font-size: 22px;
+  color: $principal;
+}
+
+.single-icon {
+  margin-bottom: 25px;
+}
+
+.single-special {
+  > h4 {
+    font-size: 22px;
+    color: $principal;
+    margin-bottom: 15px;
+  }
+  border: 1px solid #eff2f6;
+  padding: 40px;
+  border-radius: 40px 40px 40px 0px;
+  -webkit-transition-duration: 800ms;
+  -o-transition-duration: 800ms;
+  transition-duration: 800ms;
+  margin-bottom: 30px;
+}
+
+.special_description_content > h2 {
+  color: $principal;
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+.single-special {
+  &:hover {
+    -webkit-box-shadow: 0 10px 90px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 90px rgba(0, 0, 0, 0.08);
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.app-download-area {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-preferred-size: 1;
+  flex-basis: 1;
+  margin-top: 50px;
+}
+
+.app-download-btn {
+  a {
+    border: 1px solid #ddd;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 15px 30px;
+    border-radius: 30px 30px 30px 0;
+    -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  &.active a {
+    border-color: transparent;
+    background-color: #fb397d;
+  }
+  a {
+    &:hover {
+      border-color: transparent;
+      background-color: #fb397d;
+    }
+    i {
+      color: #47425d;
+      font-size: 24px;
+      margin-right: 15px;
+      -webkit-transition-duration: 500ms;
+      -o-transition-duration: 500ms;
+      transition-duration: 500ms;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1;
+      -webkit-transition-duration: 500ms;
+      -o-transition-duration: 500ms;
+      transition-duration: 500ms;
+      span {
+        font-size: 12px;
+        display: block;
+      }
+    }
+  }
+  &:first-child {
+    margin-right: 20px;
+  }
+  a:hover i {
+    color: #fff;
+  }
+  &.active a {
+    i, p {
+      color: #fff;
+    }
+  }
+  a:hover p {
+    color: #fff;
+  }
+}

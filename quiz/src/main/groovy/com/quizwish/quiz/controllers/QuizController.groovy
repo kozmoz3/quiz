@@ -12,17 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.servlet.ModelAndView
-import org.springframework.data.domain.Example
 
-import com.quizwish.quiz.models.Quiz
-import com.quizwish.quiz.models.Usuario
-import com.quizwish.quiz.models.jmodelos.MQuiz
+import com.quizwish.quiz.entity.Quiz
 import com.quizwish.quiz.services.QuizService
 import com.quizwish.quiz.utils.SesionVariables
-import com.quizwish.quiz.utils.ToExampleQuery
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
-import java.text.SimpleDateFormat
 import java.util.Map
 
 @Controller
@@ -52,30 +47,9 @@ class QuizController {
 	 }
 	 
 	 @PostMapping("/simuladores/add")
-	 def addQuiz(@ModelAttribute("quiz")MQuiz quiz, Model model) {
-		 
-		 Quiz newQuiz = new Quiz( quiz.getNombre(), quiz.getDescripcion(), quiz.getMostrarall() ? "todos" : quiz.getShowonly(),
-			 quiz.getVistaall() ? "al" : "wz", quiz.getRandom(), 
-			 quiz.getTiempo() ? quiz.getShowtimeonly() : null, ///time
-			 quiz.getPreguntasc(), quiz.getRespuestac(), quiz.getPreguntasi(),
-			 quiz.getCalificacion(), quiz.getGrafico(),	 quiz.getTiemporesponse(),
-			 quiz.getMensajesop(), quiz.getIntentosall(), true,
-			 quiz.getTipovista() ? "publico" : "privado", new Date() );
-		 
-		if(!"".equals( quiz.getVenceini()) && !"".equals( quiz.getVencefin()) ) {
-			newQuiz.setVenceini( toDate( quiz.getVenceini() ) )
-			newQuiz.setVencefin( toDate( quiz.getVencefin() ) )
-		}
-		if(!quiz.getIntentosall() ) {
-			newQuiz.setShowfechaini( toDate(quiz.getShowfechaini()) )
-			newQuiz.setShowfechafin( toDate(quiz.getShowfechafin()) )
-		}
-		
-		newQuiz.setPassword(quiz.getPassword())		
-		newQuiz.setIdusuario( SesionVariables.getUserlog() )
-		System.out.println(SesionVariables.getUserlog().getIdusuario());
-		//return quizService.setQuiz(newQuiz)
-		return SHOW;
+	 def addQuiz(@RequestParam Map<String,Object> quiz, Model model) {
+		 System.out.println(quiz.toMapString())
+		 return SHOW
 	 }
 	  
 	@PostMapping("/saveQuiz")
@@ -88,9 +62,5 @@ class QuizController {
 	@GetMapping("/simuladores/preguntas/add")
 	public String simuladoresPreguntasAdd(Model model) {
 		return "admin/components/simuladores/questions";
-	}
-	
-	def toDate(String date) {
-		return new SimpleDateFormat("dd/MM/yyyy").parse(date);
 	}
 }

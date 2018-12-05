@@ -1,4 +1,4 @@
-package com.quizwish.quiz.models
+package com.quizwish.quiz.entity
 
 import java.io.Serializable
 import javax.persistence.Basic
@@ -24,14 +24,17 @@ import javax.xml.bind.annotation.XmlRootElement
 class Quizgrupo implements Serializable {
 
     static final long serialVersionUID = 1L
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idrelacionsg")
     Integer idrelacionsg
+	
     @JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo")
     @ManyToOne(optional = false)
     Grupo idgrupo
+	
     @JoinColumn(name = "idquiz", referencedColumnName = "idquiz")
     @ManyToOne(optional = false)
     Quiz idquiz

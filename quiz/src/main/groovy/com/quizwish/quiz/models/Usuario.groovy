@@ -19,8 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlTransient
 
 
-@Entity
-@Table(name = "usuario", catalog = "quiz", schema = "")
+
 @XmlRootElement
 /*@NamedQueries({
 	@NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"), 
@@ -31,6 +30,11 @@ import javax.xml.bind.annotation.XmlTransient
 	, @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")
 	, @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")
 	, @NamedQuery(name = "Usuario.findByPerfil", query = "SELECT u FROM Usuario u WHERE u.perfil = :perfil")})*/
+class Usuario{
+	
+}
+/*@Entity
+@Table(name = "usuario", catalog = "quiz", schema = "")
 class Usuario implements Serializable {
 	static final long serialVersionUID = 1L
 	@Id
@@ -92,4 +96,4 @@ class Usuario implements Serializable {
     }
 	
 	
-}
+}*/

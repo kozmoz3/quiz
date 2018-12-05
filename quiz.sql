@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-29 11:57:28
+Date: 2018-12-04 13:29:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,32 +21,32 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `grupo`;
 CREATE TABLE `grupo` (
   `idgrupo` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idgrupo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of grupo
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for grupousuario
+-- Table structure for grupouser
 -- ----------------------------
-DROP TABLE IF EXISTS `grupousuario`;
-CREATE TABLE `grupousuario` (
+DROP TABLE IF EXISTS `grupouser`;
+CREATE TABLE `grupouser` (
   `idrelaciongu` int(11) NOT NULL AUTO_INCREMENT,
-  `idusuario` int(11) NOT NULL,
+  `iduserfk` int(11) NOT NULL,
   `idgrupo` int(11) NOT NULL,
   PRIMARY KEY (`idrelaciongu`),
-  KEY `fk_grup_user` (`idusuario`),
+  KEY `fk_grup_user` (`iduserfk`),
   KEY `fk_grup_grup` (`idgrupo`),
   CONSTRAINT `fk_grup_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
-  CONSTRAINT `fk_grup_user` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  CONSTRAINT `fk_grup_user` FOREIGN KEY (`iduserfk`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of grupousuario
+-- Records of grupouser
 -- ----------------------------
 
 -- ----------------------------
@@ -55,17 +55,17 @@ CREATE TABLE `grupousuario` (
 DROP TABLE IF EXISTS `questions`;
 CREATE TABLE `questions` (
   `idquestion` int(11) NOT NULL AUTO_INCREMENT,
-  `answers` longtext COLLATE utf8_spanish_ci NOT NULL,
-  `message` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `options` longtext COLLATE utf8_spanish_ci NOT NULL,
-  `question` longtext COLLATE utf8_spanish_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `answers` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `message` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `options` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `question` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `score` smallint(6) NOT NULL,
   `idquiz` int(11) NOT NULL,
   PRIMARY KEY (`idquestion`),
   KEY `fk_ques_quiz` (`idquiz`),
   CONSTRAINT `fk_ques_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of questions
@@ -77,35 +77,35 @@ CREATE TABLE `questions` (
 DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE `quiz` (
   `idquiz` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
-  `img` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `mostrar` char(10) COLLATE utf8_spanish_ci NOT NULL,
-  `vista` char(2) COLLATE utf8_spanish_ci NOT NULL,
-  `random` binary(255) NOT NULL,
+  `nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `img` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `mostrar` char(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `vista` char(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `random` tinyint(1) NOT NULL,
   `tiempo` time NOT NULL,
   `venceini` date DEFAULT NULL,
   `vencefin` date DEFAULT NULL,
-  `intentos` char(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `preguntasc` binary(255) NOT NULL,
-  `respuestac` binary(255) NOT NULL,
-  `preguntasi` binary(255) NOT NULL,
-  `calificacion` binary(255) NOT NULL,
-  `grafico` binary(255) NOT NULL,
-  `istiempo` binary(255) NOT NULL,
-  `mensajesop` binary(255) NOT NULL,
-  `isintentos` binary(255) NOT NULL,
+  `intentos` char(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `preguntasc` tinyint(1) NOT NULL,
+  `respuestac` tinyint(1) NOT NULL,
+  `preguntasi` tinyint(1) NOT NULL,
+  `calificacion` tinyint(1) NOT NULL,
+  `grafico` tinyint(1) NOT NULL,
+  `istiempo` tinyint(1) NOT NULL,
+  `mensajesop` tinyint(1) NOT NULL,
+  `isintentos` tinyint(1) NOT NULL,
   `showfechaini` date DEFAULT NULL,
   `showfechafin` date DEFAULT NULL,
-  `password` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estatus` binary(255) NOT NULL,
-  `tipovista` char(15) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estatus` tinyint(1) NOT NULL,
+  `tipovista` char(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fecha` datetime NOT NULL,
-  `idusuario` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
   PRIMARY KEY (`idquiz`),
-  KEY `idusuario` (`idusuario`),
-  CONSTRAINT `fk_user_quiz` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  KEY `idusuario` (`iduser`),
+  CONSTRAINT `fk_user_quiz` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quiz
@@ -124,7 +124,7 @@ CREATE TABLE `quizgrupo` (
   KEY `fk_qugr_grup` (`idgrupo`),
   CONSTRAINT `fk_qugr_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
   CONSTRAINT `fk_qugr_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quizgrupo
@@ -136,9 +136,9 @@ CREATE TABLE `quizgrupo` (
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `idrol` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idrol`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of roles
@@ -147,24 +147,26 @@ INSERT INTO `roles` VALUES ('1', 'ROLE_ROOT');
 INSERT INTO `roles` VALUES ('2', 'ROLE_ALUM');
 
 -- ----------------------------
--- Table structure for usuario
+-- Table structure for user
 -- ----------------------------
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE `usuario` (
-  `idusuario` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `apellidos` varchar(40) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `telefono` char(10) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `correo` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
-  `password` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `perfil` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `iduser` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `apellidos` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` char(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `correo` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `username` varchar(60) NOT NULL,
+  `password` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `perfil` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `enable` tinyint(1) NOT NULL,
   `idrol` int(11) NOT NULL,
-  PRIMARY KEY (`idusuario`),
+  PRIMARY KEY (`iduser`),
   KEY `fk_user_rol` (`idrol`),
   CONSTRAINT `fk_user_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of usuario
+-- Records of user
 -- ----------------------------
-INSERT INTO `usuario` VALUES ('1', 'Alfonso', 'Vásquez Cortes', null, 'alvaco_1993@hotmail.com', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', null, '1');
+INSERT INTO `user` VALUES ('1', 'Alfonso', 'Vásquez Cortes', null, 'alvaco_1993@hotmail.com', '', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', null, '1', '1');

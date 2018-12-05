@@ -1,0 +1,29 @@
+/*****************************************/
+/********* Formularios 						********/
+/*****************************************/
+.address-text > p, .phone-text > p, .email-text > p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.address-text > p > span, .phone-text > p > span, .email-text > p > span {
+  color: $principal;
+}
+
+.footer-contact-area {
+  .line-shape {
+    margin-left: 0;
+  }
+  .heading-text {
+    > p {
+      margin-top: 50px;
+    }
+    margin-bottom: 50px;
+  }
+}
+
+#name, #email {
+  font-size: 18px;
+  padding: 15px 15px;
+  border-radius: 25px 25px 25px 25px;
+}
