@@ -19,6 +19,7 @@ class LoginController {
 	private static final Log LOGGER = LogFactory.getLog(QuizController.class)
 	
 	static final def INDEX = "login";
+	static final def STUDENT = "student/index";
 	static final def ADMIN = "admin/index";
 	
 	@Autowired
@@ -44,7 +45,7 @@ class LoginController {
 			model.addAttribute("username", username);
 		return ADMIN;
 		}else
-			return INDEX;
+			return STUDENT;
 	}
 
 }
