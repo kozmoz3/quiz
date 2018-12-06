@@ -39,7 +39,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/","/register","/logout").permitAll()
 		http.authorizeRequests().antMatchers("/generales/**","/administrador/**","/estudiante/**","/home/**").permitAll()
 		http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ROOT')")
-		http.authorizeRequests().antMatchers("/me/**").access("hasAnyRole('ROLE_ALUMN')")
+		http.authorizeRequests().antMatchers("/me/**").access("hasAnyRole('ROLE_ALUM')")
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/access-denied")
 		http.authorizeRequests().and().formLogin().loginProcessingUrl("/logincheck")
 		.loginPage("/login").defaultSuccessUrl("/loginsucces")

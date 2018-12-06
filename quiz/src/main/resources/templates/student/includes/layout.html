@@ -1,5 +1,41 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<div th:fragment="top">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- <div class="sidebar-header">
+						<a href="index.html">
+							<img class="main-logo" src="/home/img/logadmin.png" alt="">
+						</a>
+					</div>-->
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item">
+							<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+								<img src="/administrador/img/product/pro4.jpg" alt="">
+								<span class="admin-name">Daniel</span>
+								<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+							</a>
+							<ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+								<li>
+									<a th:href="@{/me/profile}" class="nav-link">Salir</a>
+								</li>
+								<li>
+									<a th:href="@{/logout}" class="nav-link">Salir</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 	</div>
 	<div th:fragment="footer">
 	</div>
