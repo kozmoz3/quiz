@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.multipart.MultipartFile
 
 import com.quizwish.quiz.entity.Quiz
-import com.quizwish.quiz.services.QuizServiceImp
+
 
 @Controller
 class ActionsController {
 	
 	private static String filePath = System.getProperty("catalina.home") + File.separator + "webapps"+File.separator+"images"+File.separator;
 	
-	@Autowired
+	/*@Autowired
 	@Qualifier("serviceQuiz")
 	QuizServiceImp serviceQuiz
-
+*/
 	/*@PostMapping("/admin/actions/simuladores/add")
 	def uploadFile(
 		@RequestParam("img")MultipartFile img, 
