@@ -24,7 +24,7 @@ class UsuarioServiceImp implements UsuarioService{
 	@Override
 	def getUsuarioById(Integer id) {
 		Optional<User> usuario = userRepository.findById(id)
-		return usuario.isPresent() ? usuario : new User()
+		return usuario.isPresent() ? usuario.get() : new User()
 	}
 
 	@Override

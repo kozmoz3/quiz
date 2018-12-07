@@ -14,30 +14,30 @@
 				<div class="content-error">
 					<div class="hpanel">
 	                    <div class="panel-body">
-	                    	<form  method="POST"  >
+	                    	<form  method="POST" th:action="@{/register}" >
 	                    		<div class="row">
 	                    			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 			                            <div class="form-group">
 			                                <label class="control-label" for="username">Nombre</label>
-			                                <input type="text" placeholder="Nombre" required name="name" id="name"  class="form-control">
+			                                <input type="text" placeholder="Nombre" required name="nombre" id="nombre"  class="form-control">
 			                            </div>
 			                            <div class="form-group">
 			                                <label class="control-label" for="password">Apellidos</label>
-			                                <input type="text" placeholder="Apellidos" required name="lastname" id="lastname"  class="form-control">
+			                                <input type="text" placeholder="Apellidos" required name="apellidos" id="apellidos"  class="form-control">
 			                            </div>
 			                            <div class="form-group">
 			                                <label class="control-label" for="username">Teléfono (opcional)</label>
-			                                <input type="tel" placeholder="0123456789" required name="phone" id="phone"  class="form-control">
+			                                <input type="tel" placeholder="0123456789" name="telefono" id="telefono"  class="form-control">
 			                            </div>
 	                    			</div>
 	                    			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 	                    				<div class="form-group">
-			                                <label class="control-label" for="username">Usuario</label>
-			                                <input type="text" placeholder="Usuario" required name="user" id="user"  class="form-control">
+			                                <label class="control-label" for="username">Usuario (opcional)</label>
+			                                <input type="text" placeholder="Usuario" name="username" id="username"  class="form-control">
 			                            </div>
 			                            <div class="form-group">
 			                                <label class="control-label" for="username">Correo</label>
-			                                <input type="email" placeholder="uncorreo@example.com" required name="email" id="email"  class="form-control">
+			                                <input type="email" placeholder="uncorreo@example.com" required name="correo" id="correo"  class="form-control">
 			                            </div>
 			                            <div class="form-group">
 			                                <label class="control-label" for="password">Contraseña</label>
@@ -48,10 +48,18 @@
 	                    		</div>
 	                    	</form>
 	                    </div>
+	                    <div th:if="${type == 'post' } ">
+	                    	<div th:if="${estatus == 'ok' } ">
+	                    		<div class="alert alert-success" role="alert">
+	                    			<p>Bienvenido, <span th:text="${newuser.nombre + ' ' + newuser.apellidos}"></span>. Para acceder, has click <a th:href="@{/login}">aquí</a></p>
+	                    		</div>
+	                    	</div>
+	                    </div>
 	                </div>
 				</div>
 			</div>   
 	    </div>	    
 	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	    <script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
 	</body>
 </html>
