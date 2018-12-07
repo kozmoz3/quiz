@@ -3,6 +3,9 @@
 	<title>Index</title>
 	<meta charset="utf-8">
 	<head th:replace="student/includes/heads :: heads"></head>
+	<style type="text/css">
+		
+	</style>
 	<body>
 		<nav th:replace="student/includes/layout :: top"></nav>
 		<section class="container">
@@ -24,14 +27,14 @@
 									<tr>
 										<td>{{ Nombre simulador }}</td>
 										<td>2</td>
-										<td><input type="button" value="Activo" class="btn btn-success"/></td>
+										<td class="active-ck">Activo</td>
 										<td><a th:href="@{/me/realize}">Realizar</a></td>
 										<td><a th:href="@{/me/result}">Resultados</a></td>
 									</tr>
 									<tr>
 										<td>{{ Nombre simulador }}</td>
 										<td>10</td>
-										<td><input type="button" value="Inactivo" class="btn btn-danger"/></td>
+										<td class="inactive-ck">Inactivo</td>
 										<td><a href="#">Realizar</a></td>
 										<td><a href="#">Resultados</a></td>
 									</tr>
@@ -41,7 +44,8 @@
 					</div>
 				</div>
 			</div>
-		</section>	
+		</section>
+		<footer th:replace="student/includes/layout :: footer"></footer>
 		<div th:replace="student/includes/scripts :: scripts"></div>
 	</body>
 </html>

@@ -128,11 +128,12 @@ $("#btnnextFin").click(function(){
 		getQuestion( lista[position].options, lista[position].type, lista[position].q, position, false );
 	}else{
 		setReact( position +1 );
-		var resp = confirm("¿Está seguro de querer terminar el Quiz?");
-		if(resp == true){
+		getOptionalMessage( "Quiz", "¿Está seguro de querer terminar el Quiz?", function(){
 			sendParse();
 			clearInterval(countTimer);
-		}
+		}, function(){
+			getNotification("Continúa","warning");
+		});
 	}
 });
 
@@ -149,10 +150,10 @@ function setReactInSelected( position ){
 		$.each(listaDivs,function(key,value){
 			if( $(value).is(":checked") ) lstresp[position ].answers.push(key);
 		});
-		console.log("Había seleccionadas");
+		//console.log("Había seleccionadas");
 	}else{
 		//if( position == 0) position++;
-		console.log("No había seleccionadas");
+		//console.log("No había seleccionadas");
 		$.each(lstresp[position].answers,function(key,value){ lstresp[position].answers.pop(); });
 	}
 	//getQuestion( lista[position].options, lista[position].type, lista[position].q, position, false );
@@ -196,7 +197,7 @@ function countDown(){
 		sendParse();
 	}else segundos--;
 }
-var countTimer = setInterval(countDown,1000);
+//var countTimer = setInterval(countDown,1000);
 
 function sendParse(){
 	var cadena = "";
@@ -214,13 +215,82 @@ function sendParse(){
 }
 
 $("#btnfinlist").click(function(){
-	var resp = confirm("¿Está seguro de querer terminar el Quiz?");
-	if(resp == true){
+	getOptionalMessage( "Quiz", "¿Está seguro de querer terminar el Quiz?", function(){
 		takeList();
 		sendParse();
 		clearInterval(countTimer);
-	}
+	}, function(){
+		
+		let buttonOk = new Elements("input",{type:"button",class:"btn btn-success", value:"Ok"},[]);
+		buttonOk.addEventListener("click",function(){
+			$(".modal-window-panel").remove();
+			location.href='/me/';
+		});
+		let e = new Elements('div',{class:'modal-window-panel'},[
+			new Elements("div",{class:"modal-window-panel-content"},[
+				new Elements("div",{class:"rows"},[
+					new Elements("div",{class:"cols"},[
+						new Elements("canvas",{id:"resultados-chart",class:"chartjs", style:"width: 80%;height: 80%;"},[])
+					]),
+					new Elements("div",{class:"cols"},[
+						new Elements("div",{class:"contenidos"},[
+							new Elements("h2",{},["100%"]),
+							new Elements("div",{ style:"display: grid;"},[
+								new Elements("label",{"data-res-pregp":""},["8 Preguntas"]),
+								new Elements("label",{"data-res-pregc":""},["8 preguntas correctas"]),
+								new Elements("label",{"data-res-pregi":""},["0 preguntas incorrectas"]),
+								new Elements("label",{},["Calificacion: ",
+									new Elements("span",{"data-res-calif":""},["10"])
+								])
+							])
+						])
+					])
+				]),
+				new Elements("div",{class:"content-afoot"},[
+					new Elements("label",{},["Tiempo restante: ",
+						new Elements("span",{"data-res-timer":""},["03:20"])
+					]),
+					new Elements("span",{class:"aprovado", "data-res-status":""},["Aprobado"]),
+				]),
+				new Elements("div",{class:"content-footer"},[ buttonOk ])
+			])
+		]);
+		document.body.appendChild(e);
+		
+		getGraphic( 80, 20 );
+		getFireworks();		
+		getNotification("Continúa","warning");
+	});
 });
+
+function getGraphic( correctas, incorrectas ){
+	new Chart(document.getElementById("resultados-chart"),{
+		"type":"doughnut",
+		"data":{
+			"labels":[
+				"Incorrectas","Correctas"
+			],
+			"datasets":[
+				{
+					"label":"Datos completos",
+					"data":[ incorrectas, correctas ],
+					"backgroundColor":["rgb(255, 0, 0)","rgb(57,132,57)"]
+				}
+			]
+		}
+	});
+}
+function getFireworks(){
+	let canv = new Elements('canvas',{id:'canv'},[]);
+	canv.addEventListener("click",function (e) {
+		$(".fireworks-window").remove();
+	});
+	let e = new FireworkLand('div',{class:'fireworks-content', id:"canvas-container"},[
+		canv
+	]);
+	document.body.appendChild(e);
+	loop();
+}
 
 function takeList(){
 	$.each($("#itemquest").find(".contextual"),function(index, value){

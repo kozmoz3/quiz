@@ -7,20 +7,64 @@
 		<nav th:replace="student/includes/layout :: top"></nav>
 		<section class="container">
 			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-6">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
+							<h2>Datos personales</h2>
+							<form>
+								<div class="form-group">
+									<input type="text" class="form-control" id="strnombre" placeholder="Nombre"/>
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="strapellidos" placeholder="Apellidos"/>
+								</div>
+								<div class="form-group">
+									<input type="tel" class="form-control" id="strtelefono" placeholder="Teléfono (opcional)"/>
+								</div>
+								<div class="form-group">
+									<input type="button" class="btn btn-primary" value="Actualizar"/>
+								</div>
+							</form>
+							<hr>
+							<h2>Datos de cuenta</h2>
+							<form>
+								<div class="form-group">
+									<input type="email" class="form-control" id="strcorreo" placeholder="Correo"/>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="strpass" placeholder="Contraseña"/>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="strrpass" placeholder="Confirmar contraseña"/>
+								</div>
+								<div class="form-group">
+									<input type="button" class="btn btn-primary" value="Actualizar"/>
+								</div>
+							</form>
 						</div>
 					</div>	
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-6">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
+							<div class="img-container">
+								<img th:src="@{/administrador/img/profile/1.jpg}"/>
+								<h4>{{ Nombre de estudiante }}</h4>
+							</div>
+							<form>
+								<div class="form-group">
+									<label>
+										Cambiar foto de perfil
+										<input type="file" id="imgperfil" />
+									</label>
+								</div>
+							</form>
 						</div>
 					</div>	
 				</div>
 			</div>
-		</section>	
+		</section>
+		<footer th:replace="student/includes/layout :: footer"></footer>
 		<div th:replace="student/includes/scripts :: scripts"></div>
 	</body>
 </html>

@@ -212,3 +212,21 @@ var ModalLoad = /** @class */ (function (_super) {
     }
     return ModalLoad;
 }(Elements));
+
+
+var FireworkLand = /** @class */ (function (_super) {
+    __extends(FireworkLand, _super);
+    function FireworkLand(type, attributes, children) {
+        var _this = _super.call(this, 'div', { class: 'fireworks-window' }, []) || this;
+        Elements.prototype.addChildren(_this, [Elements.prototype.createCustomElement(type, attributes, children)]);
+        _this.addEventListener('click', function (e) {
+            if (e.target === this)
+            	FireworkLand.prototype.closeModal.call(this);
+        });
+        return _this;
+    }
+    FireworkLand.prototype.closeModal = function () {
+        document.body.removeChild(this);
+    };
+    return FireworkLand;
+}(Elements));

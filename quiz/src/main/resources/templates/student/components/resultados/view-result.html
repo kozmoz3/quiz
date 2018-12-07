@@ -6,15 +6,66 @@
 	<body>
 		<nav th:replace="student/includes/layout :: top"></nav>
 		<section class="container">
+			<div class="panel-head">
+				<a class="btn btn-info" th:href="@{/me/result}" >Atras</a>
+			</div>
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
+							<div class="contextual">
+								<div class="question">Pregunta 4
+									<div class="options">
+										<div class="options">
+											<div class="form-row">
+												<div class="col-auto" style="padding:5px;">
+													<p>Opción 1</p>
+												</div>
+											</div>
+											<div class="form-row active-res">
+												<div class="col-auto" style="padding:5px;">
+													<p>Opción 2 c</p>
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="col-auto" style="padding:5px;">
+													<p>Opción 3</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr>
+							<div class="contextual">
+								<div class="question">Pregunta 4
+									<div class="options">
+										<div class="options">
+											<div class="form-row">
+												<div class="col-auto" style="padding:5px;">
+													<p>Opción 1</p>
+												</div>
+											</div>
+											<div class="form-row active-res">
+												<div class="col-auto" style="padding:5px;">
+													<p>Opción 2 c</p>
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="col-auto" style="padding:5px;">
+													<p>Opción 3</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>	
+		</section>
+		<footer th:replace="student/includes/layout :: footer"></footer>
 		<div th:replace="student/includes/scripts :: scripts"></div>
 	</body>
 </html>

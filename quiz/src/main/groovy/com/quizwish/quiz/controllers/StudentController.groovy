@@ -17,6 +17,13 @@ class StudentController {
 	static final def RESULT ="student/components/resultados/list"
 	static final def RESPONSE ="student/components/resultados/view-result"
 	static final def PROFILE ="student/components/me/perfil"
+	static final def INDEX ="student/index"
+	
+	@GetMapping("/")
+	public String index(Model model) {
+		LOGGER.info("Method: -- index")
+		return INDEX;
+	}
 	
 	@GetMapping("/realize")
 	public String realize(Model model) {
