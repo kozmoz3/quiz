@@ -1,5 +1,8 @@
 package com.quizwish.quiz.models
 
+import com.quizwish.quiz.entity.Estudiantequiz
+import com.quizwish.quiz.entity.Grupousuario
+import com.quizwish.quiz.entity.Quiz
 import java.io.Serializable
 import javax.persistence.Basic
 import javax.persistence.CascadeType
@@ -13,6 +16,7 @@ import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 import javax.persistence.Table
 import javax.persistence.UniqueConstraint
+import javax.xml.bind.annotation.XmlTransient
 
 @Entity
 @Table(name = "user", catalog = "quiz", schema = "")
@@ -41,6 +45,13 @@ class User implements Serializable {
 	
 	@Column(name = "username", nullable = false, length = 60 )
 	private String username;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	private List<Quiz> quizList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	private List<Grupousuario> grupousuarioList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	private List<Estudiantequiz> estudiantequizList
 	
 	
 	public String getUsername() {
@@ -141,6 +152,33 @@ class User implements Serializable {
 
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
+	}
+
+	@XmlTransient
+    public List<Quiz> getQuizList() {
+        return quizList;
+    }
+
+    public void setQuizList(List<Quiz> quizList) {
+        this.quizList = quizList;
+    }
+
+	 @XmlTransient
+    public List<Grupousuario> getGrupousuarioList() {
+        return grupousuarioList;
+    }
+
+	public void setGrupousuarioList(List<Grupousuario> grupousuarioList) {
+		this.grupousuarioList = grupousuarioList;
+	}
+	
+	@XmlTransient
+	public List<Estudiantequiz> getEstudiantequizList() {
+		return estudiantequizList;
+	}
+
+	public void setEstudiantequizList(List<Estudiantequiz> estudiantequizList) {
+		this.estudiantequizList = estudiantequizList;
 	}
 
 		

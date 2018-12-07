@@ -2,10 +2,14 @@ package com.quizwish.quiz.controllers
 
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+
+import com.quizwish.quiz.component.SessionUser
 
 @Controller
 @RequestMapping(path = "/me")
@@ -19,10 +23,15 @@ class StudentController {
 	static final def PROFILE ="student/components/me/perfil"
 	static final def INDEX ="student/index"
 	
+	@Autowired
+	@Qualifier("sessionUser")
+	SessionUser sessionUser;
+	
 	@GetMapping("/")
 	public String index(Model model) {
 		LOGGER.info("Method: -- index")
-		return INDEX;
+		model.addAttribute("usuario", sessionUser.userSessionAll())
+		return INDEX
 	}
 	
 	@GetMapping("/realize")

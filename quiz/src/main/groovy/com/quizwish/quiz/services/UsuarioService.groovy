@@ -1,6 +1,6 @@
 package com.quizwish.quiz.services
 
-import com.quizwish.quiz.models.Usuario
+import com.quizwish.quiz.models.User
 import org.springframework.data.domain.Example
 
 interface UsuarioService {
@@ -8,11 +8,11 @@ interface UsuarioService {
 	
 	def getUsuarioById(Integer id);
 				
-	def setUsuario(Usuario Usuario);
+	def setUsuario(User Usuario);
 			
 	def deleteUsuario(Integer id);
 			
-	def getByCriteria(Example<Usuario> example);
+	def getByCriteria(Example<User> example);
 	
-	def getByCriteriaList(Example<Usuario> example);
+	def getByCriteriaList(Example<User> example);
 }

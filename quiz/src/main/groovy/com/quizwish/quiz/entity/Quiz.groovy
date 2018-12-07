@@ -163,6 +163,9 @@ class Quiz implements Serializable{
 	
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
     List<Quizgrupo> quizgrupoList
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
+	List<Estudiantequiz> estudiantequizList
 
     public Quiz() {
     }
@@ -222,6 +225,11 @@ class Quiz implements Serializable{
     def getQuizgrupoList() {
         return quizgrupoList
     }
+	
+	@XmlTransient
+	def getEstudiantequizList() {
+		return estudiantequizList
+	}
 
 	@Override
 	def String toString() {

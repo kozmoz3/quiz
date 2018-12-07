@@ -36,26 +36,10 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>Nombre de un alumno</td>
-													<td><input type="checkbox" id="ckus0" data-optional data-selck="1"/></td>
-												</tr>
-												<tr>
-													<td>Nombre de un alumno</td>
-													<td><input type="checkbox" id="ckus1" data-optional data-selck="2"/></td>
-												</tr>
-												<tr>
-													<td>Nombre de un alumno</td>
-													<td><input type="checkbox" id="ckus2" data-optional data-selck="3"/></td>
-												</tr>
-												<tr>
-													<td>Nombre de un alumno</td>
-													<td><input type="checkbox" id="ckus3" data-optional data-selck="4"/></td>
-												</tr>
-												<tr>
-													<td>Nombre de un alumno</td>
-													<td><input type="checkbox" id="ckus4" data-optional data-selck="5"/></td>
-												</tr>
+												<tr th:each="user,item : ${listUser}">
+													<td th:text="${user.nombre} + ' ' + ${user.apellidos}"></td>
+													<td><input type="checkbox" th:id="'ckus'+${item.index}" data-optional th:data-selck="${user.iduser}"/></td>
+												</tr>												
 											</tbody>
 										</table>
 									</div>

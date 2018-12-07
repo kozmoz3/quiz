@@ -10,10 +10,29 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-12-04 13:29:53
+Date: 2018-12-07 11:13:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for estudiantequiz
+-- ----------------------------
+DROP TABLE IF EXISTS `estudiantequiz`;
+CREATE TABLE `estudiantequiz` (
+  `idestudiantequiz` int(11) NOT NULL AUTO_INCREMENT,
+  `iduser` int(11) NOT NULL,
+  `idquiz` int(11) NOT NULL,
+  PRIMARY KEY (`idestudiantequiz`),
+  KEY `fk_estu_quizu` (`iduser`),
+  KEY `fk_estu_quizq` (`idquiz`),
+  CONSTRAINT `fk_estu_quizq` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`),
+  CONSTRAINT `fk_estu_quizu` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of estudiantequiz
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for grupo
@@ -164,9 +183,10 @@ CREATE TABLE `user` (
   PRIMARY KEY (`iduser`),
   KEY `fk_user_rol` (`idrol`),
   CONSTRAINT `fk_user_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'Alfonso', 'Vásquez Cortes', null, 'alvaco_1993@hotmail.com', '', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', null, '1', '1');
+INSERT INTO `user` VALUES ('2', 'Daniel', 'Sanchez', '1234567890', 'dani@gmail.com', '', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', null, '1', '2');

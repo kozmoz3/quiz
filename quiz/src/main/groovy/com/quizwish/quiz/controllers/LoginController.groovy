@@ -44,8 +44,10 @@ class LoginController {
 			def username = user.getNombre();
 			model.addAttribute("username", username);
 		return ADMIN;
-		}else
+		}else {
+			model.addAttribute("usuario", user);
 			return STUDENT;
+		}
 	}
 
 }
