@@ -8,7 +8,7 @@ interface UsuarioService {
 	
 	def getUsuarioById(Integer id);
 				
-	def setUsuario(User Usuario);
+	def setUsuario(User Usuario, int rol);
 			
 	def deleteUsuario(Integer id);
 			

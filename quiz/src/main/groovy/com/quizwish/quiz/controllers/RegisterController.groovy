@@ -25,9 +25,7 @@ class RegisterController {
 	@Qualifier("usuarioService")
 	UsuarioService usuarioService
 	
-	@Autowired
-	@Qualifier("rolService")
-	RolService rolService
+	
 	
 	static final def INDEX = "register";
 	
@@ -40,12 +38,9 @@ class RegisterController {
 	
 	@PostMapping("/register")
 	def newUserAdmin(@ModelAttribute("user") User usuario, Model model) {
-		def encode = new BCryptPasswordEncoder()
-		usuario.setPassword( encode.encode( usuario.getPassword() ) )
-		usuario.setIdrol( rolService.getRolById(1) )
-		usuario.setEnable(true)
-		User user = usuarioService.setUsuario(usuario)
-		
+		int rol = 1;
+		User user = usuarioService.setUsuario(usuario, rol)
+		LOGGER.info("METHOD : newUserAdmin --" + user.getNombre());
 		model.addAttribute("type", "post" )
 		model.addAttribute("estatus", "ok" )
 		model.addAttribute("newuser", user.getIduser() != null ? user : new User() )
