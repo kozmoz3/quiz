@@ -1,5 +1,7 @@
 package com.quizwish.quiz.component
 
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.security.core.context.SecurityContextHolder
@@ -12,11 +14,14 @@ import com.quizwish.quiz.repositorys.UserRepository
 @Component("sessionUser")
 class SessionUser {
 
+	private static final Log LOGGER = LogFactory.getLog(SessionUser.class)
+	
 	@Autowired
 	@Qualifier("userRepository")
 	UserRepository userRepository;
 	
 	public com.quizwish.quiz.models.User userSessionAddUsername(Model model) {
+		LOGGER.info("METHOD : userSessionAddUsername ");
 		com.quizwish.quiz.models.User user= userSessionAll()
 		def username = user.getNombre();
 		model.addAttribute("username", username);
@@ -28,6 +33,7 @@ class SessionUser {
 	}
 	
 	public com.quizwish.quiz.models.User userSessionAll(){
+		LOGGER.info("METHOD : userSessionAll ");
 		User userSesion =  session();
         return userRepository.findByCorreo( userSesion.getUsername());
 	}
