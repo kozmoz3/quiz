@@ -25,8 +25,6 @@ class RegisterController {
 	@Qualifier("usuarioService")
 	UsuarioService usuarioService
 	
-	
-	
 	static final def INDEX = "register";
 	
 	@GetMapping("/register")

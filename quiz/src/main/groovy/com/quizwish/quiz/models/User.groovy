@@ -48,8 +48,10 @@ class User implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Quiz> quizList;
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Grupousuario> grupousuarioList;
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Estudiantequiz> estudiantequizList
 	
