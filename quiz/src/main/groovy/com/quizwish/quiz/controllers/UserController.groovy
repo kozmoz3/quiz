@@ -23,6 +23,8 @@ class UserController {
 	@GetMapping("/user")
 	def show(Model model) {
 		User user = sessionUser.userSessionAll();
+		def username = user.getNombre();
+		model.addAttribute("username", username);
 		model.addAttribute("user", user);
 		return SHOW;
 	}
