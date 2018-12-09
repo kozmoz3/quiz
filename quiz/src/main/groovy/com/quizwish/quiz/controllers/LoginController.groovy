@@ -16,7 +16,7 @@ import com.quizwish.quiz.models.User
 @Controller
 class LoginController {
 	
-	private static final Log LOGGER = LogFactory.getLog(QuizController.class)
+	private static final Log LOGGER = LogFactory.getLog(LoginController.class)
 	
 	static final def INDEX = "login";
 	static final def STUDENT = "student/index";
