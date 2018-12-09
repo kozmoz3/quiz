@@ -29,9 +29,7 @@ class UserController {
 	@GetMapping("/user")
 	def show(Model model) {
 		LOGGER.info("METHOD : show ");
-		User user = sessionUser.userSessionAll();
-		def username = user.getNombre();
-		model.addAttribute("username", username);
+		User user = sessionUser.userSessionAddUsername(model);	
 		model.addAttribute("user", user);
 		return SHOW;
 	}
