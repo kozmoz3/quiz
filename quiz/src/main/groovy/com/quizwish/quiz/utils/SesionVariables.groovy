@@ -8,12 +8,12 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 
 import com.quizwish.quiz.models.Usuario
-import com.quizwish.quiz.services.UsuarioService
+//import com.quizwish.quiz.services.UsuarioService
 
 
 class SesionVariables {
 
-	@Autowired
+	/*@Autowired
 	@Qualifier("serviceUsuario")
 	static UsuarioService serviceUsuario
 
@@ -46,5 +46,5 @@ class SesionVariables {
 	private static Authentication getAuthentication() {
 		SecurityContext securityContext = SecurityContextHolder.getContext();
 		return securityContext.getAuthentication();
-	}
+	}*/
 }
