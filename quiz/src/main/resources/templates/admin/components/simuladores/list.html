@@ -16,16 +16,17 @@
 	        <div class="courses-area">
 	        	<div class="container-fluid">
 	        		<div class="row">	        		
-	        			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" th:each="student: ${quizList}">
+	        			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" th:each="quiz: ${quizList}">
 	        				<div class="courses-inner res-mg-b-30">
 	        					<div class="courses-title">
-	        						<a href="#"><img th:src="@{/administrador/img/courses/1.jpg}" alt=""></a>
-	        						<h2 th:text="${student.nombre}"></h2>
-	        						<h5>{{Grupo}}</h5>
+	        						
+                                   <a href="#"><img th:src="@{${quiz.img} ?: '/administrador/img/courses/1.jpg'}" alt=""></a>
+	        						<h2 th:text="${quiz.nombre}"></h2>
+	        						<h5 ></h5>
 	        					</div>
 	        					<div class="course-des">
-	        						<p><span><i class="fa fa-clock"></i></span> <b>100</b> Preguntas</p>
-	        						<p><span><i class="fa fa-clock"></i></span> <b>100</b> Alumnos</p>
+	        						<p><span><i class="fa fa-clock" </i></span> <b th:text="${quiz.questionsList.size()}"></b> Preguntas</p>
+	        						<p><span><i class="fa fa-clock"></i></span> <b th:text="${quiz.questionsList.size()}"></b> Alumnos</p>
 	        					</div>
 	        					<div class="product-buttons">
 	        						<button type="button" class="button-warning cart-btn">Editar</button>

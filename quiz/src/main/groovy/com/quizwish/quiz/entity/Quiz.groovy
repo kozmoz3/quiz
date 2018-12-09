@@ -47,8 +47,6 @@ import com.quizwish.quiz.models.User
 @Table(name = "quiz", catalog = "quiz", schema = "")
 class Quiz implements Serializable{
 	
-	static final long serialVersionUID = 1L
-	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
