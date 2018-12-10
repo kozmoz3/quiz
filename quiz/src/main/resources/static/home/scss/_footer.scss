@@ -1,8 +1,9 @@
 footer{
-	bottom: 0;
-	color: #fff;
-	font-size: .9rem;
-	background-color: #3e4551!important;
+	z-index: -101;
+	bottom: 0px;
+	padding-bottom: 70px;
+	font-size: 0.9rem;
+	
 	.list-unstyled{
 		padding-left: 0;
 		list-style: none;
@@ -12,25 +13,25 @@ footer{
 		border-radius: 10em;
 	}
 	.btn-float{
-		    display: inline-block;
-		    color: #fff!important;
-		    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-		    width: 47px;
-		    height: 47px;
-		    position: relative;
-		    z-index: 1;
-		    vertical-align: middle;
-		    overflow: hidden;
-		    -o-transition: all .2s ease-in-out;
-		    transition: all .2s ease-in-out;
-		    margin: 10px;
-		    border-radius: 50%;
-		    padding: 0;
-		    cursor: pointer;    
-		    -moz-user-select: none;
-		    -ms-user-select: none;
-		    user-select: none;
-		    -webkit-tap-highlight-color: transparent;
+		display: inline-block;
+		color: #fff!important;
+		box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+		width: 47px;
+		height: 47px;
+		position: relative;
+		z-index: 1;
+		vertical-align: middle;
+		overflow: hidden;
+		-o-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+		margin: 10px;
+		border-radius: 50%;
+		padding: 0;
+		cursor: pointer;    
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
 		i{
 			display: inline-block;
 			width: inherit;
