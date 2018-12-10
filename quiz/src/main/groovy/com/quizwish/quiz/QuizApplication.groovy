@@ -10,3 +10,4 @@ class QuizApplication {
 		SpringApplication.run QuizApplication, args
 	}
 }
+		
