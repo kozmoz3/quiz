@@ -3,6 +3,7 @@ package com.quizwish.quiz.configuration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
+import org.springframework.mail.SimpleMailMessage
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
@@ -37,5 +38,10 @@ class MvcConfig extends WebMvcConfigurerAdapter{
 		registry.addMapping("/**").allowedOrigins("*")
 				.allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
 				.maxAge(MAX_AGE_SECS)
+	}
+	
+	@Bean
+	public SimpleMailMessage templateSimpleMessage() {
+		return new SimpleMailMessage()
 	}
 }

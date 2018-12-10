@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.web.bind.annotation.RequestMapping
 
 
 
@@ -36,7 +37,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http)throws Exception{
 		LOGGER.info("METHOD : configure ")		
 		http.csrf().disable()
-		http.authorizeRequests().antMatchers("/","/register","/logout").permitAll()
+		http.authorizeRequests().antMatchers("/","/sendcontact","/register","/logout").permitAll()
 		http.authorizeRequests().antMatchers("/generales/**","/administrador/**","/estudiante/**","/home/**").permitAll()
 		http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ROOT')")
 		http.authorizeRequests().antMatchers("/me/**").access("hasAnyRole('ROLE_ALUM')")

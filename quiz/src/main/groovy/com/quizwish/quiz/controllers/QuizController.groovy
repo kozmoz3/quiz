@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.servlet.ModelAndView
 
-import com.quizwish.quiz.component.QuizComponent
+//import com.quizwish.quiz.component.QuizComponent
 import com.quizwish.quiz.component.SessionUser
 import com.quizwish.quiz.entity.Quiz
 import com.quizwish.quiz.models.User
@@ -41,9 +41,9 @@ class QuizController {
 	@Qualifier("quizService")
 	QuizService quizService;
 	
-	@Autowired
+	/*@Autowired
 	@Qualifier("quizComponent")
-	QuizComponent quizComponent;
+	QuizComponent quizComponent;*/
 
 	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/simuladores")
@@ -52,9 +52,9 @@ class QuizController {
 		User user = sessionUser.userSessionAll();
 		def username = user.getNombre();
 		model.addAttribute("username", username);
-		List<Quiz> quizList= quizComponent.quizWithStatusTrue(user);
-		model.addAttribute("quizList", quizList);
-		LOGGER.info("METHOD : index -- listQuiz = "+quizList );
+		//List<Quiz> quizList= quizComponent.quizWithStatusTrue(user);
+		//model.addAttribute("quizList", quizList);
+		//LOGGER.info("METHOD : index -- listQuiz = "+quizList );
 		return INDEX;
 	}
 
