@@ -55,6 +55,9 @@ class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Estudiantequiz> estudiantequizList
 	
+	public User(String correo) {
+		this.correo = correo
+	}
 	
 	public String getUsername() {
 		return username;

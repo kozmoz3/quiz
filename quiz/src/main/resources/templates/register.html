@@ -15,6 +15,7 @@
 					<div class="hpanel">
 	                    <div class="panel-body">
 	                    	<form  method="POST" th:action="@{/register}" >
+	                    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	                    		<div class="row">
 	                    			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 			                            <div class="form-group">
@@ -52,6 +53,11 @@
 	                    	<div th:if="${estatus == 'ok' } ">
 	                    		<div class="alert alert-success" role="alert">
 	                    			<p>Bienvenido, <span th:text="${newuser.nombre + ' ' + newuser.apellidos}"></span>. Para acceder, has click <a th:href="@{/login}">aquí</a></p>
+	                    		</div>
+	                    	</div>
+	                    	<div th:if="${estatus == 'correo' } ">
+	                    		<div class="alert alert-danger" role="alert">
+	                    			<p>Ese correo ya existe, por favor intenta con otro correo o inicia sesión <a th:href="@{/login}">aquí</a></p>
 	                    		</div>
 	                    	</div>
 	                    </div>

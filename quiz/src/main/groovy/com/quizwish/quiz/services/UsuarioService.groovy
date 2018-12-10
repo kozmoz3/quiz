@@ -11,8 +11,10 @@ interface UsuarioService {
 	def setUsuario(User Usuario, int rol);
 			
 	def deleteUsuario(Integer id);
+	
+	def getByCorreo(String correo);
 			
-	def getByCriteria(Example<User> example);
+	def getByCriteria(User user, int rol);
 	
 	def getByCriteriaList(Example<User> example);
 }

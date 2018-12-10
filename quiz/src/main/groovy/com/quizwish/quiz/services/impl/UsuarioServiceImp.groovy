@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.data.domain.Example
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
-
+import com.quizwish.quiz.models.Rol
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.UserRepository
 import com.quizwish.quiz.services.RolService
@@ -46,14 +46,20 @@ class UsuarioServiceImp implements UsuarioService{
 	def deleteUsuario(Integer id) {
 		return userRepository.deleteById(id)
 	}
-
+	
 	@Override
-	public Object getByCriteria(Example<User> example) {
-		return null;
+	def getByCorreo(String correo) {
+		return userRepository.findByCorreo(correo)
 	}
 
 	@Override
-	public Object getByCriteriaList(Example<User> example) {
-		return null;
+	def getByCriteria(User user, int rol) {
+		user.setIdrol( rolService.getRolById(rol) )
+		return userRepository.findOne( Example.of( user ) )
+	}
+
+	@Override
+	def getByCriteriaList(Example<User> example) {
+		return userRepository.findAll(example)
 	}
 }

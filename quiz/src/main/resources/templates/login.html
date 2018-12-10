@@ -38,7 +38,9 @@
 	                                <label><input type="checkbox" class="i-checks"> Recordar </label>
 	                            </div>
 	                            <button class="btn btn-success btn-block loginbtn">Iniciar sesión</button>
-	                            <button class="btn btn-success btn-block loginbtn" th:onclick="@{javascript:location.href='/register';}">Registrarse</button>
+	                        </form>
+	                        <form  th:action="@{/register}" >
+	                        	<button class="btn btn-success btn-block loginbtn" style="margin-top: 5px;">Registrarse</button>
 	                        </form>
 	                    </div>
 	                </div>

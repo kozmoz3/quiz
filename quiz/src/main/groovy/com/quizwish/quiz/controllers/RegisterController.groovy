@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.data.domain.Example
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -37,11 +38,17 @@ class RegisterController {
 	@PostMapping("/register")
 	def newUserAdmin(@ModelAttribute("user") User usuario, Model model) {
 		int rol = 1;
-		User user = usuarioService.setUsuario(usuario, rol)
-		LOGGER.info("METHOD : newUserAdmin --" + user.getNombre());
+		User userRepeat = usuarioService.getByCorreo(usuario.correo)
+		LOGGER.info("isEmailRepeat => " + userRepeat.iduser)
+		if( userRepeat.iduser != null ) 
+			model.addAttribute("estatus", "correo" )
+		else {
+			User user = usuarioService.setUsuario(usuario, rol)
+			LOGGER.info("METHOD : newUserAdmin --" + user.getNombre());
+			model.addAttribute("estatus", "ok" )
+			model.addAttribute("newuser", user.getIduser() != null ? user : new User() )
+		}
 		model.addAttribute("type", "post" )
-		model.addAttribute("estatus", "ok" )
-		model.addAttribute("newuser", user.getIduser() != null ? user : new User() )
 		return INDEX;
 	}
 }
