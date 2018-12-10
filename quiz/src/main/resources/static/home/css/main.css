@@ -1041,5 +1041,63 @@ p {
     margin-bottom: 0;
   }
 }
+footer {
+  bottom: 0;
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: #3e4551 !important;
+}
+footer .list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+footer .btn-rounded {
+  display: inline-block;
+  border-radius: 10em;
+}
+footer .btn-float {
+  display: inline-block;
+  color: #fff !important;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  width: 47px;
+  height: 47px;
+  position: relative;
+  z-index: 1;
+  vertical-align: middle;
+  overflow: hidden;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  margin: 10px;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+footer .btn-float i {
+  display: inline-block;
+  width: inherit;
+  text-align: center;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 47px;
+}
+footer .fb {
+  background-color: #3b5998 !important;
+}
+footer .tw {
+  background-color: #00acee !important;
+}
+footer .gplus {
+  background-color: #d34836 !important;
+}
+footer .li {
+  background-color: # #0e76a8 !important;
+}
+footer .dribbble {
+  background-color: #000 !important;
+}
 
 /*# sourceMappingURL=main.css.map */

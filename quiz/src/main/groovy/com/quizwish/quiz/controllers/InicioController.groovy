@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+
+import org.springframework.web.bind.annotation.RequestMethod
 
 @Controller
 class InicioController {
@@ -32,10 +35,10 @@ class InicioController {
 		LOGGER.info("METHOD : showIndex --");		
 		return INDEX;
 	}
-	
-	@PostMapping("/sendcontact")
-	public void sendEmail( @RequestBody MContacto contacto ) {
-		//LOGGER.info("Datos recibidos => " + contacto.name + " " + contacto.email + " " + contacto.message)
+		
+	@RequestMapping(value = "/sendcontact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	def sendEmail( @RequestBody MContacto contacto ) {
 		servicioMails.sendMail("alvaco_1993@hotmail.com", contacto.name + " > " + contacto.email, contacto.message)
+		return INDEX;
 	}
 }

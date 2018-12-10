@@ -56,5 +56,43 @@
             $('.header_area').removeClass('sticky slideInDown');
         }
     });
+    
+    
+    /*contact*/
+    $("#send").click(function(){
+    	var cantin = ["#name","#email","#message"];
+    	var isEmptys = true;
+    	$.each(cantin, function(index, value){
+    		if( $.trim( $(value).val() ) == "" ){
+    			$(value).css("border","1px solid red");
+    			isEmptys = false;
+    		}else
+    			$(value).css("border","1px solid #ced4da");
+    	});
+    	if( isEmptys ){
+    		if(sendMailTo({
+    			name: $("#name").val(),
+	    		email: $("#email").val(),
+	    		message: $("#message").val()	
+    		})){
+    			getSuccessfulMessageWithText("Mensaje enviado correctamente");
+    			$.each(cantin, function(index, value){ $(value).val(""); });
+    		}
+    	}
+    });
+    
+    function sendMailTo( data ){	
+    	var req = new XMLHttpRequest();	  
+    	req.open( "post", "/sendcontact", false );
+    	req.setRequestHeader('Content-type','application/json; charset=utf-8');
+    	req.send( JSON.stringify(data) );
+    	console.log(req);
+    	if (req.status == 200){
+    		return true;
+    	}else{
+    		getErrorMessage(getCodeStatus(req, ""));
+    		return false;
+    	}
+    }
 
 })(jQuery);
