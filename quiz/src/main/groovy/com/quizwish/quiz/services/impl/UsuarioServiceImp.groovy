@@ -1,5 +1,7 @@
 package com.quizwish.quiz.services.impl
 
+import org.apache.commons.logging.Log
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.data.domain.Example
@@ -10,9 +12,11 @@ import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.UserRepository
 import com.quizwish.quiz.services.RolService
 import com.quizwish.quiz.services.UsuarioService
-
+import org.apache.commons.logging.LogFactory
 @Service("usuarioService")
 class UsuarioServiceImp implements UsuarioService{
+	
+	private static final Log LOGGER = LogFactory.getLog(UsuarioServiceImp.class)
 	
 	@Autowired
 	@Qualifier("rolService")
@@ -61,5 +65,27 @@ class UsuarioServiceImp implements UsuarioService{
 	@Override
 	def getByCriteriaList(Example<User> example) {
 		return userRepository.findAll(example)
+	}
+	
+	@Override
+	public User save(User userUpdate, User userSession) {
+		LOGGER.info("METHOOD: save")
+		LOGGER.info("METHOOD: save  --- " +getUsuarioById(userSession.getIduser()).toString())
+		User user = getUsuarioById(userSession.getIduser())
+		user.setNombre(userUpdate.getNombre());
+		user.setApellidos(userUpdate.getApellidos())
+		user.setTelefono(userUpdate.getTelefono())
+		user.setCorreo(userSession.getCorreo())
+		user.setUsername(userSession.getUsername())
+		//user.setIdrol(userSession.getIdrol())
+		user.setEnable(true);
+		if(userUpdate.getPassword().equals("")) {
+			user.setPassword(userSession.getPassword())
+		}else {
+			def encode = new BCryptPasswordEncoder()
+			user.setPassword(encode.encode( userUpdate.getPassword() ));
+		}
+		
+		return userRepository.save(user)
 	}
 }

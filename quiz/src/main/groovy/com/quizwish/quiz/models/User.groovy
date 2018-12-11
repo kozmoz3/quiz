@@ -26,7 +26,6 @@ class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
 	@Column(name = "iduser")
 	private Integer iduser;
 	
@@ -39,7 +38,7 @@ class User implements Serializable {
 	@Column(name = "telefono", length = 10)
 	private String telefono;
 	
-	@Basic(optional = false)
+	
 	@Column(name = "correo" , unique = true, nullable = false, length = 80 )
 	private String correo;
 	
@@ -67,7 +66,7 @@ class User implements Serializable {
 		this.username = username;
 	}
 
-	@Basic(optional = false)
+	
 	@Column(name = "password", nullable = false, length = 150 )
 	private String password;
 	
@@ -79,7 +78,7 @@ class User implements Serializable {
 	
 	/*** id rol***/
 	@JoinColumn(name = "idrol", referencedColumnName = "idrol")
-	@ManyToOne(optional = false)
+	@ManyToOne()
 	Rol idrol
 	public int getIdrol() {
 		return this.idrol.getIdrol();
@@ -184,6 +183,13 @@ class User implements Serializable {
 
 	public void setEstudiantequizList(List<Estudiantequiz> estudiantequizList) {
 		this.estudiantequizList = estudiantequizList;
+	}
+
+	@Override
+	public String toString() {
+		return "User [iduser=" + iduser + ", correo=" + correo+", nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono
+				+ ", correo=" + correo + ", username=" + username +  ", password=" + password
+				+ ", enable=" + enable + ", idrol=" + idrol + "]";
 	}
 
 		

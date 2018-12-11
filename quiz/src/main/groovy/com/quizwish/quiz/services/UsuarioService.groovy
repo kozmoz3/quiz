@@ -17,4 +17,6 @@ interface UsuarioService {
 	def getByCriteria(User user, int rol);
 	
 	def getByCriteriaList(Example<User> example);
+	
+	public User save(User user, User userSession);
 }

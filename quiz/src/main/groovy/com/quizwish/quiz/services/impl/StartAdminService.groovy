@@ -17,28 +17,23 @@ class StartAdminService {
 	private static final Log LOGGER = LogFactory.getLog(StartAdminService.class)
 	
 	@Autowired
-	@Qualifier("studentRepository")
-	StudentRepository studentRepository
+	@Qualifier("studentService")
+	StudentService studentService
 	
 	@Autowired
 	@Qualifier("quizService")
 	QuizService quizService
 	
 	public int countQuizByTeacher(User user) {
+		LOGGER.info("METHOD: countQuizByTeacher")
 		return quizService.getQuizByIduser(user).size();
 	}
 	
 	public int countStudentByTeacher(int idTeacher) {
 		LOGGER.info("METHOD: countStudentByTeacher")
-		return findAllByIdTeacher(idTeacher).size();
+		return studentService.findAllByIdTeacher(idTeacher).size();
 	}
 	
-	public List<Student>  findAllByIdTeacher(Integer idTeacher) {
-		LOGGER.info("METHOD: findAllByIdTeacher")
-		//studenRepository.
-		
-		LOGGER.info("METHOD: findAllByIdTeacher -- "+studentRepository.findByTeacher( idTeacher))
-		return studentRepository.findByTeacher( idTeacher);
-	}
+	
 
 }
