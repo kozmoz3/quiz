@@ -1,6 +1,5 @@
 package com.quizwish.quiz.entity
 
-import javax.persistence.Basic
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -10,53 +9,56 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "student")
-class Student {
+class Student implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	int id
+	@Column(name = "idstudent")
+	Integer idStudent
 
-	@Column(name = "idStudent")
-	int idStudent
+	@Column(name = "student")
+	Integer student
 	
-	@Column(name = "idTeacher")
-	int idTeacher
+	@Column(name = "teacher")
+	Integer teacher
 	
 	@Column(name = "nullable")
 	boolean nullable
+	
 
-	public int getId() {
+	
+
+	public Integer getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Integer teacher) {
+		this.teacher = teacher;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getIdStudent() {
-		return idStudent;
+	public Integer getStudent() {
+		return student;
 	}
 
-	public void setIdStudent(int idStudent) {
-		this.idStudent = idStudent;
+	public void setStudent(Integer student) {
+		this.student = student;
 	}
 
-	public int getIdTeacher() {
-		return idTeacher;
-	}
-
-	public void setIdTeacher(int idTeacher) {
-		this.idTeacher = idTeacher;
-	}
-
+	
 	public boolean isNullable() {
 		return nullable;
 	}
 
 	public void setNullable(boolean nullable) {
 		this.nullable = nullable;
-	}
-	
+	}	
 	
 }
