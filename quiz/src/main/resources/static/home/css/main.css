@@ -1042,10 +1042,10 @@ p {
   }
 }
 footer {
-  bottom: 0;
-  color: #fff;
+  z-index: -101;
+  bottom: 0px;
+  padding-bottom: 70px;
   font-size: 0.9rem;
-  background-color: #3e4551 !important;
 }
 footer .list-unstyled {
   padding-left: 0;
