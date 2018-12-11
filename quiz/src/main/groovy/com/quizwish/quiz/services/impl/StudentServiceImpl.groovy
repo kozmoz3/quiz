@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service
 
 import com.quizwish.quiz.entity.Student
 import com.quizwish.quiz.repositorys.StudentRepository
+import com.quizwish.quiz.services.StudentService
 
 @Service("studentService")
-class StudentService {
+class StudentServiceImpl implements StudentService {
 	
-	private static final Log LOGGER = LogFactory.getLog(StudentService.class)
+	private static final Log LOGGER = LogFactory.getLog(StudentServiceImpl.class)
 	
 	@Autowired
 	@Qualifier("studentRepository")

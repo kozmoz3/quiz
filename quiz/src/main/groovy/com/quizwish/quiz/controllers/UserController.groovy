@@ -44,12 +44,9 @@ class UserController {
 	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@PostMapping("/users")
 	public String update(@ModelAttribute("users")User users,Model model) {
-		LOGGER.info("METHOD : show --- Param"+ users.toString());
+		LOGGER.info("METHOD : show --- Param "+ users.toString());
 		User user = sessionUser.userSessionAddUsername(model);
-		
-		usuarioService.save(users, user);
-		
-		
+		usuarioService.save(users, user)
 		model.addAttribute("user", user);
 		return SHOW;
 	}

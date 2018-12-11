@@ -10,6 +10,8 @@ import com.quizwish.quiz.entity.Student
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.StudentRepository
 import com.quizwish.quiz.services.QuizService
+import com.quizwish.quiz.services.StudentService
+
 import org.apache.commons.logging.LogFactory
 
 @Service("startAdminService")

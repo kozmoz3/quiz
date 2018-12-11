@@ -31,10 +31,7 @@ class ExamplesController {
 		return "admin/components/simuladores/list-preguntas";
 	}
 	
-	@GetMapping("/admin/estudiantes")
-	def estudiantes(Model model) {
-		return "admin/components/estudiantes/list";
-	}
+	
 	
 	@GetMapping("/admin/estudiantes/add")
 	def estudiantesAdd(Model model) {
