@@ -25,5 +25,18 @@
 #name, #email {
   font-size: 18px;
   padding: 15px 15px;
-  border-radius: 25px 25px 25px 25px;
+}
+.btn-contact{
+	color: #726a84;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    display: -ms-flexbox;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px 15px;
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    -ms-flex-pack: center;
+    justify-content: center;
 }
