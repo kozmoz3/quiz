@@ -15,6 +15,12 @@ Date: 2018-12-07 11:13:22
 
 SET FOREIGN_KEY_CHECKS=0;
 
+CREATE TABLE `student` (
+  `idstudent` int(11) NOT NULL,
+  `student` int(11) NOT NULL,
+  `teacher` int(11) NOT NULL,
+  `nullable` tinyint(1) NOT NULL
+)
 -- ----------------------------
 -- Table structure for estudiantequiz
 -- ----------------------------
