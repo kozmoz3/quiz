@@ -33,8 +33,15 @@ class StudentAdminController {
 	def show(Model model) {
 		LOGGER.info("METHOD : show");
 		User userAdmin = sessionUser.userSessionAddUsername(model);
-		List<User> listuser =studentService.findAllStudent(userAdmin.getIduser());
-		model.addAttribute("listuser", listuser);
+		List<User> liststudent =studentService.findAllStudent(userAdmin.getIduser());
+		model.addAttribute("liststudent", liststudent);
 		return "admin/components/estudiantes/list";
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@GetMapping("/estudiantes/add")
+	def create(Model model) {
+		LOGGER.info("METHOD : create");
+		return "admin/components/estudiantes/crud";
 	}
 }

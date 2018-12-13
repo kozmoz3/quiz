@@ -33,10 +33,7 @@ class ExamplesController {
 	
 	
 	
-	@GetMapping("/admin/estudiantes/add")
-	def estudiantesAdd(Model model) {
-		return "admin/components/estudiantes/crud";
-	}
+	
 	
 	@GetMapping("/admin/me")
 	def me(Model model) {

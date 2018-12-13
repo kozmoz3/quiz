@@ -16,14 +16,14 @@
 	        <div class="contacts-area mg-b-15">
 	        	<div class="container-fluid">
 	        		<div class="row">
-	        			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	        			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" th:each="student: ${liststudent}">
 	        				<div class="student-inner-std res-mg-b-30">
 	        					<div class="student-img">
 	        						<img th:src="@{administrador/img/student/1.jpg}" alt="" />
 	        					</div>
 	        					<div class="student-dtl">
-	        						<h2>{{Nombre}}</h2>
-	        						<h5>{{Apellidos}}</h5>
+	        						<h2 th:text="${student.nombre}">{{Nombre}}</h2>
+	        						<h5 th:text="${student.apellidos}">{{Apellidos}}</h5>
 	        						<div class="product-buttons">
 	        							<button type="button" class="button-warning cart-btn">Editar</button>
 	        							<button type="button" class="button-danger cart-btn">Eliminar</button>
