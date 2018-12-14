@@ -522,3 +522,13 @@ function editQ( element ){
 	getFormInResponse({ type:"get", url:url, response: response });
 }
 
+function deleteQ(element){
+	var url = $(element).attr("data-urls");
+	if($.trim(url) == "") return false;
+	getOptionalMessage( "Preguntas", "¿Está seguro de eliminar ésta pregunta?", function(){
+		setFormWM({ type:"delete", url:url, data:{} });
+	}, function(){
+		getNotification("Operación cancelada","warning");
+	});
+}
+
