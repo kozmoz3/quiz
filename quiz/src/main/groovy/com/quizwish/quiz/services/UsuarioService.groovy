@@ -8,7 +8,7 @@ interface UsuarioService {
 	
 	def getUsuarioById(Integer id);
 				
-	def setUsuario(User Usuario, int rol);
+	def save(User Usuario, int rol);
 			
 	def deleteUsuario(Integer id);
 	
@@ -18,5 +18,7 @@ interface UsuarioService {
 	
 	def getByCriteriaList(Example<User> example);
 	
-	public User save(User user, User userSession);
+	public User update(User user, User userSession);
+	
+	def findById(int id)
 }

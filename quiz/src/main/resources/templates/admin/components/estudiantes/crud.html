@@ -13,7 +13,9 @@
 	            <div th:replace="admin/includes/menu-movile :: menu-movil"></div>
 	            <div th:replace="admin/includes/navegacion :: breadcome"></div>
 	        </div>
-	        <div th:replace="admin/fragments/dataschange :: frm-data-change"></div>
+	         <form action="#" th:action="@{/admin/estudiantes/addstudent}" th:object="${users}" method="post">
+	           <div th:replace="admin/fragments/studentForm"></div>
+	         </form>
 	    </div>
 	    <div th:replace="admin/includes/scripts :: scripts"></div>
 	</body>

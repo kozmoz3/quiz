@@ -46,7 +46,7 @@ class UserController {
 	public String update(@ModelAttribute("users")User users,Model model) {
 		LOGGER.info("METHOD : show --- Param "+ users.toString());
 		User user = sessionUser.userSessionAddUsername(model);
-		usuarioService.save(users, user)
+		usuarioService.update(users, user)
 		model.addAttribute("user", user);
 		return SHOW;
 	}

@@ -8,6 +8,8 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 import com.quizwish.quiz.component.SessionUser
@@ -33,8 +35,28 @@ class StudentAdminController {
 	def show(Model model) {
 		LOGGER.info("METHOD : show");
 		User userAdmin = sessionUser.userSessionAddUsername(model);
-		List<User> listuser =studentService.findAllStudent(userAdmin.getIduser());
-		model.addAttribute("listuser", listuser);
+		List<User> liststudent =studentService.findAllStudent(userAdmin.getIduser());
+		LOGGER.info("METHOD : show --- liststudent  "+liststudent);
+		model.addAttribute("liststudent", liststudent);
 		return "admin/components/estudiantes/list";
 	}
+	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@GetMapping("/estudiantes/add")
+	def create(Model model) {
+		LOGGER.info("METHOD : create");
+		model.addAttribute("users", new User());
+		return "admin/components/estudiantes/crud";
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@PostMapping("/estudiantes/addstudent")
+	def store(@ModelAttribute("user")User users) {
+		LOGGER.info("METHOD : store -- map : "+users.toString());
+		User userAdmin = sessionUser.userSessionAll();
+		def est = studentService.save(users, userAdmin)
+		LOGGER.info("METHOD : store -- map : "+est);
+		return "redirect:/admin/estudiantes/add";
+	}
+	
 }
