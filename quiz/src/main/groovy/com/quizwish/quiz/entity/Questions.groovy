@@ -63,6 +63,16 @@ class Questions implements Serializable {
 		this.idquestion = idquestion
 	}
 
+	def Questions(Integer idquestion, String answers, String message, String options, String question, String type, short score) {
+		this.idquestion = idquestion
+		this.answers = answers
+		this.options = options
+		this.question = question
+		this.type = type
+		this.score = score
+		this.message = message
+	}
+	
 	def Questions(Integer idquestion, String answers, String options, String question, String type, short score) {
 		this.idquestion = idquestion
 		this.answers = answers

@@ -25,15 +25,6 @@ class ExamplesController {
 	@Autowired
 	@Qualifier("usuarioService")
 	UsuarioService usuarioService
-		
-	@GetMapping("/admin/simuladores/preguntas")
-	def simuladoresPreguntas(Model model) {
-		return "admin/components/simuladores/list-preguntas";
-	}
-	
-	
-	
-	
 	
 	@GetMapping("/admin/me")
 	def me(Model model) {

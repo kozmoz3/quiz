@@ -9,6 +9,17 @@ var Question = /** @class */ (function () {
 		this.type = type;
 		this.score = score;
     }
+    
+    Question.prototype.setObject = function ( model ) {
+    	this.question = model.question;
+        this.options = model.options;
+        this.answers = model.answers;
+        //this.message = model.message;
+        this.idquestion = model.idquestion;
+        //this.idquiz = model.idquiz;
+		this.type = model.type;
+		this.score = model.score;
+    };
     return Question;
 }());
 

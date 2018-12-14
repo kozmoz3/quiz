@@ -87,7 +87,7 @@ add.addEventListener("click",function(){
 	}
 });
 
-saveConfig.addEventListener("click",function(){
+/*saveConfig.addEventListener("click",function(){
 	if( $(".mainForce").find("input[id='sendAll']").length == 0 ){		
 		var sendAll = new Element('input',{ type:'button',id:'sendAll',class:'btn btn-success',value:'Guardar' },[]);
 		
@@ -112,7 +112,7 @@ saveConfig.addEventListener("click",function(){
 	config.maxint = $("#intento").is(":checked");
 	config.onmaxint = $("#intento").is(":checked") == true ? $("#number").val(): 0;
 	config.itsOk = true;
-});
+});*/
 
 function removeElemet(id){
 	$("#" + id).remove();

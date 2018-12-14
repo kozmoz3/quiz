@@ -9,6 +9,18 @@ function sendForm(idform, url, type) {
 		getErrorMessage(getCodeStatus(xhr, ""));
 }
 
+function getFormInResponse( objRequest ){	
+	var req = new XMLHttpRequest();	
+	req.open( objRequest.type, objRequest.url, false );	
+	req.send();
+	
+	if (req.status == 200)
+		if (objRequest.response != "")
+			$(objRequest.response).html( req.response );
+	else
+		getErrorMessage(getCodeStatus(req, ""));
+}
+
 function setDataWithProgress( objRequest, inresponse ){	
 	var req = new XMLHttpRequest();
 	

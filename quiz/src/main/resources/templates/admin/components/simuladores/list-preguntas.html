@@ -35,8 +35,8 @@
 		        									<input type="button" class="btn btn-success" value="Activo">
 		        								</td>
 		        								<td>
-		        									<button class="pd-setting-ed" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		        									<button data-toggle="tooltip" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+		        									<button class="pd-setting-ed" onclick="editQ(this);" data-urls="/admin/simuladores/preguntas/frm/1" data-response="#repmodal" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+		        									<button data-toggle="tooltip" onclick="deleteQ(this);" data-urls="/admin/simuladores/preguntas/delete/1" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 		        								</td>
 		        							</tr>
 		        							<tr>
@@ -45,8 +45,8 @@
 		        									<input type="button" class="btn btn-danger" value="Inactivo">
 		        								</td>
 		        								<td>
-		        									<button class="pd-setting-ed" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		        									<button data-toggle="tooltip" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+		        									<button class="pd-setting-ed" onclick="editQ(this);" data-urls="/admin/simuladores/preguntas/frm/2" data-response="#repmodal" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+		        									<button data-toggle="tooltip" onclick="deleteQ(this);" data-urls="/admin/simuladores/preguntas/delete/2" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 		        								</td>
 		        							</tr>
 	        							</tbody>
@@ -59,6 +59,10 @@
 	        </div>
 	    </div>
 	    <div th:replace="admin/includes/scripts :: scripts"></div>
+	    <script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
+	    <script type="text/javascript" th:src="@{/generales/js/senders.js}"></script>
+	    <script type="text/javascript" th:src="@{/generales/js/functions.js}"></script>
+	    
 	    <div class="modal fade" id="preguntaedit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	    	<div class="modal-dialog" role="document">
 	    		<div class="modal-content">
@@ -69,7 +73,7 @@
 	    			</div>
 	    			<div class="modal-body">
 	    				<div class="sparkline8-graph content">
-	                		<div th:replace="admin/fragments/frmaddquestion :: frm-ads-quest"></div>
+	    					<div id="repmodal"></div>
 	                		<form>
 								<div class="form-group mainForce">
 									<input type="button" class="btn btn-warning" id="clear" value="Limpiar" />
