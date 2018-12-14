@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement
 import com.quizwish.quiz.models.User
 
 @Entity
-@Table(name = "grupousuario", catalog = "quiz", schema = "")
+@Table(name = "grupouser", catalog = "quiz", schema = "")
 @XmlRootElement
 /*@NamedQueries({
 	@NamedQuery(name = "Grupousuario.findAll", query = "SELECT g FROM Grupousuario g")

@@ -29,24 +29,14 @@
 		        							</tr>
 	        							</thead>
 	        							<tbody>
-		        							<tr>
-		        								<td>Daniel Apellido Apellido</td>
+		        							<tr th:each="grupo, item : ${lstgrupos}">
+		        								<td th:text="${grupo.idgrupo.nombre}">{{name}}</td>
 		        								<td>
 		        									<input type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" value="Agregar">
 		        								</td>
 		        								<td>
-		        									<button data-toggle="tooltip" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		        									<button data-toggle="tooltip" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-		        								</td>
-		        							</tr>
-		        							<tr>
-		        								<td>Daniel Apellido Apellido</td>
-		        								<td>
-		        									<input type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" value="Agregar">
-		        								</td>
-		        								<td>
-		        									<button data-toggle="tooltip" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		        									<button data-toggle="tooltip" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+		        									<button data-toggle="tooltip" th:onclick="@{javascript:location.href='/admin/grupos/edit/__${grupo.idgrupo.idgrupo}__';}" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+		        									<button data-toggle="tooltip" th:data-delete="${grupo.idgrupo.idgrupo}" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 		        								</td>
 		        							</tr>
 	        							</tbody>
