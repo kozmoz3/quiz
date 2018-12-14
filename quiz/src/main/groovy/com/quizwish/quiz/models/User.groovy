@@ -16,7 +16,11 @@ import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 import javax.persistence.Table
 import javax.persistence.UniqueConstraint
+import javax.validation.constraints.Email
+import javax.validation.constraints.NotEmpty
 import javax.xml.bind.annotation.XmlTransient
+
+import org.hibernate.validator.constraints.Length
 
 @Entity
 @Table(name = "user", catalog = "quiz", schema = "")
@@ -29,19 +33,27 @@ class User implements Serializable {
 	@Column(name = "iduser")
 	private Integer iduser;
 	
+	@NotEmpty
+	@Length(min=4, max=30)
 	@Column(name = "nombre", length = 30)
 	private String nombre;
 	
+	@Length(min=4, max=40)
 	@Column(name = "apellidos", length = 40)
 	private String apellidos;
 	
+	@Length(min=5, max=10)
 	@Column(name = "telefono", length = 10)
 	private String telefono;
 	
-	
+	@NotEmpty
+	@Email
+	@Length(min=7, max=80)
 	@Column(name = "correo" , unique = true, nullable = false, length = 80 )
 	private String correo;
 	
+	@NotEmpty
+	@Length(min=4, max=60)
 	@Column(name = "username",  length = 60 )
 	private String username;
 	
@@ -66,7 +78,8 @@ class User implements Serializable {
 		this.username = username;
 	}
 
-	
+	@NotEmpty
+	@Length(min=7, max=150)
 	@Column(name = "password", nullable = false, length = 150 )
 	private String password;
 	

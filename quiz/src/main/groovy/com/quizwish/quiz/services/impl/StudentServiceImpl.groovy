@@ -32,14 +32,10 @@ class StudentServiceImpl implements StudentService {
 	public List<User>  findAllStudent(Integer idTeacher) {
 		LOGGER.info("METHOD: findAllStudent")
 		List<Student> studentList = findAllByIdTeacher(idTeacher);
-		LOGGER.info("METHOD: findAllStudent --- studentList "+studentList.size())
 		List<User> userList = new ArrayList();
-
 		for(Student students : studentList) {
-			LOGGER.info("METHOD: findAllStudent --- user "+usuarioService.findById(students.getStudent()))
 			userList.add(usuarioService.findById(students.getStudent()));
-		}
-		
+		}	
 		return userList;
 	}
 	
@@ -61,8 +57,7 @@ class StudentServiceImpl implements StudentService {
 	
 	private Student createUserExist(User user, User userAdmin) {
 		LOGGER.info("METHOD: createUserExist ")
-		return saveStudent(user.getIduser(),userAdmin.getIduser())
-		
+		return saveStudent(user.getIduser(),userAdmin.getIduser())	
 	}
 	
 	private Student createStudent(User user, User userAdmin) {

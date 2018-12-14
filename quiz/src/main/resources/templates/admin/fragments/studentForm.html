@@ -28,6 +28,7 @@
 																			class="form-control" placeholder="Nombre"
 																			 th:field="*{nombre}">
 																	</p>
+																	<p typeth:if="${#field.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger"/>
 																</div>
 																<div class="form-group">
 																	<p>
