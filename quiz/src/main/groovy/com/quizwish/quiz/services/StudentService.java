@@ -10,4 +10,6 @@ public interface StudentService {
 	public abstract List<User>  findAllStudent(Integer idTeacher) ;
 
 	public abstract List<Student>  findAllByIdTeacher(Integer idTeacher);
+	
+	public abstract Student  save(User user, User userAdmin );
 }

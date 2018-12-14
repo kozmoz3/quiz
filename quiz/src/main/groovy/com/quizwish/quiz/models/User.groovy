@@ -42,7 +42,7 @@ class User implements Serializable {
 	@Column(name = "correo" , unique = true, nullable = false, length = 80 )
 	private String correo;
 	
-	@Column(name = "username", nullable = false, length = 60 )
+	@Column(name = "username",  length = 60 )
 	private String username;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")

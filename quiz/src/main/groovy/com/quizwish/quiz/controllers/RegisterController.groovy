@@ -43,7 +43,7 @@ class RegisterController {
 		if( userRepeat.iduser != null ) 
 			model.addAttribute("estatus", "correo" )
 		else {
-			User user = usuarioService.setUsuario(usuario, rol)
+			User user = usuarioService.save(usuario, rol)
 			LOGGER.info("METHOD : newUserAdmin --" + user.getNombre());
 			model.addAttribute("estatus", "ok" )
 			model.addAttribute("newuser", user.getIduser() != null ? user : new User() )

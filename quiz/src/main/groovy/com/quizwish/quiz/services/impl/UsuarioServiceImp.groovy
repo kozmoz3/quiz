@@ -38,7 +38,8 @@ class UsuarioServiceImp implements UsuarioService{
 	}
 
 	@Override
-	def setUsuario(User usuario, int rol) {
+	def save(User usuario, int rol) {
+		LOGGER.info("METHOD: save "+usuario.toString())
 		def encode = new BCryptPasswordEncoder()
 		usuario.setPassword( encode.encode( usuario.getPassword() ) )
 		usuario.setIdrol( rolService.getRolById(rol) )
@@ -68,7 +69,7 @@ class UsuarioServiceImp implements UsuarioService{
 	}
 	
 	@Override
-	public User save(User userUpdate, User userSession) {
+	public User update(User userUpdate, User userSession) {
 		LOGGER.info("METHOOD: save")
 		LOGGER.info("METHOOD: save  --- " +getUsuarioById(userSession.getIduser()).toString())
 		User user = getUsuarioById(userSession.getIduser())
@@ -87,5 +88,11 @@ class UsuarioServiceImp implements UsuarioService{
 		}
 		
 		return userRepository.save(user)
+	}
+
+	@Override
+	public User findById(int id) {
+		LOGGER.info("METHOOD: findById")
+		return userRepository.getOne(id);
 	}
 }

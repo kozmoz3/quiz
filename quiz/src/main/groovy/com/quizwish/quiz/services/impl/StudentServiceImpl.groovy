@@ -13,6 +13,7 @@ import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.StudentRepository
 import com.quizwish.quiz.repositorys.UserRepository
 import com.quizwish.quiz.services.StudentService
+import com.quizwish.quiz.services.UsuarioService
 
 @Service("studentService")
 class StudentServiceImpl implements StudentService {
@@ -20,8 +21,8 @@ class StudentServiceImpl implements StudentService {
 	private static final Log LOGGER = LogFactory.getLog(StudentServiceImpl.class)
 	
 	@Autowired
-	@Qualifier("userRepository")
-	private UserRepository userRepository
+	@Qualifier("usuarioService")
+	private UsuarioService usuarioService
 	
 	@Autowired
 	@Qualifier("studentRepository")
@@ -31,11 +32,14 @@ class StudentServiceImpl implements StudentService {
 	public List<User>  findAllStudent(Integer idTeacher) {
 		LOGGER.info("METHOD: findAllStudent")
 		List<Student> studentList = findAllByIdTeacher(idTeacher);
+		LOGGER.info("METHOD: findAllStudent --- studentList "+studentList.size())
 		List<User> userList = new ArrayList();
+
 		for(Student students : studentList) {
-			userList.add(userRepository.findAllById(students.getId()));
+			LOGGER.info("METHOD: findAllStudent --- user "+usuarioService.findById(students.getStudent()))
+			userList.add(usuarioService.findById(students.getStudent()));
 		}
-		LOGGER.info("METHOD: findAllStudent --- listStudent "+userList)
+		
 		return userList;
 	}
 	
@@ -43,6 +47,38 @@ class StudentServiceImpl implements StudentService {
 	public List<Student>  findAllByIdTeacher(Integer idTeacher) {
 		LOGGER.info("METHOD: findAllByIdTeacher")
 		return studentRepository.findByTeacher( idTeacher);
+	}
+
+	@Override
+	public Student save(User user, User userAdmin) {
+		def userExist = usuarioService.getByCorreo(user.getCorreo()) 
+		LOGGER.info("METHOD: save "+userExist.toString())
+		if(userExist == null) {
+		return createStudent(user, userAdmin)
+		}
+		return createUserExist(userExist, userAdmin);
+	}
+	
+	private Student createUserExist(User user, User userAdmin) {
+		LOGGER.info("METHOD: createUserExist ")
+		return saveStudent(user.getIduser(),userAdmin.getIduser())
+		
+	}
+	
+	private Student createStudent(User user, User userAdmin) {
+		LOGGER.info("METHOD: createStudent")
+		int rol = 2;
+		User userCreated = usuarioService.save(user, rol)
+		return saveStudent(userCreated.getIduser(), userAdmin.getIduser())
+	}
+	
+	private Student saveStudent(Integer idStudent, Integer idTeacher) {
+		LOGGER.info("METHOD: saveStudent")
+		Student student = new Student();
+		student.setStudent(idStudent)
+		student.setTeacher( idTeacher)
+		student.setNullable(true);
+		return studentRepository.save(student);
 	}
 
 }
