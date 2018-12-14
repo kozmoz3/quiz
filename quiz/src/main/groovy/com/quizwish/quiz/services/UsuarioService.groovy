@@ -20,5 +20,7 @@ interface UsuarioService {
 	
 	public User update(User user, User userSession);
 	
-	def findById(int id)
+	public User updateUser(User user);
+	
+	def findById(Integer id)
 }

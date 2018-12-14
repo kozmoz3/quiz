@@ -12,6 +12,7 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
@@ -24,6 +25,8 @@ import com.quizwish.quiz.services.StudentService
 class StudentAdminController {
 	
 	private static final Log LOGGER = LogFactory.getLog(StudentAdminController.class)
+	
+	private static final String UPDATE = "admin/components/estudiantes/update";
 	
 	@Autowired
 	@Qualifier("studentService")
@@ -68,13 +71,28 @@ class StudentAdminController {
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ROOT')")
-	@GetMapping("/estudiantes/edit")
-	def edit(@ModelAttribute("user")User users) {
-		LOGGER.info("METHOD : store -- map : "+users.toString());
-		User userAdmin = sessionUser.userSessionAll();
-		def est = studentService.save(users, userAdmin)
-		LOGGER.info("METHOD : store -- map : "+est);
-		return "redirect:/admin/estudiantes/add";
+	@GetMapping("/estudiantes/edit/{id}")
+	def edit(@PathVariable("id")Integer id, Model model) {
+		LOGGER.info("METHOD : edit -- id usuario : "+id);
+		User users = studentService.findUserById(id)
+		LOGGER.info("METHOD : edit -- usuario : "+users.toString());
+		model.addAttribute("users", users);
+		return UPDATE;
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@PostMapping("/estudiantes/update")
+	def update(@Valid User users, BindingResult bindingResult, Model model) {
+		LOGGER.info("METHOD : update : user "+ users.toString());
+		if(bindingResult.hasErrors()){
+			LOGGER.info("METHOD : store -- error : "+bindingResult.allErrors);
+			return "redirect:/admin/estudiantes/add";
+		}else {
+			studentService.updateUser(users)
+			
+			return "redirect:/admin/estudiantes";
+		}
+		return UPDATE;
 	}
 	
 }

@@ -46,7 +46,7 @@ class User implements Serializable {
 	@Column(name = "telefono", length = 10)
 	private String telefono;
 	
-	@NotEmpty
+	
 	@Email
 	@Length(min=7, max=80)
 	@Column(name = "correo" , unique = true, nullable = false, length = 80 )
@@ -78,8 +78,8 @@ class User implements Serializable {
 		this.username = username;
 	}
 
-	@NotEmpty
-	@Length(min=7, max=150)
+	
+	@Length(max=150)
 	@Column(name = "password", nullable = false, length = 150 )
 	private String password;
 	

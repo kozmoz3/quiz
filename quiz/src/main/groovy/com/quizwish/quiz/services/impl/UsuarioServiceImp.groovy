@@ -72,7 +72,7 @@ class UsuarioServiceImp implements UsuarioService{
 	public User update(User userUpdate, User userSession) {
 		LOGGER.info("METHOOD: save")
 		LOGGER.info("METHOOD: save  --- " +getUsuarioById(userSession.getIduser()).toString())
-		User user = getUsuarioById(userSession.getIduser())
+		User user = findById(userSession.getIduser())
 		user.setNombre(userUpdate.getNombre());
 		user.setApellidos(userUpdate.getApellidos())
 		user.setTelefono(userUpdate.getTelefono())
@@ -80,18 +80,41 @@ class UsuarioServiceImp implements UsuarioService{
 		user.setUsername(userSession.getUsername())
 		//user.setIdrol(userSession.getIdrol())
 		user.setEnable(true);
-		if(userUpdate.getPassword().equals("")) {
-			user.setPassword(userSession.getPassword())
-		}else {
-			def encode = new BCryptPasswordEncoder()
-			user.setPassword(encode.encode( userUpdate.getPassword() ));
-		}
+		user.setPassword(encodePassword(userUpdate.getPassword(), userSession.getPassword()))
 		
 		return userRepository.save(user)
 	}
+	
+	@Override
+	public User updateUser(User user) {
+		LOGGER.info("METHOD: updateUser "+user.toString())
+		User userUpdate = findById(user.getIduser())
+		userUpdate.setNombre(user.getNombre());
+		userUpdate.setApellidos(user.getApellidos())
+		userUpdate.setTelefono(user.getTelefono())
+		LOGGER.info("METHOD: updateUser  -- correo "+userUpdate.getCorreo())
+		 String correo =userUpdate.getCorreo()
+	    userUpdate.setCorreo(correo)
+		userUpdate.setUsername(user.getUsername())
+		//user.setIdrol(userSession.getIdrol())
+		userUpdate.setEnable(true);
+		userUpdate.setPassword(encodePassword(user.getPassword(), userUpdate.getPassword()))
+		LOGGER.info("METHOD: updateUser  -- user "+userUpdate.toString())
+		return userRepository.save(userUpdate)
+	} 
+	
+	private String encodePassword(String password, String passworEncode) {
+		LOGGER.info("METHOD: encodePassword "+password +" passwordEncode "+passworEncode)
+		if(password.equals("")) {
+			return passworEncode
+		}else {
+			def encode = new BCryptPasswordEncoder()
+			return encode.encode( password );
+		}
+	}
 
 	@Override
-	public User findById(int id) {
+	public User findById(Integer id) {
 		LOGGER.info("METHOOD: findById")
 		return userRepository.getOne(id);
 	}

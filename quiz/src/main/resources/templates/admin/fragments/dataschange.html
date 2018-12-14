@@ -27,6 +27,9 @@
 																		Nombre: <input name="firstname" type="text"
 																			class="form-control" placeholder="Nombre"
 																			th:value="${users.nombre}" th:field="*{nombre}">
+																			<input name="id" type="hidden"
+																			class="form-control" 
+																			 th:field="*{iduser}">
 																	</p>
 																</div>
 																<div class="form-group">
@@ -75,6 +78,14 @@
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 														<div class="devit-card-custom">
+														<div class="form-group">
+																<p>
+																	
+																	Username <input name="username" type="text"
+																		class="form-control" placeholder="Password"
+																		th:value="${users.username}" th:field="*{username}">
+																</p>
+															</div>
 															<div class="form-group">
 																<h5 th:text="${users.correo}"></h5>
 															</div>

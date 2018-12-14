@@ -27,7 +27,17 @@ class StudentServiceImpl implements StudentService {
 	@Autowired
 	@Qualifier("studentRepository")
 	private StudentRepository studentRepository
-
+    
+	@Override
+	public User findUserById(Integer idUser) {
+		return usuarioService.findById(idUser);
+	}
+	
+	@Override
+	public User updateUser(User user) {
+		return usuarioService.updateUser(user)
+	}
+	
 	@Override
 	public List<User>  findAllStudent(Integer idTeacher) {
 		LOGGER.info("METHOD: findAllStudent")

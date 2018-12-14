@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
+<title>Administrador</title>
+<meta charset="utf-8">
+<head th:replace="admin/includes/heads :: heads"></head>
+<body>
+	<div id="hedsconf" data-title="Administrador"></div>
+	<div th:replace="admin/includes/menu-desktop :: menu-desk"></div>
+	<div class="all-content-wrapper">
+		<div th:replace="admin/includes/logo-movile :: logo-mov"></div>
+		<div class="header-advance-area">
+			<div th:replace="admin/includes/top :: top"></div>
+			<div th:replace="admin/includes/menu-movile :: menu-movil"></div>
+			<div th:replace="admin/includes/navegacion :: breadcome"></div>
+		</div>
+		<form id="acount-infor" action="#" th:action="@{/admin/estudiantes/update}"
+			th:object="${users}" method="post" class="acount-infor">
+			<div th:replace="admin/fragments/dataschange :: frm-data-change"></div>
+		</form>
+	</div>
+	<div th:replace="admin/includes/scripts :: scripts"></div>
+</body>
+</html>
