@@ -23,24 +23,18 @@
 	        						<table>
 	        							<thead>
 		        							<tr>
-		        								<th>Nombre</th>
-		        								<th>Integrantes</th>
+		        								<th>Group</th>
+		        								<th>No Student</th>
+		        								<th>Add Student</th>
 		        								<th>Configuración</th>
 		        							</tr>
 	        							</thead>
 	        							<tbody>
-		        							<tr>
-		        								<td>Daniel Apellido Apellido</td>
+		        							<tr th:each="group : ${listGroup}">
+		        								<td th:text="${group.nombre}">Daniel Apellido Apellido</td>
 		        								<td>
 		        									<input type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" value="Agregar">
 		        								</td>
-		        								<td>
-		        									<button data-toggle="tooltip" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		        									<button data-toggle="tooltip" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-		        								</td>
-		        							</tr>
-		        							<tr>
-		        								<td>Daniel Apellido Apellido</td>
 		        								<td>
 		        									<input type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" value="Agregar">
 		        								</td>

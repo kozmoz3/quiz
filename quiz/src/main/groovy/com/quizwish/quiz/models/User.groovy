@@ -1,6 +1,7 @@
 package com.quizwish.quiz.models
 
 import com.quizwish.quiz.entity.Estudiantequiz
+import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Grupousuario
 import com.quizwish.quiz.entity.Quiz
 import java.io.Serializable
@@ -66,6 +67,19 @@ class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Estudiantequiz> estudiantequizList
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	private List<Grupo> grupList
+	
+	
+	
+	public List<Grupo> getGrupList() {
+		return grupList;
+	}
+
+	public void setGrupList(List<Grupo> grupList) {
+		this.grupList = grupList;
+	}
+
 	public User(String correo) {
 		this.correo = correo
 	}

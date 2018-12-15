@@ -83,6 +83,7 @@ class StudentServiceImpl implements StudentService {
 		student.setStudent(idStudent)
 		student.setTeacher( idTeacher)
 		student.setNullable(true);
+		
 		return studentRepository.save(student);
 	}
 

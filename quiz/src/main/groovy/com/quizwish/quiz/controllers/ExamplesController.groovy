@@ -40,10 +40,7 @@ class ExamplesController {
 		return "admin/components/me/index";
 	}
 	
-	@GetMapping("/admin/grupos")
-	def grupos(Model model) {
-		return "admin/components/grupos/list";
-	}
+	
 	
 	@GetMapping("/admin/grupos/add")
 	def gruposAdd(Model model) {

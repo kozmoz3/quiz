@@ -16,10 +16,17 @@ public class QuizComponent {
 	@Autowired
 	@Qualifier("quizService")
 	QuizService quizService;
-	
-	public List<Quiz> quizWithStatusTrue(User user){
+
+	public List<Quiz> quizWithStatusTrue(User user) {
 		List<Quiz> quizList = quizService.getQuizByIduser(user);
-		quizList.stream().filter(Quiz->Quiz.isEstatus() == true).forEach(System.out::println);
-	return quizList;
+		quizList.stream().filter(Quiz -> Quiz.isEstatus() == true).forEach(System.out::println);
+		return quizList;
 	}
+
+	public List<User> StudentWithStatusTrue(List<User> listUser) {
+		listUser.stream().filter(User -> User.isEnable() == true).forEach(System.out::println);
+		return listUser;
+	}
+	
+	
 }
