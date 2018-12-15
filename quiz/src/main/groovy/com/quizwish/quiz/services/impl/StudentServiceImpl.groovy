@@ -14,6 +14,7 @@ import com.quizwish.quiz.repositorys.StudentRepository
 import com.quizwish.quiz.repositorys.UserRepository
 import com.quizwish.quiz.services.StudentService
 import com.quizwish.quiz.services.UsuarioService
+import com.quizwish.quiz.utils.StatusTrueUtil
 
 @Service("studentService")
 class StudentServiceImpl implements StudentService {
@@ -41,7 +42,7 @@ class StudentServiceImpl implements StudentService {
 	@Override
 	public List<User>  findAllStudent(Integer idTeacher) {
 		LOGGER.info("METHOD: findAllStudent")
-		List<Student> studentList = findAllByIdTeacher(idTeacher);
+		List<Student> studentList = StatusTrueUtil.StudentWithStatusTrue(findAllByIdTeacher(idTeacher));
 		List<User> userList = new ArrayList();
 		for(Student students : studentList) {
 			userList.add(usuarioService.findById(students.getStudent()));

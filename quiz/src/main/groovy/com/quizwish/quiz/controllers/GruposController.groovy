@@ -44,16 +44,16 @@ class GruposController {
 	def show(Model model) {
 		LOGGER.info("METHOD : show ")
 		User user = sessionUser.userSessionAddUsername(model)
-		List<Grupo> lstgrupos = StatusTrueUtil.grouptWithStatusTrue( grupoService.getGroupAllByUser(user));
+		List<Grupo> lstgrupos =  grupoService.getGroupAllByUser(user);
 		model.addAttribute("lstgrupos",lstgrupos)
 		return SHOW
 	}
 	
 	@GetMapping("/grupos/add")
 	def index(Model model) {
-		List<User> lstusr = usuarioService.getUsuarioAll()
-		
-		model.addAttribute("listUser",  lstusr.findAll { it.getIdrol() == 2 } )
+		User user = sessionUser.userSessionAddUsername(model)
+		List<User> listUser =  grupoService.getStudentAllByUserId(user)
+		model.addAttribute("listUser",  listUser)
 		model.addAttribute("grupo", new Grupousuario() )
 		return "admin/components/grupos/crud"
 	}

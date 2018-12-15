@@ -8,6 +8,8 @@ import com.quizwish.quiz.models.User
 
 interface GroupService {
 	
+	public List<User> getStudentAllByUserId(User userAdmin)
+	
 	public List<Grupo> getGroupAllByUser(User user)
 	//Group
 	def getGroupAll();

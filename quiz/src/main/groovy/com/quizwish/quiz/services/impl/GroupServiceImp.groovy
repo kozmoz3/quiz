@@ -7,6 +7,9 @@ import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.GroupRepository
 import com.quizwish.quiz.repositorys.GroupUserRepository
 import com.quizwish.quiz.services.GroupService
+import com.quizwish.quiz.services.StudentService
+import com.quizwish.quiz.services.UsuarioService
+import com.quizwish.quiz.utils.StatusTrueUtil
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
@@ -21,10 +24,19 @@ class GroupServiceImp implements GroupService{
 	@Autowired
 	@Qualifier("groupuserRepository")
 	GroupUserRepository groupuserRepository
+	
+	@Autowired
+	@Qualifier("studentService")
+	StudentService studentService
+	
+	@Override
+	public List<User> getStudentAllByUserId(User userAdmin){
+		return studentService.findAllStudent(userAdmin.getIduser())
+	} 
 
 	@Override
 	public List<Grupo> getGroupAllByUser(User user){
-		return user.getGrupList();
+		return StatusTrueUtil.groupWithStatusTrue( user.getGrupList());
 	}
 	
 	@Override
