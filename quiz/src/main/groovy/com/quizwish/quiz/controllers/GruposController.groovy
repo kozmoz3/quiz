@@ -26,6 +26,7 @@ class GruposController {
 	
 	private static final Log LOGGER = LogFactory.getLog(GruposController.class)
 	static final def SHOW = "admin/components/grupos/list"
+	static final def INDEX = "admin/components/grupos/crud"
 	
 	@Autowired
 	@Qualifier("sessionUser")
@@ -49,15 +50,18 @@ class GruposController {
 		return SHOW
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/grupos/add")
 	def index(Model model) {
+		LOGGER.info("METHOD : index ")
 		User user = sessionUser.userSessionAddUsername(model)
 		List<User> listUser =  grupoService.getStudentAllByUserId(user)
 		model.addAttribute("listUser",  listUser)
 		model.addAttribute("grupo", new Grupousuario() )
-		return "admin/components/grupos/crud"
+		return INDEX
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/grupos/edit/{id}")
 	def gruposEdit(@PathVariable(name = "id") int id, Model model) {
 		List<User> lstusr = usuarioService.getUsuarioAll()
@@ -67,6 +71,7 @@ class GruposController {
 		return "admin/components/grupos/crud"
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@PostMapping("/grupos/edit/{id}")
 	def gruposEditPost(Model model) {
 		return "admin/components/grupos/crud"
