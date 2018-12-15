@@ -25,28 +25,21 @@ class ExamplesController {
 	@Autowired
 	@Qualifier("usuarioService")
 	UsuarioService usuarioService
-		
-	@GetMapping("/admin/simuladores/preguntas")
-	def simuladoresPreguntas(Model model) {
-		return "admin/components/simuladores/list-preguntas";
-	}
-	
-	
-	
-	
 	
 	@GetMapping("/admin/me")
 	def me(Model model) {
 		return "admin/components/me/index";
 	}
 	
+
 	
 	
-	@GetMapping("/admin/grupos/add")
+	/*@GetMapping("/admin/grupos/add")
 	def gruposAdd(Model model) {
 		List<User> lstusr = usuarioService.getUsuarioAll()		
 		model.addAttribute("listUser",  lstusr.findAll { it.getIdrol() == 2 } )
 		return "admin/components/grupos/crud";
-	}
+	}*/
 	
+
 }

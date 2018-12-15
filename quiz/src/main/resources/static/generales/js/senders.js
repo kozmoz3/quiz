@@ -9,6 +9,29 @@ function sendForm(idform, url, type) {
 		getErrorMessage(getCodeStatus(xhr, ""));
 }
 
+function setFormWM( objRequest ){	
+	var req = new XMLHttpRequest();	
+	req.open( objRequest.type, objRequest.url, false );	
+	req.send(objRequest.data);
+	
+	if (req.status == 200)
+		getSuccessfulMessageWithText("Operación completada");
+	else
+		getErrorMessage(getCodeStatus(req, ""));
+}
+
+function getFormInResponse( objRequest ){	
+	var req = new XMLHttpRequest();	
+	req.open( objRequest.type, objRequest.url, false );	
+	req.send();
+	
+	if (req.status == 200)
+		if (objRequest.response != "")
+			$(objRequest.response).html( req.response );
+	else
+		getErrorMessage(getCodeStatus(req, ""));
+}
+
 function setDataWithProgress( objRequest, inresponse ){	
 	var req = new XMLHttpRequest();
 	

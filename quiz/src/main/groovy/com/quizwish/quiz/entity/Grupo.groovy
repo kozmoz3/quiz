@@ -63,6 +63,9 @@ class Grupo implements Serializable{
 	@Basic(optional = false)
 	@Column(name = "descripcion")
 	String descripcion
+	
+	@Column(name = "status")
+	boolean status
 
 	@JoinColumn(name = "iduser", referencedColumnName = "iduser")
 	@ManyToOne()
@@ -76,6 +79,22 @@ class Grupo implements Serializable{
 	List<Grupousuario> grupousuarioList
 
 	/*fin getter and setter*/
+   
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public User getIduser() {
+		return iduser;
+	}
+
+	public void setIduser(User iduser) {
+		this.iduser = iduser;
+	}
 
 	public Integer getIdgrupo() {
 		return idgrupo;
@@ -101,13 +120,7 @@ class Grupo implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public User getUser() {
-		return iduser;
-	}
 
-	public void setUser(User iduser) {
-		this.iduser = iduser;
-	}
 
 	public int getIdUser() {
 		return iduser.getIduser();

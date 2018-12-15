@@ -80,9 +80,4 @@ class QuizController {
 		mov.addObject("quiz",quiz)
 		return mov;
 	}
-
-	@GetMapping("/simuladores/preguntas/add")
-	public String simuladoresPreguntasAdd(Model model) {
-		return "admin/components/simuladores/questions";
-	}
 }
