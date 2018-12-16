@@ -53,11 +53,11 @@ class Quiz implements Serializable{
     @Column(name = "idquiz")
     Integer idquiz
 	
-    @Basic(optional = false)
+   
     @Column(name = "nombre")
     String nombre
 	
-    @Basic(optional = false)
+
     @Lob
     @Column(name = "descripcion")
     String descripcion
@@ -65,11 +65,11 @@ class Quiz implements Serializable{
     @Column(name = "img")
     String img
 	
-    @Basic(optional = false)
+    
     @Column(name = "mostrar")
     String mostrar
 	
-    @Basic(optional = false)
+	
     @Column(name = "vista")
     String vista
 	
@@ -77,17 +77,17 @@ class Quiz implements Serializable{
     @Column(name = "random")
     boolean random
 
-    @Basic(optional = false)
+   
     @Column(name = "tiempo")
     @Temporal(TemporalType.TIME)
     Date tiempo
 	
     @Column(name = "venceini")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     Date venceini
 	
     @Column(name = "vencefin")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     Date vencefin
 	
     @Column(name = "intentos")
@@ -126,11 +126,11 @@ class Quiz implements Serializable{
     boolean isintentos
 
     @Column(name = "showfechaini")
-    @Temporal(TemporalType.DATE)
+   // @Temporal(TemporalType.DATE)
     Date showfechaini
 	
     @Column(name = "showfechafin")
-    @Temporal(TemporalType.DATE)
+   // @Temporal(TemporalType.DATE)
     Date showfechafin
 	
     @Column(name = "password")
@@ -140,13 +140,13 @@ class Quiz implements Serializable{
     @Column(name = "estatus")
     boolean estatus
 
-    @Basic(optional = false)
+  //  @Basic(optional = false)
     @Column(name = "tipovista")
     String tipovista
 	
-    @Basic(optional = false)
+   // @Basic(optional = false)
     @Column(name = "fecha")
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
     Date fecha
 	
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")

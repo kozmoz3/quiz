@@ -32,6 +32,7 @@ class QuizController {
 	static final String INDEX = "admin/components/simuladores/list";
 	static final def SHOW = "admin/components/simuladores/crud";
 	static final def STORE = "admin/simuladores/preguntas/add";
+	static final def PREGUNTAADD = "admin/components/simuladores/questions"
 
 	@Autowired
 	@Qualifier("sessionUser")
@@ -41,20 +42,15 @@ class QuizController {
 	@Qualifier("quizService")
 	QuizService quizService;
 	
-	/*@Autowired
-	@Qualifier("quizComponent")
-	QuizComponent quizComponent;*/
 
 	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/simuladores")
 	public String index(Model model) {
 		LOGGER.info("METHOD : index --");
-		User user = sessionUser.userSessionAll();
-		def username = user.getNombre();
-		model.addAttribute("username", username);
-		//List<Quiz> quizList= quizComponent.quizWithStatusTrue(user);
-		//model.addAttribute("quizList", quizList);
-		//LOGGER.info("METHOD : index -- listQuiz = "+quizList );
+		User user = sessionUser.userSessionAddUsername(model);
+		List<Quiz> quizList=  quizService.getQuizByIduser( user);
+		model.addAttribute("quizList", quizList);
+		LOGGER.info("METHOD : index -- listQuiz = "+quizList );
 		return INDEX;
 	}
 
@@ -62,22 +58,18 @@ class QuizController {
 	@GetMapping("/simuladores/add")
 	def show(Model model) {
 		LOGGER.info("METHOD : show --");
-		User user = sessionUser.userSessionAll();
-		def username = user.getNombre();
-		model.addAttribute("username", username);
+		User user = sessionUser.userSessionAddUsername(model);
+		model.addAttribute("quiz", new Quiz());
 		return SHOW;
 	}
 
 	@PostMapping("/simuladores/add")
-	def addQuiz(@RequestParam Map<String,Object> quiz, Model model) {
-		System.out.println(quiz.toMapString())
-		return SHOW
+	def stores(@RequestParam Map<String,Object> quizMap, Model model) {
+		LOGGER.info("METHOD : stores -- "+ quizMap);
+		User user = sessionUser.userSessionAddUsername(model);
+		Quiz quiz = quizService.saveQuiz(quizMap, user)
+		return  PREGUNTAADD
 	}
 
-	@PostMapping("/saveQuiz")
-	def save(@ModelAttribute("quiz")Quiz quiz) {
-		def mov = new ModelAndView(STORE);
-		mov.addObject("quiz",quiz)
-		return mov;
-	}
+	
 }

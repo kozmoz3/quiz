@@ -20,7 +20,40 @@ class QuizServiceImpl implements QuizService{
 	@Qualifier("quizRepository")
 	def QuizRepository quizRepository
 	
-	
+	@Override
+	public  Quiz saveQuiz(Map<String,Object> quizMap, User user) {
+		LOGGER.info("METHOD : saveQuiz ");
+		Quiz quiz = new Quiz();
+		quiz.setNombre(quizMap.get("nombre"))
+		quiz.setDescripcion(quizMap.get("descripcion"))
+		//quiz.setTipovista(String tipovista)
+		
+		//quiz.setImg(quizMap.get("img"))
+		/*quiz.setMostrar(String mostrar)//boolean
+		quiz.setVista(String vista)//boolean
+		quiz.setRandom(quizMap.get("random")) 
+		quiz.setTiempo(Date tiempo)
+		quiz.setVenceini(Date venceini)
+		quiz.setVencefin(Date vencefin) 
+		quiz.setIntentos(String intentos)
+		quiz.setPreguntasc(boolean preguntasc)
+		quiz.setRespuestac(boolean respuestac)
+		quiz.setPreguntasi(boolean preguntasi)
+		quiz.setCalificacion(boolean calificacion)
+		quiz.setGrafico(boolean grafico)
+		quiz.setIstiempo(boolean istiempo)
+		quiz.setMensajesop(boolean mensajesop)
+		quiz.setIsintentos(boolean isintentos)
+		quiz.setShowfechaini(Date showfechaini)
+		quiz.setShowfechafin(Date showfechafin)
+		quiz.setPassword(String password)
+		quiz.setEstatus(boolean estatus)
+		
+		quiz.setFecha(Date fecha)
+		quiz.setIduser(User iduser)*/
+		quiz.setIduser(user)
+		return save(quiz)
+	}
 	
 	@Override
 	def save(Quiz quiz) {
@@ -33,9 +66,10 @@ class QuizServiceImpl implements QuizService{
 	}
 
 	@Override
-	public List<Quiz>  getQuizByIduser(User idUser) {
-		LOGGER.info("METHOD : getQuizByIduse -- id user = "+ idUser);
-		return quizRepository.findAllByIduser(idUser);
+	public List<Quiz>  getQuizByIduser(User user) {
+		LOGGER.info("METHOD : getQuizByIduse -- id user = ");
+		return user.getQuizList();
+		//return quizRepository.findAllByIduser(idUser);
 	}
 	
 	

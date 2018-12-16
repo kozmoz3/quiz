@@ -9,7 +9,8 @@ import com.quizwish.quiz.models.User
 
 interface QuizService {
 	
-     
+	public abstract Quiz saveQuiz(Map<String,Object> quiz, User user);
+	 
 	def save(Quiz quiz);
 	
 	def getQuizAll();
