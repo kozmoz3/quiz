@@ -30,6 +30,11 @@ class GroupServiceImp implements GroupService{
 	StudentService studentService
 	
 	@Override
+	public Grupo save(Grupo grupo) {
+		return grupoRepository.save(grupo)
+	}
+	
+	@Override
 	public List<User> getStudentAllByUserId(User userAdmin){
 		return studentService.findAllStudent(userAdmin.getIduser())
 	} 

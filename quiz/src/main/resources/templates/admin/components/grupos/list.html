@@ -33,12 +33,9 @@
 
 		        							<tr th:each="grupo: ${lstgrupos}">
 		        								<td th:text="${grupo.nombre}">{{name}}</td>
-
+		        								<td >{{No estudiante}}</td>
 		        								<td>
-		        								<td th:text="${grupo.nombre}">{{No estudiante}}</td>
-
-		        								<td>
-		        									<input type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" value="Agregar">
+		        									<input type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" value="Add Student">
 		        								</td>
 		        								<td>
 		        									<button data-toggle="tooltip" th:onclick="@{javascript:location.href='/admin/grupos/edit/__${grupo.idgrupo}__';}" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>

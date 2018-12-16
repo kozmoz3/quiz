@@ -57,7 +57,7 @@ class GruposController {
 		User user = sessionUser.userSessionAddUsername(model)
 		List<User> listUser =  grupoService.getStudentAllByUserId(user)
 		model.addAttribute("listUser",  listUser)
-		model.addAttribute("grupo", new Grupousuario() )
+		model.addAttribute("grupo", new Grupo() )
 		return INDEX
 	}
 	
