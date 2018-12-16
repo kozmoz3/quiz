@@ -1,4 +1,4 @@
-/*
+﻿/*
 Navicat MySQL Data Transfer
 
 Source Server         : local
@@ -49,7 +49,7 @@ CREATE TABLE `grupo` (
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `iduser` int(11)
+  `iduser` int(11),
   PRIMARY KEY (`idgrupo`),
    KEY `fk_grup_user` (`iduser`),
     CONSTRAINT `fk_grup_user` FOREIGN KEY (`iduserfk`) REFERENCES `user` (`iduser`)
