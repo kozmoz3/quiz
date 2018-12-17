@@ -86,6 +86,38 @@
 	
 	}
 	
+	function sendDataList( element ){
+		let colldat =  $("table[data-collection]").find("input[data-selck]").filter(function(item){
+			return $(this).is(":checked");
+		});
+		
+		var Grupousuario = /** @class */ (function () {
+		    function Grupousuario(idstudent, estatus) {
+		        this.idstudent = idstudent;
+		        this.estatus = estatus;
+		    }
+		    return Grupousuario;
+		}());
+		var arreglo = [];
+
+		$.each(colldat, function(index, item){
+			arreglo.push(new Grupousuario( $(item).attr("data-selck"), $(item).is(":checked") ));
+		});
+		let data = {};
+		let datacontainer = {};
+		let id = $("input[data-idsend]").attr("data-idsend");
+		let nameobj = $( $("table[data-collection]") ).attr("data-collection");
+		data[ nameobj ] = arreglo;
+		data[ id ] = $("input[data-idsend]").val();
+		datacontainer[ nameobj ] = data;
+		setFormWMLocation({
+			type: $(element).attr("data-href-method"),
+			url: $(element).attr("data-href-url"),
+			data: datacontainer,
+			location:  $(element).attr("data-response")
+		});
+	}
+	
 	function sendData( idElement ) {
 		var lstElements = getListElements( $(".valid-errors") );
 		var lstStringscmd = $(idElement).attr("data-list-str") != undefined ? $(idElement).attr("data-list-str") : "";

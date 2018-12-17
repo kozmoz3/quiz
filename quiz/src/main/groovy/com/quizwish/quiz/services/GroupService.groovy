@@ -18,16 +18,8 @@ interface GroupService {
 	
 	def getGroupById(Integer id);
 				
-	def setGroup(Grupo grupo, Grupousuario grupousuario, User user);
+	def setGroup(Grupo grupo, User usuario);
 			
 	def deleteGroup(Integer id);
-	
-	// Group user
-	
-	def getGroupUserAll();
-	
-	def getGroupUserById(Integer id);
-	
-	def deleteGroupUser(Integer id);
 
 }

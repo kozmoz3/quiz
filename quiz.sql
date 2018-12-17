@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
@@ -52,7 +52,9 @@ INSERT INTO `grupo` (`idgrupo`, `nombre`, `descripcion`, `status`, `iduser`) VAL
 CREATE TABLE `grupouser` (
   `idrelaciongu` int(11) NOT NULL,
   `iduserfk` int(11) NOT NULL,
-  `idgrupo` int(11) NOT NULL
+  `idgrupo` int(11) NOT NULL,
+  `idstudent` int(11) NOT NULL,
+  `estatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

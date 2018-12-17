@@ -9,11 +9,23 @@ function sendForm(idform, url, type) {
 		getErrorMessage(getCodeStatus(xhr, ""));
 }
 
+function setFormWMLocation( objRequest ){	
+	var req = new XMLHttpRequest();	
+	req.open( objRequest.type, objRequest.url, false );
+	//req.setRequestHeader('Content-type','application/json; charset=utf-8');
+	req.send( objRequest.data );
+	//console.log(JSON.stringify(objRequest.data));
+	console.log( objRequest.data);
+	if (req.status == 200)
+		location.href = objRequest.location;
+	else
+		getErrorMessage(getCodeStatus(req, ""));
+}
+
 function setFormWM( objRequest ){	
 	var req = new XMLHttpRequest();	
 	req.open( objRequest.type, objRequest.url, false );	
 	req.send(objRequest.data);
-	
 	if (req.status == 200)
 		getSuccessfulMessageWithText("Operación completada");
 	else

@@ -31,6 +31,14 @@ class Grupousuario implements Serializable{
 	@Column(name = "idrelaciongu")
 	Integer idrelaciongu
 	
+	@Basic(optional = false)
+	@Column(name = "idstudent")
+	Integer idstudent
+	
+	@Basic(optional = false)
+	@Column(name = "estatus")
+	boolean estatus
+	
 	@JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo")
 	@ManyToOne(optional = false)
 	Grupo idgrupo
@@ -44,6 +52,11 @@ class Grupousuario implements Serializable{
 
 	def Grupousuario(Integer idrelaciongu) {
 		this.idrelaciongu = idrelaciongu
+	}
+	
+	def Grupousuario(Integer idstudent, boolean estatus) {
+		this.idstudent = idstudent
+		this.estatus = estatus
 	}
 
 	@Override

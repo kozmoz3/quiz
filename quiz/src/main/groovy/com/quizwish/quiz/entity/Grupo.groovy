@@ -48,6 +48,14 @@ class Grupo implements Serializable{
 		this.nombre = nombre
 		this.descripcion = descripcion
 	}
+	
+	def Grupo(Integer idgrupo, String nombre, String descripcion, boolean status, User iduser) {
+		this.idgrupo = idgrupo
+		this.nombre = nombre
+		this.descripcion = descripcion
+		this.status = status
+		this.iduser = iduser
+	}
 
 
 	@Id

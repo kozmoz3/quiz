@@ -1,8 +1,9 @@
 package com.quizwish.quiz.services.impl
 
-
+import com.quizwish.quiz.component.SessionUser
 import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Grupousuario
+import com.quizwish.quiz.entity.Student
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.GroupRepository
 import com.quizwish.quiz.repositorys.GroupUserRepository
@@ -20,10 +21,6 @@ class GroupServiceImp implements GroupService{
 	@Autowired
 	@Qualifier("grupoRepository")
 	GroupRepository grupoRepository
-	
-	@Autowired
-	@Qualifier("groupuserRepository")
-	GroupUserRepository groupuserRepository
 	
 	@Autowired
 	@Qualifier("studentService")
@@ -52,40 +49,18 @@ class GroupServiceImp implements GroupService{
 	@Override
 	def getGroupById(Integer id) {
 		Optional<Grupo> grupo = grupoRepository.findById(id)
-		return grupo.isPresent() ? grupo : new Grupo()
+		return grupo.isPresent() ? grupo.get() : new Grupo()
 	}
 
 	@Override
-	public Grupousuario setGroup(Grupo grupo, Grupousuario grupousuario, User user) {
-		Grupo grupoadd = grupoRepository.save(grupo)
-		Grupousuario grupousuarioadd = setGrupoUser(grupoadd, grupousuario, user)
-		return null;
+	def setGroup(Grupo grupo, User usuario) {
+		grupo.setIduser(usuario)
+		return grupoRepository.save(grupo)
 	}
 	
-	private Grupousuario setGrupoUser(Grupo grupo, Grupousuario grupousuario, User user) {
-		if(grupo.getIdgrupo() != null) {
-			
-		}
-	}
-
 	@Override
 	def deleteGroup(Integer id) {
 		return grupoRepository.deleteById(id)
-	}
-
-	@Override
-	def getGroupUserAll() {
-		return groupuserRepository.findAll()
-	}
-
-	@Override
-	def getGroupUserById(Integer id) {
-		return groupuserRepository.findById(id)
-	}
-
-	@Override
-	def deleteGroupUser(Integer id) {
-		return groupuserRepository.deleteById(id)
 	}
 
 }

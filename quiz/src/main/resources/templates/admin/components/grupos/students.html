@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
-	<title>Grupos</title>
+	<title>Estudiantes</title>
 	<meta charset="utf-8">
 	<head th:replace="admin/includes/heads :: heads"></head>
 	<body>
@@ -16,33 +16,40 @@
 	        <div class="single-pro-review-area mt-t-30 mg-b-15" th:fragment="frm-data-change">
 				<div class="container-fluid">
 					<div class="sparkline8-list responsive-mg-b-30">
-						<form class="valid-errors" th:action="@{/admin/grupos/add}" th:method="post">
+						<form class="valid-errors">
 							<div class="row">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-									<div class="form-group">
-										<input type="text" required id="nombre" name="nombre" class="form-control" placeholder="Nombre"/>
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<div style="height: 204px; overflow: scroll;">
+										<table class="table" data-collection="grupousuario">
+											<thead>
+												<tr>
+													<th>Nombre</th>
+													<th>Asignar</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="user,item : ${listUser}">
+													<td th:text="${user.nombre} + ' ' + ${user.apellidos}"></td>
+													<td><input type="checkbox" th:id="'ckus'+${item.index}" data-unsel th:data-selck="${user.iduser}"/></td>
+												</tr>												
+											</tbody>
+										</table>
 									</div>
-									<div class="form-group">
-										<textarea rows="8" required id="descripcion" name="descripcion" class="form-control" placeholder="Descripción"></textarea>
-									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label>
-											Habilitar
-											<input type="checkbox" id="status" name="status"/>
+											<input type="checkbox" data-allselck /> Seleccionar todos
 										</label>
-									</div>
+									</div>-->
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="submit" class="btn btn-success" value="Enviar"/>
-								<!-- <input type="button" 
-								onclick="sendData(this);"
-								data-onclear="true" 
-								data-href-method="post" 
-								data-remain="3" 
-								data-href-url="/admin/grupos" data-optional data-noset data-cleable 
-								data-response="ptext|#unid" 
-								class="btn btn-success" value="Enviar"/>-->
+								<input type="hidden" data-idsend="idgrupo" th:value="${grupo.idgrupo}"/>
+								<input type="button" 
+								onclick="sendDataList(this);"
+								data-href-method="post"
+								th:data-href-url="@{/admin/grupos/add/estudiantes}"
+								th:data-response="@{/admin/grupos}"
+								class="btn btn-success" value="Enviar"/>
 							</div>
 						</form>
 					</div>

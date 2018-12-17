@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 import com.quizwish.quiz.entity.Grupousuario
 
 @Repository("groupuserRepository")
-interface GroupUserRepository extends JpaRepository< Grupousuario, Integer >{
-
+public interface GroupUserRepository extends JpaRepository< Grupousuario, Serializable >{
+	public abstract Grupousuario findByIdstudent(Integer idstudent);
 }

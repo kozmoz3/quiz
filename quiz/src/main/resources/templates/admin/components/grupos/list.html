@@ -33,7 +33,7 @@
 
 		        							<tr th:each="grupo: ${lstgrupos}">
 		        								<td th:text="${grupo.nombre}">{{name}}</td>
-		        								<td >{{No estudiante}}</td>
+		        								<td th:text="${#lists.size(grupo.grupousuarioList)}">{{No estudiante}}</td>
 		        								<td>
 		        									<input type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" value="Add Student">
 		        								</td>
