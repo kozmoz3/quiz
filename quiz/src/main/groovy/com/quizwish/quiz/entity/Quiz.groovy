@@ -62,16 +62,19 @@ class Quiz implements Serializable{
     @Column(name = "descripcion")
     String descripcion
 	
+	@Column(name = "showallquestion")
+	boolean  showallquestion
+	
     @Column(name = "img")
     String img
 	
     
     @Column(name = "mostrar")
-    String mostrar
+    Integer mostrar
 	
 	
     @Column(name = "vista")
-    String vista
+    boolean vista //si es true =  Todas las preguntas en una hoja And si es false= Mostrar preguntas en un wizard
 	
     
     @Column(name = "random")
@@ -140,11 +143,12 @@ class Quiz implements Serializable{
     @Column(name = "estatus")
     boolean estatus
 
-  //  @Basic(optional = false)
-    @Column(name = "tipovista")
-    String tipovista
-	
-   // @Basic(optional = false)
+  
+    @Column(name = "publicar")
+    boolean publicar
+
+
+	// @Basic(optional = false)
     @Column(name = "fecha")
     //@Temporal(TemporalType.TIMESTAMP)
     Date fecha
@@ -193,6 +197,15 @@ class Quiz implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+
+	public boolean isShowallquestion() {
+		return showallquestion;
+	}
+
+	public void setShowallquestion(boolean showallquestion) {
+		this.showallquestion = showallquestion;
+	}
 
 	public String getImg() {
 		return img;
@@ -202,22 +215,23 @@ class Quiz implements Serializable{
 		this.img = img;
 	}
 
-	public String getMostrar() {
+	public Integer getMostrar() {
 		return mostrar;
 	}
 
-	public void setMostrar(String mostrar) {
+	public void setMostrar(Integer mostrar) {
 		this.mostrar = mostrar;
 	}
 
-	public String getVista() {
+	public boolean getVista() {
 		return vista;
 	}
 
-	public void setVista(String vista) {
+	public void setVista(boolean vista) {
 		this.vista = vista;
 	}
 
+	
 	public boolean isRandom() {
 		return random;
 	}
@@ -354,13 +368,19 @@ class Quiz implements Serializable{
 		this.estatus = estatus;
 	}
 
-	public String getTipovista() {
-		return tipovista;
-	}
-
-	public void setTipovista(String tipovista) {
-		this.tipovista = tipovista;
-	}
+	
+	public boolean isPublicar() {
+		 return publicar;
+	 }
+ 
+	 public void setPublicar(boolean publicar) {
+		 this.publicar = publicar;
+	 }
+ 
+	 
+	 public void setEstudiantequizList(List<Estudiantequiz> estudiantequizList) {
+		 this.estudiantequizList = estudiantequizList;
+	 }
 
 	public Date getFecha() {
 		return fecha;

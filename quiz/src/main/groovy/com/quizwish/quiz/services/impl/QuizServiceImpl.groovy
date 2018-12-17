@@ -11,6 +11,7 @@ import com.quizwish.quiz.entity.Quiz
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.QuizRepository
 import com.quizwish.quiz.services.QuizService
+import com.quizwish.quiz.utils.CovertStringToBooleanUtil
 
 @Service("quizService")
 class QuizServiceImpl implements QuizService{
@@ -26,12 +27,15 @@ class QuizServiceImpl implements QuizService{
 		Quiz quiz = new Quiz();
 		quiz.setNombre(quizMap.get("nombre"))
 		quiz.setDescripcion(quizMap.get("descripcion"))
-		//quiz.setTipovista(String tipovista)
+		quiz.setImg(quizMap.get("img"))
+		quiz.setPublicar(CovertStringToBooleanUtil.converStringToBoolean(quizMap.get("tipovista")))
+		quiz.setShowallquestion(CovertStringToBooleanUtil.converStringToBoolean(quizMap.get("mostrarall")))
+		quiz.setMostrar(CovertStringToBooleanUtil.convertBooleanToInt(quizMap.get("mostraronly"), quizMap.get("showonly")) )
+		quiz.setVista(CovertStringToBooleanUtil.converStringToBoolean(quizMap.get("vistaall")))//si es true =  Todas las preguntas en una hoja And si es false= Mostrar preguntas en un wizard
+		quiz.setRandom(CovertStringToBooleanUtil.converStringToBoolean(quizMap.get("random")))
+		/*
 		
-		//quiz.setImg(quizMap.get("img"))
-		/*quiz.setMostrar(String mostrar)//boolean
-		quiz.setVista(String vista)//boolean
-		quiz.setRandom(quizMap.get("random")) 
+		
 		quiz.setTiempo(Date tiempo)
 		quiz.setVenceini(Date venceini)
 		quiz.setVencefin(Date vencefin) 
