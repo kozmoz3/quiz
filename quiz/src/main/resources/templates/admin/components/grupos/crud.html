@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<head th:replace="admin/includes/heads :: heads"></head>
 	<body>
-		<div id="hedsconf" data-title="Agregar grupo"></div>
+		<div id="hedsconf" th:data-title="${edit}?'Editar grupo':'Agregar grupo'"></div>
 	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
 	    <div class="all-content-wrapper">
 	        <div th:replace="admin/includes/logo-movile :: logo-mov"></div>
@@ -16,26 +16,28 @@
 	        <div class="single-pro-review-area mt-t-30 mg-b-15" th:fragment="frm-data-change">
 				<div class="container-fluid">
 					<div class="sparkline8-list responsive-mg-b-30">
-						<form class="valid-errors" th:action="@{/admin/grupos/add}" th:method="post">
+						<form class="valid-errors" th:action="${edit} ? @{/admin/grupos/edit} : @{/admin/grupos/add}" th:method="post">
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
-										<input type="text" required id="nombre" name="nombre" class="form-control" placeholder="Nombre"/>
+										<input type="text" required id="nombre" name="nombre" th:value="${grupo.nombre}" class="form-control" placeholder="Nombre"/>
 									</div>
 									<div class="form-group">
-										<textarea rows="8" required id="descripcion" name="descripcion" class="form-control" placeholder="Descripción"></textarea>
+										<textarea rows="8" required id="descripcion" name="descripcion" th:text="${grupo.descripcion}" class="form-control" placeholder="Descripción"></textarea>
 									</div>
 									<div class="form-group">
 										<label>
 											Habilitar
-											<input type="checkbox" id="status" name="status"/>
+											<input type="checkbox" id="status" name="status" th:if="${grupo.status == true}" checked="checked"/>
+											<input type="checkbox" id="status" name="status" th:if="${grupo.status == false}"/>
 										</label>
 									</div>
+									<input th:if="${edit}" type="hidden" id="idgrupo" name="idgrupo" th:value="${grupo.idgrupo}"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<input type="submit" class="btn btn-success" value="Enviar"/>
-								<!-- <input type="button" 
+								<!-- <input th:if="${edit}" type="button" 
 								onclick="sendData(this);"
 								data-onclear="true" 
 								data-href-method="post" 

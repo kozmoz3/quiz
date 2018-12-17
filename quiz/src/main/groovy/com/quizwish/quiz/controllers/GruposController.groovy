@@ -35,6 +35,7 @@ class GruposController {
 	static final def SHOW = "admin/components/grupos/list"
 	static final def INDEX = "admin/components/grupos/crud"
 	static final def RESTUDENTS = "redirect:/admin/grupos/add/estudiantes?action=add"
+	static final def RESHOW = "redirect:/admin/grupos"
 	static final def STUDENTS = "admin/components/grupos/students"
 	
 	@Autowired
@@ -69,6 +70,7 @@ class GruposController {
 		LOGGER.info("METHOD : index ")
 		User user = sessionUser.userSessionAddUsername(model)
 		model.addAttribute("grupo", new Grupo() )
+		model.addAttribute("edit", false)
 		return INDEX
 	}
 	
@@ -104,17 +106,20 @@ class GruposController {
 	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/grupos/edit/{id}")
 	def gruposEdit(@PathVariable(name = "id") int id, Model model) {
-		List<User> lstusr = usuarioService.getUsuarioAll()
 		User users = sessionUser.userSessionAddUsername(model)
-		model.addAttribute("listUser",  lstusr.findAll { it.getIdrol() == 2 } )
-		model.addAttribute("grupo", users.getGrupousuarioList().findAll{ it.getIdgrupo().getIdgrupo().equals(id) } )
+		model.addAttribute("grupo", grupoService.getGroupById(id) )
+		model.addAttribute("edit", true)
 		return "admin/components/grupos/crud"
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ROOT')")
-	@PostMapping("/grupos/edit/{id}")
-	def gruposEditPost(Model model) {
-		return "admin/components/grupos/crud"
+	@PostMapping("/grupos/edit")
+	def gruposEditPost(@ModelAttribute("grupo") Grupo grupo,  Model model) {
+		User user = sessionUser.userSessionAddUsername(model)
+		Grupo addGroup = grupoService.setGroup(grupo, user)
+		List<Grupo> lstgrupos =  grupoService.getGroupAllByUser(user);
+		model.addAttribute("lstgrupos",lstgrupos)
+		return RESHOW
 	}
 
 }
