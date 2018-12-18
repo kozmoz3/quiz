@@ -8,6 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
@@ -88,6 +89,7 @@ class GruposController {
 		return RESTUDENTS +"&idgrup=" + addGroup.getIdgrupo()
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/grupos/add/estudiantes")
 	def addStudentsView(
 		@RequestParam(name = "action", required = true) String action,
@@ -102,6 +104,7 @@ class GruposController {
 		return STUDENTS
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@RequestMapping(value = "/grupos/add/estudiantes", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
 	def addStudents( @RequestBody MGrupoUser grupousuario, Model model) {
 		LOGGER.info("METHOD : addStudents [POST]");
@@ -111,6 +114,7 @@ class GruposController {
 		return SHOW
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@RequestMapping(value = "/grupos/add/estudiante", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
 	def addStudent( @RequestBody MGrupoUser grupousuario, Model model) {
 		LOGGER.info("METHOD : addStudent [POST]");
@@ -135,6 +139,13 @@ class GruposController {
 		User user = sessionUser.userSessionAddUsername(model)
 		grupoService.setGroup(grupo, user)
 		return RESHOW
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@DeleteMapping("/grupos/delete/{id}")
+	def gruposDelete(@PathVariable(name = "id") int id, Model model) {
+		grupoService.deleteGroup(id)
+		return SHOW
 	}
 
 }

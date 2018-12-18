@@ -558,6 +558,17 @@ $("input[data-push]").click(function(){
 	setFormWOMessage({ type:"post", url:url, data: data });
 });
 
+$("button[data-delete]").click(function(){
+	var url = $(this).attr("data-delete");
+	var tr = $( $(this).attr("data-removei") );
+	getOptionalMessage( "CristalS", "¿Está seguro de eliminar el registro?", function(){
+		setFormWM({ type:"delete", url:url, data:{} });
+		$(tr).remove();
+	}, function(){
+		getNotification("Operación cancelada","info");
+	});
+});
+
 function editQ( element ){
 	var url = $(element).attr("data-urls");
 	var response = $(element).attr("data-response");
