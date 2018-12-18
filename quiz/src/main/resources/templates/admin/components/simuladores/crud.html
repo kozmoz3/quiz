@@ -3,28 +3,6 @@
 	<title>Simulador</title>
 	<meta charset="utf-8">
 	<head th:replace="admin/includes/heads :: heads"></head>
-	<style type="text/css">
-		progress[value] {
-			-webkit-appearance: none;
-			appearance: none;
-			width: 250px;
-			height: 20px;
-		}
-		.ml-auto, .mx-auto {
-		    margin-left: auto!important;
-		}
-		.mr-auto, .mx-auto {
-		    margin-right: auto!important;
-		}
-		.d-block {
-		    display: block!important;
-		}
-		.rounded-circle {
-		    border-radius: 50%!important;
-		    width: 200px;
-		    height: 200px;
-		}
-	</style>
 	<body>
 		<div id="hedsconf" th:data-title="${usuario}"></div>
 	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
@@ -81,10 +59,12 @@
 																		<p>Descripcion del Quiz</p>
 																			<textarea id="strdescripcion" class="form-control" placeholder="Descripcion"></textarea>
 																		</div>
-																		<div class="form-group">
-																			<label>Privado tu quiz
-																				<input type="checkbox" data-optional data-cleable id="chktipovista"/>
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input type="checkbox" data-optional data-cleable id="chktipovista" class='switch'/>
+																				<label for="chktipovista"></label>
+																			</div>
+																			<label>Privado tu quiz</label>
 																		</div>
 																	</div>																	
 																</div>
@@ -128,23 +108,36 @@
 																<hr>
 																<div class="row">
 																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
-																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strrandom" type="checkbox"> Preguntas random
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input data-optional data-cleable id="strrandom" type="checkbox" class='switch'/>
+																				<label for="strrandom"></label>
+																			</div>
+																			<label>Preguntas random</label>
 																		</div>
 																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strtiempo" type="checkbox"> Asignar tiempo que dure el quiz
-																			</label>
-																			<input type="time" class="form-control" disabled value="1" id="strshowtimeonly" placeholder="#" />
+																			<div class="inlabel">
+																				<div>
+																					<input data-optional data-cleable id="strtiempo" type="checkbox" class='switch'/>
+																					<label for="strtiempo"></label>
+																				</div>
+																				<label>Asignar tiempo que dure el quiz</label>
+																			</div>
+																			<div class="ingrid">
+																				<input type="number" data-presscant="2" class="form-control" min="0" max="99" maxlength="2" disabled id="strshowtimeonlyhor" placeholder="Hrs" />
+																				<input type="number" data-presscant="2" class="form-control" min="0" max="99" maxlength="2" disabled id="strshowtimeonlymin" placeholder="Min" />
+																			</div>
 																		</div>
 																	</div>
 																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable data-noset id="strvence" type="checkbox"> Vencimiento de simulador
-																			</label>
+																			<div class="inlabel">
+																				<div>
+																					<input data-optional data-cleable data-noset id="strvence" type="checkbox" class='switch'/>
+																					<label for="strvence"></label>
+																				</div>
+																				<label>Vencimiento de simulador</label>
+																			</div>
 																			<div class="form-group" style="display: flex;">
 																				<input data-optional id="strvenceini" disabled type="date" class="form-control">
 																				<span style="padding-right: 20px;padding-left: 20px;">a</span>
@@ -203,44 +196,58 @@
 															<div class="row">
 																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 																	<div class="devit-card-custom">
-																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strpreguntasc" type="checkbox"> Mostrar preguntas correctas
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input data-optional data-cleable id="strpreguntasc" type="checkbox" class='switch'>
+																				<label for="strpreguntasc"></label>
+																			</div>
+																			<label>Mostrar preguntas correctas</label>
 																		</div>
-																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strrespuestac" type="checkbox"> Mostrar respuestas correctas
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input data-optional data-cleable id="strrespuestac" type="checkbox" class='switch'>
+																				<label for="strrespuestac"></label>
+																			</div>
+																			<label>Mostrar respuestas correctas</label>
 																		</div>
-																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strpreguntasi" type="checkbox"> Mostrar preguntas incorrectas
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input data-optional data-cleable id="strpreguntasi" type="checkbox" class='switch'>
+																				<label for="strpreguntasi"></label>
+																			</div>
+																			<label>Mostrar preguntas incorrectas</label>
 																		</div>
-																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strcalificacion" type="checkbox"> Mostrar calificación
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input data-optional data-cleable id="strcalificacion" type="checkbox" class='switch'>
+																				<label for="strcalificacion"></label>
+																			</div>
+																			<label>Mostrar calificación</label>
 																		</div>
 																	</div>
 																</div>
 																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 																	<div class="devit-card-custom">
-																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strgrafico" type="checkbox"> Mostrar gráfico
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input data-optional data-cleable id="strgrafico" type="checkbox" class='switch'>
+																				<label for="strgrafico"></label>
+																			</div>
+																			<label>Mostrar gráfico</label>
 																		</div>
-																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strtiemporesponse" type="checkbox"> Mostrar tiempo de examen
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input data-optional data-cleable id="strtiemporesponse" type="checkbox" class='switch'>
+																				<label for="strtiemporesponse"></label>
+																			</div>
+																			<label>Mostrar tiempo de examen</label>
 																		</div>
-																		<div class="form-group">
-																			<label>
-																				<input data-optional data-cleable id="strmensajesop" type="checkbox"> Mostrar mensajes opcionales
-																			</label>
+																		<div class="form-group inlabel">
+																			<div>
+																				<input data-optional data-cleable id="strmensajesop" type="checkbox" class='switch'>
+																				<label for="strmensajesop"></label>
+																			</div>
+																			<label>Mostrar mensajes opcionales</label>
 																		</div>
 																	</div>
 																</div>

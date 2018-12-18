@@ -20,7 +20,10 @@ $("#strvence").click(function(){
 
 $("#strtiempo").click(function(){
 	if( $(this).is(":checked") )
-		onBlock( ["#strshowtimeonly"], false );
+		onBlock( ["#strshowtimeonlymin","#strshowtimeonlyhor"], false );
 	else
-		onBlock( ["#strshowtimeonly"], true );
+		onBlock( ["#strshowtimeonlymin","#strshowtimeonlyhor"], true );
+});
+$("input[data-presscant]").keypress(function(){
+	if( $(this).val().length > ($(this).attr("data-presscant") - 1) ) $(this).val("");
 });
