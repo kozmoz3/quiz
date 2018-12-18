@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
+
+import com.quizwish.quiz.component.GrupoUserComponent
 import com.quizwish.quiz.component.SessionUser
 import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Grupousuario
@@ -54,6 +56,10 @@ class GruposController {
 	@Qualifier("grupouserService")
 	GroupUserService grupouserService
 	
+	@Autowired
+	@Qualifier("grupouserComponent")
+	GrupoUserComponent grupouserComponent
+	
 	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/grupos")
 	def show(Model model) {
@@ -88,8 +94,10 @@ class GruposController {
 		@RequestParam(name = "idgrup", required = true) int idgrupo,  Model model) {
 		
 		User user = sessionUser.userSessionAddUsername(model)
-		model.addAttribute("listUser",  grupoService.getStudentAllByUserId(user) )
-		model.addAttribute("grupo",  grupoService.getGroupById(idgrupo) )
+		Grupo grupo = grupoService.getGroupById(idgrupo)
+		List<User> lstUsers = grupoService.getStudentAllByUserId(user)
+		model.addAttribute("listUser", grupouserComponent.getListEditGrupoUser(grupo.grupousuarioList, lstUsers) )
+		model.addAttribute("grupo",  grupo )
 		
 		return STUDENTS
 	}
@@ -100,6 +108,15 @@ class GruposController {
 		Grupo grupo = grupoService.getGroupById(grupousuario.idgrupo)
 		User user = sessionUser.userSessionAddUsername(model)
 		grupouserService.setGrupoUser(grupo, grupousuario.grupousuario, user)
+		return SHOW
+	}
+	
+	@RequestMapping(value = "/grupos/add/estudiante", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	def addStudent( @RequestBody MGrupoUser grupousuario, Model model) {
+		LOGGER.info("METHOD : addStudent [POST]");
+		Grupo grupo = grupoService.getGroupById(grupousuario.idgrupo)
+		User user = sessionUser.userSessionAddUsername(model)
+		grupouserService.setGrupoUserOnlyOne(grupo, grupousuario, user)
 		return SHOW
 	}
 	

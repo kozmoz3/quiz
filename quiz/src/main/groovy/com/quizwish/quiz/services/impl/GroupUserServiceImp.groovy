@@ -8,6 +8,7 @@ import com.quizwish.quiz.component.GrupoUserComponent
 import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Grupousuario
 import com.quizwish.quiz.models.User
+import com.quizwish.quiz.models.jmodelos.MGrupoUser
 import com.quizwish.quiz.repositorys.GroupUserRepository
 import com.quizwish.quiz.services.GroupUserService
 
@@ -37,9 +38,21 @@ class GroupUserServiceImp implements GroupUserService{
 	def deleteGroupUser(Integer id) {
 		return groupuserRepository.deleteById(id)
 	}
+	
+	@Override
+	def setGrupoUserOnlyOne(Grupo grupo, MGrupoUser grupousuario, User user) {
+		Grupousuario grupou = findAllByIdStudent(grupousuario.idstudent)
+		if(grupou != null && grupou.getIdrelaciongu() != null) {
+			grupou.setEstatus( grupousuario.status )
+			return groupuserRepository.save(grupou)
+		}else
+			return groupuserRepository.save(
+				new Grupousuario(grupousuario.idstudent, grupousuario.status, user, grupo)
+			)
+	}
 
 	@Override
-	public Object setGrupoUser(Grupo grupo, List<Grupousuario> grupousuario, User user) {
+	def setGrupoUser(Grupo grupo, List<Grupousuario> grupousuario, User user) {
 		List<Grupousuario> addgrupou = grupouserComponent.setGrupoUser(grupo, grupousuario, user)
 		return groupuserRepository.saveAll(addgrupou)
 	}

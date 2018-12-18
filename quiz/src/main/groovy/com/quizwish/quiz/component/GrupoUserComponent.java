@@ -1,7 +1,9 @@
 package com.quizwish.quiz.component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +21,8 @@ public class GrupoUserComponent {
 	@Qualifier("grupouserService")
 	GroupUserService grupouserService;
 	
+	boolean bandera;
+	
 	public List<Grupousuario> setGrupoUser(Grupo grupo, List<Grupousuario> grupousuario, User user) {
 		List<Grupousuario> lstguser = new ArrayList<>();
 		grupousuario.forEach( item -> {
@@ -33,6 +37,18 @@ public class GrupoUserComponent {
 			}else lstguser.add(item);
 		});
 		return lstguser;
+	}
+	
+	public Map<Integer, Object> getListEditGrupoUser( List<Grupousuario> grupou , List<User> lstUser) {
+		Map<Integer, Object> lstUserInGrupo = new HashMap<>();
+		lstUser.forEach( user ->{
+			bandera = false;
+			grupou.forEach( grupousr -> {
+				if(grupousr.getIdstudent().equals( user.getIduser() ) ) bandera = true;
+			});
+			lstUserInGrupo.put(user.getIduser(), new Object[]{ bandera, user });
+		});
+		return lstUserInGrupo.isEmpty() ? new HashMap<>() : lstUserInGrupo;
 	}
 	
 
