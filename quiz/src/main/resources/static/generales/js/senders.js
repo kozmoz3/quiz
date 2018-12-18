@@ -9,13 +9,20 @@ function sendForm(idform, url, type) {
 		getErrorMessage(getCodeStatus(xhr, ""));
 }
 
+function setFormWOMessage( objRequest ){	
+	var req = new XMLHttpRequest();	
+	req.open( objRequest.type, objRequest.url, false );
+	req.setRequestHeader('Content-type','application/json; charset=utf-8');
+	req.send( JSON.stringify(objRequest.data) );
+	if (req.status != 200)
+		getErrorMessage(getCodeStatus(req, ""));
+}
+
 function setFormWMLocation( objRequest ){	
 	var req = new XMLHttpRequest();	
 	req.open( objRequest.type, objRequest.url, false );
-	//req.setRequestHeader('Content-type','application/json; charset=utf-8');
-	req.send( objRequest.data );
-	//console.log(JSON.stringify(objRequest.data));
-	console.log( objRequest.data);
+	req.setRequestHeader('Content-type','application/json; charset=utf-8');
+	req.send( JSON.stringify(objRequest.data) );
 	if (req.status == 200)
 		location.href = objRequest.location;
 	else

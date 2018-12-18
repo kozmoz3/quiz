@@ -27,9 +27,10 @@ public class GrupoUserComponent {
 			item.setEstatus(true);
 			
 			Grupousuario grupouser = grupouserService.findAllByIdStudent( item.getIdstudent() );
-			if(grupouser.getIdrelaciongu() != null)
+			if(grupouser != null && grupouser.getIdrelaciongu() != null) {
 				grupouser.setEstatus(item.getEstatus());
-			lstguser.add(grupouser.getIdrelaciongu() != null ? grupouser : item);
+				lstguser.add(grupouser);
+			}else lstguser.add(item);
 		});
 		return lstguser;
 	}

@@ -9,6 +9,4 @@ class MGrupoUser {
 	public String toString() {
 		return "MGrupoUser [grupousuario=" + grupousuario + ", idgrupo=" + idgrupo + "]";
 	}
-	
-	
 }

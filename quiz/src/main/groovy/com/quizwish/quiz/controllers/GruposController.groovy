@@ -94,12 +94,13 @@ class GruposController {
 		return STUDENTS
 	}
 	
-	@PostMapping("/grupos/add/estudiantes")
-	def addStudents( @ModelAttribute(name= "grupousuario") MGrupoUser grupousuario, Model model) {
-		LOGGER.info("Grupo usuario => "+grupousuario.toString());
+	@RequestMapping(value = "/grupos/add/estudiante", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	def addStudents( @RequestBody MGrupoUser grupousuario, Model model) {
+		LOGGER.info("METHOD : addStudents [POST]");
+		//grupousuario.grupousuario.each { value-> println value.idstudent }
 		Grupo grupo = grupoService.getGroupById(grupousuario.idgrupo)
 		User user = sessionUser.userSessionAddUsername(model)
-		//grupouserService.setGrupoUser(grupo, grupousuario, user)
+		grupouserService.setGrupoUser(grupo, grupousuario.grupousuario, user)
 		return SHOW
 	}
 	
@@ -116,9 +117,7 @@ class GruposController {
 	@PostMapping("/grupos/edit")
 	def gruposEditPost(@ModelAttribute("grupo") Grupo grupo,  Model model) {
 		User user = sessionUser.userSessionAddUsername(model)
-		Grupo addGroup = grupoService.setGroup(grupo, user)
-		List<Grupo> lstgrupos =  grupoService.getGroupAllByUser(user);
-		model.addAttribute("lstgrupos",lstgrupos)
+		grupoService.setGroup(grupo, user)
 		return RESHOW
 	}
 
