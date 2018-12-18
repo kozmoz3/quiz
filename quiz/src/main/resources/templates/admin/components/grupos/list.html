@@ -35,7 +35,7 @@
 		        								<td th:text="${grupo.nombre}">{{name}}</td>
 		        								<td th:text="${#lists.size(grupo.grupousuarioList)}">{{No estudiante}}</td>
 		        								<td>
-		        									<input type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" value="Add Student">
+		        									<input type="button" th:onclick="@{javascript:location.href='/admin/grupos/add/estudiantes?action=edit&idgrup=__${grupo.idgrupo}__';}" class="btn btn-primary" data-toggle="tooltip" value="Add Student">
 		        								</td>
 		        								<td>
 		        									<button data-toggle="tooltip" th:onclick="@{javascript:location.href='/admin/grupos/edit/__${grupo.idgrupo}__';}" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>

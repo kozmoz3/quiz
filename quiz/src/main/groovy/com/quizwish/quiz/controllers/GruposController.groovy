@@ -94,10 +94,9 @@ class GruposController {
 		return STUDENTS
 	}
 	
-	@RequestMapping(value = "/grupos/add/estudiante", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping(value = "/grupos/add/estudiantes", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
 	def addStudents( @RequestBody MGrupoUser grupousuario, Model model) {
 		LOGGER.info("METHOD : addStudents [POST]");
-		//grupousuario.grupousuario.each { value-> println value.idstudent }
 		Grupo grupo = grupoService.getGroupById(grupousuario.idgrupo)
 		User user = sessionUser.userSessionAddUsername(model)
 		grupouserService.setGrupoUser(grupo, grupousuario.grupousuario, user)
