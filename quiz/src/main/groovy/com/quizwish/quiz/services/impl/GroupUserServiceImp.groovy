@@ -41,7 +41,7 @@ class GroupUserServiceImp implements GroupUserService{
 	
 	@Override
 	def setGrupoUserOnlyOne(Grupo grupo, MGrupoUser grupousuario, User user) {
-		Grupousuario grupou = findAllByIdStudent(grupousuario.idstudent)
+		Grupousuario grupou = grupouserComponent.getOnlyOneGrupousuario(grupo, grupousuario.idstudent )
 		if(grupou != null && grupou.getIdrelaciongu() != null) {
 			grupou.setEstatus( grupousuario.status )
 			return groupuserRepository.save(grupou)
@@ -58,7 +58,7 @@ class GroupUserServiceImp implements GroupUserService{
 	}
 
 	@Override
-	public Grupousuario findAllByIdStudent(Integer student) {
-		return groupuserRepository.findByIdstudent(student)
+	public List<Grupousuario> findAllByIdStudent(Integer student) {
+		return groupuserRepository.findAllByIdstudent(student)
 	}
 }

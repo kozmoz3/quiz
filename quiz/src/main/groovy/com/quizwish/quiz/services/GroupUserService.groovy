@@ -17,5 +17,5 @@ interface GroupUserService {
 	
 	def deleteGroupUser(Integer id);
 	
-	public abstract Grupousuario findAllByIdStudent(Integer student);
+	public abstract List<Grupousuario> findAllByIdStudent(Integer student);
 }

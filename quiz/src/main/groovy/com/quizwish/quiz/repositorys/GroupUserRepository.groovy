@@ -7,5 +7,5 @@ import com.quizwish.quiz.entity.Grupousuario
 
 @Repository("groupuserRepository")
 public interface GroupUserRepository extends JpaRepository< Grupousuario, Serializable >{
-	public abstract Grupousuario findByIdstudent(Integer idstudent);
+	public abstract List<Grupousuario> findAllByIdstudent(Integer idstudent);
 }

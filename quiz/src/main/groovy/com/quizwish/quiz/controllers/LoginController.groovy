@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import com.quizwish.quiz.component.SessionUser;
 import com.quizwish.quiz.models.User
-
+import com.quizwish.quiz.services.GroupUserService
 import com.quizwish.quiz.services.impl.StartAdminService
 
 
@@ -33,6 +33,10 @@ class LoginController {
 	@Autowired
 	@Qualifier("startAdminService")
 	StartAdminService startAdminService
+	
+	@Autowired
+	@Qualifier("grupouserService")
+	GroupUserService grupouserService
 	
 	@GetMapping("/login")
 	public String showLoginForm(Model model,
@@ -55,6 +59,7 @@ class LoginController {
 			model.addAttribute("numQuiz", numQuiz);
 		return ADMIN;
 		}else {
+			model.addAttribute("lstgrupos", grupouserService.findAllByIdStudent(user.iduser));
 			model.addAttribute("usuario", user);
 			return STUDENT;
 		}
