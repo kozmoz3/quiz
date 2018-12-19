@@ -25,6 +25,7 @@
 		        							<tr>
 		        								<th>Group</th>
 		        								<th>No Student</th>
+		        								<th>Status</th>
 		        								<th>Add Student</th>
 		        								<th>Configuración</th>
 		        							</tr>
@@ -33,7 +34,17 @@
 
 		        							<tr th:each="grupo,item: ${lstgrupos}" th:id="${'grupotr'+item.index}">
 		        								<td th:text="${grupo.nombre}">{{name}}</td>
-		        								<td th:text="${#lists.size(grupo.grupousuarioList)}">{{No estudiante}}</td>
+		        								
+		        								<th:block th:each="student,item : ${grupo.grupousuarioList}">
+		        								</th:block>
+		        								<td th:text="${#lists.size(grupo.grupousuarioList.?[estatus])}">{{No estudiante}}</td>
+		        								
+		        								<td th:if="${grupo.status}">
+		        									<input type="button" th:data-urlch="@{/admin/grupos/edit/false/__${grupo.idgrupo}__}" class="btn btn-success" value="Activo">
+		        								</td>
+		        								<td th:if="${not grupo.status}">
+		        									<input type="button" th:data-urlch="@{/admin/grupos/edit/true/__${grupo.idgrupo}__}" class="btn btn-danger" value="Inactivo">
+		        								</td>
 		        								<td>
 		        									<input type="button" th:onclick="@{javascript:location.href='/admin/grupos/add/estudiantes?action=edit&idgrup=__${grupo.idgrupo}__';}" class="btn btn-primary" data-toggle="tooltip" value="Add Student">
 		        								</td>
