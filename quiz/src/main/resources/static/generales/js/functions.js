@@ -555,7 +555,7 @@ $("input[data-push]").click(function(){
 			status: $(this).is(":checked")
 	};
 	if($.trim(url) == "") return false;
-	setFormWOMessage({ type:"post", url:url, data: data });
+	setFormWOMessage({ type:"put", url:url, data: data });
 });
 
 $("button[data-delete]").click(function(){

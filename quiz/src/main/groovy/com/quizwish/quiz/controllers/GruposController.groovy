@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -115,7 +116,7 @@ class GruposController {
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ROOT')")
-	@RequestMapping(value = "/grupos/add/estudiante", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping(value = "/grupos/add/estudiante", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
 	def addStudent( @RequestBody MGrupoUser grupousuario, Model model) {
 		LOGGER.info("METHOD : addStudent [POST]");
 		Grupo grupo = grupoService.getGroupById(grupousuario.idgrupo)
@@ -147,5 +148,13 @@ class GruposController {
 		grupoService.deleteGroup(id)
 		return SHOW
 	}
-
+	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@PutMapping("/grupos/status")
+	def gruposStatus(@RequestBody MGrupoUser grupousuario, Model model) {
+		Grupo grupo = grupoService.getGroupById( grupousuario.idgrupo )
+		grupo.setStatus(grupousuario.status)
+		grupoService.save(grupo)
+		return SHOW
+	}
 }

@@ -40,10 +40,12 @@
 		        								<td th:text="${#lists.size(grupo.grupousuarioList.?[estatus])}">{{No estudiante}}</td>
 		        								
 		        								<td th:if="${grupo.status}">
-		        									<input type="button" th:data-urlch="@{/admin/grupos/edit/false/__${grupo.idgrupo}__}" class="btn btn-success" value="Activo">
+		        									<input type="checkbox" th:id="'ckus'+${item.index}" checked data-selck="0" data-push th:data-idsend="${grupo.idgrupo}" class='switch'/>
+													<label th:for="'ckus'+${item.index}"></label>
 		        								</td>
 		        								<td th:if="${not grupo.status}">
-		        									<input type="button" th:data-urlch="@{/admin/grupos/edit/true/__${grupo.idgrupo}__}" class="btn btn-danger" value="Inactivo">
+		        									<input type="checkbox" th:id="'ckus'+${item.index}" data-selck="0" data-push th:data-idsend="${grupo.idgrupo}" class='switch'/>
+													<label th:for="'ckus'+${item.index}"></label>
 		        								</td>
 		        								<td>
 		        									<input type="button" th:onclick="@{javascript:location.href='/admin/grupos/add/estudiantes?action=edit&idgrup=__${grupo.idgrupo}__';}" class="btn btn-primary" data-toggle="tooltip" value="Add Student">
@@ -55,6 +57,7 @@
 		        							</tr>
 	        							</tbody>
 	        						</table>
+	        						<input type="hidden" th:data-urlcheck="@{/admin/grupos/status}">
 	        					</div>
 	        				</div>
 	        			</div>
