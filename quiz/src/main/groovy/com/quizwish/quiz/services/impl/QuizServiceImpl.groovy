@@ -33,12 +33,15 @@ class QuizServiceImpl implements QuizService{
 		quiz.setMostrar(CovertStringToBooleanUtil.convertBooleanToInt(quizMap.get("mostraronly"), quizMap.get("showonly")) )
 		quiz.setVista(CovertStringToBooleanUtil.converStringToBoolean(quizMap.get("vistaall")))//si es true =  Todas las preguntas en una hoja And si es false= Mostrar preguntas en un wizard
 		quiz.setRandom(CovertStringToBooleanUtil.converStringToBoolean(quizMap.get("random")))
+		
+		quiz.setVenceini(CovertStringToBooleanUtil.StringToDate(quizMap.get("venceini")))
+		quiz.setVencefin(CovertStringToBooleanUtil.StringToDate(quizMap.get("vencefin")))
+		
 		/*
 		
 		
 		quiz.setTiempo(Date tiempo)
-		quiz.setVenceini(Date venceini)
-		quiz.setVencefin(Date vencefin) 
+		
 		quiz.setIntentos(String intentos)
 		quiz.setPreguntasc(boolean preguntasc)
 		quiz.setRespuestac(boolean respuestac)
