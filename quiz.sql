@@ -1,184 +1,210 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2018 a las 03:01:26
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.2.12
+/*
+Navicat MySQL Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+Source Server         : local
+Source Server Version : 50505
+Source Host           : localhost:3306
+Source Database       : quiz
 
+Target Server Type    : MYSQL
+Target Server Version : 50505
+File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+Date: 2018-12-19 11:04:31
+*/
 
---
--- Base de datos: `quiz`
---
+SET FOREIGN_KEY_CHECKS=0;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `grupo`
---
-
+-- ----------------------------
+-- Table structure for grupo
+-- ----------------------------
+DROP TABLE IF EXISTS `grupo`;
 CREATE TABLE `grupo` (
-  `idgrupo` int(11) NOT NULL,
+  `idgrupo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `iduser` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `iduser` int(11) NOT NULL,
+  PRIMARY KEY (`idgrupo`),
+  KEY `iduserfk` (`iduser`),
+  CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `grupo`
---
+-- ----------------------------
+-- Records of grupo
+-- ----------------------------
+INSERT INTO `grupo` VALUES ('1', 'grupo de prueba', 'description', '1', '2');
+INSERT INTO `grupo` VALUES ('2', 'Un nombre editado', 'Una descripción editada', '1', '1');
+INSERT INTO `grupo` VALUES ('4', 'Un grupo con check', 'Una descripcion', '0', '1');
+INSERT INTO `grupo` VALUES ('5', 'Un grupo de eliminación editada', 'Una descripción', '1', '1');
 
-INSERT INTO `grupo` (`idgrupo`, `nombre`, `descripcion`, `status`, `iduser`) VALUES
-(1, 'grupo de prueba', 'description', 1, 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `grupouser`
---
-
+-- ----------------------------
+-- Table structure for grupouser
+-- ----------------------------
+DROP TABLE IF EXISTS `grupouser`;
 CREATE TABLE `grupouser` (
-  `idrelaciongu` int(11) NOT NULL,
-  `iduserfk` int(11) NOT NULL,
+  `idrelaciongu` int(11) NOT NULL AUTO_INCREMENT,
+  `iduser` int(11) NOT NULL,
   `idgrupo` int(11) NOT NULL,
   `idstudent` int(11) NOT NULL,
-  `estatus` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `estatus` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idrelaciongu`),
+  KEY `fk_grup_user` (`iduser`),
+  KEY `fk_grup_grup` (`idgrupo`),
+  CONSTRAINT `fk_grup_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
+  CONSTRAINT `fk_grup_user` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Records of grupouser
+-- ----------------------------
+INSERT INTO `grupouser` VALUES ('1', '1', '4', '3', '0');
+INSERT INTO `grupouser` VALUES ('2', '1', '4', '8', '1');
+INSERT INTO `grupouser` VALUES ('3', '1', '5', '8', '1');
+INSERT INTO `grupouser` VALUES ('4', '1', '5', '3', '0');
 
---
--- Estructura de tabla para la tabla `questions`
---
-
+-- ----------------------------
+-- Table structure for questions
+-- ----------------------------
+DROP TABLE IF EXISTS `questions`;
 CREATE TABLE `questions` (
-  `idquestion` int(11) NOT NULL,
+  `idquestion` int(11) NOT NULL AUTO_INCREMENT,
   `answers` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `message` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `options` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `question` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `score` smallint(6) NOT NULL,
-  `idquiz` int(11) NOT NULL
+  `idquiz` int(11) NOT NULL,
+  PRIMARY KEY (`idquestion`),
+  KEY `fk_ques_quiz` (`idquiz`),
+  CONSTRAINT `fk_ques_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Records of questions
+-- ----------------------------
 
---
--- Estructura de tabla para la tabla `quiz`
---
-
+-- ----------------------------
+-- Table structure for quiz
+-- ----------------------------
+DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE `quiz` (
-  `idquiz` int(11) NOT NULL,
+  `idquiz` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `img` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `mostrar` char(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `vista` char(2) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `random` tinyint(1) NOT NULL,
-  `tiempo` time NOT NULL,
+  `showallquestion` tinyint(1) NOT NULL DEFAULT '0',
+  `mostrar` int(11) NOT NULL DEFAULT '0',
+  `vista` tinyint(1) NOT NULL DEFAULT '0',
+  `random` tinyint(1) NOT NULL DEFAULT '0',
+  `tiempo` time DEFAULT NULL,
   `venceini` date DEFAULT NULL,
   `vencefin` date DEFAULT NULL,
   `intentos` char(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `preguntasc` tinyint(1) NOT NULL,
-  `respuestac` tinyint(1) NOT NULL,
-  `preguntasi` tinyint(1) NOT NULL,
-  `calificacion` tinyint(1) NOT NULL,
-  `grafico` tinyint(1) NOT NULL,
-  `istiempo` tinyint(1) NOT NULL,
-  `mensajesop` tinyint(1) NOT NULL,
-  `isintentos` tinyint(1) NOT NULL,
+  `preguntasc` tinyint(1) NOT NULL DEFAULT '0',
+  `respuestac` tinyint(1) NOT NULL DEFAULT '0',
+  `preguntasi` tinyint(1) NOT NULL DEFAULT '0',
+  `calificacion` tinyint(1) NOT NULL DEFAULT '0',
+  `grafico` tinyint(1) NOT NULL DEFAULT '0',
+  `istiempo` tinyint(1) NOT NULL DEFAULT '0',
+  `mensajesop` tinyint(1) NOT NULL DEFAULT '0',
+  `isintentos` tinyint(1) NOT NULL DEFAULT '0',
   `showfechaini` date DEFAULT NULL,
   `showfechafin` date DEFAULT NULL,
   `password` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estatus` tinyint(1) NOT NULL,
-  `tipovista` char(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `fecha` datetime NOT NULL,
-  `iduser` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `estatus` tinyint(1) NOT NULL DEFAULT '0',
+  `publicar` tinyint(1) NOT NULL DEFAULT '0',
+  `fecha` datetime DEFAULT NULL,
+  `iduser` int(11) NOT NULL,
+  PRIMARY KEY (`idquiz`),
+  KEY `idusuario` (`iduser`),
+  CONSTRAINT `fk_user_quiz` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `quiz`
---
+-- ----------------------------
+-- Records of quiz
+-- ----------------------------
+INSERT INTO `quiz` VALUES ('1', 'prueba1', 'esta es la prueba 1 de quiz', null, '0', '0', '0', '0', '02:11:08', '2018-12-05', '2019-02-28', '1', '0', '0', '0', '1', '0', '0', '0', '0', '2018-12-12', '2018-12-25', 'size', '0', '1', '2018-12-31 00:00:00', '1');
+INSERT INTO `quiz` VALUES ('2', 'sss', 'ss', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
+INSERT INTO `quiz` VALUES ('3', 'uuu', 'descroibr', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
+INSERT INTO `quiz` VALUES ('4', 'nombre', 'descripcion', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
+INSERT INTO `quiz` VALUES ('5', 'nobre', 'dec', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
+INSERT INTO `quiz` VALUES ('6', 'General1', 'General1', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
+INSERT INTO `quiz` VALUES ('7', 'simulador1', 'des', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
+INSERT INTO `quiz` VALUES ('8', 'Mostrar todas las preguntas', 'Mostrar todas las preguntas', null, '1', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
+INSERT INTO `quiz` VALUES ('9', 'Mostrar sólo', 'Mostrar sólo', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '1', null, '2');
+INSERT INTO `quiz` VALUES ('10', 'Mostrar sólo1', 'Mostrar sólo1', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '1', null, '2');
+INSERT INTO `quiz` VALUES ('11', 'Preguntas random1', 'Preguntas random1', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '1', null, '2');
+INSERT INTO `quiz` VALUES ('12', 'Todas las preguntas en una hoja1', 'Todas las preguntas en una hoja', null, '0', '0', '0', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '1', null, '2');
+INSERT INTO `quiz` VALUES ('13', 'Todas las preguntas en una hoja2', 'Todas las preguntas en una hoja2', null, '0', '0', '1', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '1', null, '2');
+INSERT INTO `quiz` VALUES ('14', 'reguntas random', 'reguntas random1', null, '0', '0', '0', '1', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '1', null, '2');
+INSERT INTO `quiz` VALUES ('15', 'pppppp', 'ppp', null, '1', '0', '1', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
+INSERT INTO `quiz` VALUES ('16', 'generar', 'quiz', null, '1', '0', '1', '0', null, null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', null, null, null, '0', '0', null, '2');
 
-INSERT INTO `quiz` (`idquiz`, `nombre`, `descripcion`, `img`, `mostrar`, `vista`, `random`, `tiempo`, `venceini`, `vencefin`, `intentos`, `preguntasc`, `respuestac`, `preguntasi`, `calificacion`, `grafico`, `istiempo`, `mensajesop`, `isintentos`, `showfechaini`, `showfechafin`, `password`, `estatus`, `tipovista`, `fecha`, `iduser`) VALUES
-(1, 'prueba1', 'esta es la prueba 1 de quiz', NULL, 'todas', 'al', 0, '02:11:08', '2018-12-05', '2019-02-28', '1', 0, 0, 0, 1, 0, 0, 0, 0, '2018-12-12', '2018-12-25', 'size', 0, '1', '2018-12-31 00:00:00', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `quizgrupo`
---
-
+-- ----------------------------
+-- Table structure for quizgrupo
+-- ----------------------------
+DROP TABLE IF EXISTS `quizgrupo`;
 CREATE TABLE `quizgrupo` (
-  `idrelacionsg` int(11) NOT NULL,
+  `idrelacionsg` int(11) NOT NULL AUTO_INCREMENT,
   `idgrupo` int(11) NOT NULL,
-  `idquiz` int(11) NOT NULL
+  `idquiz` int(11) NOT NULL,
+  PRIMARY KEY (`idrelacionsg`),
+  KEY `fk_qugr_quiz` (`idquiz`),
+  KEY `fk_qugr_grup` (`idgrupo`),
+  CONSTRAINT `fk_qugr_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
+  CONSTRAINT `fk_qugr_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Records of quizgrupo
+-- ----------------------------
 
---
--- Estructura de tabla para la tabla `roles`
---
-
+-- ----------------------------
+-- Table structure for roles
+-- ----------------------------
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
-  `idrol` int(11) NOT NULL,
-  `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idrol` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`idrol`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `roles`
---
+-- ----------------------------
+-- Records of roles
+-- ----------------------------
+INSERT INTO `roles` VALUES ('1', 'ROLE_ROOT');
+INSERT INTO `roles` VALUES ('2', 'ROLE_ALUM');
 
-INSERT INTO `roles` (`idrol`, `descripcion`) VALUES
-(1, 'ROLE_ROOT'),
-(2, 'ROLE_ALUM');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `student`
---
-
+-- ----------------------------
+-- Table structure for student
+-- ----------------------------
+DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
-  `idstudent` int(11) NOT NULL,
+  `idstudent` int(11) NOT NULL AUTO_INCREMENT,
   `student` int(11) NOT NULL,
   `teacher` int(11) NOT NULL,
-  `nullable` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nullable` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idstudent`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `student`
---
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+INSERT INTO `student` VALUES ('1', '3', '1', '1');
+INSERT INTO `student` VALUES ('2', '4', '2', '1');
+INSERT INTO `student` VALUES ('3', '5', '2', '1');
+INSERT INTO `student` VALUES ('4', '6', '2', '1');
+INSERT INTO `student` VALUES ('5', '7', '2', '1');
+INSERT INTO `student` VALUES ('6', '8', '1', '1');
 
-INSERT INTO `student` (`idstudent`, `student`, `teacher`, `nullable`) VALUES
-(1, 3, 1, 1),
-(2, 4, 2, 1),
-(3, 5, 2, 1),
-(4, 6, 2, 1),
-(5, 7, 2, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `user`
---
-
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `iduser` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `apellidos` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` char(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -187,177 +213,20 @@ CREATE TABLE `user` (
   `password` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `perfil` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `enable` tinyint(1) NOT NULL,
-  `idrol` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idrol` int(11) NOT NULL,
+  PRIMARY KEY (`iduser`),
+  KEY `fk_user_rol` (`idrol`),
+  CONSTRAINT `fk_user_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `user`
---
-
-INSERT INTO `user` (`iduser`, `nombre`, `apellidos`, `telefono`, `correo`, `username`, `password`, `perfil`, `enable`, `idrol`) VALUES
-(1, 'Alfonso', 'Vásquez Cortes', NULL, 'alvaco_1993@hotmail.com', '', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', NULL, 1, 1),
-(2, 'Enriques', 'sosa', '5548364795', 'kiqueyo847@gmail.com', 'kique', '$2a$10$Iuav6RB24Qem24bGLvEmpu2aIdXg9GtZRNwyfcTlh8nZysdYIrzy6', NULL, 1, 1),
-(3, 'Enrique2', 'sosa', '5548364795', 'kiqueyo8471@gmail.com', 'user', '$2a$10$GX3lW6vYAyCbqgke72MZXuUZEH7V15IFd5wXHPXZ9yyd1k4STZd4u', NULL, 1, 2),
-(4, 'Tatiana', 'vivar', '', 'tatiana@gmail.com', 'tatis', '$2a$10$TQoLTtUyoC/JMeHNfI8jGeQwPzDoiG6N.DZDaF./Fv/TW/DpE849a', NULL, 1, 2),
-(5, 'Andrea', 'legareta', '5548364795', 'andrea@gmail.com', 'andreas', '$2a$10$Kwgih2ZutDwLTP6Rw3m8fewmU29n6mvusgX.rngp1h.bNpe03TVk.', NULL, 1, 2),
-(6, 'fedrico', 'cccc', '', 'federico@gmail.com', 'fede', '$2a$10$WtZ/o8gDGt3TghqBoemRV.XUuRGxGI55/YPm.QO6cDuG7mH4iykn6', NULL, 1, 2),
-(7, 'dd22', 'dd22', '2222222', 'dd@gmail.com', 'username2', '$2a$10$kygtYPpFY2gzIHQefP9uHeUpxT8HL3w59F6IgbDm5lCEA4sA3lqPe', NULL, 1, 2);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  ADD PRIMARY KEY (`idgrupo`),
-  ADD KEY `iduserfk` (`iduser`);
-
---
--- Indices de la tabla `grupouser`
---
-ALTER TABLE `grupouser`
-  ADD PRIMARY KEY (`idrelaciongu`),
-  ADD KEY `fk_grup_user` (`iduserfk`),
-  ADD KEY `fk_grup_grup` (`idgrupo`);
-
---
--- Indices de la tabla `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`idquestion`),
-  ADD KEY `fk_ques_quiz` (`idquiz`);
-
---
--- Indices de la tabla `quiz`
---
-ALTER TABLE `quiz`
-  ADD PRIMARY KEY (`idquiz`),
-  ADD KEY `idusuario` (`iduser`);
-
---
--- Indices de la tabla `quizgrupo`
---
-ALTER TABLE `quizgrupo`
-  ADD PRIMARY KEY (`idrelacionsg`),
-  ADD KEY `fk_qugr_quiz` (`idquiz`),
-  ADD KEY `fk_qugr_grup` (`idgrupo`);
-
---
--- Indices de la tabla `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`idrol`);
-
---
--- Indices de la tabla `student`
---
-ALTER TABLE `student`
-  ADD PRIMARY KEY (`idstudent`);
-
---
--- Indices de la tabla `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`iduser`),
-  ADD KEY `fk_user_rol` (`idrol`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  MODIFY `idgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `grupouser`
---
-ALTER TABLE `grupouser`
-  MODIFY `idrelaciongu` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `questions`
---
-ALTER TABLE `questions`
-  MODIFY `idquestion` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `quiz`
---
-ALTER TABLE `quiz`
-  MODIFY `idquiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `quizgrupo`
---
-ALTER TABLE `quizgrupo`
-  MODIFY `idrelacionsg` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `roles`
---
-ALTER TABLE `roles`
-  MODIFY `idrol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `student`
---
-ALTER TABLE `student`
-  MODIFY `idstudent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `user`
---
-ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `grupo`
---
-ALTER TABLE `grupo`
-  ADD CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`);
-
---
--- Filtros para la tabla `grupouser`
---
-ALTER TABLE `grupouser`
-  ADD CONSTRAINT `fk_grup_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
-  ADD CONSTRAINT `fk_grup_user` FOREIGN KEY (`iduserfk`) REFERENCES `user` (`iduser`);
-
---
--- Filtros para la tabla `questions`
---
-ALTER TABLE `questions`
-  ADD CONSTRAINT `fk_ques_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`);
-
---
--- Filtros para la tabla `quiz`
---
-ALTER TABLE `quiz`
-  ADD CONSTRAINT `fk_user_quiz` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`);
-
---
--- Filtros para la tabla `quizgrupo`
---
-ALTER TABLE `quizgrupo`
-  ADD CONSTRAINT `fk_qugr_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
-  ADD CONSTRAINT `fk_qugr_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`);
-
---
--- Filtros para la tabla `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `fk_user_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('1', 'Alfonso', 'Vásquez Cortes', null, 'alvaco_1993@hotmail.com', '', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', null, '1', '1');
+INSERT INTO `user` VALUES ('2', 'Enriques', 'sosa', '5548364795', 'kiqueyo847@gmail.com', 'kique', '$2a$10$Iuav6RB24Qem24bGLvEmpu2aIdXg9GtZRNwyfcTlh8nZysdYIrzy6', null, '1', '1');
+INSERT INTO `user` VALUES ('3', 'Enrique2', 'sosa', '5548364795', 'kiqueyo8471@gmail.com', 'user', '$2a$10$GX3lW6vYAyCbqgke72MZXuUZEH7V15IFd5wXHPXZ9yyd1k4STZd4u', null, '1', '2');
+INSERT INTO `user` VALUES ('4', 'Tatiana', 'vivar', '', 'tatiana@gmail.com', 'tatis', '$2a$10$TQoLTtUyoC/JMeHNfI8jGeQwPzDoiG6N.DZDaF./Fv/TW/DpE849a', null, '1', '2');
+INSERT INTO `user` VALUES ('5', 'Andrea', 'legareta', '5548364795', 'andrea@gmail.com', 'andreas', '$2a$10$Kwgih2ZutDwLTP6Rw3m8fewmU29n6mvusgX.rngp1h.bNpe03TVk.', null, '1', '2');
+INSERT INTO `user` VALUES ('6', 'fedrico', 'cccc', '', 'federico@gmail.com', 'fede', '$2a$10$WtZ/o8gDGt3TghqBoemRV.XUuRGxGI55/YPm.QO6cDuG7mH4iykn6', null, '1', '2');
+INSERT INTO `user` VALUES ('7', 'dd22', 'dd22', '2222222', 'dd@gmail.com', 'username2', '$2a$10$kygtYPpFY2gzIHQefP9uHeUpxT8HL3w59F6IgbDm5lCEA4sA3lqPe', null, '1', '2');
+INSERT INTO `user` VALUES ('8', 'Alfonso', 'Vásquez Cortes', '5550824884', 'alvaco12@gmail.com', 'AlfonsoVACOUSR', '$2a$10$g3clgWnHv4/bcjqOARyTv.Sy9B51CNMo8HUPs.6nb19xBOA5OMaR6', null, '1', '2');

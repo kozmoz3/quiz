@@ -4,12 +4,20 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestMethod
 
 import com.quizwish.quiz.component.SessionUser
+import com.quizwish.quiz.models.User
+import com.quizwish.quiz.services.GroupUserService
 
 @Controller
 @RequestMapping(path = "/me")
@@ -27,35 +35,54 @@ class StudentController {
 	@Qualifier("sessionUser")
 	SessionUser sessionUser;
 	
+	@Autowired
+	@Qualifier("grupouserService")
+	GroupUserService grupouserService
+	
 	@GetMapping("/")
-	public String index(Model model) {
+	def index(Model model) {
 		LOGGER.info("Method: -- index")
-		model.addAttribute("usuario", sessionUser.userSessionAll())
+		User user = sessionUser.userSessionAddUsername(model);
+		model.addAttribute("lstgrupos", grupouserService.findAllByIdStudent(user.iduser));
+		model.addAttribute("usuario", user);
 		return INDEX
 	}
 	
 	@GetMapping("/realize")
-	public String realize(Model model) {
+	def realize(Model model) {
 		LOGGER.info("Method: -- realize")
 		return REALIZE;
 	}
 	
 	@GetMapping("/result")
-	public String result(Model model) {
+	def result(Model model) {
 		LOGGER.info("Method: -- result")
 		return RESULT;
 	}
 	
 	@GetMapping("/response")
-	public String response(Model model) {
+	def response(Model model) {
 		LOGGER.info("Method: -- response")
 		return RESPONSE;
 	}
 	
 	@GetMapping("/profile")
-	public String profile(Model model) {
+	def profile(Model model) {
 		LOGGER.info("Method: -- profile")
+		User user = sessionUser.userSessionAddUsername(model);
+		model.addAttribute("usuario", user);
 		return PROFILE;
+	}
+	
+	@PutMapping("/profile/personal/edit")
+	//@RequestMapping(value = "/sendcontact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	public User personal(@ModelAttribute("personal") User personal, Model model) {
+		User user = sessionUser.userSessionAddUsername(model);
+		user.setNombre(personal.nombre)
+		user.setApellidos(personal.apellidos)
+		user.setTelefono(personal.telefono)
+		user.setUsername(personal.username)
+		return user
 	}
 	
 }
