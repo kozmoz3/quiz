@@ -35,7 +35,7 @@
 	                            </div>
 	                            <div th:if="${param.error}" class="alert-danger" role="alert">Invalid email or password</div>
 	                            <div class="checkbox login-checkbox">
-	                                <label><input type="checkbox" class="i-checks"> Recordar </label>
+	                                <label><a class="link" th:href="@{/}">Volver al inicio</a> </label>
 	                            </div>
 	                            <button class="btn btn-success btn-block loginbtn">Iniciar sesión</button>
 	                        </form>

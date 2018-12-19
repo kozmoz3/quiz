@@ -19,7 +19,7 @@
 						<form class="valid-errors">
 							<div class="row">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<div style="height: 204px; overflow: scroll;">
+									<div style="/*height: 204px; overflow: scroll;*/">
 										<table class="table" data-collection="grupousuario">
 											<thead>
 												<tr>
@@ -28,28 +28,33 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="user,item : ${listUser}">
-													<td th:text="${user.nombre} + ' ' + ${user.apellidos}"></td>
-													<td><input type="checkbox" th:id="'ckus'+${item.index}" data-unsel th:data-selck="${user.iduser}"/></td>
+												<tr th:each="useri,item : ${listUser}">
+													<td th:text="${useri.value[1].nombre} + ' ' + ${useri.value[1].apellidos}"></td>
+													<td th:if="${param.action[0] == 'edit'}">
+													    <input type="checkbox" th:if="${useri.value[0] == true}" checked th:id="'ckus'+${item.index}" data-unsel data-push th:data-idsend="${grupo.idgrupo}" th:data-selck="${useri.value[1].iduser}" class='switch'/>
+													    <input type="checkbox" th:if="${useri.value[0] == false}" th:id="'ckus'+${item.index}" data-unsel data-push th:data-idsend="${grupo.idgrupo}" th:data-selck="${useri.value[1].iduser}" class='switch'/>
+													    <label th:for="'ckus'+${item.index}"></label>
+													</td>
+													<td th:if="${param.action[0] == 'add'}">
+													    <input type="checkbox" th:id="'ckus'+${item.index}" data-unsel th:data-selck="${useri.value[1].iduser}" class='switch'/>
+													    <label th:for="'ckus'+${item.index}"></label>
+													</td>
 												</tr>												
 											</tbody>
 										</table>
 									</div>
-									<!-- <div class="form-group">
-										<label>
-											<input type="checkbox" data-allselck /> Seleccionar todos
-										</label>
-									</div>-->
 								</div>
+								<input type="hidden" th:if="${param.action[0] == 'add'}" data-idsends="idgrupo" th:data-idsend="${grupo.idgrupo}"/>
+								<input type="hidden" th:if="${param.action[0] == 'edit'}" data-urlcheck="/admin/grupos/add/estudiante"/>
 							</div>
 							<div class="form-group">
-								<input type="hidden" data-idsend="idgrupo" th:value="${grupo.idgrupo}"/>
-								<input type="button" 
+								<input type="button" th:if="${param.action[0] == 'edit'}" th:onclick="@{location.href='/admin/grupos'}" class="btn btn-success" value="Listo!"/>
+								<input type="button" th:if="${param.action[0] == 'add'}" 
 								onclick="sendDataList(this);"
 								data-href-method="post"
 								th:data-href-url="@{/admin/grupos/add/estudiantes}"
 								th:data-response="@{/admin/grupos}"
-								class="btn btn-success" value="Enviar"/>
+								class="btn btn-success" value="Listo!"/>
 							</div>
 						</form>
 					</div>

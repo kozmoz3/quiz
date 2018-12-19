@@ -105,15 +105,15 @@
 		});
 		let data = {};
 		let datacontainer = {};
-		let id = $("input[data-idsend]").attr("data-idsend");
+		let id = $("input[data-idsend]").attr("data-idsends");
 		let nameobj = $( $("table[data-collection]") ).attr("data-collection");
 		data[ nameobj ] = arreglo;
-		data[ id ] = $("input[data-idsend]").val();
+		data[ id ] = $("input[data-idsend]").attr("data-idsend");
 		datacontainer[ nameobj ] = data;
 		setFormWMLocation({
 			type: $(element).attr("data-href-method"),
 			url: $(element).attr("data-href-url"),
-			data: datacontainer,
+			data: data,
 			location:  $(element).attr("data-response")
 		});
 	}
@@ -544,6 +544,28 @@ $("input[data-allselck]").click(function(){
 			$(value).prop("checked",true);
 		else
 			$(value).prop("checked",false);
+	});
+});
+
+$("input[data-push]").click(function(){
+	var url = $("input[type='hidden']").attr("data-urlcheck");
+	let data = {
+			idstudent: $(this).attr("data-selck"),
+			idgrupo: $(this).attr("data-idsend"),
+			status: $(this).is(":checked")
+	};
+	if($.trim(url) == "") return false;
+	setFormWOMessage({ type:"post", url:url, data: data });
+});
+
+$("button[data-delete]").click(function(){
+	var url = $(this).attr("data-delete");
+	var tr = $( $(this).attr("data-removei") );
+	getOptionalMessage( "CristalS", "¿Está seguro de eliminar el registro?", function(){
+		setFormWM({ type:"delete", url:url, data:{} });
+		$(tr).remove();
+	}, function(){
+		getNotification("Operación cancelada","info");
 	});
 });
 

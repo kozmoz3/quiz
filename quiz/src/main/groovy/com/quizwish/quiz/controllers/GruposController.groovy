@@ -8,6 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
+
+import com.quizwish.quiz.component.GrupoUserComponent
 import com.quizwish.quiz.component.SessionUser
 import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Grupousuario
@@ -54,6 +57,10 @@ class GruposController {
 	@Qualifier("grupouserService")
 	GroupUserService grupouserService
 	
+	@Autowired
+	@Qualifier("grupouserComponent")
+	GrupoUserComponent grupouserComponent
+	
 	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/grupos")
 	def show(Model model) {
@@ -82,24 +89,38 @@ class GruposController {
 		return RESTUDENTS +"&idgrup=" + addGroup.getIdgrupo()
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
 	@GetMapping("/grupos/add/estudiantes")
 	def addStudentsView(
 		@RequestParam(name = "action", required = true) String action,
 		@RequestParam(name = "idgrup", required = true) int idgrupo,  Model model) {
 		
 		User user = sessionUser.userSessionAddUsername(model)
-		model.addAttribute("listUser",  grupoService.getStudentAllByUserId(user) )
-		model.addAttribute("grupo",  grupoService.getGroupById(idgrupo) )
+		Grupo grupo = grupoService.getGroupById(idgrupo)
+		List<User> lstUsers = grupoService.getStudentAllByUserId(user)
+		model.addAttribute("listUser", grupouserComponent.getListEditGrupoUser(grupo.grupousuarioList, lstUsers) )
+		model.addAttribute("grupo",  grupo )
 		
 		return STUDENTS
 	}
 	
-	@PostMapping("/grupos/add/estudiantes")
-	def addStudents( @ModelAttribute(name= "grupousuario") MGrupoUser grupousuario, Model model) {
-		LOGGER.info("Grupo usuario => "+grupousuario.toString());
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@RequestMapping(value = "/grupos/add/estudiantes", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	def addStudents( @RequestBody MGrupoUser grupousuario, Model model) {
+		LOGGER.info("METHOD : addStudents [POST]");
 		Grupo grupo = grupoService.getGroupById(grupousuario.idgrupo)
 		User user = sessionUser.userSessionAddUsername(model)
-		//grupouserService.setGrupoUser(grupo, grupousuario, user)
+		grupouserService.setGrupoUser(grupo, grupousuario.grupousuario, user)
+		return SHOW
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@RequestMapping(value = "/grupos/add/estudiante", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	def addStudent( @RequestBody MGrupoUser grupousuario, Model model) {
+		LOGGER.info("METHOD : addStudent [POST]");
+		Grupo grupo = grupoService.getGroupById(grupousuario.idgrupo)
+		User user = sessionUser.userSessionAddUsername(model)
+		grupouserService.setGrupoUserOnlyOne(grupo, grupousuario, user)
 		return SHOW
 	}
 	
@@ -116,10 +137,15 @@ class GruposController {
 	@PostMapping("/grupos/edit")
 	def gruposEditPost(@ModelAttribute("grupo") Grupo grupo,  Model model) {
 		User user = sessionUser.userSessionAddUsername(model)
-		Grupo addGroup = grupoService.setGroup(grupo, user)
-		List<Grupo> lstgrupos =  grupoService.getGroupAllByUser(user);
-		model.addAttribute("lstgrupos",lstgrupos)
+		grupoService.setGroup(grupo, user)
 		return RESHOW
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ROOT')")
+	@DeleteMapping("/grupos/delete/{id}")
+	def gruposDelete(@PathVariable(name = "id") int id, Model model) {
+		grupoService.deleteGroup(id)
+		return SHOW
 	}
 
 }

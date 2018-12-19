@@ -3328,17 +3328,6 @@ td.text-right.mail-date {
     color: #444;
     line-height: 24px;
 }
-.content-error a {
-    display: inline-block;
-    margin: 0px 5px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-    padding: 10px 30px;
-    border-radius: 3px;
-    background: #006DF0;
-    transition: all .4s ease 0s;
-}
 .login-footer a{
 	color:#006DF0;
 }

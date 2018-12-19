@@ -53,6 +53,12 @@ class Grupousuario implements Serializable{
 	def Grupousuario(Integer idrelaciongu) {
 		this.idrelaciongu = idrelaciongu
 	}
+	def Grupousuario(Integer idstudent, boolean estatus, User iduser, Grupo idgrupo) {
+		this.idstudent = idstudent
+		this.estatus = estatus
+		this.iduser = iduser
+		this.idgrupo = idgrupo
+	}
 	
 	def Grupousuario(Integer idstudent, boolean estatus) {
 		this.idstudent = idstudent
