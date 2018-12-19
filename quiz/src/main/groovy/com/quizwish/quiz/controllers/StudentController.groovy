@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.MediaType
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod
 
 import com.quizwish.quiz.component.SessionUser
 import com.quizwish.quiz.models.User
+import com.quizwish.quiz.models.jmodelos.MGrupoUser
+import com.quizwish.quiz.models.jmodelos.MUser
 import com.quizwish.quiz.services.GroupUserService
+import com.quizwish.quiz.services.StudentService
 
 @Controller
 @RequestMapping(path = "/me")
@@ -30,6 +34,7 @@ class StudentController {
 	static final def RESPONSE ="student/components/resultados/view-result"
 	static final def PROFILE ="student/components/me/perfil"
 	static final def INDEX ="student/index"
+	static final def RESPONSEAll ="response"
 	
 	@Autowired
 	@Qualifier("sessionUser")
@@ -38,6 +43,10 @@ class StudentController {
 	@Autowired
 	@Qualifier("grupouserService")
 	GroupUserService grupouserService
+	
+	@Autowired
+	@Qualifier("studentService")
+	StudentService studentService
 	
 	@GetMapping("/")
 	def index(Model model) {
@@ -73,16 +82,14 @@ class StudentController {
 		model.addAttribute("usuario", user);
 		return PROFILE;
 	}
-	
-	@PutMapping("/profile/personal/edit")
-	//@RequestMapping(value = "/sendcontact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
-	public User personal(@ModelAttribute("personal") User personal, Model model) {
+
+	@PreAuthorize("hasRole('ROLE_ALUM')")
+	@RequestMapping(value = "/profile/personal/edit", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	def personal(@RequestBody MUser personal, Model model) {
+		LOGGER.info("Method: -- personal " + personal.toString())
 		User user = sessionUser.userSessionAddUsername(model);
-		user.setNombre(personal.nombre)
-		user.setApellidos(personal.apellidos)
-		user.setTelefono(personal.telefono)
-		user.setUsername(personal.username)
-		return user
+		studentService.savePersonal(user, personal)
+		return RESPONSEAll
 	}
 	
 }

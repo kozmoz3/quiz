@@ -51,7 +51,7 @@ function getFormInResponse( objRequest ){
 		getErrorMessage(getCodeStatus(req, ""));
 }
 
-function setDataWithProgress( objRequest, inresponse ){	
+function setDataWithProgress( objRequest, inresponse, headers ){	
 	var req = new XMLHttpRequest();
 	
 	req.onprogress = function (e) {
@@ -64,10 +64,18 @@ function setDataWithProgress( objRequest, inresponse ){
 	req.addEventListener("error", transferFailed, false);
 	req.addEventListener("abort", transferCanceled, false);
 	
-	req.open( objRequest.type, objRequest.url, false );	
-	req.send( objRequest.data );
+	req.open( objRequest.type, objRequest.url, false );
+	if(headers != undefined){
+		$.each(headers, function(index, value){
+			req.setRequestHeader(value.key,value.value);
+		});
+		req.send( JSON.stringify(objRequest.data) );
+	}else
+		req.send( objRequest.data );
 	
 	if (req.status == 200){
+		if(objRequest.othercnf != "")
+			location.href = objRequest.othercnf;
 		if (inresponse != "")
 			$(inresponse).html( req.response );
 		getSuccessfulMessageWithText("Operación completada");

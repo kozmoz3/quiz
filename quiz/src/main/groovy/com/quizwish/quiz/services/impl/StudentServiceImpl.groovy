@@ -6,10 +6,12 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 import com.quizwish.quiz.entity.Student
 import com.quizwish.quiz.models.User
+import com.quizwish.quiz.models.jmodelos.MUser
 import com.quizwish.quiz.repositorys.StudentRepository
 import com.quizwish.quiz.repositorys.UserRepository
 import com.quizwish.quiz.services.StudentService
@@ -86,6 +88,36 @@ class StudentServiceImpl implements StudentService {
 		student.setNullable(true);
 		
 		return studentRepository.save(student);
+	}
+
+	@Override
+	public User savePersonal(User user, MUser userdata) {
+		if(userdata.getTypes() != null)
+			return personal( user, userdata );
+		if(userdata.getCorreo() != null && !userdata.getCorreo().trim().isEmpty())
+			return correo( user, userdata );
+		if(userdata.getPassword() != null)
+			return password( user, userdata );
+		return new User()
+	}
+	
+	private User personal(User user, MUser userdata) {
+		user.setNombre(userdata.nombre)
+		user.setApellidos(userdata.apellidos)
+		user.setTelefono(userdata.telefono)
+		user.setUsername(userdata.username)
+		return usuarioService.saveSimpleStudent(user)
+	}
+	
+	private User correo(User user, MUser userdata) {
+		user.setCorreo(userdata.correo)
+		return usuarioService.saveSimpleStudent(user)
+	}
+	
+	private User password(User user, MUser userdata) {
+		def encrop = new BCryptPasswordEncoder()
+		user.setPassword(encrop.encode(userdata.password))
+		return usuarioService.saveSimpleStudent(user)
 	}
 
 }

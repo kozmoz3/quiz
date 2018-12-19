@@ -9,6 +9,7 @@
 		type : "null",
 		url : "null",
 		data: {},
+		othercnf: "",
 		cache : false,
 		success : function( response ) {
 			console.log( response );
@@ -119,7 +120,8 @@
 	}
 	
 	function sendData( idElement ) {
-		var lstElements = getListElements( $(".valid-errors") );
+		
+		var lstElements =  $(idElement).attr("data-multiples") != undefined ? getListElements( $( $(idElement).attr("data-multiples") ) ) : getListElements( $(".valid-errors") );
 		var lstStringscmd = $(idElement).attr("data-list-str") != undefined ? $(idElement).attr("data-list-str") : "";
 		var arraryString = lstStringscmd =="" ? [] : lstStringscmd.split(",");
 		var reduce = $(idElement).attr("data-remain") == '' ? 0: $(idElement).attr("data-remain");
@@ -253,11 +255,24 @@
 			default: return; break;
 		}
 		
-		var inresponse = "";
+		let inresponse = "";
+		let headers = [];
 		if( $(idElement).attr("data-response") != undefined )
 			inresponse = getOnResponse( $(idElement).attr("data-response") );
+		if( $(idElement).attr("data-content-type") != undefined && $(idElement).attr("data-content-heads") != undefined ){
+			let types = $(idElement).attr("data-content-type").split("|");
+			let heads = $(idElement).attr("data-content-heads").split("|");
+			$.each(types,function(index, item){
+				headers.push({
+					key: heads[index],
+					value: types[index]
+				});
+			});
+		}
+		if($(idElement).attr("data-content-type") != undefined)
+			objectSend.othercnf = "/logout"
 		
-		setDataWithProgress(objectSend, inresponse);
+		setDataWithProgress(objectSend, inresponse, headers );
 	}
 	
 	function getSize( input ){

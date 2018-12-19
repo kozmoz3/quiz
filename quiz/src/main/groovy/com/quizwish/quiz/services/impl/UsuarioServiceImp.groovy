@@ -118,4 +118,9 @@ class UsuarioServiceImp implements UsuarioService{
 		LOGGER.info("METHOOD: findById")
 		return userRepository.getOne(id);
 	}
+
+	@Override
+	def saveSimpleStudent(User user) {
+		return userRepository.save(user)
+	}
 }
