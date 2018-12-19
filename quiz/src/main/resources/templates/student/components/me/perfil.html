@@ -11,25 +11,35 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<h2>Datos personales</h2>
-							<form>
+							<form class="valid-errors">
 								<div class="form-group">
-									<input type="text" class="form-control" id="strnombre" placeholder="Nombre"/>
+									<input type="text" th:value="${usuario.nombre}" class="form-control" maxlength="30" id="strnombre" placeholder="Nombre"/>
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" id="strapellidos" placeholder="Apellidos"/>
+									<input type="text" th:value="${usuario.apellidos}" class="form-control" maxlength="40" id="strapellidos" placeholder="Apellidos"/>
 								</div>
 								<div class="form-group">
-									<input type="tel" class="form-control" id="strtelefono" placeholder="Teléfono (opcional)"/>
+									<input type="tel" data-optional th:value="${usuario.telefono}" class="form-control data-numeric" maxlength="10" id="strtelefono" placeholder="Teléfono (opcional)"/>
 								</div>
 								<div class="form-group">
-									<input type="button" class="btn btn-primary" value="Actualizar"/>
+									<input type="text" th:value="${usuario.username}" class="form-control" maxlength="50" id="strusername" placeholder="Username"/>
 								</div>
+								<div class="form-group">
+									<input type="button" onclick="sendData(this);"
+									data-onclear="false" 
+									data-href-method="put" 
+									data-remain="3" 
+									th:data-href-url="@{/me/profile/personal}" 
+									data-optional data-noset data-cleable data-response="view|#unid" 
+									class="btn btn-primary" value="Actualizar"/>
+								</div>
+								<div id="unid"></div>
 							</form>
 							<hr>
 							<h2>Datos de cuenta</h2>
 							<form>
 								<div class="form-group">
-									<input type="email" class="form-control" id="strcorreo" placeholder="Correo"/>
+									<input type="email" th:value="${usuario.correo}" class="form-control" id="strcorreo" placeholder="Correo"/>
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control" id="strpass" placeholder="Contraseña"/>
@@ -66,5 +76,8 @@
 		</section>
 		<footer th:replace="student/includes/layout :: footer"></footer>
 		<div th:replace="student/includes/scripts :: scripts"></div>
+		<script type="text/javascript" th:src="@{/generales/js/senders.js}"></script>
+	    <script type="text/javascript" th:src="@{/generales/js/validations.js}"></script>
+	    <script type="text/javascript" th:src="@{/generales/js/functions.js}"></script>
 	</body>
 </html>

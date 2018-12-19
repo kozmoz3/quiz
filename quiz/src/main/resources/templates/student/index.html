@@ -24,20 +24,28 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>{{ Nombre simulador }}</td>
-										<td>2</td>
-										<td class="active-ck">Activo</td>
-										<td><a th:href="@{/me/realize}">Realizar</a></td>
-										<td><a th:href="@{/me/result}">Resultados</a></td>
-									</tr>
-									<tr>
-										<td>{{ Nombre simulador }}</td>
-										<td>10</td>
-										<td class="inactive-ck">Inactivo</td>
-										<td><a href="#">Realizar</a></td>
-										<td><a href="#">Resultados</a></td>
-									</tr>
+									<th:block th:each="grupou,item : ${lstgrupos}">
+										<th:block th:if="${grupou.estatus}">
+											<th:block th:if="${grupou.idgrupo.status}">
+												<tr th:each="quiz,itemq : ${grupou.idgrupo.quizgrupoList}">
+													<td th:text="${quiz.idquiz.nombre}">{{ Nombre simulador }}</td>
+													<td>2</td>													
+													
+													<th:block th:if="${quiz.idquiz.estatus == true}">
+														<td class="active-ck">Activo</td>
+														<td><a th:href="@{/me/realize/__${quiz.idquiz.idquiz}__}">Realizar</a></td>
+														<td><a th:href="@{/me/result/__${quiz.idquiz.idquiz}__}">Resultados</a></td>
+													</th:block>
+													
+													<th:block th:if="${quiz.idquiz.estatus == false}">
+														<td class="inactive-ck">Inactivo</td>
+														<td>N/A</td>
+														<td><a th:href="@{/me/result/__${quiz.idquiz.idquiz}__}">Resultados</a></td>
+													</th:block>
+												</tr>
+											</th:block>	
+										</th:block>
+									</th:block>
 								</tbody>
 							</table>
 						</div>

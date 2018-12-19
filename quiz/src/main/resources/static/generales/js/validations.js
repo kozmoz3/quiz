@@ -350,7 +350,7 @@ var onEmpty = function( objectConfg ) {
 };
 
 jQuery(".data-numeric").keypress(function() {
-	if (!/^([1-9])*$/.exec(jQuery(this).val())){
+	if (!/^([0-9])*$/.exec(jQuery(this).val())){
 		jQuery(this).val("");
 	}
 });
