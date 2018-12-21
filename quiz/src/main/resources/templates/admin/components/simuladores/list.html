@@ -30,7 +30,7 @@
 	        					</div>
 	        					<div class="product-buttons">
 	        						<button type="button" class="button-warning cart-btn">Editar</button>
-	        						<button type="button" onclick="javascript:location.href='/admin/simuladores/preguntas';" class="button-info cart-btn">Preguntas</button>
+	        						<button type="button" th:onclick="@{javascript:location.href='/admin/simuladores/preguntas/__${quiz.idquiz}__';}" class="button-info cart-btn">Preguntas</button>
 	        						<button type="button" class="button-danger cart-btn">Eliminar</button>
 	        					</div>
 	        				</div>

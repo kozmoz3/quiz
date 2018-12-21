@@ -18,35 +18,21 @@
 	        		<div class="row">
 	        			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	        				<div class="product-status-wrap">
-	        					<h4>Lista de preguntas del simulador {{nombre del simulador}}</h4>
+	        					<h4 th:text="${'Lista de preguntas del simulador: '+quiz.nombre}"></h4>
 	        					<div class="asset-inner">
 	        						<table>
 	        							<thead>
 		        							<tr>
 		        								<th>Pregunta</th>
-		        								<th>Estatus</th>
 		        								<th>Configuración</th>
 		        							</tr>
 	        							</thead>
 	        							<tbody>
-		        							<tr>
-		        								<td>Pregunta agregada con ciertos caracteres que se muestran en la lista</td>
+		        							<tr th:each="question : ${quiz.questionsList}">
+		        								<td th:text="${question.question}">{{pregunta}}</td>
 		        								<td>
-		        									<input type="button" class="btn btn-success" value="Activo">
-		        								</td>
-		        								<td>
-		        									<button class="pd-setting-ed" onclick="editQ(this);" data-urls="/admin/simuladores/preguntas/frm/1" data-response="#repmodal" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		        									<button data-toggle="tooltip" onclick="deleteQ(this);" data-urls="/admin/simuladores/preguntas/delete/1" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-		        								</td>
-		        							</tr>
-		        							<tr>
-		        								<td>Pregunta agregada con ciertos caracteres que se muestran en la lista</td>
-		        								<td>
-		        									<input type="button" class="btn btn-danger" value="Inactivo">
-		        								</td>
-		        								<td>
-		        									<button class="pd-setting-ed" onclick="editQ(this);" data-urls="/admin/simuladores/preguntas/frm/2" data-response="#repmodal" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		        									<button data-toggle="tooltip" onclick="deleteQ(this);" data-urls="/admin/simuladores/preguntas/delete/2" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+		        									<button class="pd-setting-ed" onclick="editQ(this);" th:data-urls="@{/admin/simuladores/preguntas/frm/__${question.idquestion}__}" data-response="#repmodal" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+		        									<button data-toggle="tooltip" onclick="deleteQ(this);" th:data-urls="@{/admin/simuladores/preguntas/delete/__${question.idquestion}__}" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 		        								</td>
 		        							</tr>
 	        							</tbody>

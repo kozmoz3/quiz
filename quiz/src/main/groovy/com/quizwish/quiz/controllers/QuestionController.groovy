@@ -28,8 +28,10 @@ class QuestionController {
 	@Qualifier("quizService")
 	QuizService quizService
 	
-	@GetMapping("/preguntas")
-	def simuladoresPreguntas(Model model) {
+	@GetMapping("/preguntas/{id}")
+	def simuladoresPreguntas(@PathVariable(name = "id") int id,Model model) {
+		model.addAttribute("quiz", quizService.getQuizById(id) )
+		
 		return LSTINDEX
 	}
 	
