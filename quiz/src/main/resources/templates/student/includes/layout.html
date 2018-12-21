@@ -15,7 +15,9 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class="nav-item">
 							<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-								<img src="/administrador/img/product/pro4.jpg" alt="">
+								<img th:if="${usuario.perfil == null}" th:src="@{/administrador/img/profile/1.jpg}"/>
+								<img th:if="${usuario.perfil != null}" th:src="@{/estudiante/photos/__${usuario.perfil}__}"/>
+								
 								<span class="admin-name" th:text="${usuario.nombre}">{{nombre}}</span>
 								<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 							</a>

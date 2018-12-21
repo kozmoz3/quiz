@@ -68,18 +68,28 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="img-container">
-								<img th:src="@{/administrador/img/profile/1.jpg}"/>
+								<div id="imagePreview">
+									<img th:if="${usuario.perfil == null}" th:src="@{/administrador/img/profile/1.jpg}"/>
+									<img th:if="${usuario.perfil != null}" th:src="@{/estudiante/photos/__${usuario.perfil}__}"/>
+								</div>
 								<h4>{{ Nombre de estudiante }}</h4>
 							</div>
-							<form>
+							<form enctype="multipart/form-data">
 								<div class="form-group">
 									<label>
 										Cambiar foto de perfil
-										<input type="file" id="imgperfil" />
+										<input type="file" onchange="setArchive(this);" id="perfil" data-progress="progressimgp" 
+											data-image-size="900,900" accept=".png,.jpeg,.jpg,.gif" data-preview="imagePreview"
+											data-url-img="/me/profile/img/edit" data-reurl="/me/profile" data-loaded="false">
 									</label>
 								</div>
+								<div class="form-group">
+									<div class="progress" style="display: none;">
+										<div class="progress-bar progress-bar-striped active" id="progressimgp" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+									</div>
+								</div>
 							</form>
-							<p>La imagen se actualiza al instante en que se carga.</p>
+							<p>La imagen se actualiza al instante en que se carga. (Al actualizar la imagen, espere 2 minutos máximo pues está siendo verificada)</p>
 						</div>
 					</div>	
 				</div>

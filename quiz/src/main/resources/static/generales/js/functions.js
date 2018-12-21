@@ -23,6 +23,7 @@
 	var datosMetadata = {
             url: "null",
             type: "null",
+            othercnf: "",
             dataType: "html",
             data: "null",
             cache: false,
@@ -293,8 +294,18 @@
 	
 	function setArchive( fileElement ){
 		var progress = $(fileElement).attr("data-progress");
-	    if( progress != undefined)
+	    if( progress != undefined){
+	    	if( $(".progress") != undefined )
+	    		$(".progress").show("slow")
 	    	$( "#" + progress ).show("slow");
+	    	
+            if( $("#" + progress).get(0).nodeName == "PROGRESS" )
+            	$("#" + progress).val(1);
+            else{
+            	$("#" + progress).css("width","1%");
+            	$("#" + progress).attr("aria-valuenow",1);
+            }
+	    }
 	    
 	    if( $(fileElement).attr("data-image-size") != undefined ){
 	    	getSize( $(fileElement) );
@@ -322,7 +333,12 @@
 	            clearInterval(id);
 	        } else {
 	            width++;
-	            $("#" + progress).val(width);
+	            if( $("#" + progress).get(0).nodeName == "PROGRESS" )
+	            	$("#" + progress).val(width);
+	            else{
+	            	$("#" + progress).css("width",width + "%");
+	            	$("#" + progress).attr("aria-valuenow",width);
+	            }
 	        }
 	    }, 30);
 	}
@@ -339,16 +355,34 @@
 						});
 					};
 					reader.readAsDataURL(reference[0].files[0]);
+					if( $(reference).attr("data-url-img") != undefined){
+						var formData = new FormData();
+						formData.append( $("input[type='file']").attr("id"), new Blob( 
+								[ $("input[type='file']")[0].files[0] ],
+								{ type: $("input[type='file']")[0].files[0].type } ) );
+						
+						datosMetadata.type = "put";
+						datosMetadata.url = $(reference).attr("data-url-img");
+						datosMetadata.data= formData;
+						datosMetadata.othercnf = $(reference).attr("data-reurl");
+						setDataWithProgress( datosMetadata, "" );
+					}
 				}
-				if( idprogress != undefined)
+				if( idprogress != undefined){
 		              $("#" + idprogress).hide("slow");
+		              if( $(".progress") != undefined )
+		  	    		$(".progress").hide("slow")
+				}
 			}else{
 				reference.val("");
 				$("#" + reference.attr("data-preview")).fadeOut("slow", function() {
 					$(this).html("").slideUp("slow");
 				});
-				if( idprogress != undefined)
+				if( idprogress != undefined){
 		              $("#" + idprogress).hide("slow");
+		              if( $(".progress") != undefined )
+			  	    		$(".progress").hide("slow")
+				}
 				return false;
 			}
 		}, 3000, reference);
