@@ -17,11 +17,11 @@
 		<div class="contacts-area mg-b-15">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"
-						th:each="student: ${liststudent}">
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" th:each="student: ${liststudent}">
 						<div class="student-inner-std res-mg-b-30">
 							<div class="student-img">
-								<img th:src="@{administrador/img/student/1.jpg}" alt="" />
+								<img th:if="${student.perfil == null}" th:src="@{/administrador/img/profile/1.jpg}"/>
+								<img th:if="${student.perfil != null}" th:src="@{/estudiante/photos/__${student.perfil}__}"/>
 							</div>
 							<div class="student-dtl">
 								<h2 th:text="${student.nombre}">{{Nombre}}</h2>
@@ -31,7 +31,7 @@
 										<button type="button" class="button-warning cart-btn">Editar</button>
 									</a>
 									<a th:href="@{'/admin/estudiantes/edit/{id}' (id=${student.iduser})}">
-									<button type="button" class="button-danger cart-btn">Eliminar</button>
+										<button type="button" class="button-danger cart-btn">Eliminar</button>
 									</a>
 								</div>
 							</div>

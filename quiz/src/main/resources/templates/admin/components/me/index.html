@@ -3,6 +3,13 @@
 <title>Administrador</title>
 <meta charset="utf-8">
 <head th:replace="admin/includes/heads :: heads"></head>
+<style type="text/css">
+.img-container img{
+	height:300px;
+	width: 300px;
+	border-radius: 50%; 
+}
+</style>
 <body>
 	<div id="hedsconf" data-title="Administrador"></div>
 	<div th:replace="admin/includes/menu-desktop :: menu-desk"></div>
@@ -17,7 +24,41 @@
 			th:object="${users}" method="post" class="acount-infor">
 			<div th:replace="admin/fragments/dataschange :: frm-data-change"></div>
 		</form>
+		<form enctype="multipart/form-data">
+			<div class="single-pro-review-area mt-t-30 mg-b-15" style="text-align: center;">
+				<div class="container-fluid">
+					<div class="sparkline8-list responsive-mg-b-30">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="img-container">
+									<div id="imagePreview">
+										<img th:if="${users.perfil == null}" th:src="@{/administrador/img/profile/1.jpg}"/>
+										<img th:if="${users.perfil != null}" th:src="@{/administrador/photos/__${users.perfil}__}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>
+										Cambiar foto de perfil
+										<input type="file" onchange="setArchive(this);" id="perfil" data-progress="progressimgp" 
+											data-image-size="900,900" accept=".png,.jpeg,.jpg,.gif" data-preview="imagePreview"
+											data-url-img="/admin/user/img/edit" data-reurl="/admin/user" data-loaded="false">
+									</label>
+								</div>
+								<div class="form-group">
+									<div class="progress" style="display: none;">
+										<div class="progress-bar progress-bar-striped active" id="progressimgp" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 	<div th:replace="admin/includes/scripts :: scripts"></div>
+	<script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
+	<script type="text/javascript" th:src="@{/generales/js/senders.js}"></script>
+	<script type="text/javascript" th:src="@{/generales/js/functions.js}"></script>
 </body>
 </html>

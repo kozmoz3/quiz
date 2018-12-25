@@ -3,6 +3,8 @@ function getCodeStatus(jqXHR, textStatus) {
 		return 'Error de conexióm.';
 	else if (jqXHR.status == 404)
 		return 'Página no encontrada.';
+	else if (jqXHR.status == 405)
+		return 'Método no encontrado: ' + jqXHR.responseText.message;
 	else if (jqXHR.status == 500)
 		return 'Error interno en servidor.';
 	else if (textStatus === 'parsererror')

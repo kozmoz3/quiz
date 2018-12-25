@@ -213,9 +213,7 @@ class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [iduser=" + iduser + ", correo=" + correo+", nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono
-				+ ", correo=" + correo + ", username=" + username +  ", password=" + password
-				+ ", enable=" + enable + ", idrol=" + idrol + "]";
+		return "User [iduser=" + iduser + ", correo=" + correo+", nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono + ", correo=" + correo + ", username=" + username +  ", password=" + password + ", enable=" + enable + ", idrol=" + idrol + "]";
 	}
 
 		

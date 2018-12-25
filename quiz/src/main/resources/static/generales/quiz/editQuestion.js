@@ -31,9 +31,6 @@ btn.addEventListener("click",function(){
 });
 
 $("#add").click(function(){
-	var verificaCampos = true;
-	var verificaChecks = true;
-	var verificaScore = true;
 	var valueList = new Resource();
 	if($("#question").val() == ""){
 		getErrorMessage("Tienes que agregar una pregunta");
@@ -60,13 +57,18 @@ $("#add").click(function(){
 });
 
 function addQuestionEdit(objResource){
+	let idsend = $("#idv").val();
+	let iddom = $("#idv").attr("data-iddom");
 	var listaDivs = $("#questdiv0").find("div[data-rem]");
-	var opciones = objResource.getCampos( listaDivs );
-	var newquest = new Question($("#question").val(), opciones[0], opciones[1], $("#messages").val(), $("#idv").val(), 0, $("#typeOption").val(),$("#score-quest").val() );
-	console.log(newquest);
-	
+	var opciones = objResource.getCamposXLSX( listaDivs );
+	var newquest = new Question($("#question").val(), opciones[0], opciones[1], $("#messages").val(), idsend , 0, $("#typeOption").val(),$("#score-quest").val() );
+	setDataWithProgress({
+			type: "post",
+			url: "/admin/simuladores/preguntas/edit",
+			data: newquest,
+			othercnf: "/admin/simuladores/preguntas/" + iddom
+		}, "", [{ key: "Content-type", value: "application/json; charset=utf-8" }]);
 }
-
 
 $(document).ready(function (){
 	$("#question").val(objQuest.question);

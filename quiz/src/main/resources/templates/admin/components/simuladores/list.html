@@ -16,7 +16,7 @@
 	        <div class="courses-area">
 	        	<div class="container-fluid">
 	        		<div class="row">	        		
-	        			<div class="col-lg-4 col-md-4 col-sm-3 col-xs-2" th:each="quiz: ${quizList}">
+	        			<div class="col-lg-4 col-md-4 col-sm-3 col-xs-2" th:each="quiz,itemq: ${quizList}">
 	        				<div class="courses-inner res-mg-b-30">
 	        					<div class="courses-title">
 	        						
@@ -25,8 +25,9 @@
 	        						<h5 ></h5>
 	        					</div>
 	        					<div class="course-des">
-	        						<p><span><i class="fa fa-clock"></i></span> <b th:text="${quiz.questionsList.size()}"></b> Preguntas</p>
-	        						<p><span><i class="fa fa-clock"></i></span> <b th:text="${quiz.questionsList.size()}"></b> Alumnos</p>
+	        						<p><span><i class="fa fa-clock"></i></span> <b th:text="${#lists.size(quiz.questionsList)}"></b> Preguntas</p>
+	        						<p th:if="${#lists.size(quiz.quizgrupoList) > 0}"><span><i class="fa fa-clock"></i></span> <b th:text="${#lists.size(quiz.quizgrupoList.get(itemq.index).idgrupo.grupousuarioList.?[estatus])}"></b> Alumnos</p>
+	        						<p th:if="${#lists.size(quiz.quizgrupoList) <= 0}"><span><i class="fa fa-clock"></i></span> <b>0</b> Alumnos</p>
 	        					</div>
 	        					<div class="product-buttons">
 	        						<button type="button" class="button-warning cart-btn">Editar</button>

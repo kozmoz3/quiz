@@ -2,11 +2,18 @@ package com.quizwish.quiz.services.impl
 
 import org.apache.commons.logging.Log
 
+import java.lang.reflect.Array
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.data.domain.Example
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
+
 import com.quizwish.quiz.models.Rol
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.UserRepository
@@ -17,6 +24,7 @@ import org.apache.commons.logging.LogFactory
 class UsuarioServiceImp implements UsuarioService{
 	
 	private static final Log LOGGER = LogFactory.getLog(UsuarioServiceImp.class)
+	static final def UPLOAD = ".//src//main//resources//static//administrador//photos//"
 	
 	@Autowired
 	@Qualifier("rolService")
@@ -122,5 +130,44 @@ class UsuarioServiceImp implements UsuarioService{
 	@Override
 	def saveSimpleStudent(User user) {
 		return userRepository.save(user)
+	}
+
+	@Override
+	public User saveProfile(User user, MultipartFile multipart) {
+		LOGGER.info("METHOD - saveProfile");
+		def newNameFile = ""
+		def isexist = false
+		def extension = getFileExtension(multipart.getContentType())
+		if (extension == null ) return user
+		
+		if (user.getPerfil() != null ) {
+			newNameFile = user.getPerfil().replace("." + extension, "")
+			isexist = true
+		}else {
+			def encrop = new BCryptPasswordEncoder()
+			def fechaencript = new Date();
+			newNameFile = encrop.encode(multipart.getOriginalFilename() +""+ fechaencript.getTime())
+		}
+		LOGGER.info("METHOD - saveProfile archivo => " + newNameFile);
+		return sendArchiveAndSave(user, multipart, newNameFile, extension, isexist)
+	}
+	
+	private User sendArchiveAndSave(User user, MultipartFile multipart, String newNameFile, String extension, boolean isexist) {
+		LOGGER.info("METHOD - sendArchiveAndSave => Nombre arch: "+newNameFile + " Extensión: "+extension +" Exist: "+ isexist);
+		def nombre = newNameFile.replace(".", "") + "." + extension
+		user.setPerfil( nombre )
+		def bitsarr = multipart.getBytes()
+		def path = Paths.get( UPLOAD + nombre)
+		if(isexist) {
+			Files.deleteIfExists(path)
+			Files.write( path, bitsarr )
+		}else
+			Files.write( path, bitsarr )
+		return userRepository.save(user)
+	}
+	
+	def getFileExtension(String fileName) {
+		int dotIndex = fileName.lastIndexOf("/")
+		return (dotIndex < 0) ? null : fileName.substring( dotIndex + 1 ).toLowerCase()
 	}
 }

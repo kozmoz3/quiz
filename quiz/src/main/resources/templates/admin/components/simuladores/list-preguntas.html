@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<head th:replace="admin/includes/heads :: heads"></head>
 	<body>
-		<div id="hedsconf" data-search="pregunta" data-ads="button" data-href="/admin/simuladores/preguntas/add"></div>
+		<div id="hedsconf" data-search="pregunta" th:data-idref="${quiz.idquiz}" data-ads="button" data-href="/admin/simuladores/preguntas/add"></div>
 	    <div th:replace="admin/includes/menu-desktop :: menu-desk"></div>	    
 	    <div class="all-content-wrapper">
 	        <div th:replace="admin/includes/logo-movile :: logo-mov"></div>
@@ -28,10 +28,10 @@
 		        							</tr>
 	        							</thead>
 	        							<tbody>
-		        							<tr th:each="question : ${quiz.questionsList}">
-		        								<td th:text="${question.question}">{{pregunta}}</td>
+		        							<tr th:each="question,item : ${quiz.questionsList}">
+		        								<td th:text="${question.question}" th:id="'question'+${item.index}">{{pregunta}}</td>
 		        								<td>
-		        									<button class="pd-setting-ed" onclick="editQ(this);" th:data-urls="@{/admin/simuladores/preguntas/frm/__${question.idquestion}__}" data-response="#repmodal" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+		        									<button class="pd-setting-ed" onclick="editQ(this);" th:data-urls="@{/admin/simuladores/preguntas/frm/__${question.idquestion}__/__${quiz.idquiz}__}" data-response="#repmodal" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
 		        									<button data-toggle="tooltip" onclick="deleteQ(this);" th:data-urls="@{/admin/simuladores/preguntas/delete/__${question.idquestion}__}" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 		        								</td>
 		        							</tr>

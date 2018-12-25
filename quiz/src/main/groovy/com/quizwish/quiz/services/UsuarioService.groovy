@@ -2,6 +2,7 @@ package com.quizwish.quiz.services
 
 import com.quizwish.quiz.models.User
 import org.springframework.data.domain.Example
+import org.springframework.web.multipart.MultipartFile
 
 interface UsuarioService {
 	def getUsuarioAll();
@@ -25,4 +26,6 @@ interface UsuarioService {
 	def findById(Integer id)
 	
 	def saveSimpleStudent(User user);
+	
+	public abstract User saveProfile(User user, MultipartFile multipart);
 }

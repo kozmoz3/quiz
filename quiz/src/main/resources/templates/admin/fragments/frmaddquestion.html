@@ -26,7 +26,7 @@
 		<div class="form-group">
 			<input type="number" id="score-quest" min="1" value="1" class="form-control" placeholder="Score" title="Score"/>
 		</div>
-		<input th:if="${question != null}" type="hidden" id="idv" th:value="${question.idquestion}"/>
+		<input th:if="${question != null}" type="hidden" th:data-iddom="${iddom}" id="idv" th:value="${question.idquestion}"/>
 		<script th:if="${question != null}">
 			/*<![CDATA[*/
 				var objQuest = new Question( "[[${question.question}]]", "[[${question.options}]]", "[[${question.answers}]]", "[[${question.message}]]", [[${question.idquestion}]],0 , "[[${question.type}]]", [[${question.score}]] );
