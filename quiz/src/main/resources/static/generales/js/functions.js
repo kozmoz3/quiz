@@ -627,9 +627,11 @@ function editQ( element ){
 
 function deleteQ(element){
 	var url = $(element).attr("data-urls");
+	var idremov = $(element).attr("data-idremove");
 	if($.trim(url) == "") return false;
 	getOptionalMessage( "Preguntas", "¿Está seguro de eliminar ésta pregunta?", function(){
 		setFormWM({ type:"delete", url:url, data:{} });
+		$(idremov).remove();
 	}, function(){
 		getNotification("Operación cancelada","warning");
 	});

@@ -28,11 +28,11 @@
 		        							</tr>
 	        							</thead>
 	        							<tbody>
-		        							<tr th:each="question,item : ${quiz.questionsList}">
-		        								<td th:text="${question.question}" th:id="'question'+${item.index}">{{pregunta}}</td>
+		        							<tr th:each="question,item : ${quiz.questionsList}" th:id="'question'+${item.index}">
+		        								<td th:text="${question.question}">{{pregunta}}</td>
 		        								<td>
 		        									<button class="pd-setting-ed" onclick="editQ(this);" th:data-urls="@{/admin/simuladores/preguntas/frm/__${question.idquestion}__/__${quiz.idquiz}__}" data-response="#repmodal" data-toggle="modal" data-target="#preguntaedit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		        									<button data-toggle="tooltip" onclick="deleteQ(this);" th:data-urls="@{/admin/simuladores/preguntas/delete/__${question.idquestion}__}" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+		        									<button data-toggle="tooltip" onclick="deleteQ(this);" th:data-urls="@{/admin/simuladores/preguntas/delete/__${question.idquestion}__}" th:data-idremove="'#question'+${item.index}" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 		        								</td>
 		        							</tr>
 	        							</tbody>

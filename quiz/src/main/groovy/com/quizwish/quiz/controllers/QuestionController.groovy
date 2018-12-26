@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
@@ -27,6 +28,7 @@ class QuestionController {
 	static final def FRMPREGUNTAS = "admin/fragments/frmaddquestion"
 	static final def PREGUNTAADD = "admin/components/simuladores/questions"
 	static final def REDIRECT = "redirect:/admin/simuladores"
+	static final def BLANK = "response"
 	
 	@Autowired
 	@Qualifier("questionsService")
@@ -68,5 +70,11 @@ class QuestionController {
 	def setEditPreguntas(@RequestBody MQuestion mquestion, Model model) {
 		questionsService.setQuestion(mquestion)
 		return REDIRECT
+	}
+	
+	@DeleteMapping("/preguntas/delete/{id}")
+	def setDeletePreguntas(@PathVariable(name = "id") int id,Model model) {
+		questionsService.deleteQuestions(id)
+		return BLANK
 	}
 }
