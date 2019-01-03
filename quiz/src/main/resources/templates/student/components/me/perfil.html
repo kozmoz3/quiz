@@ -23,34 +23,44 @@
 								</div>
 								<div class="form-group">
 									<input type="text" th:value="${usuario.username}" class="form-control" maxlength="50" id="strusername" placeholder="Username"/>
+									<input type="hidden" value="personal" data-optional id="strtypes"/>
 								</div>
 								<div class="form-group">
 									<input type="button" onclick="sendData(this);"
 									data-onclear="false" 
 									data-href-method="put" 
+									data-content-type="application/json; charset=utf-8"
+									data-content-heads="Content-type" 
 									data-remain="3" 
 									th:data-href-url="@{/me/profile/personal}" 
-									data-optional data-noset data-cleable data-response="view|#unid" 
+									data-optional data-noset data-cleable
 									class="btn btn-primary" value="Actualizar"/>
 								</div>
 								<div id="unid"></div>
 							</form>
 							<hr>
 							<h2>Datos de cuenta</h2>
-							<form>
+							<form class="valid-errors form" id="cuenta">
 								<div class="form-group">
-									<input type="email" th:value="${usuario.correo}" class="form-control" id="strcorreo" placeholder="Correo"/>
+									<input type="email" data-optional class="form-control" id="strcorreo" placeholder="Correo"/>
 								</div>
 								<div class="form-group">
-									<input type="password" class="form-control" id="strpass" placeholder="Contraseña"/>
+									<input type="password" data-optional class="form-control" id="strpassword" placeholder="Contraseña"/>
 								</div>
 								<div class="form-group">
-									<input type="password" class="form-control" id="strrpass" placeholder="Confirmar contraseña"/>
+									<input type="password" data-optional class="form-control" id="strpasswordr" data-noset placeholder="Confirmar contraseña"/>
 								</div>
 								<div class="form-group">
-									<input type="button" class="btn btn-primary" value="Actualizar"/>
+									<input type="button" onclick="sendData(this);"
+									data-onclear="true" data-multiples="#cuenta" data-href-method="put" 
+									data-content-type="application/json; charset=utf-8" data-content-heads="Content-type" 
+									data-remain="3" th:data-href-url="@{/me/profile/personal}" 
+									data-optional data-noset data-cleable data-logout
+									class="btn btn-primary" value="Actualizar"/>
 								</div>
 							</form>
+							<p>Si quieres actualizar sólo la contraseña, deja el campo de correo vacío y viceversa.</p>
+							<p><strong>Nota: </strong>al actualizar estos campos se cerrará la sesión automáticamente</p>
 						</div>
 					</div>	
 				</div>
@@ -58,17 +68,28 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="img-container">
-								<img th:src="@{/administrador/img/profile/1.jpg}"/>
+								<div id="imagePreview">
+									<img th:if="${usuario.perfil == null}" th:src="@{/administrador/img/profile/1.jpg}"/>
+									<img th:if="${usuario.perfil != null}" th:src="@{/estudiante/photos/__${usuario.perfil}__}"/>
+								</div>
 								<h4>{{ Nombre de estudiante }}</h4>
 							</div>
-							<form>
+							<form enctype="multipart/form-data">
 								<div class="form-group">
 									<label>
 										Cambiar foto de perfil
-										<input type="file" id="imgperfil" />
+										<input type="file" onchange="setArchive(this);" id="perfil" data-progress="progressimgp" 
+											data-image-size="900,900" accept=".png,.jpeg,.jpg,.gif" data-preview="imagePreview"
+											data-url-img="/me/profile/img/edit" data-reurl="/me/profile" data-loaded="false">
 									</label>
 								</div>
+								<div class="form-group">
+									<div class="progress" style="display: none;">
+										<div class="progress-bar progress-bar-striped active" id="progressimgp" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+									</div>
+								</div>
 							</form>
+							<p>La imagen se actualiza al instante en que se carga. (Al actualizar la imagen, espere 2 minutos máximo pues está siendo verificada)</p>
 						</div>
 					</div>	
 				</div>

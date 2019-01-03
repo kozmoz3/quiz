@@ -167,6 +167,20 @@ $("#intento").click(function(){
 		$("#number").remove();
 });
 
+$("#listo").click(function(){
+	let idsend = $(this).attr("data-idsend");
+	$.each(listQuestions,function(k,v){
+		v.idquiz = idsend;
+		v.idquestion = null;
+	});
+	setDataWithProgress({
+				type: "post",
+				url: "/admin/simuladores/preguntas/add",
+				data: listQuestions,
+				othercnf: "/admin/simuladores/preguntas/" + idsend
+			},"",[{ key: "Content-type", value: "application/json; charset=utf-8" }]);
+});
+
 // COOKIES
 function getCookie(cname) {
 	var name = cname + "=";

@@ -17,7 +17,7 @@ interface QuizService {
 	
 	public List<Quiz> getQuizByIduser(User user);
 	
-	
+	def getQuizById(Integer id);
 				
 	def setQuiz(Quiz quiz);
 			

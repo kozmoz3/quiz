@@ -1,6 +1,5 @@
 package com.quizwish.quiz.models
 
-import com.quizwish.quiz.entity.Estudiantequiz
 import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Grupousuario
 import com.quizwish.quiz.entity.Quiz
@@ -64,8 +63,8 @@ class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Grupousuario> grupousuarioList;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
-	private List<Estudiantequiz> estudiantequizList
+	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	private List<Estudiantequiz> estudiantequizList*/
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Grupo> grupList
@@ -203,20 +202,18 @@ class User implements Serializable {
 		this.grupousuarioList = grupousuarioList;
 	}
 	
-	@XmlTransient
+	/*@XmlTransient
 	public List<Estudiantequiz> getEstudiantequizList() {
 		return estudiantequizList;
 	}
 
 	public void setEstudiantequizList(List<Estudiantequiz> estudiantequizList) {
 		this.estudiantequizList = estudiantequizList;
-	}
+	}*/
 
 	@Override
 	public String toString() {
-		return "User [iduser=" + iduser + ", correo=" + correo+", nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono
-				+ ", correo=" + correo + ", username=" + username +  ", password=" + password
-				+ ", enable=" + enable + ", idrol=" + idrol + "]";
+		return "User [iduser=" + iduser + ", correo=" + correo+", nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono + ", correo=" + correo + ", username=" + username +  ", password=" + password + ", enable=" + enable + ", idrol=" + idrol + "]";
 	}
 
 		

@@ -9,6 +9,7 @@
 		type : "null",
 		url : "null",
 		data: {},
+		othercnf: "",
 		cache : false,
 		success : function( response ) {
 			console.log( response );
@@ -22,6 +23,7 @@
 	var datosMetadata = {
             url: "null",
             type: "null",
+            othercnf: "",
             dataType: "html",
             data: "null",
             cache: false,
@@ -119,7 +121,8 @@
 	}
 	
 	function sendData( idElement ) {
-		var lstElements = getListElements( $(".valid-errors") );
+		
+		var lstElements =  $(idElement).attr("data-multiples") != undefined ? getListElements( $( $(idElement).attr("data-multiples") ) ) : getListElements( $(".valid-errors") );
 		var lstStringscmd = $(idElement).attr("data-list-str") != undefined ? $(idElement).attr("data-list-str") : "";
 		var arraryString = lstStringscmd =="" ? [] : lstStringscmd.split(",");
 		var reduce = $(idElement).attr("data-remain") == '' ? 0: $(idElement).attr("data-remain");
@@ -253,11 +256,24 @@
 			default: return; break;
 		}
 		
-		var inresponse = "";
+		let inresponse = "";
+		let headers = [];
 		if( $(idElement).attr("data-response") != undefined )
 			inresponse = getOnResponse( $(idElement).attr("data-response") );
+		if( $(idElement).attr("data-content-type") != undefined && $(idElement).attr("data-content-heads") != undefined ){
+			let types = $(idElement).attr("data-content-type").split("|");
+			let heads = $(idElement).attr("data-content-heads").split("|");
+			$.each(types,function(index, item){
+				headers.push({
+					key: heads[index],
+					value: types[index]
+				});
+			});
+		}
+		if($(idElement).attr("data-content-type") != undefined)
+			objectSend.othercnf = "/logout"
 		
-		setDataWithProgress(objectSend, inresponse);
+		setDataWithProgress(objectSend, inresponse, headers );
 	}
 	
 	function getSize( input ){
@@ -278,8 +294,18 @@
 	
 	function setArchive( fileElement ){
 		var progress = $(fileElement).attr("data-progress");
-	    if( progress != undefined)
+	    if( progress != undefined){
+	    	if( $(".progress") != undefined )
+	    		$(".progress").show("slow")
 	    	$( "#" + progress ).show("slow");
+	    	
+            if( $("#" + progress).get(0).nodeName == "PROGRESS" )
+            	$("#" + progress).val(1);
+            else{
+            	$("#" + progress).css("width","1%");
+            	$("#" + progress).attr("aria-valuenow",1);
+            }
+	    }
 	    
 	    if( $(fileElement).attr("data-image-size") != undefined ){
 	    	getSize( $(fileElement) );
@@ -307,7 +333,12 @@
 	            clearInterval(id);
 	        } else {
 	            width++;
-	            $("#" + progress).val(width);
+	            if( $("#" + progress).get(0).nodeName == "PROGRESS" )
+	            	$("#" + progress).val(width);
+	            else{
+	            	$("#" + progress).css("width",width + "%");
+	            	$("#" + progress).attr("aria-valuenow",width);
+	            }
 	        }
 	    }, 30);
 	}
@@ -324,16 +355,34 @@
 						});
 					};
 					reader.readAsDataURL(reference[0].files[0]);
+					if( $(reference).attr("data-url-img") != undefined){
+						var formData = new FormData();
+						formData.append( $("input[type='file']").attr("id"), new Blob( 
+								[ $("input[type='file']")[0].files[0] ],
+								{ type: $("input[type='file']")[0].files[0].type } ) );
+						
+						datosMetadata.type = "put";
+						datosMetadata.url = $(reference).attr("data-url-img");
+						datosMetadata.data= formData;
+						datosMetadata.othercnf = $(reference).attr("data-reurl");
+						setDataWithProgress( datosMetadata, "" );
+					}
 				}
-				if( idprogress != undefined)
+				if( idprogress != undefined){
 		              $("#" + idprogress).hide("slow");
+		              if( $(".progress") != undefined )
+		  	    		$(".progress").hide("slow")
+				}
 			}else{
 				reference.val("");
 				$("#" + reference.attr("data-preview")).fadeOut("slow", function() {
 					$(this).html("").slideUp("slow");
 				});
-				if( idprogress != undefined)
+				if( idprogress != undefined){
 		              $("#" + idprogress).hide("slow");
+		              if( $(".progress") != undefined )
+			  	    		$(".progress").hide("slow")
+				}
 				return false;
 			}
 		}, 3000, reference);
@@ -555,7 +604,7 @@ $("input[data-push]").click(function(){
 			status: $(this).is(":checked")
 	};
 	if($.trim(url) == "") return false;
-	setFormWOMessage({ type:"post", url:url, data: data });
+	setFormWOMessage({ type:"put", url:url, data: data });
 });
 
 $("button[data-delete]").click(function(){
@@ -578,9 +627,11 @@ function editQ( element ){
 
 function deleteQ(element){
 	var url = $(element).attr("data-urls");
+	var idremov = $(element).attr("data-idremove");
 	if($.trim(url) == "") return false;
 	getOptionalMessage( "Preguntas", "¿Está seguro de eliminar ésta pregunta?", function(){
 		setFormWM({ type:"delete", url:url, data:{} });
+		$(idremov).remove();
 	}, function(){
 		getNotification("Operación cancelada","warning");
 	});

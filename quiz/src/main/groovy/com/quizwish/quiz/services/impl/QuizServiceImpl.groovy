@@ -93,5 +93,11 @@ class QuizServiceImpl implements QuizService{
 		return quizRepository.deleteById(id)
 	}
 
+	@Override
+	def getQuizById(Integer id) {
+		Optional<Quiz> optional = quizRepository.findById(id)
+		return optional.isPresent() ? optional.get() : new Quiz()
+	}
+
 
 }

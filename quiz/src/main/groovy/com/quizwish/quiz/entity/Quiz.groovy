@@ -162,10 +162,12 @@ class Quiz implements Serializable{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
     List<Quizgrupo> quizgrupoList
 	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
 	List<Estudiantequiz> estudiantequizList
 	
 	
+
 
     public Quiz() {
     }
@@ -395,9 +397,9 @@ class Quiz implements Serializable{
 	 }
  
 	 
-	 public void setEstudiantequizList(List<Estudiantequiz> estudiantequizList) {
+	 /*public void setEstudiantequizList(List<Estudiantequiz> estudiantequizList) {
 		 this.estudiantequizList = estudiantequizList;
-	 }
+	 }*/
 
 	public String getFecha() {
 		return fecha;
@@ -433,10 +435,10 @@ class Quiz implements Serializable{
         return quizgrupoList
     }
 	
-	@XmlTransient
+	/*@XmlTransient
 	def getEstudiantequizList() {
 		return estudiantequizList
-	}
+	}*/
 
 	@Override
 	def String toString() {

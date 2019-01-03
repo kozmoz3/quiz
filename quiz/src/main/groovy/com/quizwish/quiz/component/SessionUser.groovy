@@ -25,6 +25,7 @@ class SessionUser {
 		com.quizwish.quiz.models.User user= userSessionAll()
 		def username = user.getNombre();
 		model.addAttribute("username", username);
+		model.addAttribute("usernameimg", user.getPerfil());
 		return user;
 	}
 	
