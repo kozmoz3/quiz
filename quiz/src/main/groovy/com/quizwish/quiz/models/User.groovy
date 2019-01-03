@@ -58,7 +58,7 @@ class User implements Serializable {
 	@Column(name = "username",  length = 60 )
 	private String username;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	@OneToMany( mappedBy = "iduser")
 	private List<Quiz> quizList;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")

@@ -1,6 +1,7 @@
 package com.quizwish.quiz.entity
 
 import java.io.Serializable
+import java.time.LocalDate
 import java.util.Date
 import java.util.List
 import javax.persistence.Basic
@@ -87,11 +88,11 @@ class Quiz implements Serializable{
 	
     @Column(name = "venceini")
     //@Temporal(TemporalType.DATE)
-    Date venceini
+    String venceini
 	
     @Column(name = "vencefin")
     //@Temporal(TemporalType.DATE)
-    Date vencefin
+    String vencefin
 	
     @Column(name = "intentos")
     String intentos
@@ -129,12 +130,10 @@ class Quiz implements Serializable{
     boolean isintentos
 
     @Column(name = "showfechaini")
-   // @Temporal(TemporalType.DATE)
-    Date showfechaini
+    String showfechaini
 	
     @Column(name = "showfechafin")
-   // @Temporal(TemporalType.DATE)
-    Date showfechafin
+    String  showfechafin
 	
     @Column(name = "password")
     String password
@@ -150,11 +149,11 @@ class Quiz implements Serializable{
 
 	// @Basic(optional = false)
     @Column(name = "fecha")
-    //@Temporal(TemporalType.TIMESTAMP)
-    Date fecha
+   
+    String fecha
 	
+	@ManyToOne()
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")
-    @ManyToOne(optional = false)
     User iduser
 	
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
@@ -165,6 +164,8 @@ class Quiz implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
 	List<Estudiantequiz> estudiantequizList
+	
+	
 
     public Quiz() {
     }
@@ -184,6 +185,22 @@ class Quiz implements Serializable{
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	public void setVenceini(String venceini) {
+		this.venceini = venceini;
+	}
+
+	public void setVencefin(String vencefin) {
+		this.vencefin = vencefin;
+	}
+
+	public void setShowfechaini(String showfechaini) {
+		this.showfechaini = showfechaini;
+	}
+
+	public void setShowfechafin(String showfechafin) {
+		this.showfechafin = showfechafin;
 	}
 
 	public void setNombre(String nombre) {
@@ -248,19 +265,19 @@ class Quiz implements Serializable{
 		this.tiempo = tiempo;
 	}
 
-	public Date getVenceini() {
+	public  String getVenceini() {
 		return venceini;
 	}
 
-	public void setVenceini(Date venceini) {
+	public void setVenceini(String venceini) {
 		this.venceini = venceini;
 	}
 
-	public Date getVencefin() {
+	public String getVencefin() {
 		return vencefin;
 	}
 
-	public void setVencefin(Date vencefin) {
+	public void setVencefin(String vencefin) {
 		this.vencefin = vencefin;
 	}
 
@@ -382,11 +399,11 @@ class Quiz implements Serializable{
 		 this.estudiantequizList = estudiantequizList;
 	 }
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 

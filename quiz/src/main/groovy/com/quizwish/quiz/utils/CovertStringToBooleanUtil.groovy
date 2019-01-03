@@ -10,13 +10,13 @@ class CovertStringToBooleanUtil {
 
 	private static final Log LOGGER = LogFactory.getLog(CovertStringToBooleanUtil.class)
 	
-	public static Date StringToDate(String dateInString) {
+	/*public static Date StringToDate(String dateInString) {
 		LOGGER.info("METHOD : StringToDate --- date = "+dateInString);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 		Date date = formatter.parse(dateInString);
 		return date;
 		//return formatter.format(date)
-	}
+	}*/
 	
 	public static boolean converStringToBoolean(String convert){
 		LOGGER.info("METHOD : converStringToBoolean -- convert = "+convert);

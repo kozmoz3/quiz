@@ -42,6 +42,7 @@ class StudentAdminController {
 		LOGGER.info("METHOD : show");
 		User userAdmin = sessionUser.userSessionAddUsername(model);
 		List<User> liststudent = studentService.findAllStudent(userAdmin.getIduser());
+		LOGGER.info("METHOD : show --- listStudent "+liststudent);
 		model.addAttribute("liststudent", liststudent);
 		return "admin/components/estudiantes/list";
 	}

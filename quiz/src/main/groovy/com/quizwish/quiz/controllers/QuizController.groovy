@@ -48,7 +48,8 @@ class QuizController {
 	public String index(Model model) {
 		LOGGER.info("METHOD : index --");
 		User user = sessionUser.userSessionAddUsername(model);
-		List<Quiz> quizList=  quizService.getQuizByIduser( user);
+		List<Quiz> quizList=  quizService.getQuizByIduser(user);
+		LOGGER.info("METHOD : index -- listQuiz = "+quizList );
 		model.addAttribute("quizList", quizList);
 		LOGGER.info("METHOD : index -- listQuiz = "+quizList );
 		return INDEX;

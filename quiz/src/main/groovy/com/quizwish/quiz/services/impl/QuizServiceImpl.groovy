@@ -12,6 +12,7 @@ import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.QuizRepository
 import com.quizwish.quiz.services.QuizService
 import com.quizwish.quiz.utils.CovertStringToBooleanUtil
+import com.quizwish.quiz.utils.DatesUtil
 
 @Service("quizService")
 class QuizServiceImpl implements QuizService{
@@ -34,8 +35,9 @@ class QuizServiceImpl implements QuizService{
 		quiz.setVista(CovertStringToBooleanUtil.converStringToBoolean(quizMap.get("vistaall")))//si es true =  Todas las preguntas en una hoja And si es false= Mostrar preguntas en un wizard
 		quiz.setRandom(CovertStringToBooleanUtil.converStringToBoolean(quizMap.get("random")))
 		
-		quiz.setVenceini(CovertStringToBooleanUtil.StringToDate(quizMap.get("venceini")))
-		quiz.setVencefin(CovertStringToBooleanUtil.StringToDate(quizMap.get("vencefin")))
+		LOGGER.info("METHOD : saveQuiz  fecha " + quizMap.get("venceini"));
+		/*quiz.setVenceini(quizMap.get("venceini"))
+		quiz.setVencefin(quizMap.get("vencefin"))*/
 		
 		/*
 		
@@ -74,9 +76,9 @@ class QuizServiceImpl implements QuizService{
 
 	@Override
 	public List<Quiz>  getQuizByIduser(User user) {
-		LOGGER.info("METHOD : getQuizByIduse -- id user = ");
+		LOGGER.info("METHOD : getQuizByIduse -- id user = "+ user.nombre+" list ");
 		return user.getQuizList();
-		//return quizRepository.findAllByIduser(idUser);
+		//return quizRepository.findAllByIduser(user);
 	}
 	
 	

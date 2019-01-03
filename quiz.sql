@@ -1,4 +1,4 @@
-/*
+﻿
 Navicat MySQL Data Transfer
 
 Source Server         : local
@@ -99,8 +99,8 @@ CREATE TABLE `quiz` (
   `vista` tinyint(1) NOT NULL DEFAULT '0',
   `random` tinyint(1) NOT NULL DEFAULT '0',
   `tiempo` time DEFAULT NULL,
-  `venceini` date DEFAULT NULL,
-  `vencefin` date DEFAULT NULL,
+  `venceini` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `vencefin` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `intentos` char(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `preguntasc` tinyint(1) NOT NULL DEFAULT '0',
   `respuestac` tinyint(1) NOT NULL DEFAULT '0',
