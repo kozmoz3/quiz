@@ -149,7 +149,6 @@ class Quiz implements Serializable{
 
 	// @Basic(optional = false)
     @Column(name = "fecha")
-   
     String fecha
 	
 	@ManyToOne()
@@ -189,13 +188,7 @@ class Quiz implements Serializable{
 		return nombre;
 	}
 
-	public void setVenceini(String venceini) {
-		this.venceini = venceini;
-	}
 
-	public void setVencefin(String vencefin) {
-		this.vencefin = vencefin;
-	}
 
 	public void setShowfechaini(String showfechaini) {
 		this.showfechaini = showfechaini;
