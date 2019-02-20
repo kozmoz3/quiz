@@ -99,13 +99,13 @@
   							</div>
   							<div class="order-products">
   								<div class="order-col">
-  									<div>{{ Nombre }}</div>
-  									<div>${{ Precio }}</div>
+  									<div th:text="${precio.nombre}">{{ Nombre }}</div>
+  									<div th:text="${'$ ' + precio.precio}">${{ Precio }}</div>
   								</div>
   							</div>
   							<div class="order-col">
   								<div><strong>TOTAL (c/IVA)</strong></div>
-  								<div><strong class="order-total">${{ Total }}</strong></div>
+  								<div><strong class="order-total" th:text="${ ( (precio.precio / 100) * 16) + precio.precio }">${{ Total }}</strong></div>
   							</div>
   						</div>
   						<div class="input-checkbox">

@@ -47,6 +47,7 @@ class InicioController {
 	@GetMapping("/")
 	public String showIndex(Model model ) {
 		model.addAttribute("precios", (List<TPrecios>) tpreciosService.getTPreciosAll())
+		model.addAttribute("userlog", sessionUser.inSession() ? sessionUser.userSessionAll(): new User() );
 		LOGGER.info("METHOD : showIndex --");		
 		return INDEX;
 	}
@@ -59,7 +60,8 @@ class InicioController {
 	
 	@RequestMapping(value="/details/{id}", method = RequestMethod.GET)
 	def details( @PathVariable("id") Integer id, Model model) {
-		model.addAttribute("userlog", sessionUser.inSession() ? sessionUser.userSessionAll() : new User());
+		model.addAttribute("userlog", sessionUser.userSessionAll());
+		model.addAttribute("precio", (TPrecios) tpreciosService.getTPreciosById(id) )
 		return DETAILS
 	}
 }

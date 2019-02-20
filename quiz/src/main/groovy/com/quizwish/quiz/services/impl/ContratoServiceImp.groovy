@@ -21,7 +21,8 @@ class ContratoServiceImp implements ContratoService{
 
 	@Override
 	public Contrato getContratoById(String folio) {
-		return contratoRepository.findById(folio)
+		Optional<Contrato> opcional = contratoRepository.findById(folio)
+		return opcional.isPresent() ? opcional.get() : new Contrato(); 
 	}
 
 	@Override

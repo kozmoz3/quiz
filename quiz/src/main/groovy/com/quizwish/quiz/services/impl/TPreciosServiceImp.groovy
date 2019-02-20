@@ -15,37 +15,38 @@ class TPreciosServiceImp implements TPreciosService{
 	TPreciosRepository tpreciosRepository
 
 	@Override
-	public Object getTPreciosAll() {
+	public List<TPrecios> getTPreciosAll() {
 		return tpreciosRepository.findAll();
 	}
 
 	@Override
-	public Object getTPreciosById(int id) {
-		return tpreciosRepository.findById(id);
+	public TPrecios getTPreciosById(int id) {
+		Optional<TPrecios> opcional = tpreciosRepository.findById(id);
+		return opcional.isPresent() ? opcional.get() : new TPrecios();
 	}
 
 	@Override
-	public Object saveTPreciosAll(List<TPrecios> lstTPrecios) {
+	def saveTPreciosAll(List<TPrecios> lstTPrecios) {
 		return tpreciosRepository.saveAll(lstTPrecios);
 	}
 
 	@Override
-	public Object saveTPrecios(TPrecios tprecios) {
+	def saveTPrecios(TPrecios tprecios) {
 		return tpreciosRepository.save(tprecios);
 	}
 
 	@Override
-	public Object updateTPrecios(TPrecios tprecios) {
+	def updateTPrecios(TPrecios tprecios) {
 		return tpreciosRepository.save(tprecios);
 	}
 
 	@Override
-	public Object deleteTPrecios(int id) {
+	def deleteTPrecios(int id) {
 		return tpreciosRepository.deleteById(id);
 	}
 
 	@Override
-	public Object removeTPrecios(int id) {
+	def removeTPrecios(int id) {
 		return null;
 	}
 }
