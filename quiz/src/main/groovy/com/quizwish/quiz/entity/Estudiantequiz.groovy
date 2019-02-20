@@ -6,6 +6,8 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
 import javax.persistence.Table
 
 @Entity
@@ -28,6 +30,10 @@ class Estudiantequiz {
 	
 	@Column(name = "status")
 	boolean status
+	
+	@JoinColumn(name = "idquiz", referencedColumnName = "idquiz")
+	@ManyToOne(optional = false)
+	Quiz idquiz
 	
 	
 }
