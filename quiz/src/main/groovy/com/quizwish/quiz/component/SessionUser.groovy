@@ -42,4 +42,9 @@ class SessionUser {
 	public User session() {
 		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
+	
+	public boolean inSession() {
+		Object sesion = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return sesion instanceof String ? false : true;
+	}
 }

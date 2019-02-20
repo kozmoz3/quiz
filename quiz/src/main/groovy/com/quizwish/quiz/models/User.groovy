@@ -1,5 +1,6 @@
 package com.quizwish.quiz.models
 
+import com.quizwish.quiz.entity.Contrato
 import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Grupousuario
 import com.quizwish.quiz.entity.Quiz
@@ -59,6 +60,9 @@ class User implements Serializable {
 	
 	@OneToMany( mappedBy = "iduser")
 	private List<Quiz> quizList;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private List<Contrato> contratoList;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Grupousuario> grupousuarioList;

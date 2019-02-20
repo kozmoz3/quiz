@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.security.core.context.SecurityContextHolder
 
 import org.springframework.web.bind.annotation.RequestMethod
 
@@ -50,9 +51,9 @@ class InicioController {
 		return INDEX;
 	}
 	
-	@RequestMapping(value="/details", method = RequestMethod.GET)
-	def details(@AuthenticationPrincipal User principal, Model model) {
-		model.addAttribute("userlog", principal);
+	@RequestMapping(value="/details/{type}/{id}", method = RequestMethod.GET)
+	def details(@PathVariable("id") String type, @PathVariable("id") Integer id, Model model) {
+		model.addAttribute("userlog", sessionUser.inSession() ? sessionUser.userSessionAll() : new User());
 		return DETAILS
 	}
 }
