@@ -215,95 +215,21 @@
                     </div>
                 </div>
             </div>
-            <div class="row no-gutters">
-                <div class="col-12 col-md-6 col-lg-3">
+            <div class="row no-gutters" >
+                <div class="col-12 col-md-6 col-lg-3" th:each="precio : ${precios}">
                     <div class="single-price-plan text-center">
                         <div class="package-plan">
-                            <h5>Esmeralda (Gratuito)</h5>
+                            <h5 th:text="${precio.nombre}"></h5>
                             <div class="ca-price d-flex justify-content-center">
                                 <span>$</span>
-                                <h4>0</h4>
+                                <h4 th:text="${precio.precio}">0</h4>
                             </div>
                         </div>
-                        <div class="package-description">
-                            <p>2 meses gratuito</p>
-                            <p>10 Quiz</p>
-                            <p>50 preguntas por quiz</p>
-                            <p>Soporte</p>
-                            <p>20 alumnos registrados</p>
+                        <div class="package-description" th:each="item : ${#strings.arraySplit(precio.descripcion, '|')}">
+                            <p th:text="${item}"></p>
                         </div>
                         <div class="plan-button">
-                            <a th:href="/dey">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="single-price-plan text-center">
-                        <div class="package-plan">
-                            <h5>Zafiro</h5>
-                            <div class="ca-price d-flex justify-content-center">
-                                <span>$</span>
-                                <h4>49</h4>
-                            </div>
-                        </div>
-                        <div class="package-description">
-                            <p>Pago por mes</p>
-                            <p>10 quiz</p>
-                            <p>100 preguntas por quiz</p>
-                            <p>Soporte</p>
-                            <p>Sin anuncios</p>
-                            <p>50 usuarios registrados</p>
-                        </div>
-                        <div class="plan-button">
-                            <a href="#">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="single-price-plan active text-center">
-                        <div class="package-plan">
-                            <h5>Rubí</h5>
-                            <div class="ca-price d-flex justify-content-center">
-                                <span>$</span>
-                                <h4>69</h4>
-                            </div>
-                        </div>
-                        <div class="package-description">
-                            <p>Pago anual</p>
-                            <p>Quiz ilimitados</p>
-                            <p>200 preguntas por quiz</p>
-                            <p>Soporte preferente</p>
-                            <p>Importación por archivo</p>
-                            <p>Exportación por archivo</p>
-                            <p>Sin anuncios</p>
-                            <p>100 usuarios registrados</p>
-                        </div>
-                        <div class="plan-button">
-                            <a href="#">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="single-price-plan text-center">
-                        <div class="package-plan">
-                            <h5>Diamante</h5>
-                            <div class="ca-price d-flex justify-content-center">
-                                <span>$</span>
-                                <h4>99</h4>
-                            </div>
-                        </div>
-                        <div class="package-description">
-                            <p>Pago anual</p>
-                            <p>Quiz ilimitados</p>
-                            <p>300 preguntas por quiz</p>
-                            <p>Soporte preferente</p>
-                            <p>Importación por archivo</p>
-                            <p>Exportación por archivo</p>
-                            <p>Sin anuncios</p>
-                            <p>150 usuarios registrados</p>
-                        </div>
-                        <div class="plan-button">
-                            <a href="#">Seleccionar</a>
+                            <a th:href="@{/details/__${precio.idprecio}__}">Seleccionar</a>
                         </div>
                     </div>
                 </div>

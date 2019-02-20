@@ -18,35 +18,35 @@ import javax.xml.bind.annotation.XmlRootElement
 @Table(name = "tprecios", catalog = "quiz", schema = "")
 class TPrecios {
 	
-	private static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "idprecio")
-    private Integer idprecio;
+    Integer idprecio;
     @Basic(optional = false)
     @Column(name = "nombre")
-    private String nombre;
+    String nombre;
     @Basic(optional = false)
     @Column(name = "descripcion")
-    private String descripcion;
+    String descripcion;
     @Basic(optional = false)
     @Column(name = "precio")
-    private double precio;
+    double precio;
     @Basic(optional = false)
     @Column(name = "fechault")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechault;
+    Date fechault;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idprecio")
-    private List<Contrato> contratoList;
+    List<Contrato> contratoList;
 
-    public Tprecios() {
+    def Tprecios() {
     }
 
-    public Tprecios(Integer idprecio) {
+    def Tprecios(Integer idprecio) {
         this.idprecio = idprecio;
     }
 
-    public Tprecios(Integer idprecio, String nombre, String descripcion, double precio, Date fechault) {
+    def Tprecios(Integer idprecio, String nombre, String descripcion, double precio, Date fechault) {
         this.idprecio = idprecio;
         this.nombre = nombre;
         this.descripcion = descripcion;

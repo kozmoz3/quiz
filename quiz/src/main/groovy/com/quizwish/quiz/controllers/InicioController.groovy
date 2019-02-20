@@ -1,10 +1,11 @@
 package com.quizwish.quiz.controllers
 
 import com.quizwish.quiz.component.SessionUser
+import com.quizwish.quiz.entity.TPrecios
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.models.jmodelos.MContacto
 import com.quizwish.quiz.services.EmailService
-
+import com.quizwish.quiz.services.TPreciosService
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -39,8 +40,13 @@ class InicioController {
 	@Qualifier("sessionUser")
 	SessionUser sessionUser;
 	
+	@Autowired
+	@Qualifier("tpreciosService")
+	TPreciosService tpreciosService
+	
 	@GetMapping("/")
 	public String showIndex(Model model ) {
+		model.addAttribute("precios", (List<TPrecios>) tpreciosService.getTPreciosAll())
 		LOGGER.info("METHOD : showIndex --");		
 		return INDEX;
 	}
@@ -51,8 +57,8 @@ class InicioController {
 		return INDEX;
 	}
 	
-	@RequestMapping(value="/details/{type}/{id}", method = RequestMethod.GET)
-	def details(@PathVariable("id") String type, @PathVariable("id") Integer id, Model model) {
+	@RequestMapping(value="/details/{id}", method = RequestMethod.GET)
+	def details( @PathVariable("id") Integer id, Model model) {
 		model.addAttribute("userlog", sessionUser.inSession() ? sessionUser.userSessionAll() : new User());
 		return DETAILS
 	}
