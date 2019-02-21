@@ -31,11 +31,10 @@
                             <span class="navbar-toggler-icon"></span></button>
                             <div class="collapse navbar-collapse" id="ca-navbar">
                                 <ul class="navbar-nav ml-auto" id="nav">
-                                    <li class="nav-item active"><a class="nav-link" th:href="@{/}">Home</a></li>
+                                    <li class="nav-item active"><a class="nav-link" th:href="@{/}">Inicio</a></li>
                                 </ul>
                                 <div class="sing-up-button d-lg-none">
                                     <a th:if="${userlog != null}" th:href="@{/loginsucces}">Control panel</a>
-                                    <a th:if="${userlog == null}" th:href="@{/login}">Iniciar sesión</a>
                                 </div>
                             </div>
                         </nav>
@@ -44,7 +43,6 @@
                 <div class="col-12 col-lg-2">
                     <div class="sing-up-button d-none d-lg-block">
                         <a th:if="${userlog != null}" th:href="@{/loginsucces}">Control panel</a>
-                        <a th:if="${userlog == null}" th:href="@{/login}">Iniciar sesión</a>
                     </div>
                 </div>
             </div>
@@ -71,20 +69,16 @@
                 <form class="form">
     							<div class="form-group form-wrapper wow fadeInDown" data-wow-delay="0.5s">
     								<label class="control-label" for="username">Nombre</label>
-			                        <input th:value="${userlog != null ? userlog.nombre : ''}" type="text" placeholder="Nombre" required name="nombre" id="nombre"  class="form-control">
+			                        <input disabled th:value="${userlog != null ? userlog.nombre : ''}" type="text" placeholder="Nombre" required name="nombre" id="nombre"  class="form-control">
     							</div>
     							<div class="form-group form-wrapper wow fadeInDown" data-wow-delay="0.5s">
     								<label class="control-label" for="password">Apellidos</label>
-			                        <input th:value="${userlog != null ? userlog.apellidos : ''}" type="text" placeholder="Apellidos" required name="apellidos" id="apellidos"  class="form-control">
+			                        <input disabled th:value="${userlog != null ? userlog.apellidos : ''}" type="text" placeholder="Apellidos" required name="apellidos" id="apellidos"  class="form-control">
     							</div>
     							<div class="form-group form-wrapper wow fadeInDown" data-wow-delay="0.5s">
     								<label class="control-label" for="username">Correo</label>
-			                        <input th:value="${userlog != null ? userlog.correo : ''}" type="email" placeholder="uncorreo@example.com" required name="correo" id="correo"  class="form-control">
+			                        <input disabled th:value="${userlog != null ? userlog.correo : ''}" type="email" placeholder="uncorreo@example.com" required name="correo" id="correo"  class="form-control">
     							</div>
-    							<div class="form-group form-wrapper wow fadeInDown" data-wow-delay="0.5s">
-    								<label class="control-label" for="password">Contraseña</label>
-			                    	<input type="password" placeholder="******" required name="password" id="password"  class="form-control">
-			                   	</div>
                 </form>
   						</div>
   					</div>

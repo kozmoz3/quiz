@@ -28,7 +28,7 @@
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ca-navbar" aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                             <div class="collapse navbar-collapse" id="ca-navbar">
                                 <ul class="navbar-nav ml-auto" id="nav">
-                                    <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
+                                    <li class="nav-item active"><a class="nav-link" href="#home">Inicio</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#screenshot">Screenshots</a></li>
@@ -36,7 +36,8 @@
                                     <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
                                 </ul>
                                 <div class="sing-up-button d-lg-none">
-                                    <a th:href="@{/login}">Iniciar sesión</a>
+                                	<a th:if="${userlog.iduser != null}" th:href="@{/loginsucces}">Control panel</a>
+                                    <a th:if="${userlog.iduser == null}" th:href="@{/login}">Iniciar sesión</a>
                                 </div>
                             </div>
                         </nav>
@@ -44,7 +45,8 @@
                 </div>
                 <div class="col-12 col-lg-2">
                     <div class="sing-up-button d-none d-lg-block">
-                        <a th:href="@{/login}">Iniciar sesión</a>
+                        <a th:if="${userlog.iduser != null}" th:href="@{/loginsucces}">Control panel</a>
+                        <a th:if="${userlog.iduser == null}" th:href="@{/login}">Iniciar sesión</a>
                     </div>
                 </div>
             </div>

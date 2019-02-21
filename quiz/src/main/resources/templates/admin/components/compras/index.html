@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
+<title>Administrador</title>
+<meta charset="utf-8">
+<head th:replace="admin/includes/heads :: heads"></head>
+<style type="text/css">
+.img-container img{
+	height:300px;
+	width: 300px;
+	border-radius: 50%; 
+}
+</style>
+<body>
+	<div id="hedsconf" data-title="Mis compras"></div>
+	<div th:replace="admin/includes/menu-desktop :: menu-desk"></div>
+	<div class="all-content-wrapper">
+		<div th:replace="admin/includes/logo-movile :: logo-mov"></div>
+		<div class="header-advance-area">
+			<div th:replace="admin/includes/top :: top"></div>
+			<div th:replace="admin/includes/menu-movile :: menu-movil"></div>
+			<div th:replace="admin/includes/navegacion :: breadcome"></div>
+		</div>
+		<div class="single-pro-review-area mt-t-30 mg-b-15" th:fragment="frm-data-change">
+			<div class="container-fluid">
+				<div class="sparkline8-list responsive-mg-b-30">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Plan</th>
+										<th>Vencimiento</th>
+										<th>Estatus</th>
+										<th>Costo</th>
+										<th>Facturar</th>
+										<th>Eliminar</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="compra: ${compras}">
+										<td th:text="${compra.idprecio.nombre}"></td>
+										<td th:text="${compra.fechavence}"></td>
+										<td th:text="${compra.estatus == true ? 'Pagado' : 'Pendiente'}"></td>
+										<td th:text="${compra.idprecio.precio}"></td>
+										<td><a>Facturar</a></td>
+										<td th:if="${compra.estatus == true}"><a>Eliminar</a></td>
+										<td th:if="${compra.estatus == false}"><a>Pagar</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="admin/includes/scripts :: scripts"></div>
+	<script type="text/javascript" th:src="@{/generales/js/messages.js}"></script>
+	<script type="text/javascript" th:src="@{/generales/js/senders.js}"></script>
+	<script type="text/javascript" th:src="@{/generales/js/functions.js}"></script>
+</body>
+</html>
