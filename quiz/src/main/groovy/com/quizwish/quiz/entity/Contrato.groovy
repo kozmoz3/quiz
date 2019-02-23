@@ -35,7 +35,7 @@ class Contrato implements Serializable{
     Date fechavence;
     @Basic(optional = false)
     @Column(name = "estatus")
-    short estatus;
+    boolean estatus;
     @JoinColumn(name = "idprecio", referencedColumnName = "idprecio")
     @ManyToOne(optional = false)
     TPrecios idprecio;
@@ -50,7 +50,7 @@ class Contrato implements Serializable{
         this.idcontrato = idcontrato;
     }
 
-    def Contrato(String idcontrato, Date fechacontra, Date fechavence, short estatus) {
+    def Contrato(String idcontrato, Date fechacontra, Date fechavence, boolean estatus) {
         this.idcontrato = idcontrato;
         this.fechacontra = fechacontra;
         this.fechavence = fechavence;

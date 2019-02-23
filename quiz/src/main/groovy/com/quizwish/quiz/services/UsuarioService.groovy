@@ -10,6 +10,8 @@ interface UsuarioService {
 	def getUsuarioById(Integer id);
 				
 	def save(User usuario, int rol);
+	
+	def register(User usuario, int rol);
 			
 	def deleteUsuario(Integer id);
 	

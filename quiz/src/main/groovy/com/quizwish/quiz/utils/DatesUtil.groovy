@@ -10,4 +10,11 @@ class DatesUtil {
      return date;
     }*/
 	
+	public static Date addMonths(int meses) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.MONTH, meses);
+		return cal.getTime();
+	}
+	
 }

@@ -14,12 +14,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 
+import com.quizwish.quiz.entity.Contrato
+import com.quizwish.quiz.entity.TPrecios
 import com.quizwish.quiz.models.Rol
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.UserRepository
+import com.quizwish.quiz.services.ContratoService
 import com.quizwish.quiz.services.RolService
+import com.quizwish.quiz.services.TPreciosService
 import com.quizwish.quiz.services.UsuarioService
 import org.apache.commons.logging.LogFactory
+import com.quizwish.quiz.utils.DatesUtil
+
 @Service("usuarioService")
 class UsuarioServiceImp implements UsuarioService{
 	
@@ -29,6 +35,14 @@ class UsuarioServiceImp implements UsuarioService{
 	@Autowired
 	@Qualifier("rolService")
 	RolService rolService
+	
+	@Autowired
+	@Qualifier("contratoService")
+	ContratoService contratoService
+	
+	@Autowired
+	@Qualifier("tpreciosService")
+	TPreciosService tpreciosService
 	
 	@Autowired
 	@Qualifier("userRepository")
@@ -169,5 +183,50 @@ class UsuarioServiceImp implements UsuarioService{
 	def getFileExtension(String fileName) {
 		int dotIndex = fileName.lastIndexOf("/")
 		return (dotIndex < 0) ? null : fileName.substring( dotIndex + 1 ).toLowerCase()
+	}
+
+	@Override
+	def register(User usuario, int rol) {		
+		LOGGER.info("METHOD: save "+usuario.toString())
+		def encode = new BCryptPasswordEncoder()
+		usuario.setPassword( encode.encode( usuario.getPassword() ) )
+		usuario.setIdrol( rolService.getRolById(rol) )
+		usuario.setEnable(true)
+		
+		User bewuser = userRepository.save(usuario)
+		if(bewuser != null) {
+			getContrato(bewuser)
+		}
+		return bewuser != null ? bewuser: new User()
+	}
+	
+	def getContrato(User bewuser) {
+		TPrecios tprecios = tpreciosService.getTPreciosById(1)
+		Contrato contrato = new Contrato()
+		contrato.setEstatus( true )
+		contrato.setFechacontra( new Date() )
+		contrato.setFechavence(DatesUtil.addMonths(2))
+		contrato.setIdprecio( tprecios )
+		contrato.setIduser( bewuser )
+		boolean existe = true
+		String folio = ""
+		while(existe) {
+			folio = getFolio();
+			if( contratoService.getContratoById(folio) != null) {
+				existe = false
+			}
+		}
+		contrato.setIdcontrato(folio)
+		contratoService.saveContrato(contrato)
+	}
+	
+	private String  getFolio() {
+		StringBuilder build = new StringBuilder();
+		Date fecha = new Date();
+		long claveunica = fecha.getTime();
+		int range = (90 - 65) + 1;
+		int letra = (int) (Math.random() * range) + 65;
+		char toletter = (char) letra;
+		return build.append(toletter).append(claveunica).toString();
 	}
 }

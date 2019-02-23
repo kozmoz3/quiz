@@ -1,6 +1,7 @@
 package com.quizwish.quiz.controllers
 
 import com.quizwish.quiz.models.User
+import com.quizwish.quiz.services.ContratoService
 import com.quizwish.quiz.services.RolService
 import com.quizwish.quiz.services.UsuarioService
 
@@ -25,7 +26,7 @@ class RegisterController {
 	@Autowired
 	@Qualifier("usuarioService")
 	UsuarioService usuarioService
-	
+		
 	static final def INDEX = "register";
 	
 	@GetMapping("/register")
@@ -39,11 +40,11 @@ class RegisterController {
 	def newUserAdmin(@ModelAttribute("user") User usuario, Model model) {
 		int rol = 1;
 		User userRepeat = usuarioService.getByCorreo(usuario.correo)
-		LOGGER.info("isEmailRepeat => " + userRepeat.iduser)
-		if( userRepeat.iduser != null ) 
+		//LOGGER.info("isEmailRepeat => " + userRepeat.iduser)
+		if( userRepeat != null ) 
 			model.addAttribute("estatus", "correo" )
 		else {
-			User user = usuarioService.save(usuario, rol)
+			User user = usuarioService.register(usuario, rol)
 			LOGGER.info("METHOD : newUserAdmin --" + user.getNombre());
 			model.addAttribute("estatus", "ok" )
 			model.addAttribute("newuser", user.getIduser() != null ? user : new User() )

@@ -43,7 +43,7 @@ class User implements Serializable {
 	@Column(name = "apellidos", length = 40)
 	private String apellidos;
 	
-	@Length(min=5, max=10)
+	@Length(min=0, max=10)
 	@Column(name = "telefono", length = 10)
 	private String telefono;
 	

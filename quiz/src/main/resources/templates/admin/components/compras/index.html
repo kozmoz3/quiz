@@ -43,8 +43,12 @@
 										<td th:text="${compra.estatus == true ? 'Pagado' : 'Pendiente'}"></td>
 										<td th:text="${compra.idprecio.precio}"></td>
 										<td><a>Facturar</a></td>
-										<td th:if="${compra.estatus == true}"><a>Eliminar</a></td>
-										<td th:if="${compra.estatus == false}"><a>Pagar</a></td>
+										<!-- /*/ <th:block th:if="${compra.estatus == true}"> /*/-->
+											<td><a>Eliminar</a></td>
+										<!-- /*/ </th:block> /*/-->
+										<!-- /*/ <th:block th:if="${compra.estatus == false}"> /*/-->
+											<td><a>Pagar</a></td>
+										<!-- /*/ </th:block> /*/-->
 									</tr>
 								</tbody>
 							</table>
