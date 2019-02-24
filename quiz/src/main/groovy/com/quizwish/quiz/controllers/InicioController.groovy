@@ -30,7 +30,9 @@ class InicioController {
 	private static final Log LOGGER = LogFactory.getLog(InicioController.class)
 	
 	static final def INDEX = "index";
+	static final def PRICE = "price";
 	static final def DETAILS = "details";
+	static final def REDIRECT = "redirect:/";
 	
 	@Autowired
 	@Qualifier("servicioMails")
@@ -50,6 +52,17 @@ class InicioController {
 		model.addAttribute("userlog", sessionUser.inSession() ? sessionUser.userSessionAll(): new User() );
 		LOGGER.info("METHOD : showIndex --");		
 		return INDEX;
+	}
+	
+	@GetMapping("/price")
+	public String setPrice(Model model ) {
+		if(!sessionUser.inSession()) {
+			return REDIRECT;
+		}
+		model.addAttribute("precios", (List<TPrecios>) tpreciosService.getTPreciosAll())
+		model.addAttribute("userlog", sessionUser.inSession() ? sessionUser.userSessionAll(): new User() );
+		LOGGER.info("METHOD : showIndex --");
+		return PRICE;
 	}
 		
 	@RequestMapping(value = "/sendcontact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )

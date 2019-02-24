@@ -1,5 +1,6 @@
 package com.quizwish.quiz.controllers
 
+import com.quizwish.quiz.component.SessionUser
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.services.ContratoService
 import com.quizwish.quiz.services.RolService
@@ -26,12 +27,20 @@ class RegisterController {
 	@Autowired
 	@Qualifier("usuarioService")
 	UsuarioService usuarioService
+	
+	@Autowired
+	@Qualifier("sessionUser")
+	SessionUser sessionUser
 		
 	static final def INDEX = "register";
+	static final def REDIRECT = "redirect:/loginsucces";
 	
 	@GetMapping("/register")
 	public String showRegisterForm(Model model ) {
 		LOGGER.info("METHOD : showRegisterForm --");
+		if(sessionUser.inSession()) {
+			return REDIRECT;
+		}
 		model.addAttribute("type", "show" )
 		return INDEX;
 	}

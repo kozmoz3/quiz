@@ -23,39 +23,43 @@ import com.quizwish.quiz.services.impl.StartAdminService
 
 @Controller
 class LoginController {
-	
+
 	private static final Log LOGGER = LogFactory.getLog(LoginController.class)
-	
+
 	static final def INDEX = "login";
 	static final def STUDENT = "student/index";
 	static final def ADMIN = "admin/index";
 	static final def FINSUBSCRIPCION = "terminada";
-	
+	static final def REDIRECT = "redirect:/loginsucces";
+
 	@Autowired
 	@Qualifier("sessionUser")
 	SessionUser sessionUser;
-	
+
 	@Autowired
 	@Qualifier("startAdminService")
 	StartAdminService startAdminService
-	
+
 	@Autowired
 	@Qualifier("grupouserService")
 	GroupUserService grupouserService
-	
+
 	@Autowired
 	@Qualifier("contratoscomponent")
 	ContratosComponent contratoscomponent
-	
+
 	@GetMapping("/login")
 	public String showLoginForm(Model model,
-		                        @RequestParam(name="error", defaultValue="", required=false)String error ) {
+			@RequestParam(name="error", defaultValue="", required=false)String error ) {
+		if(sessionUser.inSession()) {
+			return REDIRECT;
+		}
 		LOGGER.info("METHOD : showLoginForm --");
 		model.addAttribute("error", error)
-		
+
 		return INDEX;
 	}
-	
+
 	@PreAuthorize("hasRole('ROLE_ROOT') or hasRole('ROLE_ALUM') ")
 	@GetMapping("/loginsucces")
 	public String loginCheck(Model model) {
@@ -69,12 +73,11 @@ class LoginController {
 			int numQuiz = startAdminService.countQuizByTeacher(user);
 			model.addAttribute("numStudent", numStudent);
 			model.addAttribute("numQuiz", numQuiz);
-		return ADMIN;
+			return ADMIN;
 		}else {
 			model.addAttribute("lstgrupos", grupouserService.findAllByIdStudent(user.iduser));
 			model.addAttribute("usuario", user);
 			return STUDENT;
 		}
 	}
-
 }
