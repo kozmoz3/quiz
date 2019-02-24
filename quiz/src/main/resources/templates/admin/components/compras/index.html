@@ -43,12 +43,14 @@
 										<td th:text="${compra.estatus == true ? 'Pagado' : 'Pendiente'}"></td>
 										<td th:text="${compra.idprecio.precio}"></td>
 										<td><a>Facturar</a></td>
-										<!-- /*/ <th:block th:if="${compra.estatus == true}"> /*/-->
-											<td><a>Eliminar</a></td>
-										<!-- /*/ </th:block> /*/-->
-										<!-- /*/ <th:block th:if="${compra.estatus == false}"> /*/-->
-											<td><a>Pagar</a></td>
-										<!-- /*/ </th:block> /*/-->
+										<th:block th:switch="${compra.estatus}">
+											<td th:case="true">
+												<input type="button" class="btn btn-danger" value="Eliminar"/>
+											</td>
+											<td th:case="false">
+												<input type="button" class="btn btn-info" value="Pagar"/>
+											</td>
+										</th:block>
 									</tr>
 								</tbody>
 							</table>

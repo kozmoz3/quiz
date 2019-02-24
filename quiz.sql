@@ -1,19 +1,43 @@
-﻿
+/*
 Navicat MySQL Data Transfer
 
 Source Server         : local
-Source Server Version : 50505
+Source Server Version : 80012
 Source Host           : localhost:3306
 Source Database       : quiz
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-12-19 11:04:31
+Date: 2019-02-23 21:54:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for contrato
+-- ----------------------------
+DROP TABLE IF EXISTS `contrato`;
+CREATE TABLE `contrato` (
+  `idcontrato` varchar(255) NOT NULL,
+  `idprecio` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
+  `fechacontra` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  `fechavence` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  `estatus` tinyint(4) NOT NULL,
+  PRIMARY KEY (`idcontrato`),
+  KEY `fk_contr_usr` (`iduser`),
+  KEY `fk_contr_pre` (`idprecio`),
+  CONSTRAINT `fk_contr_pre` FOREIGN KEY (`idprecio`) REFERENCES `tprecios` (`idprecio`),
+  CONSTRAINT `fk_contr_usr` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of contrato
+-- ----------------------------
+INSERT INTO `contrato` VALUES ('EA342GE553000', '1', '1', '2019-02-23 21:46:11.148600', '2019-02-22 00:27:14.000000', '0');
+INSERT INTO `contrato` VALUES ('V1550893105727', '1', '13', '2019-02-22 21:38:25.588000', '2019-04-22 21:38:25.676000', '1');
 
 -- ----------------------------
 -- Table structure for grupo
@@ -36,7 +60,7 @@ CREATE TABLE `grupo` (
 INSERT INTO `grupo` VALUES ('1', 'grupo de prueba', 'description', '1', '2');
 INSERT INTO `grupo` VALUES ('2', 'Un nombre editado', 'Una descripción editada', '1', '1');
 INSERT INTO `grupo` VALUES ('4', 'Un grupo con check', 'Una descripcion', '0', '1');
-INSERT INTO `grupo` VALUES ('5', 'Un grupo de eliminación editada', 'Una descripción', '1', '1');
+INSERT INTO `grupo` VALUES ('5', 'Un grupo de eliminación editada', 'Una descripción', '0', '1');
 
 -- ----------------------------
 -- Table structure for grupouser
@@ -79,11 +103,12 @@ CREATE TABLE `questions` (
   PRIMARY KEY (`idquestion`),
   KEY `fk_ques_quiz` (`idquiz`),
   CONSTRAINT `fk_ques_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of questions
 -- ----------------------------
+INSERT INTO `questions` VALUES ('1', '1', '', 'Si##&&No', 'Esta es una pregunta de opción múltiple modificada 4', 'radio', '1', '1');
 
 -- ----------------------------
 -- Table structure for quiz
@@ -99,8 +124,8 @@ CREATE TABLE `quiz` (
   `vista` tinyint(1) NOT NULL DEFAULT '0',
   `random` tinyint(1) NOT NULL DEFAULT '0',
   `tiempo` time DEFAULT NULL,
-  `venceini` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
-  `vencefin` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `venceini` date DEFAULT NULL,
+  `vencefin` date DEFAULT NULL,
   `intentos` char(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `preguntasc` tinyint(1) NOT NULL DEFAULT '0',
   `respuestac` tinyint(1) NOT NULL DEFAULT '0',
@@ -200,6 +225,44 @@ INSERT INTO `student` VALUES ('5', '7', '2', '1');
 INSERT INTO `student` VALUES ('6', '8', '1', '1');
 
 -- ----------------------------
+-- Table structure for studentquiz
+-- ----------------------------
+DROP TABLE IF EXISTS `studentquiz`;
+CREATE TABLE `studentquiz` (
+  `idstudentquiz` int(11) NOT NULL,
+  `quiz` int(11) NOT NULL,
+  `student` int(11) NOT NULL,
+  `teacher` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idstudentquiz`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of studentquiz
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tprecios
+-- ----------------------------
+DROP TABLE IF EXISTS `tprecios`;
+CREATE TABLE `tprecios` (
+  `idprecio` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` char(15) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `precio` double(11,2) NOT NULL,
+  `fechault` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idprecio`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of tprecios
+-- ----------------------------
+INSERT INTO `tprecios` VALUES ('1', 'Esmeralda', '2 meses gratuito|10 Quiz|50 preguntas por quiz|Soporte|20 alumnos registrados', '0.00', '2019-02-20 14:44:40');
+INSERT INTO `tprecios` VALUES ('2', 'Zafiro', 'Pago por mes|10 quiz|100 preguntas por quiz|Soporte|Sin anuncios|50 usuarios registrados', '49.00', '2019-02-20 14:44:40');
+INSERT INTO `tprecios` VALUES ('3', 'Rubí', 'Pago anual|Quiz ilimitados|200 preguntas por quiz|Soporte preferente|Importación por archivo|Exportación por archivo|Sin anuncios|100 usuarios registrados', '69.00', '2019-02-20 14:44:40');
+INSERT INTO `tprecios` VALUES ('4', 'Diamante', 'Pago anual|Quiz ilimitados|300 preguntas por quiz|Soporte preferente|Importación por archivo|Exportación por archivo|Sin anuncios|150 usuarios registrados', '99.00', '2019-02-20 14:44:40');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -217,16 +280,18 @@ CREATE TABLE `user` (
   PRIMARY KEY (`iduser`),
   KEY `fk_user_rol` (`idrol`),
   CONSTRAINT `fk_user_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'Alfonso', 'Vásquez Cortes', null, 'alvaco_1993@hotmail.com', '', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', null, '1', '1');
+INSERT INTO `user` VALUES ('1', 'Alfonso', 'Vásquez Cortes', null, 'alvaco_1993@hotmail.com', 'LVACO', '$2a$10$KVQEE7VUVu/BH44zTDwO0OrqNmtHBdqwIxEcCbv.TFnjnfpABYF.q', '$2a$10$locPZJmvTIIi2amjayb3QL5K6PpwcNSLxszXf82XztUB0HHM.jpeg', '1', '1');
 INSERT INTO `user` VALUES ('2', 'Enriques', 'sosa', '5548364795', 'kiqueyo847@gmail.com', 'kique', '$2a$10$Iuav6RB24Qem24bGLvEmpu2aIdXg9GtZRNwyfcTlh8nZysdYIrzy6', null, '1', '1');
 INSERT INTO `user` VALUES ('3', 'Enrique2', 'sosa', '5548364795', 'kiqueyo8471@gmail.com', 'user', '$2a$10$GX3lW6vYAyCbqgke72MZXuUZEH7V15IFd5wXHPXZ9yyd1k4STZd4u', null, '1', '2');
 INSERT INTO `user` VALUES ('4', 'Tatiana', 'vivar', '', 'tatiana@gmail.com', 'tatis', '$2a$10$TQoLTtUyoC/JMeHNfI8jGeQwPzDoiG6N.DZDaF./Fv/TW/DpE849a', null, '1', '2');
 INSERT INTO `user` VALUES ('5', 'Andrea', 'legareta', '5548364795', 'andrea@gmail.com', 'andreas', '$2a$10$Kwgih2ZutDwLTP6Rw3m8fewmU29n6mvusgX.rngp1h.bNpe03TVk.', null, '1', '2');
 INSERT INTO `user` VALUES ('6', 'fedrico', 'cccc', '', 'federico@gmail.com', 'fede', '$2a$10$WtZ/o8gDGt3TghqBoemRV.XUuRGxGI55/YPm.QO6cDuG7mH4iykn6', null, '1', '2');
 INSERT INTO `user` VALUES ('7', 'dd22', 'dd22', '2222222', 'dd@gmail.com', 'username2', '$2a$10$kygtYPpFY2gzIHQefP9uHeUpxT8HL3w59F6IgbDm5lCEA4sA3lqPe', null, '1', '2');
-INSERT INTO `user` VALUES ('8', 'Alfonso', 'Vásquez Cortes', '5550824884', 'alvaco12@gmail.com', 'AlfonsoVACOUSR', '$2a$10$g3clgWnHv4/bcjqOARyTv.Sy9B51CNMo8HUPs.6nb19xBOA5OMaR6', null, '1', '2');
+INSERT INTO `user` VALUES ('8', 'Alfonso', 'Vásquez Cortes', '5550824884', 'alvaco12@gmail.com', 'AlfonsoVACOUSR', '$2a$10$w5m9vnJdm5jt/Ifor2zRTe/vXnvQMpLPSXe3xlcxYJqLm8kdSfL1y', '$2a$10$4UYAVLvUbHS0RfFV5xkVleJhGujy9CeH283Fqxcw75NAfIcuehfMe.jpeg', '1', '2');
+INSERT INTO `user` VALUES ('13', 'Registro', 'Contrato Inicial', '', 'contrato@gmail.com', 'contratoinicial', '$2a$10$zEarX5TdGIk6HdV8dKG7ZuaERdD2/zVHcC6sG5StgGfAL2iqpfI4e', null, '1', '1');
+SET FOREIGN_KEY_CHECKS=1;
