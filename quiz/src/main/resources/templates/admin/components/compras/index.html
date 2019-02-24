@@ -42,13 +42,19 @@
 										<td th:text="${compra.fechavence}"></td>
 										<td th:text="${compra.estatus == true ? 'Pagado' : 'Pendiente'}"></td>
 										<td th:text="${compra.idprecio.precio}"></td>
-										<td><a>Facturar</a></td>
+										<td>
+											<th:block th:if="${compra.idprecio.nombre != 'Esmeralda'}">
+												<input type="button" class="btn btn-info" value="Facturar"/>
+											</th:block>
+										</td>
 										<th:block th:switch="${compra.estatus}">
 											<td th:case="true">
 												<input type="button" class="btn btn-danger" value="Eliminar"/>
 											</td>
 											<td th:case="false">
-												<input type="button" class="btn btn-info" value="Pagar"/>
+												<th:block th:if="${compra.idprecio.nombre != 'Esmeralda'}">
+													<input type="button" class="btn btn-info" value="Pagar"/>
+												</th:block>
 											</td>
 										</th:block>
 									</tr>
