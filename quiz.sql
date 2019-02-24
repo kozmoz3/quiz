@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2019-02-23 21:54:26
+Date: 2019-02-24 10:50:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ CREATE TABLE `contrato` (
 -- ----------------------------
 -- Records of contrato
 -- ----------------------------
-INSERT INTO `contrato` VALUES ('EA342GE553000', '1', '1', '2019-02-23 21:46:11.148600', '2019-02-22 00:27:14.000000', '0');
+INSERT INTO `contrato` VALUES ('EA342GE553000', '1', '1', '2019-02-23 21:56:03.594159', '2019-03-23 00:27:14.000000', '0');
 INSERT INTO `contrato` VALUES ('V1550893105727', '1', '13', '2019-02-22 21:38:25.588000', '2019-04-22 21:38:25.676000', '1');
 
 -- ----------------------------
@@ -175,6 +175,7 @@ CREATE TABLE `quizgrupo` (
   `idrelacionsg` int(11) NOT NULL AUTO_INCREMENT,
   `idgrupo` int(11) NOT NULL,
   `idquiz` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`idrelacionsg`),
   KEY `fk_qugr_quiz` (`idquiz`),
   KEY `fk_qugr_grup` (`idgrupo`),

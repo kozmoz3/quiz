@@ -22,6 +22,7 @@ interface QuizService {
 	def setQuiz(Quiz quiz);
 			
 	def deleteQuiz(Integer id);
-			
+	
+	def relacionQuizGrupo(Integer idquiz, Integer grupo, boolean satus)
 	
 }

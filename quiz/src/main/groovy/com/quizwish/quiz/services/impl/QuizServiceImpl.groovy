@@ -8,8 +8,11 @@ import org.springframework.data.domain.Example
 import org.springframework.stereotype.Service
 
 import com.quizwish.quiz.entity.Quiz
+import com.quizwish.quiz.entity.Quizgrupo
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.repositorys.QuizRepository
+import com.quizwish.quiz.repositorys.QuizgrupoRepository
+import com.quizwish.quiz.services.GroupService
 import com.quizwish.quiz.services.QuizService
 import com.quizwish.quiz.utils.CovertStringToBooleanUtil
 import com.quizwish.quiz.utils.DatesUtil
@@ -21,6 +24,14 @@ class QuizServiceImpl implements QuizService{
 	@Autowired
 	@Qualifier("quizRepository")
 	def QuizRepository quizRepository
+	
+	@Autowired
+	@Qualifier("quizgrupoRepository")
+	def QuizgrupoRepository quizgrupoRepository
+	
+	@Autowired
+	@Qualifier("grupoService")
+	GroupService grupoService
 	
 	@Override
 	public  Quiz saveQuiz(Map<String,Object> quizMap, User user) {
@@ -97,6 +108,15 @@ class QuizServiceImpl implements QuizService{
 	def getQuizById(Integer id) {
 		Optional<Quiz> optional = quizRepository.findById(id)
 		return optional.isPresent() ? optional.get() : new Quiz()
+	}
+
+	@Override
+	public Quizgrupo relacionQuizGrupo(Integer idquiz, Integer grupo, boolean estatus) {
+		Quizgrupo quizgrupo = new Quizgrupo()
+		quizgrupo.setIdquiz( getQuizById( idquiz ) )
+		quizgrupo.setIdgrupo( grupoService.getGroupById(grupo) )
+		quizgrupo.setStatus( estatus )
+		return quizgrupoRepository.save(quizgrupo)
 	}
 
 

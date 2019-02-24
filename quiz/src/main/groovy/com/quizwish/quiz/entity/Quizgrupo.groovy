@@ -38,6 +38,9 @@ class Quizgrupo implements Serializable {
     @JoinColumn(name = "idquiz", referencedColumnName = "idquiz")
     @ManyToOne(optional = false)
     Quiz idquiz
+	
+	@Column(name = "status")
+	boolean status
 
     def Quizgrupo() {
     }

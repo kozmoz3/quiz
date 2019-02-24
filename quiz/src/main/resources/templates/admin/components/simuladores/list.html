@@ -27,7 +27,7 @@
 	        					<div class="course-des">
 	        						<p><span><i class="fa fa-clock"></i></span> <b th:text="${#lists.size(quiz.questionsList)}"></b> Preguntas</p>
 	        						<p th:if="${#lists.size(quiz.quizgrupoList) > 0}"><span><i class="fa fa-clock"></i></span> <b th:text="${#lists.size(quiz.quizgrupoList.get(itemq.index).idgrupo.grupousuarioList.?[estatus])}"></b> Alumnos</p>
-	        						<p th:if="${#lists.size(quiz.quizgrupoList) <= 0}"><span><i class="fa fa-clock"></i></span> <b>0</b> Alumnos</p>
+	        						<p th:if="${#lists.size(quiz.quizgrupoList) <= 0}"><span><i class="fa fa-clock"></i></span> <b>0</b> <a th:href="@{/admin/relacion/grupos/__${quiz.idquiz}__}">Alumnos</a></p>
 	        					</div>
 	        					<div class="product-buttons">
 	        						<button type="button" class="button-warning cart-btn">Editar</button>

@@ -607,6 +607,15 @@ $("input[data-push]").click(function(){
 	setFormWOMessage({ type:"put", url:url, data: data });
 });
 
+$("input[data-assign]").click(function(){
+	let url = $("input[type='hidden']").attr("data-urlcheck");
+	let complement = "/" + $(this).attr("data-in") + "/" + $(this).attr("data-to") +"/"+ $(this).is(":checked");
+	if($.trim(url) == "") return false;
+	url += complement;
+	console.log(url);
+	setFormWOMessageOnlyUrl({ type:"post", url:url });
+});
+
 $("button[data-delete]").click(function(){
 	var url = $(this).attr("data-delete");
 	var tr = $( $(this).attr("data-removei") );

@@ -9,6 +9,16 @@ function sendForm(idform, url, type) {
 		getErrorMessage(getCodeStatus(xhr, ""));
 }
 
+function setFormWOMessageOnlyUrl( objRequest ){	
+	var req = new XMLHttpRequest();	
+	req.open( objRequest.type, objRequest.url, false );
+	req.send();
+	if (req.status != 200)
+		getErrorMessage(getCodeStatus(req, ""));
+	else
+		getSuccessfulMessage();
+}
+
 function setFormWOMessage( objRequest ){	
 	var req = new XMLHttpRequest();	
 	req.open( objRequest.type, objRequest.url, false );
