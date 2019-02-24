@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.data.domain.Example
 import org.springframework.stereotype.Service
-
+import com.quizwish.quiz.component.QuizComponent
+import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Quiz
 import com.quizwish.quiz.entity.Quizgrupo
 import com.quizwish.quiz.models.User
@@ -14,6 +15,7 @@ import com.quizwish.quiz.repositorys.QuizRepository
 import com.quizwish.quiz.repositorys.QuizgrupoRepository
 import com.quizwish.quiz.services.GroupService
 import com.quizwish.quiz.services.QuizService
+import com.quizwish.quiz.services.QuizgrupoService
 import com.quizwish.quiz.utils.CovertStringToBooleanUtil
 import com.quizwish.quiz.utils.DatesUtil
 
@@ -26,12 +28,16 @@ class QuizServiceImpl implements QuizService{
 	def QuizRepository quizRepository
 	
 	@Autowired
-	@Qualifier("quizgrupoRepository")
-	def QuizgrupoRepository quizgrupoRepository
+	@Qualifier("quizgrupoService")
+	def QuizgrupoService quizgrupoService
 	
 	@Autowired
 	@Qualifier("grupoService")
 	GroupService grupoService
+	
+	@Autowired
+	@Qualifier("quizComponent")
+	QuizComponent quizComponent
 	
 	@Override
 	public  Quiz saveQuiz(Map<String,Object> quizMap, User user) {
@@ -111,13 +117,18 @@ class QuizServiceImpl implements QuizService{
 	}
 
 	@Override
-	public Quizgrupo relacionQuizGrupo(Integer idquiz, Integer grupo, boolean estatus) {
-		Quizgrupo quizgrupo = new Quizgrupo()
-		quizgrupo.setIdquiz( getQuizById( idquiz ) )
-		quizgrupo.setIdgrupo( grupoService.getGroupById(grupo) )
-		quizgrupo.setStatus( estatus )
-		return quizgrupoRepository.save(quizgrupo)
-	}
+	public Quizgrupo relacionQuizGrupo(Integer idquiz, Integer idgrupo, boolean estatus) {
+		Grupo grupo = grupoService.getGroupById(idgrupo)
+		Quiz quiz = getQuizById( idquiz )
+		Quizgrupo temporal = quizComponent.getOnlyOneQuizgrupo(grupo, quiz);
+		if(temporal != null && temporal.getIdrelacionsg() != null) {
+			temporal.setStatus( estatus )
+			return quizgrupoService.saveQuizgrupo(temporal)
+		}else {
+			return quizgrupoService.saveQuizgrupo(new Quizgrupo( quiz, grupo, estatus ))
+		}
+		
+	}	
 
 
 }

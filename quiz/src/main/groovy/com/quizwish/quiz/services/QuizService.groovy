@@ -3,7 +3,9 @@ package com.quizwish.quiz.services
 
 import org.hibernate.criterion.Example
 
+import com.quizwish.quiz.entity.Grupousuario
 import com.quizwish.quiz.entity.Quiz
+import com.quizwish.quiz.entity.Quizgrupo
 import com.quizwish.quiz.models.User
 
 

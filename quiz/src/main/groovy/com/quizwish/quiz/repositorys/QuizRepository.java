@@ -15,5 +15,4 @@ public interface QuizRepository extends JpaRepository<Quiz, Serializable>{
 	public abstract List<Quiz> findAllByIduser(User iduser);
 	
 	
-	
 }

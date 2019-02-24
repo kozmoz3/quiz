@@ -612,8 +612,7 @@ $("input[data-assign]").click(function(){
 	let complement = "/" + $(this).attr("data-in") + "/" + $(this).attr("data-to") +"/"+ $(this).is(":checked");
 	if($.trim(url) == "") return false;
 	url += complement;
-	console.log(url);
-	setFormWOMessageOnlyUrl({ type:"post", url:url });
+	setFormWOMessageOnlyUrl({ type:"put", url:url });
 });
 
 $("button[data-delete]").click(function(){

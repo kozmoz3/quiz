@@ -48,4 +48,10 @@ class Quizgrupo implements Serializable {
     def Quizgrupo(Integer idrelacionsg) {
         this.idrelacionsg = idrelacionsg
     }
+	
+	def Quizgrupo(Quiz idquiz, Grupo idgrupo, boolean status) {
+		this.idquiz = idquiz
+		this.idgrupo = idgrupo
+		this.status = status
+	}
 }
