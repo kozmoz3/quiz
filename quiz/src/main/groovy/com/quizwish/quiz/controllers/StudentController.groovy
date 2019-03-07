@@ -11,6 +11,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -20,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import com.quizwish.quiz.component.SessionUser
+import com.quizwish.quiz.entity.Quiz
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.models.jmodelos.MGrupoUser
 import com.quizwish.quiz.models.jmodelos.MUser
 import com.quizwish.quiz.services.GroupUserService
+import com.quizwish.quiz.services.QuizService
 import com.quizwish.quiz.services.StudentService
 
 @Controller
@@ -52,6 +55,10 @@ class StudentController {
 	@Qualifier("studentService")
 	StudentService studentService
 	
+	@Autowired
+	@Qualifier("quizService")
+	QuizService quizService
+	
 	@GetMapping("/")
 	def index(Model model) {
 		LOGGER.info("Method: -- index")
@@ -61,9 +68,13 @@ class StudentController {
 		return INDEX
 	}
 	
-	@GetMapping("/realize")
-	def realize(Model model) {
+	@GetMapping("/realize/{id}")
+	def realize(@PathVariable("id") Integer id, Model model) {
 		LOGGER.info("Method: -- realize")
+		Quiz quiz = quizService.getQuizById(id)
+		User user = sessionUser.userSessionAddUsername(model);
+		model.addAttribute("usuario", user);
+		model.addAttribute("quiz", quiz);
 		return REALIZE;
 	}
 	

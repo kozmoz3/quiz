@@ -43,6 +43,8 @@
 					<div class="col-md-6" id="itemquest"></div>
 					<div class="col-md-6" id="itemslist"></div>
 				</div>
+				<div th:text="${quiz.questionsList}">
+				</div>
 			</div>
 		</section>
 		<footer th:replace="student/includes/layout :: footer"></footer>
@@ -50,7 +52,14 @@
 		<script type="text/javascript" th:src="@{/generales/js/fireworks.js}"></script>
 		<script th:src="@{/administrador/js/charts/Chart.js}"></script>
 		<script type="text/javascript" th:src="@{/generales/quiz/Question.js}"></script>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+				var message = [[${quiz.questionsList}]];
+				alert(message);
+			/*]]>*/
+		</script>
 		<script type="text/javascript">
+			
 			var objResource = new Resource();
 			var listQuestions = [];
 	
@@ -72,6 +81,14 @@
 			listQuestions.push(new Question("Pregunta 16", ["Opción 1", "Opción 2 c", "Opción 3"], [1], "Una description 4", 16, 1, "radio"));
 			listQuestions.push(new Question("Pregunta 17", ["Opción 1", "Opción 2", "Opción 3 c"], [2], "Una description 5", 17, 1, "radio"));
 			listQuestions.push(new Question("Pregunta 18", ["Opción 1 c", "Opción 2 c", "Opción 3"], [0, 1], "Una description 6", 18, 1, "checkbox"));
+			
+			/*var objQuiz = new Quiz(listQuestions);
+			var lista = objResource.getNewArray(15, objQuiz.getObject() );	
+			var lstresp = []; 
+			var id = 1;
+			var typeview = false;
+			var itempos = 0;
+			var arrobjectElement = [];*/
 		</script>
 		<script type="text/javascript" th:src="@{/generales/quiz/quiz.js}"></script>
 	</body>

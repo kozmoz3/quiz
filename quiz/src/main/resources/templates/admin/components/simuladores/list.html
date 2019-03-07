@@ -20,7 +20,7 @@
 	        				<div class="courses-inner res-mg-b-30">
 	        					<div class="courses-title">
 	        						
-                                   <a href="#"><img th:src="@{${quiz.img}? ${quiz.img} : '/administrador/img/courses/1.jpg'}" alt=""></a>
+                                   <a th:href="@{/admin/simuladores/resultados/__${quiz.idquiz}__}"><img th:src="@{${quiz.img}? ${quiz.img} : '/administrador/img/courses/1.jpg'}" alt=""></a>
 	        						<h2 th:text="${quiz.nombre}"></h2>
 	        						<h5 ></h5>
 	        					</div>

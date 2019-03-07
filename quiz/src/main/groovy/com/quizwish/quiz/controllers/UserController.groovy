@@ -60,6 +60,7 @@ class UserController {
 		User user = sessionUser.userSessionAddUsername(model);
 		model.addAttribute("users", user);
 		if(!perfil.isEmpty()) {
+			LOGGER.info("Method: -- personal => Tamaño => " + perfil.getSize() +" Nombre: " + perfil.getName() +" Original: " + perfil.getOriginalFilename() );
 			try {
 				usuarioService.saveProfile(user, perfil)
 			} catch(Exception e) {
