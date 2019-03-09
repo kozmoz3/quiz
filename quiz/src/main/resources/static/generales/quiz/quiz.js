@@ -1,11 +1,3 @@
-var objQuiz = new Quiz(listQuestions);
-var lista = objResource.getNewArray(15, objQuiz.getObject() );	
-var lstresp = []; 
-var id = 1;
-var typeview = false;
-var itempos = 0;
-var arrobjectElement = [];
-
 if(typeview){	
 	getQuizWizard();
 }else{

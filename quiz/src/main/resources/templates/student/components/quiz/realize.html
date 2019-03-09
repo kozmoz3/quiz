@@ -1,27 +1,10 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
-	<title>Resultados</title>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
+	<title>Realizar quiz</title>
 	<meta charset="utf-8">
 	<head th:replace="student/includes/heads :: heads"></head>
-	<style type="text/css">
-		.fireworks-window{
-			  position:fixed;
-			  top:0;
-			  left:0;
-			  width:100%;
-			  height:100vh;
-			  display:flex;
-			  z-index: 10000;
-			  background-color: rgba(0,0,0,.9);
-			}
-			.fireworks-content{
-			  background:transparent;
-			}
-			.vialing-err{
-				background-color: red; 
-			}
-			
-	</style>
+	<script type="text/javascript">var objResource;var listQuestions = [];var objQuiz, lista;var lstresp = [];var id = 0;var typeview = false;var itempos = 0;var arrobjectElement = [];</script>
+	<style type="text/css">.fireworks-window{position:fixed;top:0; left:0;width:100%;height:100vh;display:flex;z-index: 10000;background-color: rgba(0,0,0,.9);}.fireworks-content{background:transparent;}.vialing-err{background-color: red; }</style>
 	<body>
 		<nav th:replace="student/includes/layout :: top"></nav>
 		<section class="section">
@@ -43,8 +26,6 @@
 					<div class="col-md-6" id="itemquest"></div>
 					<div class="col-md-6" id="itemslist"></div>
 				</div>
-				<div th:text="${quiz.questionsList}">
-				</div>
 			</div>
 		</section>
 		<footer th:replace="student/includes/layout :: footer"></footer>
@@ -53,42 +34,7 @@
 		<script th:src="@{/administrador/js/charts/Chart.js}"></script>
 		<script type="text/javascript" th:src="@{/generales/quiz/Question.js}"></script>
 		<script th:inline="javascript">
-			/*<![CDATA[*/
-				var message = [[${quiz.questionsList}]];
-				alert(message);
-			/*]]>*/
-		</script>
-		<script type="text/javascript">
-			
-			var objResource = new Resource();
-			var listQuestions = [];
-	
-			listQuestions.push(new Question("Pregunta 1", ["Opción 1 c", "Opción 2"], [0], "Una description 1", 1, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 2", ["Opción 1 c", "Opción 2 c", "Opción 3"], [0, 1], "Una description 2", 2, 1, "checkbox"));
-			listQuestions.push(new Question("Pregunta 3", ["Opción 1 c", "Opción 2", "Opción 3 c", "Opción 4"], [0, 2], "Una description 3", 3, 1, "checkbox"));
-			listQuestions.push(new Question("Pregunta 4", ["Opción 1", "Opción 2 c", "Opción 3"], [1], "Una description 4", 4, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 5", ["Opción 1", "Opción 2", "Opción 3 c"], [2], "Una description 5", 5, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 6", ["Opción 1 c", "Opción 2", "Opción 3 c"], [0, 2], "Una description 6", 6, 1, "checkbox"));
-			listQuestions.push(new Question("Pregunta 7", ["Opción 1 c", "Opción 2"], [0], "Una description 1", 7, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 8", ["Opción 1 c", "Opción 2 c", "Opción 3"], [0, 1], "Una description 2", 8, 1, "checkbox"));
-			listQuestions.push(new Question("Pregunta 9", ["Opción 1 c", "Opción 2", "Opción 3 c", "Opción 4"], [0, 2], "Una description 3", 9, 1, "checkbox"));
-			listQuestions.push(new Question("Pregunta 10", ["Opción 1", "Opción 2 c", "Opción 3"], [1], "Una description 4", 10, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 11", ["Opción 1", "Opción 2", "Opción 3 c"], [2], "Una description 5", 11, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 12", ["Opción 1 c", "Opción 2", "Opción 3 c"], [0, 2], "Una description 6", 12, 1, "checkbox"));
-			listQuestions.push(new Question("Pregunta 13", ["Opción 1 c", "Opción 2"], [0], "Una description 1", 13, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 14", ["Opción 1 c", "Opción 2 c", "Opción 3"], [0, 1], "Una description 2", 14, 1, "checkbox"));
-			listQuestions.push(new Question("Pregunta 15", ["Opción 1 c", "Opción 2", "Opción 3 c", "Opción 4"], [0, 2], "Una description 3", 15, 1, "checkbox"));
-			listQuestions.push(new Question("Pregunta 16", ["Opción 1", "Opción 2 c", "Opción 3"], [1], "Una description 4", 16, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 17", ["Opción 1", "Opción 2", "Opción 3 c"], [2], "Una description 5", 17, 1, "radio"));
-			listQuestions.push(new Question("Pregunta 18", ["Opción 1 c", "Opción 2 c", "Opción 3"], [0, 1], "Una description 6", 18, 1, "checkbox"));
-			
-			/*var objQuiz = new Quiz(listQuestions);
-			var lista = objResource.getNewArray(15, objQuiz.getObject() );	
-			var lstresp = []; 
-			var id = 1;
-			var typeview = false;
-			var itempos = 0;
-			var arrobjectElement = [];*/
+			/*<![CDATA[*/ var jsonval = [[${quiz.questionsList}]] ;var configurationcs = {"id" : [[ ${quiz.idquiz} ]],"showallquestion" : [[ ${quiz.showallquestion} ]],"mostrar" : [[ ${quiz.mostrar} ]],"vista" : [[ ${quiz.vista} ]],"random" : [[ ${quiz.random} ]],"tiempo" : [[ ${quiz.tiempo} ]],"venceini" : [[ ${quiz.venceini} ]],"vencefin" : [[ ${quiz.vencefin} ]],"intentos" : [[ ${quiz.intentos} ]],"preguntasc" : [[ ${quiz.preguntasc} ]],"respuestac" : [[ ${quiz.respuestac} ]],"preguntasi" : [[ ${quiz.preguntasi} ]],"calificacion" : [[ ${quiz.calificacion} ]],"grafico" : [[ ${quiz.grafico} ]],"istiempo" : [[ ${quiz.istiempo} ]],"mensajesop" : [[ ${quiz.mensajesop} ]],"isintentos" : [[ ${quiz.isintentos} ]]}; setConfiguration( configurationcs, jsonval );function setConfiguration( configurationcs, jsonvalues ){$.each( jsonvalues, function( key, val ) {listQuestions.push(new Question(val.question, val.options.split("##\u0026\u0026"), val.answers.split(","), val.message, val.idquestion, 0, val.type, val.score));});objResource = new Resource();objQuiz = new Quiz(listQuestions);lista = objResource.getNewArray(15, objQuiz.getObject() );lstresp = [];id = configurationcs.id;typeview = configurationcs.vista;itempos = 0;arrobjectElement = [];} /*]]>*/
 		</script>
 		<script type="text/javascript" th:src="@{/generales/quiz/quiz.js}"></script>
 	</body>
