@@ -15,16 +15,11 @@ import javax.persistence.NamedQuery
 import javax.persistence.Table
 import javax.xml.bind.annotation.XmlRootElement
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+
 @Entity
 @Table(name = "questions", catalog = "quiz", schema = "")
 @XmlRootElement
-/*@NamedQueries({
-	@NamedQuery(name = "Questions.findAll", query = "SELECT q FROM Questions q")
-	, @NamedQuery(name = "Questions.findByIdquestion", query = "SELECT q FROM Questions q WHERE q.idquestion = :idquestion")
-	, @NamedQuery(name = "Questions.findByMessage", query = "SELECT q FROM Questions q WHERE q.message = :message")
-	, @NamedQuery(name = "Questions.findByQuestion", query = "SELECT q FROM Questions q WHERE q.question = :question")
-	, @NamedQuery(name = "Questions.findByType", query = "SELECT q FROM Questions q WHERE q.type = :type")
-	, @NamedQuery(name = "Questions.findByScore", query = "SELECT q FROM Questions q WHERE q.score = :score")})*/
 class Questions implements Serializable {
 	
 	static final long serialVersionUID = 2L
@@ -54,6 +49,7 @@ class Questions implements Serializable {
 	short score
 	@JoinColumn(name = "idquiz", referencedColumnName = "idquiz")
 	@ManyToOne(optional = false)
+	@JsonBackReference
 	Quiz idquiz
 
 	def Questions() {

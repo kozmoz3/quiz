@@ -1,5 +1,6 @@
 package com.quizwish.quiz.entity
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.Basic
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -37,6 +38,7 @@ class TPrecios {
     @Temporal(TemporalType.TIMESTAMP)
     Date fechault;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idprecio")
+	@JsonManagedReference
     List<Contrato> contratoList;
 
     def Tprecios() {

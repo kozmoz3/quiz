@@ -13,6 +13,7 @@ import javax.persistence.Temporal
 import javax.persistence.TemporalType
 import javax.xml.bind.annotation.XmlRootElement
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import com.quizwish.quiz.models.User
 
 @XmlRootElement
@@ -38,9 +39,11 @@ class Contrato implements Serializable{
     boolean estatus;
     @JoinColumn(name = "idprecio", referencedColumnName = "idprecio")
     @ManyToOne(optional = false)
+	@JsonBackReference
     TPrecios idprecio;
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
+	@JsonBackReference
     User iduser;
 
     def Contrato() {

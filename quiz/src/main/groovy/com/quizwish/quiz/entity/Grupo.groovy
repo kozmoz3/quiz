@@ -18,6 +18,8 @@ import javax.persistence.Table
 import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlTransient
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.quizwish.quiz.models.User
 
 /**
@@ -26,12 +28,6 @@ import com.quizwish.quiz.models.User
  */
 
 @XmlRootElement
-/*@NamedQueries({
- @NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g")
- , @NamedQuery(name = "Grupo.findByIdgrupo", query = "SELECT g FROM Grupo g WHERE g.idgrupo = :idgrupo")
- , @NamedQuery(name = "Grupo.findByNombre", query = "SELECT g FROM Grupo g WHERE g.nombre = :nombre")
- , @NamedQuery(name = "Grupo.findByDescripcion", query = "SELECT g FROM Grupo g WHERE g.descripcion = :descripcion")})*/
-
 @Entity
 @Table(name = "grupo", catalog = "quiz", schema = "")
 class Grupo implements Serializable{
@@ -77,13 +73,16 @@ class Grupo implements Serializable{
 
 	@JoinColumn(name = "iduser", referencedColumnName = "iduser")
 	@ManyToOne()
+	@JsonBackReference
 	User iduser
 	
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
+	@JsonManagedReference
 	List<Quizgrupo> quizgrupoList
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idgrupo")
+	@JsonManagedReference
 	List<Grupousuario> grupousuarioList
 
 	/*fin getter and setter*/

@@ -1,5 +1,7 @@
 package com.quizwish.quiz.models
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.quizwish.quiz.entity.Contrato
 import com.quizwish.quiz.entity.Grupo
 import com.quizwish.quiz.entity.Grupousuario
@@ -59,18 +61,22 @@ class User implements Serializable {
 	private String username;
 	
 	@OneToMany( mappedBy = "iduser")
+	@JsonManagedReference
 	private List<Quiz> quizList;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	@JsonManagedReference
     private List<Contrato> contratoList;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	@JsonManagedReference
 	private List<Grupousuario> grupousuarioList;
 	
 	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
 	private List<Estudiantequiz> estudiantequizList*/
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+	@JsonManagedReference
 	private List<Grupo> grupList
 	
 	
@@ -109,6 +115,7 @@ class User implements Serializable {
 	/*** id rol***/
 	@JoinColumn(name = "idrol", referencedColumnName = "idrol")
 	@ManyToOne()
+	@JsonBackReference
 	Rol idrol
 	public int getIdrol() {
 		return this.idrol.getIdrol();

@@ -10,6 +10,8 @@ import javax.persistence.Id
 import javax.persistence.OneToMany
 import javax.persistence.Table
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
+
 @Entity
 @Table(name = "roles", catalog = "quiz", schema = "")
 class Rol implements Serializable{
@@ -25,6 +27,7 @@ class Rol implements Serializable{
 	String descripcion
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idrol")
+	@JsonManagedReference
 	List<User> usuarioList
 	
 	public Rol() {

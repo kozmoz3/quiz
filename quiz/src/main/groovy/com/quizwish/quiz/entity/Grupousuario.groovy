@@ -14,6 +14,7 @@ import javax.persistence.NamedQuery
 import javax.persistence.Table
 import javax.xml.bind.annotation.XmlRootElement
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import com.quizwish.quiz.models.User
 
 @Entity
@@ -41,10 +42,12 @@ class Grupousuario implements Serializable{
 	
 	@JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo")
 	@ManyToOne(optional = false)
+	@JsonBackReference
 	Grupo idgrupo
 	
 	@JoinColumn(name = "iduser", referencedColumnName = "iduser")
 	@ManyToOne(optional = false)
+	@JsonBackReference
 	User iduser
 
 	def Grupousuario() {

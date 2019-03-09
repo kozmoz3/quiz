@@ -1,5 +1,6 @@
 package com.quizwish.quiz.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.io.Serializable
 import javax.persistence.Basic
 import javax.persistence.Column
@@ -18,9 +19,6 @@ import javax.xml.bind.annotation.XmlRootElement
 @Entity
 @Table(name = "quizgrupo", catalog = "quiz", schema = "")
 @XmlRootElement
-/*@NamedQueries({
-	@NamedQuery(name = "Quizgrupo.findAll", query = "SELECT q FROM Quizgrupo q")
-	, @NamedQuery(name = "Quizgrupo.findByIdrelacionsg", query = "SELECT q FROM Quizgrupo q WHERE q.idrelacionsg = :idrelacionsg")})*/
 class Quizgrupo implements Serializable {
 
     static final long serialVersionUID = 1L
@@ -33,10 +31,12 @@ class Quizgrupo implements Serializable {
 	
     @JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo")
     @ManyToOne(optional = false)
+	@JsonBackReference
     Grupo idgrupo
 	
     @JoinColumn(name = "idquiz", referencedColumnName = "idquiz")
     @ManyToOne(optional = false)
+	@JsonBackReference
     Quiz idquiz
 	
 	@Column(name = "status")
