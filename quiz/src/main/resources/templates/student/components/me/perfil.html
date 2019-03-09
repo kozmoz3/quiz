@@ -72,7 +72,7 @@
 									<img th:if="${usuario.perfil == null}" th:src="@{/administrador/img/profile/1.jpg}"/>
 									<img th:if="${usuario.perfil != null}" th:src="@{/estudiante/photos/__${usuario.perfil}__}"/>
 								</div>
-								<h4>{{ Nombre de estudiante }}</h4>
+								<h4 th:text="${usuario.nombre + ' ' + usuario.apellidos}"></h4>
 							</div>
 							<form enctype="multipart/form-data">
 								<div class="form-group">

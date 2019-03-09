@@ -1,23 +1,25 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en">
-	<title>Subscripción terminada</title>
-	<meta charset="utf-8">
-	<head th:replace="admin/includes/heads :: heads"></head>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" >
+	<head>
+		<meta charset="UTF-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Subscripción terminada</title>
+		<style type="text/css">
+			body{left: 0;right: 0;background-color: #fff;}.card{width: 50%;height: auto;background-color: #fff;position: absolute;border: 5px solid #fff;border-radius: 10px;box-shadow:  9px 18px 66px -7px #000;display: block;left: 25%;top: 50px;animation: bounceIn 1s ease-in-out;}.title{text-align: center;background-color: rgba(10,10,10,0.3);border-radius: 10px 10px 0px 0px;}.title img{width: 20%;height: 20%;border: 5px;}.title h3{font-weight: bold;font-size: 2em;}.body{font-size: 1em;text-align: justify; color: #383f54;font-family: sans-serif;padding-right: 30px;padding-left: 30px;padding-bottom: 50px;text-justify: inter-word;}.footer{padding-left: 50px;padding-top:10px;padding-bottom: 5px;float: right;}.footer p{font-size: 10px;}@keyframes bounceIn {0% {transform: translateY(-1000px);}60% {transform: translateY(200px);}100% {transform: translateY(0px);}}@media (max-width: 600px){.card{width: 80%;left: 10%;}}
+		</style>
+	</head>
 	<body>
-	    <div class="all-content-wrapper">
-	        <div class="header-advance-area">
-	            <div th:replace="admin/includes/top :: top"></div>
-	        </div>
-	        <div class="product-sales-area mg-tb-30">
-            	<div class="container-fluid">
-	                <div class="row">
-	                	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-	                	
-	                	</div>
-	                </div>
-            	</div>
-            </div>
-	    </div>
-	    <div th:replace="admin/includes/scripts :: scripts"></div>
+		<section class="card">
+			<div class="title">
+				<img src="https://image.flaticon.com/icons/png/512/130/130196.png">
+				<h3>Subscripción terminada</h3>
+			</div>
+			<div class="body">
+				<p>Su subscripción se terminó, por favor contrata un nuevo plan para seguir usando nuestros beneficios en construcción de exámenes. Para contratar un nuevo plan da click <a th:href="@{/price}">aquí.</a> recuerda que tus datos se guardan por 3 meses, después de ello se eliminan haciendose irrecuperables.</p>
+			</div>
+			<div class="footer">
+				<p>Todos los derechos recervados &copy; Consulte <a th:href="@{/terminos}">Términos y condiciones</a></p>
+			</div>
+		</section>
 	</body>
 </html>

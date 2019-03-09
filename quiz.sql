@@ -31,7 +31,7 @@ CREATE TABLE `contrato` (
   KEY `fk_contr_pre` (`idprecio`),
   CONSTRAINT `fk_contr_pre` FOREIGN KEY (`idprecio`) REFERENCES `tprecios` (`idprecio`),
   CONSTRAINT `fk_contr_usr` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of contrato
@@ -52,7 +52,7 @@ CREATE TABLE `grupo` (
   PRIMARY KEY (`idgrupo`),
   KEY `iduserfk` (`iduser`),
   CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of grupo
@@ -77,7 +77,7 @@ CREATE TABLE `grupouser` (
   KEY `fk_grup_grup` (`idgrupo`),
   CONSTRAINT `fk_grup_grup` FOREIGN KEY (`idgrupo`) REFERENCES `grupo` (`idgrupo`),
   CONSTRAINT `fk_grup_user` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of grupouser
@@ -103,7 +103,7 @@ CREATE TABLE `questions` (
   PRIMARY KEY (`idquestion`),
   KEY `fk_ques_quiz` (`idquiz`),
   CONSTRAINT `fk_ques_quiz` FOREIGN KEY (`idquiz`) REFERENCES `quiz` (`idquiz`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of questions
@@ -145,7 +145,7 @@ CREATE TABLE `quiz` (
   PRIMARY KEY (`idquiz`),
   KEY `idusuario` (`iduser`),
   CONSTRAINT `fk_user_quiz` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quiz
@@ -195,7 +195,7 @@ CREATE TABLE `roles` (
   `idrol` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idrol`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of roles
@@ -213,7 +213,7 @@ CREATE TABLE `student` (
   `teacher` int(11) NOT NULL,
   `nullable` tinyint(1) NOT NULL,
   PRIMARY KEY (`idstudent`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of student
@@ -236,7 +236,7 @@ CREATE TABLE `studentquiz` (
   `teacher` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`idstudentquiz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of studentquiz
@@ -253,7 +253,7 @@ CREATE TABLE `tprecios` (
   `precio` double(11,2) NOT NULL,
   `fechault` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idprecio`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tprecios
@@ -281,7 +281,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`iduser`),
   KEY `fk_user_rol` (`idrol`),
   CONSTRAINT `fk_user_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of user
