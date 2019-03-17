@@ -142,13 +142,14 @@ function setReactInSelected( position ){
 		$.each(listaDivs,function(key,value){
 			if( $(value).is(":checked") ) lstresp[position ].answers.push(key);
 		});
-		//console.log("Había seleccionadas");
+		// console.log("Había seleccionadas");
 	}else{
-		//if( position == 0) position++;
-		//console.log("No había seleccionadas");
+		// if( position == 0) position++;
+		// console.log("No había seleccionadas");
 		$.each(lstresp[position].answers,function(key,value){ lstresp[position].answers.pop(); });
 	}
-	//getQuestion( lista[position].options, lista[position].type, lista[position].q, position, false );
+	// getQuestion( lista[position].options, lista[position].type,
+	// lista[position].q, position, false );
 }
 
 function setReactBef( position ){
@@ -189,7 +190,7 @@ function countDown(){
 		sendParse();
 	}else segundos--;
 }
-//var countTimer = setInterval(countDown,1000);
+// var countTimer = setInterval(countDown,1000);
 
 function sendParse(){
 	var cadena = "";
@@ -218,17 +219,26 @@ $("#btnfinlist").click(function(){
 			$(".modal-window-panel").remove();
 			location.href='/me/';
 		});
+		
+		let graph = new Elements("div",{},[]), showtimer = new Elements("div",{},[]);
+		if(configurationcs.grafico)
+			graph = new Elements("div",{class:"cols"},[
+				new Elements("canvas",{ id:"resultados-chart", class:"chartjs", style:"width: 80%;height: 80%;"},[])
+				]);
+		if(configurationcs.istiempo)
+			showtimer = new Elements("label",{},["Tiempo restante: ",
+				new Elements("span",{"data-res-timer":""},["03:20"])
+			]);
+		
 		let e = new Elements('div',{class:'modal-window-panel'},[
-			new Elements("div",{class:"modal-window-panel-content"},[
+			new Elements("div",{id:"__panelresponse",class:"modal-window-panel-content"},[
 				new Elements("div",{class:"rows"},[
-					new Elements("div",{class:"cols"},[
-						new Elements("canvas",{id:"resultados-chart",class:"chartjs", style:"width: 80%;height: 80%;"},[])
-					]),
+					graph,
 					new Elements("div",{class:"cols"},[
 						new Elements("div",{class:"contenidos"},[
 							new Elements("h2",{},["100%"]),
 							new Elements("div",{ style:"display: grid;"},[
-								new Elements("label",{"data-res-pregp":""},["8 Preguntas"]),
+								new Elements("label",{"data-res-pregp":""},[jsonval.length + " Preguntas"]),
 								new Elements("label",{"data-res-pregc":""},["8 preguntas correctas"]),
 								new Elements("label",{"data-res-pregi":""},["0 preguntas incorrectas"]),
 								new Elements("label",{},["Calificacion: ",
@@ -239,17 +249,17 @@ $("#btnfinlist").click(function(){
 					])
 				]),
 				new Elements("div",{class:"content-afoot"},[
-					new Elements("label",{},["Tiempo restante: ",
-						new Elements("span",{"data-res-timer":""},["03:20"])
-					]),
+					showtimer,
 					new Elements("span",{class:"aprovado", "data-res-status":""},["Aprobado"]),
 				]),
 				new Elements("div",{class:"content-footer"},[ buttonOk ])
 			])
 		]);
 		document.body.appendChild(e);
-		
-		getGraphic( 80, 20 );
+		if(configurationcs.grafico)
+			getGraphic( 80, 20 );
+		if($("resultados-chart").attr("class") === undefined)
+			$("#__panelresponse").css("width","30%");
 		getFireworks();		
 		getNotification("Continúa","warning");
 	});

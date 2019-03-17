@@ -407,7 +407,7 @@ class Quiz implements Serializable{
 	}
 
 	@XmlTransient
-    def getQuestionsList() {
+    List<Questions>  getQuestionsList() {
         return questionsList
     }
 	

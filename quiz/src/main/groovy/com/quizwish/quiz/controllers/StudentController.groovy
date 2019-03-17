@@ -74,6 +74,7 @@ class StudentController {
 		Quiz quiz = quizService.getQuizById(id)
 		User user = sessionUser.userSessionAddUsername(model);
 		model.addAttribute("usuario", user);
+		quiz.getQuestionsList().each { it -> it.setAnswers("") }
 		model.addAttribute("quiz", quiz);
 		return REALIZE;
 	}

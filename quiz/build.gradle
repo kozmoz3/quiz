@@ -17,10 +17,21 @@ buildscript {
 	}
 }
 
+plugins {
+	id "org.sonarqube" version "2.6.2"
+}
+sonarqube {
+	properties {
+		property 'sonar.projectName', 'SONAR'
+	}
+}
+
+
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 group = 'com.quizwish'
 version = '0.0.1-SNAPSHOT'
@@ -48,6 +59,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	compile ("log4j:log4j:1.2.17")
 	
+	compile ('com.google.guava:guava:21.0')
 	
 	implementation('org.codehaus.groovy:groovy')
 	runtimeOnly('mysql:mysql-connector-java')
