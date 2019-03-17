@@ -17,7 +17,6 @@
 								<thead>
 									<tr>
 										<th>Nombre</th>
-										<th>Intentos</th>
 										<th>Estatus</th>
 										<th>Ir a</th>
 										<th>Resultados</th>
@@ -29,8 +28,6 @@
 											<th:block th:if="${grupou.idgrupo.status}">
 												<tr th:each="quiz,itemq : ${grupou.idgrupo.quizgrupoList}">
 													<td th:text="${quiz.idquiz.nombre}">{{ Nombre simulador }}</td>
-													<td>2</td>													
-													
 													<th:block th:if="${quiz.idquiz.estatus == true}">
 														<td class="active-ck">Activo</td>
 														<td><a th:href="@{/me/realize/__${quiz.idquiz.idquiz}__}">Realizar</a></td>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
+import com.quizwish.quiz.component.RespuestasComponent
 import com.quizwish.quiz.component.SessionUser
 import com.quizwish.quiz.entity.Questions
 import com.quizwish.quiz.entity.Quiz
@@ -71,6 +72,10 @@ class StudentController {
 	@Qualifier("questionsService")
 	QuestionsService questionsService
 	
+	@Autowired
+	@Qualifier("respuestasComponent")
+	RespuestasComponent respuestasComponent
+	
 	@GetMapping("/")
 	def index(Model model) {
 		LOGGER.info("Method: -- index")
@@ -108,22 +113,10 @@ class StudentController {
 		User user = sessionUser.userSessionAddUsername(model);
 		model.addAttribute("usuario", user);
 		Respuestas respuestas = respuestasService.getRespuestasById(id)
-		List<Integer> ids = getPreguntas(respuestas);
-		List<Questions> questions = questionsService.getAllQuestionsById(ids)
-		model.addAttribute("lstrespuetas", respuestas);
-		model.addAttribute("questions", questions)
+		model.addAttribute("lstrespuetas", respuestasComponent.getMisRespuestas(respuestas));
 		return RESPONSE;
 	}
 	
-	private List<Integer> getPreguntas(Respuestas respuestas) {
-		String[] preguntar = respuestas.getPrespuestas().split("\\|")
-		List<Integer> listaid = new ArrayList<>()
-		for(String pregunta : preguntar) {
-			String[] preguntaid = pregunta.split("&")
-			listaid.add( Integer.parseInt(preguntaid[0]) )
-		}
-		return listaid
-	}
 	
 	@GetMapping("/profile")
 	def profile(Model model) {
