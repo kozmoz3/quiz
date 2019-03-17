@@ -16,4 +16,6 @@ interface QuestionsService {
 	def deleteQuestions(Integer id);
 	
 	def setQuestions(List<MQuestion> lstQuest)
+	
+	def getAllQuestionsById(List<Integer> ids)
 }

@@ -1,5 +1,7 @@
 if(typeview){	
 	getQuizWizard();
+	if(configurationcs.tiempo != "" || configurationcs.tiempo != null)
+		configureTime();
 }else{
 	$(".clock").removeClass("col-md-6");
 	$(".plain").removeClass("col-md-6");
@@ -18,6 +20,8 @@ if(typeview){
 	undoElements( [".container", ".container"] );
 	$(".container hr")[0].remove();
 	getQuizList();
+	if(configurationcs.tiempo != "" || configurationcs.tiempo != null)
+		configureTime();
 }
 
 function getQuizList(){
@@ -177,7 +181,6 @@ function setReact( position ){
 	}
 }
 
-var segundos=200;
 function countDown(){
 	var minutes = Math.round( (segundos-30) /60);
 	var remain = segundos % 60;
@@ -190,7 +193,12 @@ function countDown(){
 		sendParse();
 	}else segundos--;
 }
-// var countTimer = setInterval(countDown,1000);
+var countTimer;
+var segundos = configurationcs.tiempo != "" || configurationcs.tiempo != null ? Number(configurationcs.tiempo.split(':')[0])*60+Number(configurationcs.tiempo.split(':')[1]) * 1000 : 0;
+
+function configureTime(){
+	countTimer = setInterval(countDown,1000);
+}
 
 function sendParse(){
 	var cadena = "";

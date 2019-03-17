@@ -21,12 +21,16 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import com.quizwish.quiz.component.SessionUser
+import com.quizwish.quiz.entity.Questions
 import com.quizwish.quiz.entity.Quiz
+import com.quizwish.quiz.entity.Respuestas
 import com.quizwish.quiz.models.User
 import com.quizwish.quiz.models.jmodelos.MGrupoUser
 import com.quizwish.quiz.models.jmodelos.MUser
 import com.quizwish.quiz.services.GroupUserService
+import com.quizwish.quiz.services.QuestionsService
 import com.quizwish.quiz.services.QuizService
+import com.quizwish.quiz.services.RespuestasService
 import com.quizwish.quiz.services.StudentService
 
 @Controller
@@ -59,6 +63,14 @@ class StudentController {
 	@Qualifier("quizService")
 	QuizService quizService
 	
+	@Autowired
+	@Qualifier("respuestasService")
+	RespuestasService respuestasService
+	
+	@Autowired
+	@Qualifier("questionsService")
+	QuestionsService questionsService
+	
 	@GetMapping("/")
 	def index(Model model) {
 		LOGGER.info("Method: -- index")
@@ -79,16 +91,38 @@ class StudentController {
 		return REALIZE;
 	}
 	
-	@GetMapping("/result")
-	def result(Model model) {
+	@GetMapping("/result/{id}")
+	def result(@PathVariable("id") Integer id, Model model) {
 		LOGGER.info("Method: -- result")
+		Quiz quiz = quizService.getQuizById(id)
+		User user = sessionUser.userSessionAddUsername(model);
+		List<Respuestas> lstrespuetas = respuestasService.getRespuestasAll(quiz, user.getIduser())		
+		model.addAttribute("usuario", user);
+		model.addAttribute("lstrespuetas", lstrespuetas);
 		return RESULT;
 	}
 	
-	@GetMapping("/response")
-	def response(Model model) {
+	@GetMapping("/response/{id}")
+	def response(@PathVariable("id") Integer id, Model model) {
 		LOGGER.info("Method: -- response")
+		User user = sessionUser.userSessionAddUsername(model);
+		model.addAttribute("usuario", user);
+		Respuestas respuestas = respuestasService.getRespuestasById(id)
+		List<Integer> ids = getPreguntas(respuestas);
+		List<Questions> questions = questionsService.getAllQuestionsById(ids)
+		model.addAttribute("lstrespuetas", respuestas);
+		model.addAttribute("questions", questions)
 		return RESPONSE;
+	}
+	
+	private List<Integer> getPreguntas(Respuestas respuestas) {
+		String[] preguntar = respuestas.getPrespuestas().split("\\|")
+		List<Integer> listaid = new ArrayList<>()
+		for(String pregunta : preguntar) {
+			String[] preguntaid = pregunta.split("&")
+			listaid.add( Integer.parseInt(preguntaid[0]) )
+		}
+		return listaid
 	}
 	
 	@GetMapping("/profile")

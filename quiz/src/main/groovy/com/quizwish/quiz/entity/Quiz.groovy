@@ -153,7 +153,9 @@ class Quiz implements Serializable{
 	@JsonManagedReference
 	List<Estudiantequiz> estudiantequizList
 	
-	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idquiz")
+	@JsonManagedReference
+	List<Respuestas> respuestasList
 
 
     public Quiz() {

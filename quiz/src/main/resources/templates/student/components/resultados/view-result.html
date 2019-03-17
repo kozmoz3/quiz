@@ -67,5 +67,8 @@
 		</section>
 		<footer th:replace="student/includes/layout :: footer"></footer>
 		<div th:replace="student/includes/scripts :: scripts"></div>
+		<script th:inline="javascript">
+		/*<![CDATA[*/ var questions = [[${questions}]] ; var misrespuetas = [[${lstrespuetas}]] /*]]>*/
+		</script>
 	</body>
 </html>

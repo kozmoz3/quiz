@@ -55,5 +55,10 @@ class QuestionsServiceImp implements QuestionsService{
 			lstqustions.each { it -> questionsRepository.save(it) }
 		return lstqustions;
 	}
+
+	@Override
+	def getAllQuestionsById(List<Integer> ids) {
+		return questionsRepository.findAllById(ids)
+	}
 	
 }

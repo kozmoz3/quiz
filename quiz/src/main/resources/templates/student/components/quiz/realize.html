@@ -34,7 +34,24 @@
 		<script th:src="@{/administrador/js/charts/Chart.js}"></script>
 		<script type="text/javascript" th:src="@{/generales/quiz/Question.js}"></script>
 		<script th:inline="javascript">
-			/*<![CDATA[*/ var jsonval = [[${quiz.questionsList}]] ;var configurationcs = {"id" : [[ ${quiz.idquiz} ]],"showallquestion" : [[ ${quiz.showallquestion} ]],"mostrar" : [[ ${quiz.mostrar} ]],"vista" : [[ ${quiz.vista} ]],"random" : [[ ${quiz.random} ]],"tiempo" : [[ ${quiz.tiempo} ]],"venceini" : [[ ${quiz.venceini} ]],"vencefin" : [[ ${quiz.vencefin} ]],"intentos" : [[ ${quiz.intentos} ]],"preguntasc" : [[ ${quiz.preguntasc} ]],"respuestac" : [[ ${quiz.respuestac} ]],"preguntasi" : [[ ${quiz.preguntasi} ]],"calificacion" : [[ ${quiz.calificacion} ]],"grafico" : [[ ${quiz.grafico} ]],"istiempo" : [[ ${quiz.istiempo} ]],"mensajesop" : [[ ${quiz.mensajesop} ]],"isintentos" : [[ ${quiz.isintentos} ]]}; setConfiguration( configurationcs, jsonval );function setConfiguration( configurationcs, jsonvalues ){$.each( jsonvalues, function( key, val ) {listQuestions.push(new Question(val.question, val.options.split("##\u0026\u0026"), val.answers.split(","), val.message, val.idquestion, 0, val.type, val.score));});objResource = new Resource();objQuiz = new Quiz(listQuestions);lista = objResource.getNewArray(15, objQuiz.getObject() );lstresp = [];id = configurationcs.id;typeview = configurationcs.vista;itempos = 0;arrobjectElement = [];} /*]]>*/
+			/*<![CDATA[*/ var jsonval = [[${quiz.questionsList}]] ;var configurationcs = {
+					"id" : [[ ${quiz.idquiz} ]],
+					"showallquestion" : [[ ${quiz.showallquestion} ]],
+					"mostrar" : [[ ${quiz.mostrar} ]],
+					"vista" : [[ ${quiz.vista} ]],
+					"random" : [[ ${quiz.random} ]],
+					"tiempo" : [[ ${quiz.tiempo} ]],
+					"venceini" : [[ ${quiz.venceini} ]],
+					"vencefin" : [[ ${quiz.vencefin} ]],
+					"intentos" : [[ ${quiz.intentos} ]],
+					"preguntasc" : [[ ${quiz.preguntasc} ]],
+					"respuestac" : [[ ${quiz.respuestac} ]],
+					"preguntasi" : [[ ${quiz.preguntasi} ]],
+					"calificacion" : [[ ${quiz.calificacion} ]],
+					"grafico" : [[ ${quiz.grafico} ]],
+					"istiempo" : [[ ${quiz.istiempo} ]],
+					"mensajesop" : [[ ${quiz.mensajesop} ]],
+					"isintentos" : [[ ${quiz.isintentos} ]]}; setConfiguration( configurationcs, jsonval );function setConfiguration( configurationcs, jsonvalues ){$.each( jsonvalues, function( key, val ) {listQuestions.push(new Question(val.question, val.options.split("##\u0026\u0026"), val.answers.split(","), val.message, val.idquestion, 0, val.type, val.score));});objResource = new Resource();objQuiz = new Quiz(listQuestions);lista = objResource.getNewArray(15, objQuiz.getObject() );lstresp = [];id = configurationcs.id;typeview = configurationcs.vista;itempos = 0;arrobjectElement = [];} /*]]>*/
 		</script>
 		<script type="text/javascript" th:src="@{/generales/quiz/quiz.js}"></script>
 	</body>

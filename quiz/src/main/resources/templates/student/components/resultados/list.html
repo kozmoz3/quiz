@@ -24,19 +24,12 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>8.7</td>
-										<td>1.3</td>
-										<td>87%</td>
-										<td><a th:href="@{/me/response}">ver respuestas</a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>7</td>
-										<td>0</td>
-										<td>100%</td>
-										<td><a th:href="@{/me/response}">ver respuestas</a></td>
+									<tr th:each="respuesta, item : ${lstrespuetas}">
+										<td th:text="${item.index + 1}">{0}</td>
+										<td th:text="${respuesta.correctas}">{0}</td>
+										<td th:text="${respuesta.incorrectas}">{0}</td>
+										<td th:text="${respuesta.calificacion}">{0}</td>
+										<td><a th:href="@{/me/response/__${respuesta.idexamen}__}">ver respuestas</a></td>
 									</tr>
 								</tbody>
 							</table>
