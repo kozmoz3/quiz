@@ -44,7 +44,7 @@ class StudentAdminController {
 		List<User> liststudent = studentService.findAllStudent(userAdmin.getIduser());
 		LOGGER.info("METHOD : show --- listStudent "+liststudent);
 		model.addAttribute("liststudent", liststudent);
-		return "admin/components/estudiantes/list";
+		return "admin/student/index";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ROOT')")
