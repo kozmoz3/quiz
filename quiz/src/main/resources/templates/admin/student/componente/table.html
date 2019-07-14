@@ -1,28 +1,29 @@
+<div class="col-xs-12" style="background-color:white !important;">
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Accion</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody th:each="student: ${liststudent}">
+				<tr>
+					<td th:text="${student.nombre}">1</td>
+					<td th:text="${student.apellidos}">Anna</td>
+					<td><a
+						th:href="@{'/admin/estudiantes/edit/{id}' (id=${student.iduser})}">
+							<button type="button" class="button-warning cart-btn">Editar</button>
+					</a></td>
+					<td><a
+						th:href="@{'/admin/estudiantes/edit/{id}' (id=${student.iduser})}">
+							<button type="button" class="button-danger cart-btn">Eliminar</button>
+					</a></td>
 
-<div class="table-responsive">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Firstname</th>
-				<th>Lastname</th>
-				<th>Accion</th>
-				<th>Accion</th>
-			</tr>
-		</thead>
-		<tbody th:each="student: ${liststudent}">
-			<tr>
-				<td th:text="${student.nombre}">1</td>
-				<td th:text="${student.apellidos}">Anna</td>
-				<td><a
-					th:href="@{'/admin/estudiantes/edit/{id}' (id=${student.iduser})}">
-						<button type="button" class="button-warning cart-btn">Editar</button>
-				</a></td>
-				<td><a
-					th:href="@{'/admin/estudiantes/edit/{id}' (id=${student.iduser})}">
-						<button type="button" class="button-danger cart-btn">Eliminar</button>
-				</a></td>
-
-			</tr>
-		</tbody>
-	</table>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
