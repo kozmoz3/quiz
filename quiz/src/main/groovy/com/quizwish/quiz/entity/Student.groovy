@@ -18,15 +18,20 @@ class Student{
 
 	@Column(name = "student")
 	Integer student
-	
+
 	@Column(name = "teacher")
 	Integer teacher
-	
+
 	@Column(name = "nullable")
 	boolean nullable
-	
+	@Column(name = "name")
+	String name;
 
-	
+	@Column(name = "firstname")
+	String firstName;
+
+	public Student() {}
+
 
 	public Integer getTeacher() {
 		return teacher;
@@ -52,13 +57,36 @@ class Student{
 		this.student = student;
 	}
 
-	
+
 	public boolean isNullable() {
 		return nullable;
 	}
 
 	public void setNullable(boolean nullable) {
 		this.nullable = nullable;
-	}	
-	
+	}
+
+	public Integer getIdStudent() {
+		return idStudent;
+	}
+
+	public void setIdStudent(Integer idStudent) {
+		this.idStudent = idStudent;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 }

@@ -212,6 +212,8 @@ CREATE TABLE `student` (
   `student` int(11) NOT NULL,
   `teacher` int(11) NOT NULL,
   `nullable` tinyint(1) NOT NULL,
+  `name` varchar2(60) ,
+  `firstname` varchar2(80) 
   PRIMARY KEY (`idstudent`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
