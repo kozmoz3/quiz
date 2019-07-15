@@ -82,7 +82,18 @@ class StudentServiceImpl implements StudentService {
 		LOGGER.info("METHOD: createStudent")
 		int rol = 2;
 		User userCreated = usuarioService.save(user, rol)
-		return saveStudent(userCreated.getIduser(), userAdmin.getIduser())
+		return saveStudent(userCreated.getIduser(), userAdmin.getIduser(),user)
+	}
+	
+	private Student saveStudent(Integer idStudent, Integer idTeacher, User students) {
+		LOGGER.info("METHOD: saveStudent")
+		Student student = new Student();
+		student.setStudent(idStudent)
+		student.setTeacher( idTeacher)
+		student.setNullable(true);
+		student.setName(students.getNombre());
+		student.setFirstName(students.getApellidos());
+		return studentRepository.save(student);
 	}
 	
 	private Student saveStudent(Integer idStudent, Integer idTeacher) {
