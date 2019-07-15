@@ -9,7 +9,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "student")
-class Student implements Serializable{
+class Student{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
